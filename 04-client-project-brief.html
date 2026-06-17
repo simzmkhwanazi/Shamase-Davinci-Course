@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Project Brief — Wanderlight Coffee Co.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0f17;--surface:#161a24;--surface-2:#1c2130;--border:#252a36;--text:#e8e6e0;--muted:#8b8e98;--dim:#5d626d;--gold:#d4a574;--gold-dim:#a07d52;--teal:#5dc8b7;--red:#ec5a5a;--blue:#7aa7e5;--green:#7ec98e}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;line-height:1.65;font-size:15.5px}
+body{background-image:radial-gradient(ellipse at top left,rgba(212,165,116,.05),transparent 60%),radial-gradient(ellipse at bottom right,rgba(93,200,183,.04),transparent 60%)}
+h1,h2,h3,h4{font-family:'Fraunces',serif;letter-spacing:-.015em;color:var(--text)}
+h1{font-size:clamp(2.6rem,5.5vw,4rem);font-weight:400;margin:0 0 .8rem;font-variation-settings:"opsz" 144}
+h2{font-size:1.9rem;margin:3.5rem 0 1rem;padding-top:2rem;border-top:1px solid var(--border);color:var(--gold);font-style:italic;font-variation-settings:"opsz" 100}
+h2 .num{font-family:'JetBrains Mono',monospace;color:var(--gold-dim);font-style:normal;font-size:.78rem;letter-spacing:.18em;display:block;margin-bottom:.3rem;font-weight:400}
+h3{font-size:1.3rem;margin-top:2.2rem;color:var(--teal);font-style:italic;font-weight:400}
+h4{font-size:.78rem;margin-top:1.6rem;color:var(--gold);font-family:'Sora',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.12em}
+p{margin:.9rem 0}
+strong{color:var(--gold);font-weight:600}em{color:var(--teal);font-style:italic}
+code,kbd{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--surface-2);padding:.12em .4em;border-radius:3px;color:var(--gold);border:1px solid var(--border)}
+.shell{max-width:920px;margin:0 auto;padding:4rem 2rem 6rem}
+header.hero{padding:4rem 0 4rem;border-bottom:1px solid var(--border);margin-bottom:2rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.28em;color:var(--teal);margin-bottom:1.3rem}
+.lede{font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;color:var(--muted);line-height:1.5;max-width:720px;font-weight:300}
+
+.brief-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.6rem;margin-top:2.6rem;padding-top:2rem;border-top:1px solid var(--border);font-size:.78rem;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.brief-meta span strong{display:block;color:var(--gold);font-family:'Sora',sans-serif;font-size:1.3rem;font-weight:500;margin-top:.2rem}
+
+ul,ol{padding-left:1.5rem}
+ul li,ol li{margin:.45rem 0}
+ul li::marker{color:var(--gold-dim)}
+ol li::marker{color:var(--gold);font-family:'JetBrains Mono',monospace}
+
+table{width:100%;border-collapse:collapse;margin:1.4rem 0;font-size:.9rem;background:var(--surface);border-radius:6px;overflow:hidden}
+th{text-align:left;padding:.85rem 1rem;background:var(--surface-2);font-family:'Sora',sans-serif;font-weight:600;color:var(--teal);text-transform:uppercase;font-size:.72rem;letter-spacing:.1em;border-bottom:1px solid var(--border)}
+td{padding:.85rem 1rem;border-bottom:1px solid var(--border);vertical-align:top}
+tr:last-child td{border-bottom:0}
+
+.callout{margin:1.6rem 0;padding:1.3rem 1.6rem;border-radius:8px;background:var(--surface);border-left:3px solid var(--gold);font-size:.93rem}
+.callout.spec{border-left-color:var(--blue);background:linear-gradient(90deg,rgba(122,167,229,.06),transparent)}
+.callout.warning{border-left-color:var(--red);background:linear-gradient(90deg,rgba(236,90,90,.07),transparent)}
+.callout.principle{border-left-color:var(--teal);background:linear-gradient(90deg,rgba(93,200,183,.06),transparent)}
+.callout .label{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);margin-bottom:.6rem;display:block;font-weight:600}
+.callout.spec .label{color:var(--blue)}
+.callout.warning .label{color:var(--red)}
+.callout.principle .label{color:var(--teal)}
+
+.deliverable{margin:3rem 0;padding:2rem;background:var(--surface);border-radius:10px;border:1px solid var(--border);position:relative}
+.deliverable .tag{position:absolute;top:-12px;left:2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.2em;background:var(--bg);color:var(--gold);padding:.2rem .8rem;border:1px solid var(--gold-dim);border-radius:3px;font-weight:600}
+.deliverable h3{margin-top:.6rem;color:var(--gold);font-style:normal;font-weight:500;font-variation-settings:"opsz" 100}
+.deliverable .one-liner{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);font-size:1rem;margin-bottom:1rem}
+.spec-grid{display:grid;grid-template-columns:120px 1fr;gap:.4rem .9rem;margin:1rem 0;font-size:.88rem;background:var(--surface-2);padding:1rem 1.2rem;border-radius:6px}
+.spec-grid dt{color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;padding-top:.15rem}
+.spec-grid dd{margin:0;color:var(--text)}
+
+.pull{font-family:'Fraunces',serif;font-style:italic;font-size:1.4rem;line-height:1.4;color:var(--gold);margin:2.5rem 0;padding-left:1.5rem;border-left:3px solid var(--gold);font-weight:400;font-variation-settings:"opsz" 100}
+.pull cite{display:block;font-size:.85rem;color:var(--muted);font-style:normal;margin-top:.6rem;font-family:'Sora',sans-serif;letter-spacing:.05em}
+
+.rubric{margin:1.6rem 0}
+.rubric table th{font-size:.7rem}
+.rubric .pts{font-family:'JetBrains Mono',monospace;color:var(--gold);font-weight:600}
+.rubric .area{color:var(--text);font-weight:500}
+.rubric .criteria{color:var(--muted);font-size:.86rem}
+
+footer{margin-top:5rem;padding-top:2rem;border-top:1px solid var(--border);color:var(--dim);font-size:.8rem;text-align:center;font-family:'JetBrains Mono',monospace}
+
+@media print{body{background:#fff;color:#111}.deliverable{break-inside:avoid;background:#fff;border:1px solid #999}.spec-grid,.callout{background:#f6f3ed;color:#000}h1,h2,h3{color:#000;page-break-after:avoid}}
+</style></head>
+<body><div class="shell">
+
+<header class="hero">
+<div class="eyebrow">Client Project Brief · Final Assessment</div>
+<h1>Wanderlight Coffee Co.</h1>
+<p class="lede">A practical brief to be completed after the course and exam. One shoot, one set of footage, three very different deliverables. The exercise tests every page of Resolve in a realistic commercial scenario.</p>
+<div class="brief-meta">
+<span>Client<strong>Wanderlight Coffee Co.</strong></span>
+<span>Project type<strong>Brand content package</strong></span>
+<span>Total runtime<strong>~2 hours raw → 3 deliverables</strong></span>
+<span>Deadline<strong>10 working days from kickoff</strong></span>
+</div>
+</header>
+
+<h2><span class="num">PART I</span>The Client &amp; The Story</h2>
+
+<p>Wanderlight Coffee Co. is a Johannesburg-based specialty coffee roaster that has just opened its fourth café in Maboneng. They want a content package documenting opening week — to launch their marketing push across owned channels, paid social, and B2B sales decks to corporate clients (offices that buy their beans wholesale).</p>
+
+<p>They have one shoot day with you: opening Saturday, 6am to 8pm. You shoot the entire day with two operators. From that one day of footage, you must deliver three completely different videos for three different audiences and contexts. Same footage, three creative outcomes.</p>
+
+<div class="callout principle">
+<span class="label">The challenge</span>
+<p>The professional skill being tested isn't camera operation or even editing in isolation — it's the discipline of <em>building a single workflow that scales to three outputs</em>. You should be grading once, mixing once, then variant-rendering. Re-doing each deliverable from scratch is the wrong answer.</p>
+</div>
+
+<h3>What was shot</h3>
+<p>You shot approximately 2 hours of usable footage across these categories:</p>
+<ul>
+<li><strong>Hero brand</strong> — slow, deliberate cinematic shots: espresso pour, milk steam, beans falling into hopper, hands on portafilter, latte art top-down, café interior wide shots in soft morning light.</li>
+<li><strong>Customer arrivals</strong> — handheld observational shots of customers entering, queueing, conversing, taking first sips. Real people, real moments. Lots of variety in framing.</li>
+<li><strong>Staff at work</strong> — barista pulling shots, milk steaming, calling orders, plating pastries, restocking. Some scripted, mostly documentary.</li>
+<li><strong>Founder interview</strong> — 12-minute sit-down with the founder, shot in the café before opening. Two cameras (wide locked off + close-up handheld), boom audio captured on a separate Zoom H6.</li>
+<li><strong>Roastery B-roll</strong> — quick mid-morning trip to their nearby roastery; green beans, the roaster machine running, the head roaster doing a cupping session.</li>
+<li><strong>Drone (DJI Mini 4 Pro, D-Log M)</strong> — establishing aerial shots over the café and surrounding Maboneng neighbourhood, two short sequences only.</li>
+</ul>
+
+<div class="callout spec">
+<span class="label">Technical specs of the footage</span>
+<p><strong>Primary cameras:</strong> 2× Sony A7S III in S-Log3, 4K 25 fps, 10-bit 4:2:2. <strong>Drone:</strong> DJI Mini 4 Pro, D-Log M, 4K 25 fps. <strong>Camera audio:</strong> scratch only — not usable. <strong>Boom audio:</strong> Zoom H6, 48kHz / 24-bit, mono. <strong>Total media:</strong> ~120 GB across 2 SD cards + the Zoom's SD card. <strong>Music:</strong> client provides one royalty-free 2:30 track from Musicbed.</p>
+</div>
+
+<h2><span class="num">PART II</span>The Three Deliverables</h2>
+
+<p>From this single body of footage, you will produce three discrete videos. Each has its own audience, length, aspect ratio, codec, colour direction, and mix philosophy. <strong>You should plan to grade once, mix once, then duplicate the master timeline twice and re-frame and re-render for each variant</strong> — not start three separate projects.</p>
+
+<div class="deliverable">
+<span class="tag">DELIVERABLE 01</span>
+<h3>The Cinematic Director's Cut</h3>
+<p class="one-liner">A 2-minute brand film for the founder to share on his personal LinkedIn and use in pitch decks. The hero piece.</p>
+
+<h4>Audience &amp; Use</h4>
+<p>The founder will use this to attract investor attention and serve as the marquee piece on the Wanderlight About page. It needs to feel like a short film — restrained, intentional, with a clear emotional arc from quiet anticipation (pre-opening) through the energy of the day, ending on a thoughtful founder soundbite.</p>
+
+<h4>Creative Direction</h4>
+<p>Naturalistic but cinematic. Think early-morning warmth, lots of natural light, deliberate handheld where appropriate, locked-off where the moment calls for stillness. The founder's voice (from the interview) carries the through-line; everything else is image and music. <em>No on-screen text, no captions, no logos.</em> Trust the visuals.</p>
+
+<dl class="spec-grid">
+<dt>Length</dt><dd>1:45 – 2:15 (target 2:00)</dd>
+<dt>Aspect</dt><dd>16:9 (1920×1080, but cinematic via Output Blanking to 2.39:1)</dd>
+<dt>Frame rate</dt><dd>25 fps (timeline matches camera)</dd>
+<dt>Codec</dt><dd>Two renders: (1) ProRes 422 HQ master for archive; (2) H.265 4K (UHD) for delivery to client</dd>
+<dt>Audio</dt><dd>Stereo mix. Founder voiceover bedded with music; light SFX where appropriate (espresso pour, milk steam, coffee grinder). No camera audio on screen.</dd>
+<dt>Colour</dt><dd>DaVinci Wide Gamut Intermediate working space → Rec.709-A output. Notary Structure applied. Look: warm, slightly desaturated, gentle teal-shadow lift to balance the warmth.</dd>
+<dt>Grain</dt><dd>Subtle 35mm film grain in the Fine Tune node. Just enough to add texture.</dd>
+</dl>
+
+<h4>Specific Technical Requirements</h4>
+<ul>
+<li>Sync the founder's interview audio (Zoom H6) to the two interview cameras on the Media page using <strong>Auto-Sync Audio → Synchronize using Waveform</strong>.</li>
+<li>Use the Cut page's <strong>Sync Bin</strong> to cut between the two interview cameras for the founder's voiceover segments.</li>
+<li>Apply Output Blanking 2.39:1 on the Color page for the cinematic frame; reframe vertically inside the bars using Sizing → Input.</li>
+<li>Grade the drone D-Log M footage <em>and</em> the Sony S-Log3 footage to live in the same emotional world — they will cut together.</li>
+<li>Apply Resolve's <strong>Stabilisation</strong> selectively on handheld shots that would feel jittery; leave intentional shake where the emotion calls for it.</li>
+</ul>
+</div>
+
+<div class="deliverable">
+<span class="tag">DELIVERABLE 02</span>
+<h3>The Social Cut — Vertical</h3>
+<p class="one-liner">A 60-second high-energy vertical edit for Instagram Reels and TikTok. Loud, fast, joyful.</p>
+
+<h4>Audience &amp; Use</h4>
+<p>Wanderlight's marketing team will post this across Instagram Reels and TikTok during opening week. The target audience is 20–35 year old Johannesburg café-goers who scroll fast and need to be hooked in 1.5 seconds. Energy is everything. The cut should feel like a different planet from Deliverable 01.</p>
+
+<h4>Creative Direction</h4>
+<p>Fast cuts, beat-driven, punchy. Heavy on customer faces, latte art reveals, energetic staff moments, the drone sequence used as a visual hook. On-screen text bursts (large, bold, custom-coloured). The music dominates; the founder's voice does <em>not</em> appear. Saturation pushed harder than the cinematic cut; contrast more aggressive; closer to a vibrant Instagram-grade aesthetic.</p>
+
+<dl class="spec-grid">
+<dt>Length</dt><dd>0:55 – 1:00 (hard cap: TikTok algorithm cliff at 60s)</dd>
+<dt>Aspect</dt><dd>9:16 vertical (1080×1920)</dd>
+<dt>Frame rate</dt><dd>25 fps</dd>
+<dt>Codec</dt><dd>H.265 high-bitrate MP4. Audio: AAC stereo, 320 kbps.</dd>
+<dt>Audio</dt><dd>Music-led. Light SFX accents. No dialogue. Mix down to stereo.</dd>
+<dt>Colour</dt><dd>Same Notary Structure base from the master, but with the Final Look node pushed harder — more saturation via Color Slicer (HSV), tighter contrast curve, slightly cooler highlights to feel more "modern."</dd>
+<dt>Text</dt><dd>3–5 short on-screen text bursts. Custom font, bold, on-brand colour (Wanderlight uses a warm cream + deep coffee-brown palette).</dd>
+</dl>
+
+<h4>Specific Technical Requirements</h4>
+<ul>
+<li>Duplicate the master timeline for this variant. Change the timeline resolution to 1080×1920 (Project Settings → Format).</li>
+<li>For each shot reused from Deliverable 01, use Sizing → <strong>Input</strong> to reframe vertically (you'll lose horizontal information by design).</li>
+<li>Cuts must land on the music's beat. Use Fairlight's range mode to identify beat positions on the waveform; mark them with timeline markers; cut your video to those markers.</li>
+<li>If the client-provided track is too long, use the AI Music Editor (Studio) or manually splice on waveform-matched peaks to shorten it to ~58 seconds with a clean ending.</li>
+<li>Add text using the Edit page's Text+ generator. Keyframe each text burst's opacity (in/out) and scale for energy. Ease the keyframes for natural deceleration.</li>
+<li>Render with audio AAC 320 kbps stereo. Verify the final file plays on both a phone and a desktop browser — TikTok's bitrate ceiling means heavily-bitrated files re-encode badly.</li>
+</ul>
+
+<div class="callout warning">
+<span class="label">Trap to avoid</span>
+<p>The amateur move is to cut the vertical version first, then realise the cinematic version needs material that's now buried in another timeline. Always cut the master in 16:9 <em>first</em>, lock picture, grade, mix, <em>then</em> duplicate and reframe vertically. Working in the wrong order doubles your time.</p>
+</div>
+</div>
+
+<div class="deliverable">
+<span class="tag">DELIVERABLE 03</span>
+<h3>The Corporate B-Roll Reel</h3>
+<p class="one-liner">A 90-second clean reel for Wanderlight's wholesale sales team. Caption-burned. Office-mute-friendly.</p>
+
+<h4>Audience &amp; Use</h4>
+<p>The wholesale sales team will email this as part of their pitch package to corporate clients (office managers, hotels, restaurants) who buy Wanderlight beans in bulk. It will be watched in offices — frequently muted — by someone deciding whether to book a tasting. It must communicate the brand's quality and care <em>even with no audio</em>.</p>
+
+<h4>Creative Direction</h4>
+<p>Clean, naturalistic, restrained. Closer to broadcast Rec.709 than to a stylised cinema grade — accurate skin tones, accurate product colours, no aggressive look. The roastery footage features prominently here (provenance matters to wholesale buyers). Burned-in captions throughout, describing what's happening — "Daily roast quality control," "Single-origin sourcing from Ethiopia and Rwanda," "Wholesale-grade espresso program." Includes brand logo at start and end.</p>
+
+<dl class="spec-grid">
+<dt>Length</dt><dd>1:25 – 1:35 (target 1:30)</dd>
+<dt>Aspect</dt><dd>16:9 (1920×1080, no cinema bars)</dd>
+<dt>Frame rate</dt><dd>25 fps</dd>
+<dt>Codec</dt><dd>H.264 MP4 (universal compatibility — must play on any corporate machine, including Windows in IT-locked environments)</dd>
+<dt>Audio</dt><dd>Stereo. Music only at -18 LUFS (will be background ambience if anyone unmutes; the captions carry the message regardless).</dd>
+<dt>Colour</dt><dd>Notary Structure with a <em>minimal</em> Global Look. White-balance accurate. No teal-orange. The roastery footage may need stronger balancing — the lighting there is mixed tungsten/daylight.</dd>
+<dt>Captions</dt><dd>Burned-in subtitles throughout. Brand-consistent font, lower-third placement, semi-transparent background bar for legibility on bright shots.</dd>
+</dl>
+
+<h4>Specific Technical Requirements</h4>
+<ul>
+<li>Duplicate the master timeline. Restructure pacing for the corporate audience — longer holds, less cutting energy. Roastery sequence should run continuously for ~25 seconds in the middle to communicate "real production."</li>
+<li>Add subtitle clips throughout via Effects → Titles → Subtitle. Style them once, then re-use.</li>
+<li>On the Deliver page, set <strong>Subtitle → Format → Burn into video</strong> — they must render into the file (corporate environments may not respect external subtitle tracks).</li>
+<li>Use the Color page <em>Groups</em> feature to group the roastery footage together; apply a slightly different balance to that group via the group's pre-clip grade (because of the lighting difference).</li>
+<li>For the founder's logo at start and end: build in the Edit page using Generators or in Fusion as a Fusion title with brand colours.</li>
+<li>Render at <strong>H.264, Quality: Automatic</strong>. File size target: under 100 MB for email-friendly sharing.</li>
+</ul>
+</div>
+
+<h2><span class="num">PART III</span>Workflow Discipline</h2>
+
+<p>You will be assessed not only on the three deliverables but on the workflow you follow to produce them. The professional approach is sequenced and reversible:</p>
+
+<ol>
+<li><strong>Day 1 — Ingest &amp; Organise (Media page).</strong> Import all footage, bin by category, set keywords, tag every clip's Input Color Space. Auto-sync founder interview audio. Identify clip 24 (founder soundbite #1) and clip 47 (latte art reveal hero) as <em>marker clips</em> — they'll anchor each deliverable.</li>
+<li><strong>Day 2–3 — Rough cut the master (Edit page).</strong> Build a 16:9 master timeline that contains the long-form spine — about 3:30. This will be the source from which all three deliverables are derived.</li>
+<li><strong>Day 4 — Lock picture for D-01 (Director's Cut).</strong> Trim down to 2:00. Get founder approval on this single edit; <em>do not</em> proceed to grade until picture is locked.</li>
+<li><strong>Day 5–6 — Colour (Color page).</strong> Apply Notary Structure to every clip. Grade the Cinematic Director's Cut to completion. This is the "hero grade." Save it as a still in the Gallery.</li>
+<li><strong>Day 7 — Audio (Fairlight page).</strong> Sync, balance, mix, master. Sub-bus the founder dialogue, music to its own bus, SFX to a third. Compressor + EQ on dialogue, gentle compression on music, no compression on SFX.</li>
+<li><strong>Day 8 — Variants.</strong> Duplicate the master timeline twice. For D-02: change resolution to 1080×1920, re-sizing each clip, push the Final Look harder, add text. For D-03: keep 16:9, soften the look, add subtitle clips, restructure pacing.</li>
+<li><strong>Day 9 — QA &amp; render.</strong> Watch each variant from start to finish. Check on a phone (vertical) and a laptop (others). Render all three via the Render Queue overnight.</li>
+<li><strong>Day 10 — Buffer &amp; client review.</strong> Reserved for client feedback rounds and revisions. <em>Always leave this day. Always.</em></li>
+</ol>
+
+<div class="callout principle">
+<span class="label">The discipline being taught</span>
+<p>Notice that grading happens <em>once</em>, on the master, before the variants are created. The variants inherit the grade. Notice that the Render Queue is used so all three render in parallel (overnight) rather than each requiring your attention sequentially. Notice that Day 10 is empty by design. This is the entire point of the exercise.</p>
+</div>
+
+<h2><span class="num">PART IV</span>Assessment Rubric</h2>
+
+<p>Your three deliverables are evaluated against this rubric. Total: 100 points. Pass: 75.</p>
+
+<div class="rubric">
+<table>
+<thead><tr><th>Area</th><th>Pts</th><th>Criteria</th></tr></thead>
+<tbody>
+<tr><td class="area">Workflow discipline</td><td class="pts">20</td><td class="criteria">Master timeline used as single source. Grade applied once. Variants are duplications, not re-edits. Render Queue used for batch delivery. Day 10 reserved for client feedback.</td></tr>
+<tr><td class="area">Colour management</td><td class="pts">10</td><td class="criteria">DaVinci Wide Gamut Intermediate working space. Each clip's Input Color Space tagged correctly (S-Log3, D-Log M). Output Rec.709-A for Mac viewing.</td></tr>
+<tr><td class="area">Notary Structure applied</td><td class="pts">10</td><td class="criteria">Balance → isolate → look → refine across all clips. Layer Mixer for skin protection. Parallel mixer for Global Look adjustments.</td></tr>
+<tr><td class="area">D-01 Cinematic cut</td><td class="pts">15</td><td class="criteria">Restrained, intentional. ProRes archive + H.265 deliverable both rendered. 2.39:1 framing. Subtle grain. No on-screen text.</td></tr>
+<tr><td class="area">D-02 Vertical social</td><td class="pts">15</td><td class="criteria">9:16 framing competent. Cuts land on music beats. Text bursts on-brand and animated cleanly. H.265 file under TikTok's bitrate ceiling.</td></tr>
+<tr><td class="area">D-03 Corporate reel</td><td class="pts">10</td><td class="criteria">Captions burned in (not external). H.264 universal MP4. File under 100 MB. Restrained Rec.709-accurate grade. Roastery group-graded.</td></tr>
+<tr><td class="area">Audio mix integrity</td><td class="pts">10</td><td class="criteria">Dialogue ducks under music in D-01. Music dominates D-02. -18 LUFS background in D-03. Buses used for shared processing. No clipping anywhere.</td></tr>
+<tr><td class="area">Delivery completeness</td><td class="pts">10</td><td class="criteria">All three files delivered on time. File naming consistent. Subtitles where required actually render. Archive ProRes preserves all timeline tracks.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2><span class="num">PART V</span>Submission</h2>
+
+<p>Submit a single archive (ZIP or Dropbox folder) containing:</p>
+<ul>
+<li><code>01_director-cut_master.mov</code> — ProRes 422 HQ archive</li>
+<li><code>01_director-cut_deliver.mp4</code> — H.265 UHD client file</li>
+<li><code>02_social-vertical.mp4</code> — H.265 vertical</li>
+<li><code>03_corporate-reel.mp4</code> — H.264 universal MP4</li>
+<li><code>project.drp</code> — Resolve project export (so the grade and mix can be inspected)</li>
+<li><code>README.md</code> — a one-page reflection: what you did differently across the three deliverables, what surprised you, what you'd do better next time</li>
+</ul>
+
+<div class="pull">
+"Same footage, three audiences. The student who reshapes intent without re-doing the work is the one we'd hire."
+<cite>— Project rubric, internal note</cite>
+</div>
+
+<footer>Client Project Brief · Shamase Studios Training Programme · Final Assessment 2026</footer>
+
+</div></body></html>

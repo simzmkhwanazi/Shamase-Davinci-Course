@@ -1,0 +1,1149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The DaVinci Resolve Course — A Complete Post-Production Curriculum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f17;
+  --bg-2:#11141d;
+  --surface:#161a24;
+  --surface-2:#1c2130;
+  --border:#252a36;
+  --text:#e8e6e0;
+  --muted:#8b8e98;
+  --dim:#5d626d;
+  --gold:#d4a574;
+  --gold-dim:#a07d52;
+  --teal:#5dc8b7;
+  --red:#ec5a5a;
+  --blue:#7aa7e5;
+  --max:1100px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;font-weight:400;line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{background-image:radial-gradient(ellipse at top left,rgba(212,165,116,.04),transparent 60%),radial-gradient(ellipse at bottom right,rgba(93,200,183,.03),transparent 60%)}
+
+/* Typography */
+h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-.015em;line-height:1.15;color:var(--text)}
+h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:400;font-variation-settings:"opsz" 144,"SOFT" 50}
+h2{font-size:clamp(1.8rem,3.5vw,2.6rem);margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--border);font-variation-settings:"opsz" 100}
+h3{font-size:1.4rem;margin-top:2.2rem;color:var(--gold);font-style:italic;font-weight:400}
+h4{font-size:1.1rem;margin-top:1.6rem;color:var(--teal);font-family:'Sora',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}
+p{margin:.9rem 0}
+strong{color:var(--gold);font-weight:600}
+em{color:var(--teal);font-style:italic}
+code,kbd{font-family:'JetBrains Mono',monospace;font-size:.88em;background:var(--surface-2);padding:.12em .4em;border-radius:3px;color:var(--gold);border:1px solid var(--border)}
+kbd{box-shadow:0 1px 0 var(--border)}
+
+/* Layout */
+.shell{display:grid;grid-template-columns:280px 1fr;gap:0;min-height:100vh}
+nav.toc{position:sticky;top:0;height:100vh;overflow-y:auto;padding:2.5rem 1.8rem;background:var(--bg-2);border-right:1px solid var(--border);font-size:.85rem}
+nav.toc::-webkit-scrollbar{width:5px}
+nav.toc::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+nav.toc .brand{font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;color:var(--gold);margin-bottom:.5rem;display:block}
+nav.toc .brand-sub{color:var(--dim);font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;margin-bottom:2rem;display:block}
+nav.toc .part-label{color:var(--teal);font-size:.65rem;text-transform:uppercase;letter-spacing:.18em;margin-top:1.8rem;margin-bottom:.6rem;display:block;font-weight:600}
+nav.toc ol{list-style:none;padding:0;margin:0;counter-reset:mod}
+nav.toc ol li{counter-increment:mod;margin:.35rem 0}
+nav.toc ol li a{display:block;padding:.35rem 0;color:var(--muted);text-decoration:none;border-left:2px solid transparent;padding-left:.8rem;margin-left:-.8rem;transition:all .2s}
+nav.toc ol li a:hover{color:var(--gold);border-left-color:var(--gold)}
+nav.toc ol li a::before{content:"M" counter(mod,decimal-leading-zero) " · ";color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:.75em}
+
+main{max-width:var(--max);padding:4rem 4rem 6rem;width:100%}
+@media (max-width:1000px){.shell{grid-template-columns:1fr}nav.toc{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--border)}main{padding:2rem 1.3rem 4rem}}
+
+/* Hero */
+.hero{padding:5rem 0 4rem;border-bottom:1px solid var(--border);margin-bottom:2rem}
+.hero .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.25em;color:var(--teal);margin-bottom:1.2rem}
+.hero h1{margin:0 0 1rem}
+.hero .lede{font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;color:var(--muted);max-width:680px;line-height:1.5;font-weight:300}
+.hero .meta{display:flex;gap:2.5rem;flex-wrap:wrap;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.hero .meta span strong{display:block;color:var(--gold);font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:500;margin-top:.2rem}
+
+/* Modules */
+section.module{padding-top:2rem;scroll-margin-top:1rem}
+.mod-head{display:flex;align-items:baseline;gap:1.5rem;margin-bottom:1rem}
+.mod-num{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--gold-dim);letter-spacing:.15em}
+.mod-head h2{margin:0;padding:0;border:0;flex:1}
+
+/* Callouts */
+.callout{margin:1.6rem 0;padding:1.2rem 1.5rem;border-radius:6px;background:var(--surface);border-left:3px solid var(--gold);font-size:.95rem}
+.callout.commentary{border-left-color:var(--teal);background:linear-gradient(90deg,rgba(93,200,183,.06),transparent)}
+.callout.pitfall{border-left-color:var(--red);background:linear-gradient(90deg,rgba(236,90,90,.07),transparent)}
+.callout.v21{border-left-color:var(--blue);background:linear-gradient(90deg,rgba(122,167,229,.06),transparent)}
+.callout .label{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);margin-bottom:.5rem;display:block;font-weight:600}
+.callout.commentary .label{color:var(--teal)}
+.callout.pitfall .label{color:var(--red)}
+.callout.v21 .label{color:var(--blue)}
+
+/* Lists */
+ul,ol{padding-left:1.4rem}
+ul li,ol li{margin:.4rem 0}
+ul li::marker{color:var(--gold-dim)}
+ol li::marker{color:var(--gold);font-family:'JetBrains Mono',monospace}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;margin:1.4rem 0;font-size:.9rem;background:var(--surface);border-radius:6px;overflow:hidden}
+th{text-align:left;padding:.8rem 1rem;background:var(--surface-2);font-family:'Sora',sans-serif;font-weight:600;color:var(--teal);text-transform:uppercase;font-size:.72rem;letter-spacing:.1em;border-bottom:1px solid var(--border)}
+td{padding:.8rem 1rem;border-bottom:1px solid var(--border)}
+tr:last-child td{border-bottom:0}
+
+/* Diagrams */
+.flow{font-family:'JetBrains Mono',monospace;font-size:.85rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.5rem;margin:1.4rem 0;overflow-x:auto;color:var(--muted);line-height:1.8}
+.flow .node{display:inline-block;background:var(--surface-2);border:1px solid var(--gold-dim);padding:.3rem .6rem;border-radius:3px;color:var(--gold);margin:0 .15rem}
+.flow .arrow{color:var(--teal);margin:0 .3rem}
+
+/* Pull quote */
+.pull{font-family:'Fraunces',serif;font-style:italic;font-size:1.5rem;line-height:1.4;color:var(--gold);margin:2.5rem 0;padding-left:1.5rem;border-left:3px solid var(--gold);font-weight:400;font-variation-settings:"opsz" 100}
+.pull cite{display:block;font-size:.85rem;color:var(--muted);font-style:normal;margin-top:.6rem;font-family:'Sora',sans-serif;letter-spacing:.05em}
+
+/* Part divider */
+.part-divider{margin:6rem 0 4rem;padding:3rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
+.part-divider .label{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--teal);letter-spacing:.3em;text-transform:uppercase;margin-bottom:.8rem}
+.part-divider h2{font-size:3rem;margin:0;padding:0;border:0;font-style:italic;color:var(--gold);font-variation-settings:"opsz" 144}
+.part-divider p{color:var(--muted);max-width:600px;margin:1rem auto 0;font-style:italic;font-family:'Fraunces',serif}
+
+/* Footer */
+footer{margin-top:6rem;padding-top:2rem;border-top:1px solid var(--border);color:var(--dim);font-size:.8rem;text-align:center;font-family:'JetBrains Mono',monospace}
+
+/* Print */
+@media print{
+  body{background:#fff;color:#111}
+  .shell{display:block}
+  nav.toc{display:none}
+  main{max-width:100%;padding:1rem}
+  h1,h2,h3,h4{color:#000;page-break-after:avoid}
+  h3{color:#a07d52}
+  .callout{break-inside:avoid;background:#f6f3ed;border-left-color:#a07d52}
+  .pull{color:#000;border-left-color:#a07d52}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<nav class="toc">
+  <span class="brand">The Resolve Course</span>
+  <span class="brand-sub">Shamase Studios · 2026</span>
+  <span class="part-label">Part I · Foundations</span>
+  <ol>
+    <li><a href="#m01">Foundations &amp; Philosophy</a></li>
+    <li><a href="#m02">Media Page</a></li>
+    <li><a href="#m03">Edit Page</a></li>
+    <li><a href="#m04">Cut Page</a></li>
+    <li><a href="#m05">Fusion Page</a></li>
+    <li><a href="#m06">Color Page Basics</a></li>
+    <li><a href="#m07">Fairlight Page</a></li>
+    <li><a href="#m08">Deliver Page</a></li>
+  </ol>
+  <span class="part-label">Part II · Color Mastery</span>
+  <ol style="counter-reset:mod 8">
+    <li><a href="#m09">Color Management Setup</a></li>
+    <li><a href="#m10">The Node Tree Architecture</a></li>
+    <li><a href="#m11">Balancing Nodes</a></li>
+    <li><a href="#m12">Color Isolation &amp; Layer Mixer</a></li>
+    <li><a href="#m13">Global Look Creation</a></li>
+    <li><a href="#m14">Power Windows &amp; Adjustments</a></li>
+    <li><a href="#m15">Final Look &amp; Refinement</a></li>
+    <li><a href="#m16">Grading Different Footage Types</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<header class="hero">
+  <div class="eyebrow">A Complete Curriculum · DaVinci Resolve 20.3 &amp; 21 Beta</div>
+  <h1>The Resolve Course</h1>
+  <p class="lede">From an empty project to a colour-graded, scored, delivered film — every page, every node, every decision. Distilled from a seven-hour masterclass into structured lectures, with commentary on what the videos don't tell you.</p>
+  <div class="meta">
+    <span>Duration<strong>~7 hours of source</strong></span>
+    <span>Modules<strong>16</strong></span>
+    <span>Format<strong>Lecture + Commentary</strong></span>
+    <span>Audience<strong>Beginner → Expert</strong></span>
+  </div>
+</header>
+
+<!-- ===================== MODULE 01 ===================== -->
+<section class="module" id="m01">
+<div class="mod-head"><span class="mod-num">M·01</span><h2>Foundations &amp; Philosophy</h2></div>
+
+<p>Before any tool, the mindset. Resolve is not "another editor with extra features" — it's an attempt to put the whole post-production pipeline (media management, editing, visual effects, colour grading, audio mixing, delivery) into a single application. Most students fail Resolve not because the software is hard, but because they don't understand the <em>pipeline</em> that the software was built to express. Once you see the pipeline, the seven pages of Resolve become obvious.</p>
+
+<h3>What Resolve actually is</h3>
+<p>Resolve began life as the colour-grading tool used on Hollywood features — that's its origin and remains its most professional muscle. Over successive versions, Blackmagic Design layered on editing (Edit and Cut pages), visual effects and motion graphics (Fusion), and audio post (Fairlight), so the entire post workflow now lives inside one application that shares a single timeline across every page.</p>
+
+<p>The practical consequence: <strong>you do not export, round-trip, or convert</strong> when you move from editing to grading to audio. You click a button at the bottom of the screen, and the same timeline appears in a different workspace tuned for that task. This is rare. Premiere users round-trip to After Effects. FCP users round-trip to Logic. Resolve users do not round-trip — and that is the single biggest argument for learning it.</p>
+
+<h3>The seven pages and what they're for</h3>
+<table>
+<thead><tr><th>Page</th><th>Job</th><th>When you use it</th></tr></thead>
+<tbody>
+<tr><td>Media</td><td>Manage and organise footage</td><td>At the start, when ingesting and tagging clips</td></tr>
+<tr><td>Cut</td><td>Fast, deadline-driven editing</td><td>Vlogs, news, social cuts — speed over precision</td></tr>
+<tr><td>Edit</td><td>Storytelling and detailed editing</td><td>The hub for most narrative and commercial work</td></tr>
+<tr><td>Fusion</td><td>VFX, compositing, motion graphics</td><td>When the pixels need to change beyond colour</td></tr>
+<tr><td>Color</td><td>Colour correction and grading</td><td>After the cut is locked, before audio finishing</td></tr>
+<tr><td>Fairlight</td><td>Audio mixing and sound design</td><td>Dialogue cleanup, music, effects, final mix</td></tr>
+<tr><td>Deliver</td><td>Render the final file</td><td>The last step — exporting for YouTube, client, archive</td></tr>
+</tbody>
+</table>
+
+<p>The pages also appear in this order along the bottom of the interface for a reason: it's the order of the post-production workflow. Ingest → cut → composite → grade → mix → deliver. You'll bounce between them, but you'll mostly move from left to right.</p>
+
+<h3>Free vs Studio: an honest assessment</h3>
+<p>The free version of Resolve is genuinely the most generous freeware in professional video. It includes colour grading, Fusion compositing, Fairlight mixing, commercial-use rights, no watermark, no demo period, and renders up to UHD. Studio costs <strong>$295 once</strong> (no subscription) and adds: Resolve FX (extra effects), AI tools (Magic Mask, voice isolation, depth maps, music editor, face refinement), HDR delivery, higher than UHD rendering, and on Windows the ability to render H.265.</p>
+
+<div class="callout">
+<span class="label">Lecturer's rule</span>
+<p>Start with the free version. Open it. Make things. When you hit a wall where Resolve says <em>"this feature requires Studio,"</em> note what it was. After three such walls you're a Studio buyer. Before that, you're paying for capabilities you can't yet use.</p>
+</div>
+
+<h3>Hardware: the honest truth</h3>
+<p>Resolve is resource-hungry. The free version will run on modest hardware for SD/HD editing, but the moment you start using Fusion, AI features, or 4K colour with multiple nodes, you need at minimum a mid-range gaming PC GPU (RTX 3060 class or better) or an Apple Silicon Mac (M2 or later). RAM should be 16 GB minimum, 32 GB strongly recommended. Storage matters — SSDs only for media, never spinning disks for video work.</p>
+
+<div class="callout v21">
+<span class="label">v21 update</span>
+<p>Resolve 21 (public beta, mid-2026) adds a new <strong>Photo page</strong> for grading still images, an AI <strong>IntelliSearch</strong> for finding content by describing it ("find the shot of the red car"), <strong>CineFocus</strong> for synthetic depth-of-field, and major Fusion updates including the Krokodove toolkit. Everything taught here remains correct in v21 — these are additions, not replacements.</p>
+</div>
+
+<h3>The interface, oriented</h3>
+<p>Across every page, the same three structural concepts repeat: a <strong>viewer</strong> (what you see), a <strong>selection mechanism</strong> (clips, thumbnails, or a media pool to pick from), and an <strong>inspector or palette panel</strong> (where you adjust the properties of whatever is selected). Internalise this triangle. Whether you're animating a title, grading a shot, mixing audio, or rendering, you are always selecting something and adjusting its properties.</p>
+
+<h3>The project library</h3>
+<p>Resolve does not store projects as loose files you can throw anywhere. Projects live in a <em>library</em> — a database that Resolve manages. By default the library is a folder Resolve creates on your system drive. You can have multiple libraries (local, network, or cloud) and switch between them in the Project Manager that opens when you launch Resolve. To move a project to another machine, right-click it and <code>Export Project</code> as a <code>.drp</code> file; on the other end, right-click in the project manager and <code>Import Project</code>.</p>
+
+<div class="callout pitfall">
+<span class="label">Common trap</span>
+<p>Beginners try to find and double-click <code>.drp</code> files in Finder/Explorer to open projects. That works, but only after you've imported them into a library. The library is the source of truth, not the file. Treat <code>.drp</code> like a moving van, not an apartment.</p>
+</div>
+
+</section>
+
+<!-- ===================== MODULE 02 ===================== -->
+<section class="module" id="m02">
+<div class="mod-head"><span class="mod-num">M·02</span><h2>The Media Page</h2></div>
+
+<p>Bad media management kills more projects than bad editing. The Media page exists to prevent that.</p>
+
+<h3>The two-tier mental model</h3>
+<p>The Media page splits the world into two tiers:</p>
+<ol>
+<li><strong>Media Storage</strong> (top-left): everything on your computer's file system that Resolve can <em>see</em> but doesn't yet <em>know about</em>. Browsing here is like walking through your hard drive.</li>
+<li><strong>Media Pool</strong> (bottom): everything Resolve <em>knows about and can use in this project</em>. To bring a clip into the project, you drag from Storage to Pool.</li>
+</ol>
+
+<p>This distinction matters because Resolve treats Pool clips as project assets — it tracks their metadata, sync information, color tags, smart-bin membership, and any user edits. Storage is just a file browser; Pool is a database.</p>
+
+<h3>Bins and smart bins</h3>
+<p>Bins are folders inside the Pool. Make one per scene, per shoot day, per camera, per category — whatever organisation suits the job. Right-click in the bin list area &gt; New Bin. You can also drag a folder from your file system directly into the bin list and Resolve will replicate the folder structure as bins, importing every clip inside.</p>
+
+<p><strong>Smart bins</strong> are live filters — they collect clips automatically based on rules you define (e.g. "clip contains keyword <code>OTS</code>" or "scene equals 4"). Anything matching the rule appears in the smart bin without you having to drag it there. Useful for documentary or multi-day shoots where the same logical group of clips lives across many folders.</p>
+
+<h3>Metadata: when it pays off</h3>
+<p>The Media page has a sprawling metadata panel where you can record scene, take, angle, keyword, description, comments — dozens of fields. <strong>You don't need most of them most of the time.</strong> But for narrative work with multiple takes per shot, logging <code>Scene</code>, <code>Take</code>, and a one-word <code>Comments</code> field ("circle take," "use this") will save you hours when you assemble the edit.</p>
+
+<p>The workflow: double-click a clip → it loads in the source viewer → scrub to the slate → read the scene/take aloud → type it into the metadata fields. You can then switch the Pool to List view, right-click the column headers, enable Scene and Take columns, and sort by them.</p>
+
+<div class="callout commentary">
+<span class="label">Commentary</span>
+<p>The metadata payoff comes when the project gets large, not while you're entering it. Beginners abandon metadata because the payoff feels distant. Do it anyway on anything over 30 clips — you will need it on the second pass of the edit.</p>
+</div>
+
+<h3>Syncing audio</h3>
+<p>If you recorded sound separately (a boom into a Zoom recorder while video records on-camera), the Media page can sync them. Select the video clip and the matching audio clip together, right-click → <code>Audio Sync</code> → <code>Auto-Sync Audio</code> → <strong>Synchronize using Waveform</strong>. Resolve scans both files' audio waveforms, finds the matching peak (your clap or slate), and replaces the camera's audio with the high-quality recording.</p>
+
+<p>You can multi-select dozens of clips and sync them all in one operation. Where Resolve fails (no matching audio in one of the clips, or two takes too similar), it tells you which clips didn't sync; you can fix those manually later.</p>
+
+<div class="callout pitfall">
+<span class="label">Trap</span>
+<p>If your recorder and camera use different sample rates, sync can drift over long takes. Set both devices to 48 kHz before the shoot. The Media page can sync, but it can't fix incorrect sample-rate metadata after the fact without quality loss.</p>
+</div>
+
+<h3>AI audio classification (Studio only)</h3>
+<p>Studio users can right-click audio clips → <code>AI Tools</code> → <code>Audio Classification</code> → <code>Analyze</code>, which sorts clips into Dialogue, Music, Effects sub-categories (laughter, door, liquid, etc.). Hit-or-miss accuracy but invaluable for very large sound-effect libraries.</p>
+</section>
+
+<!-- ===================== MODULE 03 ===================== -->
+<section class="module" id="m03">
+<div class="mod-head"><span class="mod-num">M·03</span><h2>The Edit Page</h2></div>
+
+<p>This is the heart of the post-production workflow. The Edit page is where the <em>story</em> gets built — where clips become sequences and sequences become a film. If you only learn one page deeply, learn this one.</p>
+
+<h3>The interface, properly</h3>
+<p>Two viewers: the <strong>source viewer</strong> (left) is where you preview clips before adding them to the timeline; the <strong>timeline viewer</strong> (right) is what your audience will see — it's the live preview of the cut. Below them lies the timeline itself, where the actual editing happens. The Media Pool is in the top-left by default but can be switched off when you don't need it.</p>
+
+<p>Both viewers can be operated by the keyboard: <kbd>J</kbd> plays backward, <kbd>K</kbd> stops, <kbd>L</kbd> plays forward. Tap <kbd>L</kbd> twice for 2× speed, three times for 4×. This is faster than scrubbing with the mouse and you should learn it early.</p>
+
+<h3>Ins and outs — the heart of editing</h3>
+<p>Editing in Resolve is not "drag a long clip onto the timeline and trim it." That works but wastes effort. The professional flow:</p>
+<ol>
+<li>Double-click a clip in the Pool — it loads into the source viewer.</li>
+<li>Find where you want the clip to start and press <kbd>I</kbd> for <strong>In</strong>.</li>
+<li>Find where you want it to end and press <kbd>O</kbd> for <strong>Out</strong>.</li>
+<li>Drag the middle of the source viewer into the timeline — only the portion between In and Out is added.</li>
+</ol>
+
+<p>This is faster than trim-after-the-fact because you preview the trim while picking it, and the Pool clip itself isn't modified — every time you load it again, the In/Out you set are remembered until you change them.</p>
+
+<h3>The edit buttons</h3>
+<p>Between the two viewers sit edit buttons that take whatever's in the source viewer (or the source clip selected) and place it into the timeline in different ways:</p>
+<table>
+<thead><tr><th>Button</th><th>Behaviour</th><th>Use it when</th></tr></thead>
+<tbody>
+<tr><td>Insert</td><td>Inserts at playhead, pushing later clips right</td><td>Adding a missing shot inside an existing edit</td></tr>
+<tr><td>Overwrite</td><td>Pastes over whatever is at the playhead</td><td>Replacing a section without changing length</td></tr>
+<tr><td>Replace</td><td>Swaps the clip under the playhead for the source</td><td>Trying alternative takes in place</td></tr>
+<tr><td>Place on Top</td><td>Adds to a new track above</td><td>B-roll over A-roll, picture-in-picture</td></tr>
+<tr><td>Append</td><td>Throws the clip at the end of the timeline</td><td>Gathering selects; rough assembly</td></tr>
+</tbody>
+</table>
+
+<h3>The story-building loop</h3>
+<p>The actual practice of editing — once mechanics are out of the way — is this loop, repeated for every scene:</p>
+<ol>
+<li><strong>Find the anchor.</strong> Pick a wide shot that contains the most action — the master shot. Cut it down to roughly its right length and place it at the head of the scene.</li>
+<li><strong>Layer reactions and details.</strong> Find close-ups, reaction shots, and inserts that show what the wide shot can't — emotions, glances, details. Stack these on a track above the anchor.</li>
+<li><strong>Cut on action.</strong> Where a character moves (turns their head, reaches, sits down), cut from one shot to another at the moment of motion. The eye accepts the cut because motion masks the discontinuity.</li>
+<li><strong>Trim.</strong> Aggressively shorten everything. Most cuts can lose half a second on each side and feel better for it.</li>
+</ol>
+
+<div class="callout commentary">
+<span class="label">Commentary — the anchor technique</span>
+<p>The anchor technique works because the audience never knows you cheated. They see the wide shot and think they're watching events unfold; the close-ups are decoration. If you build a scene from close-ups outward you'll constantly chase continuity errors. Build from the wide in, and continuity is the wide shot's problem.</p>
+</div>
+
+<h3>Trimming: three tools, three jobs</h3>
+<p>The Edit page has three editing modes, switched with <kbd>A</kbd>, <kbd>T</kbd>, and <kbd>B</kbd>:</p>
+<ul>
+<li><kbd>A</kbd> — <strong>Selection / Arrow tool.</strong> Move clips around. Trim by dragging clip edges (leaves gaps).</li>
+<li><kbd>T</kbd> — <strong>Trim tool.</strong> Trim edges and have neighbouring clips ripple closed (no gaps). Drag the upper half of a clip to <em>slip</em> (change which part of the clip is shown, keeping its in/out the same). Drag the lower half to <em>slide</em> (move the clip in time while trimming its neighbours).</li>
+<li><kbd>B</kbd> — <strong>Blade tool.</strong> Click anywhere on a clip to slice it. Useful for chopping silence or marking sections.</li>
+</ul>
+
+<h3>The killer shortcut you must learn</h3>
+<p>Custom keyboard shortcuts are the single biggest speed-up available. Go to <strong>DaVinci Resolve menu → Keyboard Customization</strong>. Assign:</p>
+<ul>
+<li><kbd>Q</kbd> = <code>Trim Start to Playhead</code> (ripples earlier portion of the clip away)</li>
+<li><kbd>W</kbd> = <code>Trim End to Playhead</code> (ripples later portion away)</li>
+<li><kbd>S</kbd> = <code>Split Clip</code> (slices at playhead)</li>
+</ul>
+<p>With those three on your left hand, you can edit dialogue or podcasts at three to four times the speed of the default shortcuts. Save the layout as a preset so it travels between machines.</p>
+
+<h3>Animating with keyframes</h3>
+<p>Almost any property in Resolve — position, scale, opacity, blur, colour balance — can be keyframed over time. Select the clip → open the <strong>Inspector</strong> on the right → next to the property you want to animate, click the little diamond. That marks the current value as a keyframe at the current time. Move the playhead, change the property value, and a second keyframe is created automatically. Resolve interpolates between the two.</p>
+
+<p>To soften a stop (so a moving element decelerates instead of jerking to a halt), open the Keyframes panel, switch from the timeline view to the curves view, select the keyframe, and flatten its outgoing tangent. This produces an <em>ease-out</em>. The same logic produces ease-in (flatten incoming tangent) and ease-in-out (flatten both).</p>
+
+<div class="callout pitfall">
+<span class="label">Trap</span>
+<p>If you set a keyframe at the start of a clip and a second one before the end, the animation finishes mid-clip and then sits still. To finish the animation at the very end of the clip, place the second keyframe on the last frame, not earlier. Beginners commonly produce "animations that stop too early" by misplacing the second keyframe.</p>
+</div>
+
+<h3>Audio in the Edit page</h3>
+<p>Every video track has a corresponding audio track. Drag the bottom edge of an audio track header down to enlarge it and see the waveform clearly. Click the volume rubber-band line (the horizontal line through the middle of the audio clip) and drag it up or down to change clip volume. <kbd>Alt</kbd>-click on the line to add keyframes you can drag individually — that's how you duck audio under dialogue, fade an effect, or smooth out a peak.</p>
+
+<p>The white triangles at the top corners of each clip are <strong>fade handles</strong>. Drag them inward to create a fade-in or fade-out, on either audio or video. This is the only "transition" most edits ever need.</p>
+
+<h3>Effects, generators, titles</h3>
+<p>The Effects panel (top toolbar button) holds: <strong>Toolbox</strong> (Resolve's native effects), <strong>OpenFX</strong> (extra effects, mostly Studio), <strong>Audio FX</strong>, <strong>Titles</strong>, <strong>Generators</strong>, and <strong>Transitions</strong>. Drag any of them onto a clip or a track to apply.</p>
+
+<p>For titles: drag <code>Text</code> from the Titles section onto your timeline. Select the title clip → in the Inspector, the <strong>Title</strong> tab controls the text content, font, size, tracking, colour; the <strong>Settings</strong> tab controls the underlying video properties (position, rotation, scale) that you'd keyframe to animate the title.</p>
+
+</section>
+
+<!-- ===================== MODULE 04 ===================== -->
+<section class="module" id="m04">
+<div class="mod-head"><span class="mod-num">M·04</span><h2>The Cut Page</h2></div>
+
+<p>The Cut page is the Edit page's faster, less precise twin. It exists because some projects don't need precision — they need speed.</p>
+
+<h3>The defining feature: two timelines</h3>
+<p>The Cut page shows the same timeline at two zoom levels simultaneously: a fully zoomed-out version at the top (showing the whole project) and a zoomed-in version below (showing detail around the playhead). Click anywhere on the upper timeline to jump there; work on the detail in the lower. This eliminates the constant zoom-in/zoom-out that consumes time in the Edit page.</p>
+
+<h3>The single viewer</h3>
+<p>Where the Edit page has two viewers (source + timeline), the Cut page has one viewer that toggles between source and timeline modes. Slightly slower for picking exact in-points, faster for general browsing.</p>
+
+<h3>Source Tape mode</h3>
+<p>The Cut page's secret weapon. Click the second icon above the viewer to enter Source Tape — all the clips in the active bin are virtually joined into one long "tape" you can scrub through continuously. For finding a B-roll shot when you don't remember which clip it's in, this is much faster than opening clips one by one.</p>
+
+<h3>The Sync Bin (the genuine killer feature)</h3>
+<p>For multicam shoots — interviews, live events, panels — the Cut page's Sync Bin is the most efficient multicam workflow in any editor. The process:</p>
+<ol>
+<li>Select all camera clips in the Media Pool.</li>
+<li>Click the <strong>Sync</strong> button (left side of the interface) and choose <code>Sync by Audio</code>, then <code>Auto Sync</code>.</li>
+<li>Click <code>Save Sync</code>. Resolve tags each clip with its synced position.</li>
+<li>Drag one camera (usually the wide) into the timeline as your spine.</li>
+<li>Open the <strong>Sync Bin</strong> view — it now shows, live, every camera angle at the current playhead position.</li>
+<li>Pick the angle you want at any moment, set in/out, and use <code>Place on Top</code> to drop it as a cut-in.</li>
+</ol>
+
+<p>This avoids the traditional multicam workflow of creating a "multicam clip" and switching angles in real-time playback — slower and easier to mess up. The Sync Bin lets you scrub at your own pace and see all your options live.</p>
+
+<div class="callout commentary">
+<span class="label">When to choose Cut over Edit</span>
+<p>Use the Cut page when (a) you're moving very fast on a deadline; (b) the project is mostly one-clip-after-another with simple sound design (vlog, news package, talking-head with B-roll); or (c) you're doing a multicam interview cut. Use the Edit page for anything narrative, anything with stacked audio design, or anything requiring fine-grained timeline manipulation.</p>
+</div>
+
+<h3>Smart edit decisions</h3>
+<p>Many Cut-page edit buttons (Insert, Append, Place on Top) snap to the <em>nearest edit point</em> rather than the exact playhead position. This is by design — it's faster to "drop a clip in roughly the right spot" than to micro-position the playhead. But it can surprise you the first time. The little green animation indicates which edit point is currently selected as the target.</p>
+
+</section>
+
+<!-- ===================== MODULE 05 ===================== -->
+<section class="module" id="m05">
+<div class="mod-head"><span class="mod-num">M·05</span><h2>The Fusion Page</h2></div>
+
+<p>Fusion is where Resolve becomes a visual-effects compositor — Blackmagic's answer to After Effects, but built on a fundamentally different paradigm. Most students bounce off Fusion in their first ten minutes because the interface looks alien. It isn't. It's just a flowchart.</p>
+
+<h3>Why Fusion exists</h3>
+<p>Anything that changes the actual <em>pixels</em> of your image beyond colour — adding fog or smoke to a sky, replacing a screen, removing an unwanted object, adding lightsabers, building a title sequence — happens in Fusion. If you've heard of "compositing," that's the formal name for layering and modifying images. Fusion is a compositor.</p>
+
+<h3>Node-based vs layer-based thinking</h3>
+<p>The hard part for After Effects refugees: Fusion isn't layers stacked on a timeline. It's a <strong>flowchart of operations</strong>. Each box ("node") performs one job — blur, colour correct, combine, mask — and you wire nodes together to flow an image through a sequence of changes.</p>
+
+<div class="flow">
+<span class="node">MediaIn</span><span class="arrow">→</span><span class="node">Blur</span><span class="arrow">→</span><span class="node">ColorCorrector</span><span class="arrow">→</span><span class="node">MediaOut</span>
+</div>
+
+<p>The flowchart above takes the source footage in, blurs it, colour-corrects it, and outputs the result back to the timeline. Each step is modular — you can disable any node, rearrange order, or branch the flow without losing earlier work.</p>
+
+<div class="callout commentary">
+<span class="label">The recipe metaphor</span>
+<p>Think of Fusion like a recipe. To make lemonade you need lemons (input), squeeze them, take water (another input), combine, add sugar (third input), stir, serve. Each step is a node; each ingredient is a MediaIn; combining two ingredients is a Merge node. Once you see it as a recipe, Fusion stops being intimidating.</p>
+</div>
+
+<h3>The two default nodes</h3>
+<p>When you click into Fusion on a clip, you get two nodes by default:</p>
+<ul>
+<li><strong>MediaIn</strong> — imports the clip from the timeline. Anything connected after this gets the source footage.</li>
+<li><strong>MediaOut</strong> — returns the result to the timeline. Whatever connects to MediaOut is what appears in the Edit page.</li>
+</ul>
+<p>The line between them is the flow. To insert a node, drop it onto the line and the line turns blue indicating a valid drop — release and the node is wired in automatically.</p>
+
+<h3>Node colours and connections</h3>
+<p>Every node has inputs and outputs. The triangles on the left of a node are <em>inputs</em>; the white square on the right is its <em>output</em>. Drag from an output to an input to connect.</p>
+<ul>
+<li><strong>Yellow input</strong> — primary image (background, or "the thing to operate on")</li>
+<li><strong>Green input</strong> — secondary image (foreground when merging)</li>
+<li><strong>Blue input</strong> — effect mask (limits the node's effect to a region)</li>
+</ul>
+
+<h3>The Merge node — combining two images</h3>
+<p>To layer one image over another, you need a <strong>Merge</strong> node. It has three inputs: yellow (background), green (foreground), blue (mask). The output is the combined image. This is how you put a logo over footage, or put a generated cloud over a sky, or composite an alien into a cockpit.</p>
+
+<div class="flow">
+<span class="node">FootageA</span><span class="arrow">→</span><span class="node">Merge (yellow)</span> ← (green) <span class="node">FootageB</span>
+</div>
+
+<h3>Masking — limiting where a node acts</h3>
+<p>Masks are central to Fusion. The principle: take a node that does something to the whole image, then attach a mask to its <code>blue</code> input — the node now only operates within the mask's white area.</p>
+<p>The common masks: <strong>Rectangle</strong>, <strong>Ellipse</strong>, and <strong>Polygon</strong> (a freehand pen tool). For a soft mask, pull the red outer handles outward to add feather. For polygons, click to add corners or click-and-drag to add curves; close the path by clicking the first point again.</p>
+
+<div class="callout pitfall">
+<span class="label">The auto-animation trap</span>
+<p>Polygon masks animate automatically by default — if you draw a mask at frame 1 and adjust it at frame 30, you've just created a keyframed shape change. To stop this, right-click in the inspector where it says <em>"right-click here for shape animation"</em> → <strong>Remove Polygon1 → Polyline</strong>. Now the mask is static. Forget this and your masks will jiggle in playback in ways you don't understand.</p>
+</div>
+
+<h3>The two viewers</h3>
+<p>Unlike the Edit page, both Fusion viewers are independent. Drop any node into either viewer to inspect it. The standard workflow: <strong>right viewer = MediaOut</strong> (your final result), <strong>left viewer = whatever node you're currently working on</strong>. Press <kbd>1</kbd> or <kbd>2</kbd> with a node selected to load it into the left or right viewer.</p>
+
+<h3>The Transform node</h3>
+<p>To move, scale, or rotate part of a composite, use a <strong>Transform</strong> node. It has the same controls you'd find in the Edit Inspector (X/Y position, size, rotation, pivot) but lives as a discrete step in the flow, which means you can keyframe it independently of other transformations earlier or later in the chain.</p>
+
+<h3>A worked example: smoke trail in a sky</h3>
+<p>The exercise from Casey's masterclass — adding a smoke trail across a wide landscape shot — illustrates the whole approach:</p>
+<ol>
+<li><strong>Generate the smoke.</strong> Drag a <code>FastNoise</code> node onto the flow but don't connect it yet. View it in the left viewer. In its Inspector: push <em>Detail</em> and <em>Scale</em> to taste; in the Color tab, set Colour 2's RGB to zero (so it generates black clouds on transparency).</li>
+<li><strong>Combine smoke and footage.</strong> Add a Merge node after MediaIn. Connect FastNoise to the green (foreground) input. Now black clouds appear over the entire frame.</li>
+<li><strong>Mask where the smoke appears.</strong> Drop a <code>Polygon</code> node, draw a streak across the sky, connect the polygon's output to FastNoise's blue input. The smoke now only exists inside the polygon shape.</li>
+<li><strong>Soften.</strong> On the polygon, push <em>Soft Edge</em> up; the streak fades naturally.</li>
+<li><strong>Animate subtly.</strong> On FastNoise, give <em>Seethe Rate</em> a tiny value (e.g. 0.05) so the cloud texture drifts slowly. Keyframe <em>Center</em> from one position to another across the clip for very gentle directional movement.</li>
+<li><strong>Disable mask animation</strong> on the polygon (see pitfall above) so the streak shape itself doesn't jiggle.</li>
+</ol>
+
+<h3>Day-for-night exercise (an introduction to multi-layer grading in Fusion)</h3>
+<p>To turn a daytime shot into night, you split the image into the sky and the ground/building and treat them differently:</p>
+<ol>
+<li>Run MediaIn through a <code>Brightness/Contrast</code> node tuned for the building (medium darken).</li>
+<li>Run MediaIn through a <em>second</em> Brightness/Contrast tuned harder for the sky (heavy darken, kill saturation).</li>
+<li>Merge the sky-graded version over the building-graded version.</li>
+<li>Mask the merge with a polygon to limit the sky correction to the sky.</li>
+<li>Add a final ColorCorrector to tint the whole composite blue.</li>
+<li>Optional: Merge the original footage back on top through tight ellipse masks at the lamp positions, so lights still appear warm and luminous.</li>
+<li>Optional: Generate FastNoise → mask to a low strip → merge as soft ground fog.</li>
+</ol>
+
+<p>The whole exercise teaches the core Fusion lesson: nothing in Fusion needs to be hard — each node does one thing, and you compose them.</p>
+
+<h3>Combining shots in Fusion</h3>
+<p>To combine two timeline clips inside Fusion, two approaches:</p>
+<ul>
+<li><strong>Drag the second clip in from the Media Pool</strong> while inside the Fusion page — it becomes a second MediaIn.</li>
+<li><strong>Or back on the Edit page</strong>, stack the two clips on adjacent tracks, select both, right-click → <code>New Fusion Clip</code>. They're combined into one timeline item that opens both inside Fusion.</li>
+</ul>
+
+<p>For the alien-in-cockpit composite from the masterclass: bring in the cockpit (foreground plate) and alien (background plate) as two MediaIns. Cut a hole in the cockpit using an inverted polygon mask over its cockpit window. Scale and position the alien with a Transform. Stack: <code>Alien → Transform → MediaOut (background)</code>, <code>Ship → Polygon (inverted, masked) → over the alien</code>. Add a subtle interactive light grade — a Brightness/Contrast inside a soft rectangle mask near where the cockpit glass would catch light — to sell the integration.</p>
+
+<h3>Tracker and Magic Mask</h3>
+<p>The <strong>Tracker</strong> node locks onto a feature in the image and follows it. Drag from the toolbar, place the tracker target on the feature, hit <em>Track Forward</em>. You can then feed the tracker's output to a Merge node and set its Operation to <code>Match Move</code> to stick text or another image to the tracked feature. Or set Operation to <code>Foreground Only</code> to produce just the tracked transform, which you can wire elsewhere.</p>
+
+<p><strong>Magic Mask</strong> (Studio) is AI-assisted rotoscoping. Draw a line over your subject, hit <em>Track Forward and Reverse</em>, and Resolve generates a moving mask that follows them. Use it for cutting out a character from their background, or for fast subject isolation when a polygon would take an hour.</p>
+
+<div class="callout v21">
+<span class="label">v21 update</span>
+<p>Fusion 21 adds the <strong>Krokodove</strong> toolkit — 70+ new graphics tools, including templates for motion graphics that you can drop in and customise. The macro editor is also significantly improved. Everything taught above remains correct; Krokodove is additive.</p>
+</div>
+
+</section>
+
+<!-- ===================== MODULE 06 ===================== -->
+<section class="module" id="m06">
+<div class="mod-head"><span class="mod-num">M·06</span><h2>The Color Page (Basics)</h2></div>
+
+<p>This module covers the mechanics of the Color page — interface, controls, scopes, copying grades, and timeline-level grading. The deeper colour science and grading methodology lives in <strong>Part II</strong> of this course.</p>
+
+<h3>How the Color page works conceptually</h3>
+<p>The Color page operates on a simple principle: <strong>whatever clip the playhead is over, you're grading that clip.</strong> No effects to drag, no clip selection to remember — you look at a shot in the viewer, and the colour controls below adjust that shot. To grade a different shot, click its thumbnail or move the playhead.</p>
+
+<h3>Interface map</h3>
+<p>Top of the page: the viewer, the gallery (where you save still references), and the clips strip (one thumbnail per timeline clip). Middle: the node graph for the currently selected clip. Bottom: the colour palettes — primaries, curves, qualifier, windows, key, tracker, scopes. Each palette adjusts the currently selected node on the currently selected clip.</p>
+
+<h3>Nodes in Color vs Nodes in Fusion</h3>
+<p>Both use nodes, but with different meanings:</p>
+<ul>
+<li>A <strong>Fusion node</strong> does one specific job (blur, transform, merge).</li>
+<li>A <strong>Color node</strong> is a container for any combination of corrections — curves, primaries, qualifiers, windows, all in one node.</li>
+</ul>
+<p>Color nodes exist to <em>organise</em> your corrections — you might use one node for exposure, another for white balance, another for a creative look, another for a vignette. You can name them (right-click → Node Label) and toggle them on/off (click the node number) to see what each contributes.</p>
+
+<h3>The primary palette — the workhorse</h3>
+<p>The primary color wheels are the single most-used palette on the Color page. They contain:</p>
+<ul>
+<li><strong>Lift / Gamma / Gain</strong> — three colour wheels that bias the darks, midtones, and highlights respectively. Drag the centre dot of a wheel toward a colour to push that colour into that tonal range. Drag the slider beneath the wheel to lift or darken that range.</li>
+<li><strong>Offset</strong> — a fourth wheel/slider that biases the entire image equally. Use it for global colour casts and exposure shifts.</li>
+<li><strong>Contrast / Pivot</strong> — Contrast widens the gap between darks and lights; Pivot moves the midpoint where that split happens. Push Pivot left to apply contrast more in the dark tones, right for highlights.</li>
+<li><strong>Temperature / Tint</strong> — global white-balance shifts.</li>
+<li><strong>Saturation / Hue / Color Boost</strong> — Saturation acts on everything; Color Boost only boosts already-desaturated colours (so you saturate without going neon).</li>
+</ul>
+
+<h3>The curves palette</h3>
+<p>The Custom Curves: a graph of input brightness (X) versus output brightness (Y). Drag points up to brighten, down to darken. A subtle <strong>S-curve</strong> (push the upper-mid up, lower-mid down) adds the kind of contrast film prints have — it's the single most useful curve adjustment.</p>
+
+<p>The Color page also offers a row of "versus" curves:</p>
+<ul>
+<li><strong>Hue vs Hue</strong> — pick a colour, shift it to another colour. (Turn that red car blue.)</li>
+<li><strong>Hue vs Sat</strong> — pick a colour, change its saturation. (Desaturate the greens of the forest.)</li>
+<li><strong>Hue vs Lum</strong> — pick a colour, change its brightness. (Darken the sky's blue.)</li>
+<li><strong>Lum vs Sat</strong> — desaturate by brightness. (Common trick: pull saturation out of pure white and pure black, leaving only the midtones saturated.)</li>
+<li><strong>Sat vs Sat</strong> — restrict over-saturated areas without touching less-saturated ones.</li>
+<li><strong>Sat vs Lum</strong> — brighten or darken based on saturation level.</li>
+</ul>
+
+<h3>Scopes — the truth about your image</h3>
+<p>Your eyes lie. After ten seconds of looking at an image, your brain accepts whatever colour cast is present as "normal." Scopes don't lie. Always grade with scopes visible.</p>
+<table>
+<thead><tr><th>Scope</th><th>Reads</th><th>Use it for</th></tr></thead>
+<tbody>
+<tr><td>Waveform</td><td>Brightness across the horizontal axis of the frame</td><td>Setting overall exposure and contrast</td></tr>
+<tr><td>Parade</td><td>Three waveforms — R, G, B channels side by side</td><td>White balance — match all three at a neutral object</td></tr>
+<tr><td>Vector scope</td><td>Hue (angle) and saturation (radius)</td><td>Skin tones (the diagonal "skin line"), over-saturation</td></tr>
+<tr><td>Histogram</td><td>Distribution of brightness values</td><td>Quick check for clipping at black or white</td></tr>
+</tbody>
+</table>
+
+<h3>Resetting and copying grades</h3>
+<p>To reset a single node: right-click the node → <code>Reset Node Grade</code>. To reset everything on a clip: right-click in the empty space of the node graph → <code>Reset All Grades and Nodes</code>.</p>
+<p>To copy a grade from one clip to another: select the target clip; mouse over the source clip's thumbnail; <strong>middle-click</strong>. The grade copies instantly. Select multiple targets first and one middle-click copies the grade to all of them.</p>
+
+<h3>Three levels of grade: clip, group, timeline</h3>
+<p>The Color page can apply corrections at three scopes:</p>
+<ul>
+<li><strong>Clip grade</strong> — affects one clip only. Default view.</li>
+<li><strong>Group grade</strong> — affects all clips assigned to the same group. (Right-click a clip → Assign to Group.) Two stages: pre-clip group (applied before the clip grade) and post-clip group (applied after).</li>
+<li><strong>Timeline grade</strong> — applied to every clip in the timeline. Two stages, pre and post. Switch to the timeline node graph using the small dots at the top of the node graph area.</li>
+</ul>
+
+<p>The order of operations: pre-clip group → clip grade → post-clip group → timeline grade → output. This lets you have a "creative look" living on the timeline that affects every clip, while still grading each clip individually beneath it.</p>
+
+<h3>Stills — saving and comparing grades</h3>
+<p>Right-click the viewer → <code>Grab Still</code> saves the current frame + its grade as a "still" in the Gallery. You can then right-click any still → <code>Apply Grade</code> to copy it; or right-click → <code>Play Still</code> to overlay it on the viewer for split-screen comparison.</p>
+
+<div class="callout commentary">
+<span class="label">The hero shot technique</span>
+<p>Pick one shot of the project — usually a wide, well-lit beauty shot. Grade it carefully. Grab a still. Now every other shot in the project gets compared to that still using <em>Play Still</em>. Match each shot to the hero, not to its neighbours. This is how feature colourists prevent "drift" — the slow visual shift that creeps in when you only ever compare shot N to shot N-1.</p>
+</div>
+
+</section>
+
+<!-- ===================== MODULE 07 ===================== -->
+<section class="module" id="m07">
+<div class="mod-head"><span class="mod-num">M·07</span><h2>The Fairlight Page</h2></div>
+
+<p>Fairlight is Resolve's dedicated audio post application — Resolve's equivalent of Pro Tools or Adobe Audition, but living inside the same timeline. You can do basic audio in the Edit page; you go to Fairlight when you need professional control.</p>
+
+<h3>When to move from Edit to Fairlight</h3>
+<p>Edit-page audio is for: setting clip volume, fades, simple ducking, ambient bed levels. Fairlight is for: dialogue compression, EQ shaping, multi-track sound design, busing, professional mix metering, audio sweetening. The transition is frictionless — you can hop back and forth at any time; the timeline is shared.</p>
+
+<h3>The interface</h3>
+<p>The timeline takes most of the screen, since audio editing is largely a timeline activity. The mixer panel runs down the right side — one channel strip per track, with mute/solo, fader, EQ access, dynamics access, effects slots, panning, and bus routing. The viewer is smaller but can be popped out if needed.</p>
+
+<h3>Mono vs stereo tracks</h3>
+<p>A common stumbling block: if you record dialogue to a single microphone, that's mono — both ears should hear it equally. But Resolve may import it onto a stereo track with audio only on the left channel. Right-click the clip in the Media Pool → <code>Clip Attributes</code> → <code>Audio</code>, set the format to two separate mono channels. Then right-click the timeline track header → <code>Change Track Type</code> → <code>Mono</code>.</p>
+
+<h3>Tracks are your friend</h3>
+<p>The most important habit in Fairlight: <strong>use lots of tracks</strong>. One track per dialogue character, one per ambience layer, one per sound effect, one per music stem. Add tracks freely (right-click any track header → Add Tracks). Tracks are how you keep effects and processing scoped — apply an EQ to a track, every clip on that track gets it.</p>
+
+<h3>Range mode and editing audio</h3>
+<p>The standard mouse modes:</p>
+<ul>
+<li><strong>Selection mode</strong> — pick and move whole clips.</li>
+<li><strong>Range mode</strong> — drag across part of a clip to select a region. Backspace deletes that region; you can pull volume keyframes within it without splitting.</li>
+<li><strong>Focus mode</strong> — combines both: top half of clip = range selection, bottom half = clip selection.</li>
+</ul>
+
+<h3>Buses — the professional structure</h3>
+<p>A <strong>bus</strong> is a routing channel: multiple tracks send their audio into one bus, you process the bus, and the bus sends to the main output. Use buses to group related tracks — all dialogue tracks → DialogueBus; all body-drop SFX → BodyBus; all music → MusicBus — and apply shared processing (compression, EQ, reverb) once on the bus rather than per track.</p>
+
+<p>To make a bus: <strong>Fairlight menu → Bus Format → Add Bus</strong>. Set its type (stereo, mono, 5.1, etc.) and a colour. On each track, set the Bus Output dropdown to your new bus. On the bus, set its Bus Output to Bus 1 (the main mix) so it actually reaches the speakers.</p>
+
+<h3>The dynamics panel</h3>
+<p>Double-click the green strip in a track's channel strip to open <strong>Dynamics</strong>. The most useful component is the <strong>Compressor</strong>: it turns down sounds above a threshold by a ratio you set, then a Makeup gain pushes the whole signal back up. The result: loud parts get quieter, quiet parts get relatively louder, the overall track sits at a more consistent level.</p>
+
+<p>Quick setting for dialogue: load the <code>Dialog Compression</code> preset from the top of the panel. It's a sensible starting point: threshold around -24 dB, ratio about 3:1, makeup gain 6 dB. Adjust threshold so the gain-reduction meter shows -3 to -6 dB on the loudest peaks.</p>
+
+<h3>EQ — shaping frequency</h3>
+<p>Double-click the cyan strip in a channel strip to open <strong>Equalizer</strong>. It's a graph of frequency (X) vs gain (Y). Higher frequencies are right, lower frequencies left. Push the graph up at a frequency to boost it; down to cut.</p>
+
+<p>The classic move for making a sound feel "in another room": pull down the high frequencies (right side of the graph), maybe boost low-mids slightly. That's how the masterclass mom-yelling-through-the-wall effect is achieved — high-cut EQ on the dialogue, volume reduced, sometimes routed through a reverb bus.</p>
+
+<h3>Effects, applied where</h3>
+<p>Audio effects can be applied at three levels:</p>
+<ol>
+<li><strong>Clip</strong> — drag an effect onto an individual clip. Affects only that clip. Useful for one-off sweeteners.</li>
+<li><strong>Track</strong> — drag onto the track header. Affects every clip on the track.</li>
+<li><strong>Bus</strong> — apply on the bus's channel strip. Affects everything routed into the bus.</li>
+</ol>
+<p>The professional habit: use track and bus effects for consistent processing; reserve clip effects for surgical fixes.</p>
+
+<h3>The AI Music Editor (Studio)</h3>
+<p>Studio has an AI Music Editor: select a music clip, in the Inspector type a target length, click <em>Adjust</em>. Resolve analyses the song, finds beat boundaries, and rebuilds the song shorter or longer at musical seams. It's hit-or-miss — sometimes magic, sometimes weird. For predictable results, splice manually on beat: find similar waveform peaks at the start and end of your desired section, blade between them, and add a short crossfade at the splice.</p>
+
+<h3>The sound library</h3>
+<p>Add folders of sound effects via the Sound Library panel → <code>Add Library</code>. Resolve indexes them; you can then search by keyword and double-click to audition. Drag into a track from the search results. Set in/out on the source viewer first if you only want part of the file.</p>
+
+<h3>Track automation</h3>
+<p>To automate <em>track-level</em> parameters (the fader, an EQ band, a send) over time, use the automation dropdown in the timeline. Switch from "None" to "Fader Level" (or whatever you want to automate), then play back — Resolve records your fader moves as a curve you can then refine by hand.</p>
+
+</section>
+
+<!-- ===================== MODULE 08 ===================== -->
+<section class="module" id="m08">
+<div class="mod-head"><span class="mod-num">M·08</span><h2>The Deliver Page</h2></div>
+
+<p>Your project doesn't exist until it's delivered. Deliver converts your timeline into a video file the rest of the world can play.</p>
+
+<h3>The interface</h3>
+<p>Left: Render Settings (the most important panel). Top-right: viewer, with familiar in/out point controls (<kbd>I</kbd>, <kbd>O</kbd>). Top-right of that: Render Queue (a to-do list of render jobs). Bottom: a thumbnail timeline and detailed timeline view (read-only — you don't edit here, you only mark ranges to export).</p>
+
+<h3>Codec vs container — the essential distinction</h3>
+<p>A common confusion: <strong>format</strong> (the container) and <strong>codec</strong> (the encoding) are different things.</p>
+<ul>
+<li><strong>Container</strong>: the wrapper file — <code>.mp4</code>, <code>.mov</code> (QuickTime), <code>.mxf</code>, <code>.avi</code>.</li>
+<li><strong>Codec</strong>: how the video is encoded inside the container — H.264, H.265, ProRes, DNxHR.</li>
+</ul>
+<p>A QuickTime file can hold ProRes, H.264, or many others. An MP4 typically holds H.264 or H.265. The choice of codec drives quality and file size; the choice of container drives compatibility.</p>
+
+<h3>The codec triangle</h3>
+<p>You can have a video file that is <strong>small</strong>, <strong>looks great</strong>, or <strong>plays back smoothly</strong> — pick two. The classic codecs and their trade-offs:</p>
+<table>
+<thead><tr><th>Codec</th><th>Small</th><th>Looks great</th><th>Plays smoothly</th><th>Use it for</th></tr></thead>
+<tbody>
+<tr><td>H.264</td><td>✓</td><td>—</td><td>✓</td><td>YouTube, client previews, web delivery</td></tr>
+<tr><td>H.265 (HEVC)</td><td>✓</td><td>✓</td><td>—</td><td>YouTube uploads where quality matters; final delivery for streaming</td></tr>
+<tr><td>ProRes</td><td>—</td><td>✓</td><td>✓</td><td>Archive masters, intermediates, files that will be re-edited</td></tr>
+<tr><td>DNxHR</td><td>—</td><td>✓</td><td>✓</td><td>Same use case as ProRes; common in Avid pipelines</td></tr>
+</tbody>
+</table>
+
+<div class="callout commentary">
+<span class="label">The YouTube hack</span>
+<p>If your timeline is 1080p and you're uploading to YouTube, set the Deliver resolution to <strong>Ultra HD (3840×2160)</strong>. YouTube applies a different compression algorithm to 4K uploads, and your 1080p footage will look noticeably cleaner after their re-encode than if you'd uploaded native 1080. The Render dialog will warn you that this "won't improve quality" — it's technically right about the file but wrong about the YouTube result.</p>
+</div>
+
+<h3>The render queue</h3>
+<p>Configure your render settings → choose a filename → choose a destination → click <strong>Add to Render Queue</strong>. The job appears in the queue but doesn't run yet. You can add multiple jobs (different codecs, resolutions, or in/out ranges of the same timeline) and click <strong>Render All</strong> once to process them sequentially. This is the right way to make a "delivery package" — the same project in YouTube quality, archive quality, client review quality, all in one batch.</p>
+
+<h3>Common preset choices</h3>
+<ul>
+<li><strong>H.265 Master</strong> + Ultra HD resolution → for YouTube uploads.</li>
+<li><strong>H.264 Master</strong> at timeline resolution → for client previews, email-able files, fast turnarounds.</li>
+<li><strong>ProRes</strong> (Type: ProRes 422 HQ or 4444) with <em>Audio: Linear PCM, 32-bit float, All Timeline Tracks</em> → for archive masters. Every track is preserved, every channel is intact, you can re-edit in five years without quality loss.</li>
+</ul>
+
+<h3>Individual clips vs single clip</h3>
+<p>The Render Settings have a <em>Single Clip</em> / <em>Individual Clips</em> toggle. Single Clip renders the whole timeline (or your in/out range) as one file — the normal case. Individual Clips renders every timeline clip as a separate file — useful for batch-converting raw camera footage to ProRes for editing, or for producing per-clip deliverables for client review.</p>
+
+<h3>Burning in subtitles</h3>
+<p>If your timeline has subtitles (added via the Edit page Effects → Titles → Subtitle), they will <strong>not</strong> render by default. Go to the Subtitle tab in Render Settings, set <strong>Format → Burn into video</strong>. Otherwise you'll export, send to a client, and only then notice the subtitles are missing.</p>
+
+<div class="callout pitfall">
+<span class="label">The overheating story</span>
+<p>If exports fail, produce glitch frames, or render slowly, check thermal throttling — particularly on Macs. A hot laptop will skip render frames and produce white-block artefacts. Render in a cool environment, use a laptop stand for airflow, or render with the laptop lid closed and an external monitor. Some users have literally exported sitting outside in the snow. Don't laugh until your MacBook is hitting 95°C.</p>
+</div>
+
+</section>
+
+<div class="part-divider">
+<span class="label">End of Part I — Part II Begins</span>
+<h2>Colour Mastery</h2>
+<p>From log to finished grade. Eight modules covering the Notary Structure — a complete grading workflow that scales from iPhone footage to cinema cameras.</p>
+</div>
+
+<!-- ===================== MODULE 09 ===================== -->
+<section class="module" id="m09">
+<div class="mod-head"><span class="mod-num">M·09</span><h2>Color Management Setup</h2></div>
+
+<p>Before you grade a single frame, set up colour management correctly. Skip this step and you'll spend hours fighting the image instead of grading it.</p>
+
+<h3>Why colour management matters</h3>
+<p>Professional cameras (and recent iPhones in their Pro modes) record in <strong>log</strong> — a grey, flat, low-contrast image. That ugliness is intentional: log packs the maximum amount of information into the file at the cost of how it looks straight out of the camera. Trying to grade log footage "by eye" with no colour management means you're guessing what the camera saw, manually undoing the log transform, and grading on top of that guess — all at the same time. That's three jobs at once.</p>
+
+<p>Colour management does the first two jobs scientifically, leaving you with one: making creative choices.</p>
+
+<h3>The setup, step by step</h3>
+<p>From the Edit page (or any page with the Project Settings cog at the bottom-right):</p>
+<ol>
+<li>Open <strong>Project Settings → Color Management</strong>.</li>
+<li>Set <strong>Color Science</strong> to <code>DaVinci YRGB Color Managed</code>.</li>
+<li><strong>Uncheck</strong> "Automatic Color Management." (Manual mode gives you control over the working space.)</li>
+<li>Set <strong>Color Processing Mode</strong> to <code>HDR DaVinci Wide Gamut Intermediate</code>. This is the modern, future-proof working space — wide enough to hold any camera's gamut, log-shaped for accurate maths.</li>
+<li>Set <strong>Output Color Space</strong>: <ul>
+<li><strong>Mac</strong>: <code>Rec.709-A</code> — Apple's slight gamma curve compensates so what you see in the viewer matches what plays back in QuickTime and other Mac apps.</li>
+<li><strong>Windows</strong>: <code>Rec.709 Gamma 2.2</code> or <code>2.4</code>. (2.2 for general; 2.4 if you're mastering for a darker viewing environment.)</li>
+</ul></li>
+<li>Leave <strong>Input Color Space</strong> alone in the project settings — you'll set that per-clip.</li>
+<li>Click <strong>Save</strong>. Your viewer will briefly flash as Resolve recalculates.</li>
+</ol>
+
+<h3>Tagging your footage</h3>
+<p>Resolve now needs to know what each clip was shot in. In the Media Pool: select all clips from the same camera and colour science, right-click → <code>Input Color Space</code>, choose the matching entry.</p>
+
+<table>
+<thead><tr><th>Camera / source</th><th>Input Color Space</th></tr></thead>
+<tbody>
+<tr><td>Sony A7S III / FX3 in S-Log3</td><td>S-Gamut3.Cine / S-Log3</td></tr>
+<tr><td>Canon C70 / R5 in Canon Log 3</td><td>Canon Cinema Gamut / Canon Log 3</td></tr>
+<tr><td>Blackmagic Pocket 6K / Film Gen 4/5</td><td>Blackmagic Design 4.6K / Pocket 6K Film Gen 4 (or 5)</td></tr>
+<tr><td>iPhone 15/16 Pro in Apple Log</td><td>Apple Log</td></tr>
+<tr><td>iPhone standard mode (Rec.709)</td><td>Rec.709 Gamma 2.4 (or "Same as Timeline")</td></tr>
+<tr><td>Drone footage in D-Log (DJI)</td><td>DJI D-Gamut / D-Log</td></tr>
+<tr><td>Standard MP4/MOV — no log</td><td>Rec.709 — same as timeline</td></tr>
+</tbody>
+</table>
+
+<p>You'll know instantly when you tag correctly: the image jumps from grey-flat to a balanced, natural-looking starting point. That's the camera's log curve being reversed and the colour space being remapped into the working space, automatically and accurately.</p>
+
+<div class="callout pitfall">
+<span class="label">If you don't know how you shot it</span>
+<p>Check the camera menu's picture style or color profile setting and write it on the slate at the start of the shoot. Resolve cannot infer this from the file in most cases. Footage tagged with the wrong color space looks <em>almost</em> right — that's the dangerous part. A subtle colour cast or contrast wrong-ness creeps through everything you do downstream.</p>
+</div>
+
+<h3>The CST node alternative</h3>
+<p>You can also handle colour space conversions per-clip using a <strong>Color Space Transform</strong> node (in Resolve FX, drag onto a node in the Color page). The Notary Structure (covered next module) uses a CST as the first node of every clip. The CST takes <em>Input Color Space</em> and <em>Input Gamma</em> from the source and outputs <em>Output Color Space</em> and <em>Output Gamma</em> for grading. This approach gives per-clip control if your footage is mixed.</p>
+
+</section>
+
+<!-- ===================== MODULE 10 ===================== -->
+<section class="module" id="m10">
+<div class="mod-head"><span class="mod-num">M·10</span><h2>The Node Tree Architecture</h2></div>
+
+<p>The single biggest gain in colour grading speed comes not from learning tools but from working in a structured node tree. The Notary Structure (downloadable as a free <em>power grade</em> from MNL or Studios) lays out a complete grading workflow as a pre-built node tree you apply to every clip. Once you've used it, you can build it from memory in any project.</p>
+
+<h3>The three columns</h3>
+<p>Conceptually, the node tree has three columns of work, each with a clear job:</p>
+<ol>
+<li><strong>Balancing</strong> — neutralise the image. Get exposure, contrast, and saturation into a usable range. This is technical work, not creative.</li>
+<li><strong>Color Isolation</strong> — separate the image into regions (skin, sky, main subject, background) so you can adjust each independently.</li>
+<li><strong>Global Look</strong> — the creative grade. Colour, contrast, mood, style.</li>
+</ol>
+
+<h3>The Notary structure, laid out</h3>
+<div class="flow">
+<span class="node">CST in</span><span class="arrow">→</span><span class="node">Exposure</span><span class="arrow">→</span><span class="node">Contrast</span><span class="arrow">→</span><span class="node">Saturation</span><span class="arrow">→</span><span class="node">[Layer Mixer]</span><span class="arrow">→</span><span class="node">Global</span><span class="arrow">→</span><span class="node">[Parallel Mixer]</span><span class="arrow">→</span><span class="node">Final Look</span><span class="arrow">→</span><span class="node">Fine Tune</span><span class="arrow">→</span><span class="node">CST out</span>
+</div>
+
+<p>Around the Layer Mixer hang the colour isolation nodes: <strong>Main Object</strong> (the subject, e.g. skin), <strong>Second Object</strong> (a secondary element, e.g. a jacket or the sky), <strong>Third Object</strong> (optional), and <strong>Background</strong> (everything not isolated). Around the Parallel Mixer hang the Global Look adjustments: <strong>Power Window 1, 2, 3</strong> and <strong>Adjustment 1, 2, 3</strong>.</p>
+
+<h3>Serial nodes vs parallel mixer vs layer mixer</h3>
+<p>Three different ways of combining nodes, each with a different purpose:</p>
+<table>
+<thead><tr><th>Type</th><th>How it combines</th><th>Use for</th></tr></thead>
+<tbody>
+<tr><td><strong>Serial</strong></td><td>Each node operates on the output of the previous one</td><td>Sequential corrections where order matters (balance → isolate → look)</td></tr>
+<tr><td><strong>Parallel Mixer</strong></td><td>Multiple corrections all start from the same source, then sum equally</td><td>Multiple independent corrections to the same image (windows, adjustments)</td></tr>
+<tr><td><strong>Layer Mixer</strong></td><td>Bottom branches take priority, stacking like Photoshop layers</td><td>Colour isolation where some regions should override others</td></tr>
+</tbody>
+</table>
+
+<h3>Why serial is fine but lossy at scale</h3>
+<p>Each serial node operates on the previous one's output. Most of the time this is what you want — and the small precision loss across two or three nodes is invisible. But across <em>eight</em> serial nodes, small precision errors compound. The parallel mixer avoids this for the Global Look section: every Global adjustment works from the same starting image and they sum together, so there's no compounding loss between them.</p>
+
+<h3>Why the Layer Mixer makes isolation easy</h3>
+<p>If you put your "main object" correction at the bottom branch of a layer mixer, it overrides anything done above it. That means: when you push blue into the background node, the main object (skin) stays untouched, because the skin correction is on the lower priority branch. Same with second object overriding background, third object overriding second, and so on. It's like masking without having to draw a mask — the qualifier you set inside the node defines the protected region.</p>
+
+<div class="callout commentary">
+<span class="label">Why this structure beats freeform</span>
+<p>You can grade any clip without a fixed node tree. Many colourists do. But a known structure means: (1) other graders can read your work; (2) you can copy a grade between clips and know what will happen; (3) you can split work in a team (one person balances, another grades); (4) you don't waste decisions on "where do I put this." A consistent tree is creative scaffolding, not a limitation.</p>
+</div>
+
+<h3>Applying the Notary Structure</h3>
+<p>If you've downloaded the power grade files (a <code>.drx</code> and a <code>.dpx</code>), import them: open the Color page → Gallery → Power Grades folder → drag the files in. Then on each clip: right-click the matching still in Gallery → <code>Apply Grade</code>. The full structure appears, pre-labelled and pre-organised. Adjust the CST in node's <em>Input Color Space</em> and <em>Input Gamma</em> to match your camera (or to Rec.709 for non-log footage), and you're ready to grade.</p>
+
+<h3>Labelling and toggling nodes</h3>
+<p>Right-click a node → <code>Node Label</code> to rename it. Click the small number on the node to disable/enable it (so you can see your image with and without that correction). Select multiple nodes and <kbd>Cmd/Ctrl</kbd>+<kbd>D</kbd> to disable all at once.</p>
+
+<p>Map a keyboard shortcut to <em>Label Selected Node</em> (DaVinci Resolve menu → Keyboard Customization → search "label") so you can rename nodes without breaking flow. <kbd>F2</kbd> is a natural choice if it isn't taken.</p>
+
+</section>
+
+<!-- ===================== MODULE 11 ===================== -->
+<section class="module" id="m11">
+<div class="mod-head"><span class="mod-num">M·11</span><h2>Balancing Nodes — Exposure, Contrast, Saturation</h2></div>
+
+<p>The balancing column is the unglamorous foundation. Done well, everything downstream is easier. Done badly, every later move fights ground that should already be solid.</p>
+
+<h3>The goal: stretch the waveform</h3>
+<p>Open the Parade scope. You should see the image's brightness distribution across three RGB channels. The goal of the balancing column is to <strong>stretch this waveform to fill the available range</strong> — black values touch (but don't crush against) the 0 line; whites reach close to (but don't clip at) the 1023 line; midtones occupy the middle without bunching.</p>
+
+<h3>Exposure — using offset, then lift/gamma/gain</h3>
+<p>On the Exposure node, start with <strong>Offset</strong>. Grab the offset wheel and drag the slider to lift or darken the whole image globally. Get the overall brightness roughly correct first.</p>
+<p>Then refine the tonal range:</p>
+<ul>
+<li><strong>Lift slider</strong> — push down to deepen blacks, up to raise the shadow floor. You want the bottom of the waveform near (but above) 0.</li>
+<li><strong>Gamma slider</strong> — push up to lift midtones, down to compress them. Most of your image's information is in the midtones, so use gamma to "open up" the image.</li>
+<li><strong>Gain slider</strong> — push up to extend highlights, down to recover overexposed areas. Keep the top of the waveform near (but below) 1023.</li>
+</ul>
+
+<div class="callout pitfall">
+<span class="label">Clipping is the enemy</span>
+<p>If the top of your waveform is a flat horizontal line at 1023, your highlights are <em>clipped</em> — pixels exceeding 1023 are all being recorded as 1023. The data is gone. Same for blacks pinned at 0. Pull gain down or lift up until you see a soft curve at top and bottom, not a hard wall. Clipped pixels cannot be recovered later, no matter how clever the grade.</p>
+</div>
+
+<h3>Contrast — and the pivot</h3>
+<p>On the Contrast node, push the Contrast slider to taste. The <strong>Pivot</strong> control sets the midpoint where contrast happens: pushing pivot left makes contrast apply more in the shadows; pushing right pushes contrast into the highlights. For images that look "muddy" — where skin tones feel dark and blotchy — try slight contrast with pivot pulled left, so blacks deepen without crushing midtones.</p>
+
+<h3>Saturation — modest at this stage</h3>
+<p>On the Saturation node, add modest saturation only. You're not creating a look here; you're giving the next stage (colour isolation) enough colour separation to qualify regions. If the image looks flat and grey, push saturation slightly — just enough that the qualifier can distinguish skin from sky. Overcooking saturation now means doing damage you'll have to undo later.</p>
+
+<div class="callout commentary">
+<span class="label">Studio users: use HDR Wheels</span>
+<p>Studio's HDR Wheels palette splits the image into six tonal regions (specular, highlights, light, shadow, dark, black) with independent thresholds, vs the three of the standard primaries (lift, gamma, gain). For balancing, HDR Wheels gives you surgical control over each tonal region. Pull <em>Lights</em> down to recover a blown sky while <em>Shadows</em> stays where it is — impossible cleanly with the standard wheels. If you have Studio, prefer HDR Wheels for the balancing column.</p>
+</div>
+
+<h3>White balance using the parade</h3>
+<p>Find an object in the image that should be neutral — a white wall, a grey concrete surface, the asphalt of a street. Look at the parade scope. At that horizontal position in the frame, all three RGB channels should be at the same height. If red is higher than green and blue, the image is tinted red; adjust the Offset wheel toward cyan until the three channels align at the neutral object.</p>
+
+<p>Or use <strong>Temperature</strong> and <strong>Tint</strong> in the primary controls: Temperature moves between blue (cool) and orange (warm); Tint between green and magenta. These are convenient white-balance corrections without thinking in colour-wheel terms.</p>
+
+<div class="callout commentary">
+<span class="label">When not to balance to neutral</span>
+<p>Not every image should be neutrally white-balanced. A sunset is warm by nature; a fluorescent-lit office is cold; a candle-lit room is amber. The goal of balancing isn't to make every shot look like daylight — it's to make every shot look like a faithful starting point for the creative grade. If the scene was warm by design, leave it warm. Balance fixes <em>errors</em>, not character.</p>
+</div>
+
+</section>
+
+<!-- ===================== MODULE 12 ===================== -->
+<section class="module" id="m12">
+<div class="mod-head"><span class="mod-num">M·12</span><h2>Color Isolation &amp; the Layer Mixer</h2></div>
+
+<p>Color isolation is the ability to grade one region of your image — the skin, the sky, the subject's jacket — without affecting the rest. Mastering it transforms what's possible in your grade.</p>
+
+<h3>The qualifier — the basic isolation tool</h3>
+<p>The Qualifier palette selects pixels by colour, saturation, and luminance. On the Main Object node:</p>
+<ol>
+<li>Click the <strong>Qualifier+</strong> picker (the eyedropper).</li>
+<li>Click on the colour you want to isolate (e.g. skin on the subject's face).</li>
+<li>Hit <kbd>Shift</kbd>+<kbd>H</kbd> to show the selection — selected pixels appear in colour, deselected as grey.</li>
+<li>Refine using the Hue, Saturation, and Luminance sliders: pull <em>Width</em> down to tighten the colour range; pull <em>Lum Low</em> down to exclude very dark pixels; pull <em>Lum High</em> down to exclude bright pixels.</li>
+<li>Add minus picks (<strong>Qualifier–</strong>) on areas falsely included; refine until the selection is clean enough.</li>
+</ol>
+
+<h3>Finessing the selection</h3>
+<p>Two controls in the Matte Finesse section that always matter:</p>
+<ul>
+<li><strong>Denoise</strong> — smooths the matte's edge, removing noise specks from the selection.</li>
+<li><strong>Blur Radius</strong> — softens the edge so the correction blends instead of cutting hard.</li>
+</ul>
+<p>You can also use <em>Clean Black</em> and <em>Clean White</em> to fill holes inside the selection (skin selections often have small gaps that Clean White closes), and <em>Pre-filter</em> to slightly smooth the input before qualifying — useful on noisy or low-bitrate footage where the matte goes blocky.</p>
+
+<h3>What footage quality means here</h3>
+<p>The cleanliness of your qualifier matte is bounded by your footage's bit depth. <strong>8-bit footage</strong> (most consumer phones in standard mode, older DSLRs) qualifies poorly — selections are blocky and full of holes. <strong>10-bit</strong> (most modern mirrorless cameras, iPhones in Apple Log) qualifies cleanly. <strong>12-bit and raw</strong> qualify beautifully. You can compensate for low-bit footage with heavy Denoise and Blur Radius, but at the cost of edge precision.</p>
+
+<h3>Power windows — geometric isolation</h3>
+<p>Sometimes a qualifier picks too much. Power windows let you geometrically restrict where the correction can apply. From the Window palette, click the Circle, Square, Polygon, or Gradient. Draw or position the shape; the red outer outline controls feather (softness).</p>
+
+<p>Combine qualifier + window: the correction applies only to pixels selected by the qualifier AND inside the window. So you can qualify "all skin tones" and then power-window-restrict to "only inside this oval around the face" — eliminating spurious skin-coloured selections in the background.</p>
+
+<h3>Tracking a window</h3>
+<p>Static windows are useless on moving subjects. After drawing your window, switch from the Window tab to the <strong>Tracker</strong> tab. Place the playhead at the start of your shot, click <em>Track Forward and Reverse</em>, and Resolve tracks the window automatically. The tracker uses features in the image to lock onto motion — works well on contrasted subjects, struggles on blurred or low-contrast areas.</p>
+
+<h3>Magic Mask (Studio) — AI rotoscoping</h3>
+<p>The fastest isolation tool when available. Studio only. With Magic Mask: draw a line over your subject; Resolve recognises the subject as a shape (person, face, object); click <em>Track Forward and Reverse</em>; an AI-driven moving mask is generated. For a clean human subject, results are nearly perfect. For complex edges (hair, glass), you'll combine Magic Mask with manual refinement.</p>
+
+<div class="callout v21">
+<span class="label">v21 update</span>
+<p>Magic Mask in v21 has improved cache retention when pasting node attributes, and gets faster real-time tracking. The underlying neural net has also been updated for cleaner masks on hair and translucent subjects. Workflow is unchanged.</p>
+</div>
+
+<h3>The Layer Mixer pattern</h3>
+<p>The Notary Structure connects Main Object, Second Object, Third Object, and Background through a <strong>Layer Mixer</strong> node. The Layer Mixer's rule: lower branches take priority. So when you push blue into the background node, the second object overrides it where the second object is selected; the main object overrides both where the main object is selected.</p>
+
+<div class="flow">
+Background (top)<br>
+Third Object<br>
+Second Object<br>
+<strong>Main Object (bottom — highest priority)</strong>
+</div>
+
+<p>The practical implication: <em>after</em> isolating each region, you can grade each independently. Push the background blue without worrying it'll affect skin. Push skin orange without worrying it'll affect the background. The isolation is automatic from the qualifiers you set in each object node.</p>
+
+<h3>The skin-tone indicator</h3>
+<p>On the vectorscope (Scopes → Vectorscope), click the three dots → <strong>Show Skin Tone Indicator</strong>. A diagonal line appears running from the centre out toward roughly 11 o'clock — this is the line where healthy human skin tones should fall, regardless of ethnicity. Adjust the Main Object's grading until the skin cloud sits on or near that line.</p>
+
+<p>This isn't a rigid law — you can stylistically place skin off the line for effect. But "natural-looking" skin lives on this line, and the indicator gives you a target to land on or deliberately deviate from.</p>
+
+<div class="callout commentary">
+<span class="label">Don't push isolation too far</span>
+<p>The more aggressively you grade an isolated region, the more visible the qualifier's edge becomes. If you push the skin Main Object hard pink while the background goes dark teal, any imperfection in the skin selection will show as a halo or fringing. Strong isolation looks worst on cheap footage. Restraint always wins — small, layered isolations beat one big extreme one.</p>
+</div>
+
+</section>
+
+<!-- ===================== MODULE 13 ===================== -->
+<section class="module" id="m13">
+<div class="mod-head"><span class="mod-num">M·13</span><h2>The Global Look</h2></div>
+
+<p>Everything in the balancing and isolation columns has been technical groundwork. The Global Look is where the grade becomes <em>your</em> grade — where colour, mood, and intention enter the picture.</p>
+
+<h3>The hero frame</h3>
+<p>Before pushing a single slider, pick a <strong>hero frame</strong>. This is one frame in your project that represents the look you're aiming for — well-lit, contains the main subject, captures the scene's mood. Park the playhead on this frame and design the Global Look entirely against it. Once locked, you'll apply that look across the timeline and only adjust other shots to match the hero.</p>
+
+<h3>Curves first</h3>
+<p>The Global node's first move is usually a custom curve. Add three points: one in the shadows (lower-left quadrant), one in the midtones (centre), one in the highlights (upper-right). Now you have three independent control points.</p>
+
+<p>The standard contrast-and-lift move:</p>
+<ul>
+<li>Drop the shadow point slightly to deepen blacks.</li>
+<li>Lift the midtone point slightly to brighten skin and faces.</li>
+<li>Pull the highlight point slightly down to recover or soften brights.</li>
+</ul>
+
+<p>This is an <strong>S-curve</strong> — the most useful single curve shape in colour grading. It adds contrast in a film-print-like way and lifts midtones without flattening them.</p>
+
+<h3>Reference images</h3>
+<p>If you're unsure where to take the grade, import a still you admire (from a film, a photographer, an Instagram grade you like). Drag it into the Gallery, then click the split-screen icon to compare it against your shot. Watch the parade and vectorscope underneath as you grade — you can literally see when your image's tonal distribution starts matching the reference.</p>
+
+<p>This is not about copying — it's about giving your eye a target. Reference grades break the "blank canvas paralysis."</p>
+
+<h3>Push the colour where it should go</h3>
+<p>With the curve in place, move to the primaries on the Global node. Some classic moves:</p>
+<ul>
+<li><strong>Teal in the shadows + orange in the highlights</strong> — the modern blockbuster look. Subtle is better than maxed.</li>
+<li><strong>Warm lift + cool gain</strong> — the "amber/blue" film-print emulation.</li>
+<li><strong>Cool gamma + warm gain</strong> — moody night-time look with warm practicals.</li>
+<li><strong>Desaturate everything slightly</strong> — for grit, realism, or naturalism.</li>
+</ul>
+
+<p>Always make these moves <em>subtly</em>. If you can see at a glance that the grade is "the teal-orange one," you've gone too far. The strongest grades are felt before they're seen.</p>
+
+<h3>Skin tone protection</h3>
+<p>After pushing the Global colour, check the skin. If the grade has pushed skin in an unflattering direction, go back to the Main Object node (in the Color Isolation column) and gently shift the skin back toward the vectorscope's skin line. This is the reason isolation comes first — so you can still adjust skin <em>after</em> the global look exists.</p>
+
+<h3>Saturation versus density</h3>
+<p>The Saturation slider in the primaries is blunt — it affects luminance and contrast too. The Color Slicer (Studio) offers an alternative: an <strong>HSV saturation</strong> control that boosts saturation without changing brightness or contrast, and a <strong>density</strong> control that deepens midtone colour without affecting saturation per se. Both produce more cinematic results than the primary saturation slider.</p>
+
+<div class="callout commentary">
+<span class="label">Restraint is the look</span>
+<p>The reason professional grades look professional is not that they have more effects applied — it's that they have <em>fewer</em>, more deliberate effects, executed precisely. A great grade survives being toggled on and off without looking shocking. If toggling your grade gets a "wow," you've gone too far. If it gets a small approving nod, you've nailed it.</p>
+</div>
+
+</section>
+
+<!-- ===================== MODULE 14 ===================== -->
+<section class="module" id="m14">
+<div class="mod-head"><span class="mod-num">M·14</span><h2>Power Windows &amp; Adjustment Nodes</h2></div>
+
+<p>Around the Global node hang three Power Window nodes and three Adjustment nodes in parallel. Together they let you shape light, refine features, and add localised tweaks — all driven from the same source image.</p>
+
+<h3>Power Windows — shaping light</h3>
+<p>The three power window slots in the Notary Structure are pre-built with common shapes: a circular vignette, a horizontal gradient, and another gradient. You adjust their position and use them to add localised exposure and colour shifts.</p>
+
+<h4>Vignette</h4>
+<p>The most common use of power window 1 — a circle, inverted (Window palette → Key tab → click <em>Invert</em>) so the edges are selected rather than the centre. Pull down the offset slightly. The edges darken; attention focuses on the subject in the centre. Keep the feather generous so the vignette is invisible — felt, not seen.</p>
+
+<h4>Sky / ground gradient</h4>
+<p>Power window 2 is often a gradient mask. Drag the gradient line to separate the top half (sky) from the bottom half (ground). Adjust the upper half (e.g., pull down highlights, add blue) while the lower half stays untouched. Or invert and darken the foreground for a "subject pops" effect.</p>
+
+<h4>Subject brightening</h4>
+<p>Power window 3 can be a circle around the subject's face. Lift the shadows slightly — the face gains presence and the eye is drawn there. This works because cinematographers have lit faces for a hundred years, and the eye expects to follow light.</p>
+
+<h3>Tracking</h3>
+<p>Every window can be tracked. After positioning, switch to the Tracker tab → Track Forward and Reverse. Resolve locks the window to the moving subject. Re-check by scrubbing — if the window drifts, set keyframes manually on the trajectory.</p>
+
+<h3>Adjustment 1 — Color Slicer / Density</h3>
+<p>The Adjustment column is where the Color Slicer lives (Studio). Saturation here means <em>HSV saturation</em> — pure colour boost without luminance side-effects. Density deepens midtone richness in a film-like way. Use these for the final saturation push instead of the primary's saturation slider.</p>
+
+<p>If you have specific colour spikes (the skin is too hot, the sky is too saturated), the slicer also offers per-colour saturation controls — pull the saturation of just one hue down without touching others.</p>
+
+<h3>Adjustment 2 — Color Warper / Hue versus Hue refinement</h3>
+<p>The Color Warper is a hexagonal grid (or octagonal in 8-sided mode) that lets you click-and-drag any colour in the image around its hue/saturation position. To shift a yellow toward orange, click on a yellow pixel in the viewer (a control point appears on the warper), then drag the control point toward the orange direction. Saturation is the distance from the centre; hue is the angle.</p>
+
+<p>This is more controllable than Hue vs Hue curves for surgical changes — single hues, with selective falloff. The radius control determines how broad an area each control point affects.</p>
+
+<h3>Adjustment 3 — Face Refinement (Studio)</h3>
+<p>Resolve's Face Refinement effect is the surgical beauty tool. Drag it onto Adjustment 3, click <em>Detect Face</em>, then <em>Track Forward and Reverse</em>. Resolve generates a face mask that follows the subject. Now you can:</p>
+<ul>
+<li><strong>Smooth skin</strong> — softens texture. Pull <em>Scaling</em> down so detail isn't completely wiped. Around 0.3–0.5 smoothing is natural; anything higher becomes plastic.</li>
+<li><strong>Brighten eyes</strong> — lifts the white of the eye and slightly the iris. Use very subtly. Past 0.3 it looks fake.</li>
+<li><strong>Eye light</strong> — adds a soft glow to the eye area. A whisper of this can lift a tired performance.</li>
+<li><strong>Eye bag removal</strong> — lightens under-eye shadows. Powerful but easy to overdo.</li>
+<li><strong>Skin tonality</strong> — re-saturates skin slightly if the global look has desaturated faces.</li>
+<li><strong>Shine removal</strong> — knocks down forehead and cheek hotspots from on-set lighting.</li>
+</ul>
+
+<div class="callout pitfall">
+<span class="label">The plastic trap</span>
+<p>Face Refinement is the most-abused tool in colour grading. Pushed past about 30% strength on any control, skin starts looking like a video-game character. The best face refinement work is one you can't notice — viewers should think "they look good today," not "they look retouched." If you can see your changes, dial them down.</p>
+</div>
+
+</section>
+
+<!-- ===================== MODULE 15 ===================== -->
+<section class="module" id="m15">
+<div class="mod-head"><span class="mod-num">M·15</span><h2>Final Look &amp; Refinement</h2></div>
+
+<p>The Final Look node sits in serial after the Global Look. Its job is to push the image one more step further — adjustments that build on top of the Global rather than redefining it.</p>
+
+<h3>Why a serial node here, after parallel?</h3>
+<p>The Global parallel mixer combines all its branches as equal contributors. But sometimes you want to take the <em>result</em> of the Global Look and stretch it further — darken everything more, add a final colour cast, push contrast another notch. A serial node working on the parallel mixer's output gives you that authority.</p>
+
+<h3>Common Final Look moves</h3>
+<ul>
+<li><strong>Pull the whole image darker</strong> — for moody night-time looks, drop offset and crush slightly.</li>
+<li><strong>Lift to "high-key"</strong> — push gain up, gamma up, slight desaturation, for clean editorial fashion.</li>
+<li><strong>Add a final cast</strong> — global warm or cool tint as a finishing layer.</li>
+<li><strong>Soften highlights</strong> — slight curve roll-off at the top right of the curve to soften bright edges.</li>
+</ul>
+
+<h3>The Fine Tune node — the last serial</h3>
+<p>The Fine Tune node sits after Final Look. Use it for very small final adjustments — a tiny white-balance shift, a hair of contrast, sometimes adding film grain or an effect like Glow that should be on top of everything else.</p>
+
+<h3>Adding film grain</h3>
+<p><strong>Studio:</strong> in Effects → Film Grain → 35mm or 16mm. Drag onto the Fine Tune node. In its Inspector, choose a stock (16mm gives heavier grain; 35mm finer; 65mm "Archival Print" gives a warmer, broader grain). Adjust:</p>
+<ul>
+<li><strong>Grain Strength</strong> — visibility of the grain.</li>
+<li><strong>Grain Size</strong> — pixel size of the grain pattern.</li>
+<li><strong>Softness</strong> — how blurred each grain particle is.</li>
+<li><strong>Advanced Controls</strong> — apply grain selectively to shadows, midtones, or highlights. Common move: lower grain in shadows to keep black areas clean.</li>
+</ul>
+
+<p><strong>Free version:</strong> film grain plugins are not native to the free tier. The workaround: download a film grain overlay video file (free options exist from MNL or Studios and other sources). Drag onto a video track above your edit. In the Inspector, change the clip's <strong>Composite Mode</strong> to <code>Overlay</code>. The grain is then applied via blending. Slower than native grain, but free.</p>
+
+<div class="callout commentary">
+<span class="label">Why add grain</span>
+<p>Modern digital footage looks too clean — sterile, even. Grain restores texture. It also masks small digital artefacts (compression blockiness, banding in skies) by adding a noise floor that the eye accepts. Grain pulls a digital image into the "feel" of film without changing the colour. Used subtly, it makes any grade look more cinematic.</p>
+</div>
+
+<h3>Sharpening — and the secret of Scaling</h3>
+<p>Sharpening lives in a Blur node (counterintuitively). On a node, Resolve FX → Blur → Sharpen, or use the built-in Blur palette in the Color page. The <strong>Radius</strong> slider: below 0.5 sharpens, above 0.5 blurs. Default is 0.5 (no effect).</p>
+
+<p>Set Radius to about 0.48–0.46 for a tasteful sharpen. Push too far below and edge halos appear.</p>
+
+<p>The undersung control: <strong>Scaling</strong>. Scaling sets which pixel size the sharpening targets. Higher scaling = bigger features get sharpened (eyes, lips); lower scaling = finer texture gets sharpened. Pushing scaling toward 1.0 produces strikingly detailed images, especially for social media compression where soft footage looks worse after the platform's re-encode.</p>
+
+<h3>Aspect ratio (output blanking)</h3>
+<p>For cinema framing without re-cropping, use <strong>Output Blanking</strong> in the Color page (Color → Output Blanking → 2.39:1). Black bars top and bottom; the image stays full-frame but composed cinematically. Use the Sizing → Input controls (vertical position) to re-frame within the new aspect ratio.</p>
+
+<h3>Gaussian blur for film emulation</h3>
+<p>Adding a tiny Gaussian Blur (radius 0.05–0.15) on the Fine Tune node makes digital footage feel less hyper-sharp, helping it emulate the soft optics of film lenses. Combine with grain for a strong analogue feel.</p>
+
+</section>
+
+<!-- ===================== MODULE 16 ===================== -->
+<section class="module" id="m16">
+<div class="mod-head"><span class="mod-num">M·16</span><h2>Grading Different Footage Types</h2></div>
+
+<p>The Notary Structure works across cinema cameras, iPhones, and recorded broadcast. The only thing that changes is the CST in setup.</p>
+
+<h3>Log footage (cinema cameras)</h3>
+<p>On the CST in node:</p>
+<ul>
+<li>Input Color Space and Input Gamma: set to your camera's log space.</li>
+<li>Output Color Space: <code>DaVinci Wide Gamut</code>.</li>
+<li>Output Gamma: <code>DaVinci Intermediate</code>.</li>
+</ul>
+<p>Or if you're using project-level colour management, leave CST in as <code>Bypass</code> and tag the clip in the Media Pool. Either approach works; CST gives you per-clip control if footage is mixed.</p>
+
+<h3>iPhone footage (standard Rec.709)</h3>
+<p>An iPhone in its default video mode (not Pro / Apple Log) records to Rec.709. The image already looks like a finished picture — high saturation, baked-in contrast.</p>
+<p>On the CST in node: Input = Rec.709 / Rec.709, Output = Rec.709 / Rec.709. This effectively bypasses the CST. From here you can still balance, isolate, and grade — but with much less latitude than log footage.</p>
+
+<h4>Limits of phone footage</h4>
+<p>Phone video is typically 8-bit (some flagships shoot 10-bit, but compressed heavily). Pushing colour hard on phone footage shows artefacts quickly — banding in skies, blocky qualifier mattes, broken-up isolations. The rule: small moves, well-chosen, repeated. Three subtle adjustments to a phone image beat one extreme one.</p>
+
+<h4>What works well on phone footage</h4>
+<ul>
+<li>White-balance correction — phones often produce slightly cool indoor footage that warms beautifully with one offset shift.</li>
+<li>Highlight recovery in the lift/gamma/gain controls — phones blow highlights aggressively; you can lift a small amount back.</li>
+<li>Light grading toward a creative cast — desaturated cool blue/teal works very well on phone footage.</li>
+<li>Grain — masks compression noise and lifts the footage out of "phone video" territory.</li>
+<li>Subtle sharpening with scaling, especially before social media upload.</li>
+</ul>
+
+<h4>What fails on phone footage</h4>
+<ul>
+<li>Strong colour isolation — qualifiers will fail on the limited bit-depth.</li>
+<li>Heavy contrast pushes — banding emerges quickly.</li>
+<li>Extreme stylisation — the image breaks down structurally.</li>
+</ul>
+
+<h3>Apple Log (iPhone 15 Pro / 16 Pro)</h3>
+<p>Treat as a proper log camera. CST in: Input = Apple Log. Output = DaVinci Wide Gamut Intermediate. Apple Log is 10-bit and very gradeable — comparable to mid-tier mirrorless cameras. The Notary Structure works on it with full latitude.</p>
+
+<h3>Drone footage (DJI D-Log)</h3>
+<p>DJI cameras record in D-Log (or D-Cinelike for some models). CST in: DJI D-Gamut / D-Log. Drone footage often comes with strong colour fringing (chromatic aberration) and ND-filter casts — handle these in the balancing column before grading creatively.</p>
+
+<h3>Broadcast / stock footage (Rec.709)</h3>
+<p>News footage, stock libraries, and most YouTube downloads are in Rec.709 already. CST in stays at Rec.709 input. The footage often arrives over-graded and over-saturated. Use the balancing column to pull saturation <em>down</em> before adding your own creative grade — otherwise you're stacking grade on top of grade.</p>
+
+<h3>Mixed footage projects</h3>
+<p>If your timeline has clips from different cameras, tag each in the Media Pool with the correct Input Color Space (right-click → Input Color Space → choose). The project's colour management then handles each correctly into the working space, and the same Notary Structure can be applied to every clip identically.</p>
+
+<div class="callout commentary">
+<span class="label">The final practice</span>
+<p>You'll improve at colour grading by studying images. Watch films with the sound off — pause and look at how the colourist treated skin, sky, contrast. Open stills on Instagram and ask: what was added, what was removed? The more references you can hold in your head, the more options you have when you sit down with footage of your own. Tools matter; eyes matter more.</p>
+</div>
+
+<h3>One last reminder: small moves, layered</h3>
+<p>Every module in this course has said it: <strong>small adjustments, many of them, beat one big adjustment</strong>. A grade with twelve subtle moves looks deliberate and felt. A grade with two extreme moves looks like a filter. The Notary Structure is built to make twelve subtle moves easy — that's the whole point of it. Use it, and your grades will compound elegance.</p>
+
+</section>
+
+<div class="pull">
+"You can colour-grade anything if you know what column you're in. Balance, isolate, look, refine. Everything else is taste."
+<cite>— The lecturer, at the end of class</cite>
+</div>
+
+<footer>
+The Resolve Course · Compiled for the Shamase Studios training programme · 2026<br>
+Sources: Casey Faris / Ground Control (Resolve Masterclass) · Ragab / MNL Studios (Color Grading Masterclass) · Blackmagic Design official documentation v20.3 &amp; v21 Beta
+</footer>
+
+</main>
+</div>
+</body>
+</html>
