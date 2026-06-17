@@ -1,0 +1,1016 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0d0f17">
+<title>DaVinci Resolve Mastery — Mock Exam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f17; --surface:#161a24; --surface-2:#1c2130; --surface-3:#232936;
+  --border:#252a36; --border-2:#343b4a;
+  --text:#e8e6e0; --muted:#8b8e98; --dim:#5d626d;
+  --gold:#d4a574; --gold-dim:#a07d52;
+  --teal:#5dc8b7; --teal-dim:#3a8d80;
+  --red:#ec5a5a; --red-bright:#ff3838;
+  --green:#7ec98e; --green-dim:#5a9f6a;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;line-height:1.55;font-size:16px;overflow-x:hidden}
+body{background-image:radial-gradient(ellipse at top,rgba(212,165,116,.04),transparent 60%)}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-size:inherit}
+input{font-family:inherit;font-size:inherit}
+
+.screen{display:none;padding:0;min-height:100vh}
+[data-active="start"] #screen-start,
+[data-active="exam"] #screen-exam,
+[data-active="review"] #screen-review,
+[data-active="results"] #screen-results,
+[data-active="locked"] #screen-locked,
+[data-active="passed"] #screen-passed{display:block}
+
+/* ─── SHARED ─────────────────────────────────────────────────── */
+.wrap{max-width:680px;margin:0 auto;padding:1.5rem 1.25rem 6rem}
+h1,h2,h3{font-family:'Fraunces',serif;letter-spacing:-.015em;font-weight:400}
+h1{font-size:clamp(2rem,7vw,2.8rem);margin:0 0 .5rem;font-variation-settings:"opsz" 144}
+h2{font-size:1.4rem;margin:1.8rem 0 .7rem;color:var(--gold);font-style:italic;font-variation-settings:"opsz" 100}
+h3{font-size:1.1rem;margin:1.3rem 0 .5rem;color:var(--teal)}
+strong{color:var(--gold);font-weight:600}em{color:var(--teal);font-style:italic}
+code,kbd{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--surface-2);padding:.12em .42em;border-radius:3px;color:var(--gold);border:1px solid var(--border)}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.22em;color:var(--teal);margin-bottom:1rem}
+
+/* ─── SCREENSHOT INSTRUCTION BANNER (the loud red bit) ───────── */
+.shot-banner{
+  background:var(--red-bright);
+  color:#fff;
+  padding:1.2rem 1.4rem;
+  border-radius:8px;
+  font-weight:700;
+  font-size:1.05rem;
+  line-height:1.4;
+  text-align:center;
+  letter-spacing:.01em;
+  margin:1.4rem 0;
+  box-shadow:0 4px 20px rgba(255,56,56,.25);
+  border:2px solid #fff;
+}
+.shot-banner .icon{font-size:1.6rem;display:block;margin-bottom:.4rem}
+.shot-banner .sub{display:block;font-size:.85rem;font-weight:500;margin-top:.4rem;opacity:.9}
+
+/* ─── START SCREEN ───────────────────────────────────────────── */
+.lede{font-family:'Fraunces',serif;font-style:italic;font-size:1.1rem;color:var(--muted);line-height:1.5;margin:.8rem 0 1.5rem}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin:1.4rem 0}
+.facts .fact{background:var(--surface);padding:.8rem 1rem;border-radius:6px;border:1px solid var(--border)}
+.facts .fact .l{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:.25rem}
+.facts .fact .v{font-size:1.05rem;color:var(--text);font-weight:500}
+.facts .fact.warn .v{color:var(--red)}
+
+.rules{background:var(--surface);border-left:3px solid var(--teal);padding:1rem 1.2rem;border-radius:6px;margin:1.4rem 0;font-size:.92rem}
+.rules p{margin:.45rem 0}
+.rules p.warn{color:var(--red);font-weight:500}
+
+.name-field{margin:1.6rem 0}
+.name-field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.18em;color:var(--teal);margin-bottom:.5rem}
+.name-field input{
+  width:100%;padding:.95rem 1rem;background:var(--surface-2);color:var(--text);
+  border:1px solid var(--border-2);border-radius:8px;font-size:1.05rem;
+  font-family:'Sora',sans-serif;
+}
+.name-field input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,165,116,.15)}
+
+.btn{display:block;width:100%;padding:1.1rem 1.4rem;background:var(--gold);color:#1a1308;border-radius:8px;font-weight:600;font-size:1.05rem;letter-spacing:.02em;margin:1rem 0;transition:opacity .15s,transform .05s;border:none}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn.secondary{background:var(--surface-2);color:var(--text);border:1px solid var(--border-2)}
+.btn.danger{background:var(--red);color:#fff}
+.btn.success{background:var(--green);color:#0d1410}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.btn-row .btn{margin:0}
+
+.attempts-log{margin-top:2rem;padding-top:1.4rem;border-top:1px solid var(--border)}
+.attempts-log h3{margin-top:0;color:var(--gold);font-size:.95rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.15em;font-style:normal}
+.attempt-row{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem;background:var(--surface);border-radius:6px;margin:.5rem 0;font-size:.9rem;border:1px solid var(--border)}
+.attempt-row .a-num{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:.8rem}
+.attempt-row .a-score{font-family:'JetBrains Mono',monospace;color:var(--text);font-weight:600}
+.attempt-row .a-result{font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.2rem .6rem;border-radius:3px;letter-spacing:.1em;font-weight:600}
+.attempt-row .a-result.pass{background:rgba(126,201,142,.15);color:var(--green);border:1px solid rgba(126,201,142,.4)}
+.attempt-row .a-result.fail{background:rgba(236,90,90,.12);color:var(--red);border:1px solid rgba(236,90,90,.4)}
+
+/* ─── EXAM SCREEN ────────────────────────────────────────────── */
+.exam-bar{position:sticky;top:0;background:rgba(13,15,23,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:.7rem 1rem;z-index:50;display:flex;align-items:center;gap:.8rem;font-family:'JetBrains Mono',monospace;font-size:.78rem}
+.exam-bar .candidate{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
+.exam-bar .timer{color:var(--gold);font-weight:600;letter-spacing:.05em;font-size:.85rem}
+.exam-bar .timer.warning{color:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+.exam-bar .qcount{color:var(--teal);font-weight:600}
+
+.progress-bar{height:3px;background:var(--surface);position:sticky;top:38px;z-index:50}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));transition:width .3s}
+
+.q-wrap{padding:1rem 1.25rem 0}
+.q-meta{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;color:var(--gold-dim);text-transform:uppercase;margin:1rem 0 .5rem}
+.q-scenario{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);font-size:1rem;line-height:1.5;margin:.8rem 0;padding-left:1rem;border-left:2px solid var(--gold-dim)}
+.q-stem{font-size:1.08rem;line-height:1.45;margin:1rem 0 1.2rem;color:var(--text)}
+
+.opts-list{list-style:none;padding:0;margin:0}
+.opt-btn{
+  display:flex;width:100%;padding:1rem 1.1rem;background:var(--surface);
+  border:1.5px solid var(--border-2);border-radius:10px;color:var(--text);
+  text-align:left;margin:.6rem 0;gap:.85rem;align-items:flex-start;
+  font-size:.95rem;line-height:1.4;transition:all .15s;font-family:'Sora',sans-serif;
+}
+.opt-btn:active{transform:scale(.985)}
+.opt-btn.selected{background:rgba(212,165,116,.15);border-color:var(--gold);box-shadow:0 0 0 2px rgba(212,165,116,.2)}
+.opt-btn .letter{
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.85rem;
+  background:var(--surface-2);color:var(--teal);padding:.25rem .55rem;border-radius:5px;
+  flex-shrink:0;border:1px solid var(--border-2);min-width:1.8rem;text-align:center;
+}
+.opt-btn.selected .letter{background:var(--gold);color:#1a1308;border-color:var(--gold)}
+
+.q-tools{display:flex;gap:.6rem;margin:1.4rem 0 1rem}
+.q-tool{flex:1;padding:.65rem .8rem;background:var(--surface);border:1px solid var(--border-2);border-radius:6px;color:var(--muted);font-size:.82rem;font-family:'JetBrains Mono',monospace;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.q-tool.active{background:rgba(236,90,90,.1);border-color:var(--red);color:var(--red)}
+.q-tool .ico{font-size:.95rem}
+
+.exam-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(13,15,23,.97);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:.7rem 1rem;display:flex;gap:.5rem;z-index:50;padding-bottom:max(.7rem,env(safe-area-inset-bottom))}
+.nav-btn{flex:1;padding:.85rem 1rem;background:var(--surface-2);color:var(--text);border:1px solid var(--border-2);border-radius:8px;font-weight:500;font-size:.92rem;letter-spacing:.02em;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.nav-btn:disabled{opacity:.3}
+.nav-btn.primary{background:var(--gold);color:#1a1308;border-color:var(--gold);font-weight:600}
+.nav-btn.danger{background:var(--red);color:#fff;border-color:var(--red);font-weight:600}
+.nav-btn.center{flex:0 0 auto;padding:.85rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.08em}
+
+/* ─── NAVIGATOR OVERLAY ──────────────────────────────────────── */
+.overlay{position:fixed;inset:0;background:rgba(13,15,23,.92);backdrop-filter:blur(8px);z-index:100;display:none;flex-direction:column;padding:1rem;overflow-y:auto}
+.overlay.open{display:flex}
+.overlay-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1rem;padding:.5rem .25rem}
+.overlay-head h2{margin:0;color:var(--gold);font-size:1.2rem;font-style:normal;font-family:'Fraunces',serif}
+.overlay-head .close{background:var(--surface-2);padding:.5rem .8rem;border-radius:6px;font-size:1.4rem;color:var(--text);border:1px solid var(--border-2);line-height:1}
+.nav-legend{display:flex;flex-wrap:wrap;gap:.8rem;font-size:.75rem;color:var(--muted);margin-bottom:1rem;padding:.5rem .25rem;font-family:'JetBrains Mono',monospace}
+.nav-legend span{display:flex;align-items:center;gap:.35rem}
+.nav-legend .swatch{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid var(--border-2)}
+.nav-legend .swatch.answered{background:var(--gold)}
+.nav-legend .swatch.unanswered{background:var(--surface)}
+.nav-legend .swatch.flagged{background:var(--surface);border:2px solid var(--red)}
+.nav-legend .swatch.current{background:var(--teal)}
+
+.nav-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.45rem;margin-bottom:5rem}
+@media(min-width:480px){.nav-grid{grid-template-columns:repeat(7,1fr)}}
+@media(min-width:640px){.nav-grid{grid-template-columns:repeat(10,1fr)}}
+.nav-cell{padding:.7rem .25rem;background:var(--surface);border:1px solid var(--border-2);border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;color:var(--muted);text-align:center;transition:all .1s}
+.nav-cell.answered{background:var(--gold);color:#1a1308;border-color:var(--gold)}
+.nav-cell.flagged{border:2px solid var(--red)}
+.nav-cell.current{background:var(--teal);color:#0d1410;border-color:var(--teal)}
+.nav-cell:active{transform:scale(.95)}
+
+/* ─── REVIEW SCREEN ──────────────────────────────────────────── */
+.review-summary{background:var(--surface);border-radius:8px;padding:1rem 1.2rem;margin:1.2rem 0;border:1px solid var(--border)}
+.review-summary .row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px dashed var(--border-2);font-size:.95rem}
+.review-summary .row:last-child{border-bottom:0}
+.review-summary .row .l{color:var(--muted)}
+.review-summary .row .v{color:var(--text);font-weight:600;font-family:'JetBrains Mono',monospace}
+.review-summary .row .v.warn{color:var(--red)}
+.review-summary .row .v.ok{color:var(--green)}
+
+.q-list-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin:.8rem 0 1.4rem}
+.q-pill{padding:.4rem .7rem;background:var(--surface);border:1px solid var(--border-2);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--gold)}
+.q-pill.flagged{border-color:var(--red);color:var(--red)}
+
+/* ─── RESULTS SCREEN ─────────────────────────────────────────── */
+.result-hero{padding:1.5rem 1.2rem;border-radius:10px;margin:1rem 0 1.5rem;text-align:center;border:1px solid var(--border)}
+.result-hero.pass{background:linear-gradient(180deg,rgba(126,201,142,.15),rgba(126,201,142,.04));border-color:rgba(126,201,142,.4)}
+.result-hero.fail{background:linear-gradient(180deg,rgba(236,90,90,.12),rgba(236,90,90,.03));border-color:rgba(236,90,90,.4)}
+.result-hero .verdict{font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.3em;font-weight:700;margin-bottom:.5rem}
+.result-hero.pass .verdict{color:var(--green)}
+.result-hero.fail .verdict{color:var(--red)}
+.result-hero .score-big{font-family:'Fraunces',serif;font-size:3.4rem;font-weight:300;line-height:1;margin:.4rem 0;font-variation-settings:"opsz" 144}
+.result-hero .score-big .of{color:var(--muted);font-size:1.8rem}
+.result-hero .pct{font-family:'JetBrains Mono',monospace;font-size:1rem;color:var(--muted)}
+
+.result-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin:1.2rem 0}
+.result-meta .item{background:var(--surface);padding:.85rem 1rem;border-radius:6px;border:1px solid var(--border)}
+.result-meta .item .l{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:.25rem}
+.result-meta .item .v{font-size:1.05rem;color:var(--text);font-weight:600;font-family:'JetBrains Mono',monospace}
+
+.mod-table{width:100%;border-collapse:collapse;margin:1rem 0 1.6rem;background:var(--surface);border-radius:8px;overflow:hidden;font-size:.88rem}
+.mod-table th{padding:.7rem .9rem;background:var(--surface-2);text-align:left;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);border-bottom:1px solid var(--border)}
+.mod-table td{padding:.65rem .9rem;border-bottom:1px solid var(--border);vertical-align:middle}
+.mod-table tr:last-child td{border-bottom:0}
+.mod-table td.score{font-family:'JetBrains Mono',monospace;font-weight:600;text-align:right;color:var(--text);white-space:nowrap}
+.mod-table td.bar{width:35%}
+.mod-bar-bg{height:6px;background:var(--surface-3);border-radius:3px;overflow:hidden}
+.mod-bar-fill{height:100%;background:var(--gold);border-radius:3px;transition:width .5s}
+.mod-bar-fill.weak{background:var(--red)}
+.mod-bar-fill.strong{background:var(--green)}
+
+.wrong-list{margin:1rem 0}
+.wrong-list .heading{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.18em;color:var(--red);text-transform:uppercase;margin-bottom:.6rem;font-weight:600}
+.wrong-pills{display:flex;flex-wrap:wrap;gap:.35rem;margin:.4rem 0 1rem}
+.wrong-pill{background:rgba(236,90,90,.1);border:1px solid rgba(236,90,90,.4);color:var(--red);padding:.3rem .6rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:600}
+
+.weak-topics{background:var(--surface);border-left:3px solid var(--red);border-radius:6px;padding:.9rem 1.1rem;margin:1rem 0;font-size:.9rem}
+.weak-topics .head{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem;font-weight:600}
+.weak-topics ul{margin:.4rem 0 0;padding-left:1.2rem;color:var(--muted)}
+.weak-topics ul li{margin:.3rem 0;color:var(--text);font-size:.92rem}
+.weak-topics ul li em{color:var(--gold);font-style:normal;font-weight:600}
+
+.review-toggle{margin:1.6rem 0 0;padding:.85rem 1.1rem;background:var(--surface);border:1px solid var(--border-2);border-radius:8px;width:100%;color:var(--text);font-size:.95rem;text-align:left;display:flex;align-items:center;justify-content:space-between}
+.review-toggle .ico{color:var(--muted);transition:transform .2s}
+.review-toggle.open .ico{transform:rotate(90deg)}
+
+.review-details{display:none;margin-top:.8rem}
+.review-details.show{display:block}
+.review-card{background:var(--surface);border-radius:8px;border:1px solid var(--border);padding:1rem 1.1rem;margin:.7rem 0}
+.review-card .rc-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem;flex-wrap:wrap;gap:.5rem}
+.review-card .rc-num{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--gold-dim);letter-spacing:.12em}
+.review-card .rc-mod{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.1em}
+.review-card .rc-stem{font-size:.93rem;line-height:1.45;margin:.5rem 0}
+.review-card .rc-scenario{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);font-size:.86rem;line-height:1.45;margin:.4rem 0;padding-left:.8rem;border-left:2px solid var(--border-2)}
+.review-card .rc-choice{font-size:.85rem;padding:.4rem .6rem;border-radius:4px;margin:.4rem 0;line-height:1.4}
+.review-card .rc-choice.user-wrong{background:rgba(236,90,90,.08);border-left:3px solid var(--red)}
+.review-card .rc-choice.correct-was{background:rgba(126,201,142,.08);border-left:3px solid var(--green)}
+.review-card .rc-choice .l{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:.75rem;letter-spacing:.05em;margin-right:.45rem}
+.review-card .rc-choice.user-wrong .l{color:var(--red)}
+.review-card .rc-choice.correct-was .l{color:var(--green)}
+.review-card .rc-exp{font-size:.86rem;color:var(--muted);line-height:1.5;margin-top:.6rem;padding-top:.6rem;border-top:1px dashed var(--border-2)}
+.review-card .rc-exp strong.label{display:block;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.18em;color:var(--teal);text-transform:uppercase;margin-bottom:.3rem;font-weight:600}
+.review-card .rc-principle{font-style:italic;color:var(--gold);margin-top:.6rem;font-size:.85rem;line-height:1.4}
+
+/* ─── LOCKED SCREEN ──────────────────────────────────────────── */
+.lock-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem;text-align:center;margin:1.5rem 0}
+.lock-card .ico{font-size:2.5rem;margin-bottom:.5rem}
+
+/* ─── TIME-UP MODAL ──────────────────────────────────────────── */
+.modal{position:fixed;inset:0;background:rgba(13,15,23,.95);backdrop-filter:blur(8px);z-index:200;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.modal.open{display:flex}
+.modal-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem 1.4rem;max-width:480px;width:100%;text-align:center}
+.modal-card h2{margin-top:0;color:var(--red);font-style:normal;font-family:'Fraunces',serif}
+.modal-card .btn{margin-top:1rem}
+
+footer.app-footer{text-align:center;padding:2rem 1rem;color:var(--dim);font-size:.7rem;font-family:'JetBrains Mono',monospace;letter-spacing:.1em}
+
+/* Print-friendly results (in case anyone prints) */
+@media print{
+  body{background:#fff;color:#111;font-size:11pt}
+  .exam-nav,.q-tools,.exam-bar,.progress-bar,.overlay,.modal,.btn,.review-toggle{display:none !important}
+  .screen{display:block !important}
+  .shot-banner{background:#fff;color:#c00;border:2px solid #c00;box-shadow:none}
+  .review-details{display:block !important}
+}
+</style></head>
+<body data-active="start">
+
+<main id="app">
+
+<!-- ═══════════════════════════ START SCREEN ═══════════════════════════ -->
+<section id="screen-start" class="screen"><div class="wrap">
+<div class="eyebrow">Shamase Studios · Mock Examination</div>
+<h1>DaVinci Resolve Mastery</h1>
+<p class="lede">A 150-question scenario-based examination. Five hours. Pass mark 90%. Three attempts maximum.</p>
+
+<div class="facts">
+<div class="fact"><div class="l">Questions</div><div class="v">150</div></div>
+<div class="fact"><div class="l">Duration</div><div class="v">5 hours</div></div>
+<div class="fact"><div class="l">Pass mark</div><div class="v">90% (135/150)</div></div>
+<div class="fact warn"><div class="l">Attempts</div><div class="v" id="attempts-remaining">3 maximum</div></div>
+</div>
+
+<div class="rules">
+<p><strong>Rules.</strong></p>
+<p>1. One best answer per question. Other options may be partly correct; only one represents the strongest professional choice.</p>
+<p>2. The timer starts when you tap <em>Begin</em>. At <strong>5:00:00</strong> the exam auto-submits with whatever's been answered. Unanswered questions are marked wrong.</p>
+<p>3. Your progress is saved automatically. You can close the browser and resume — but the clock keeps running.</p>
+<p>4. You have a maximum of <strong>3 attempts total</strong>. Each attempt is tracked.</p>
+<p class="warn">5. When you finish — pass or fail — you must <strong>screenshot the result page and send it to your instructor</strong>. The page will remind you.</p>
+</div>
+
+<div class="name-field">
+<label for="candidate-name">Your full name (required)</label>
+<input id="candidate-name" type="text" placeholder="e.g. Lerato Khumalo" autocomplete="name" autocorrect="off" autocapitalize="words">
+</div>
+
+<button class="btn" id="btn-start" disabled>Begin examination</button>
+<button class="btn secondary" id="btn-resume" style="display:none">Resume in-progress attempt</button>
+
+<div class="attempts-log" id="attempts-log" style="display:none">
+<h3>Previous attempts on this device</h3>
+<div id="attempts-list"></div>
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ EXAM SCREEN ═══════════════════════════ -->
+<section id="screen-exam" class="screen">
+<div class="exam-bar">
+<span class="candidate" id="bar-candidate">—</span>
+<span class="qcount" id="bar-qcount">1/150</span>
+<span class="timer" id="bar-timer">5:00:00</span>
+</div>
+<div class="progress-bar"><div class="fill" id="progress-fill" style="width:0%"></div></div>
+
+<div class="q-wrap" id="q-wrap"></div>
+
+<div class="q-tools" id="q-tools" style="margin:1.4rem 1.25rem 1rem">
+<button class="q-tool" id="btn-flag"><span class="ico">⚑</span> <span id="flag-label">Flag for review</span></button>
+<button class="q-tool" id="btn-navigator"><span class="ico">▦</span> Navigator</button>
+</div>
+
+<div style="height:5rem"></div>
+
+<div class="exam-nav">
+<button class="nav-btn" id="btn-prev">← Prev</button>
+<button class="nav-btn center" id="btn-submit-top">Submit</button>
+<button class="nav-btn primary" id="btn-next">Next →</button>
+</div>
+</section>
+
+<!-- ═══════════════════════════ NAVIGATOR OVERLAY ═══════════════════════════ -->
+<div class="overlay" id="navigator">
+<div class="overlay-head"><h2>Jump to question</h2><button class="close" id="nav-close">×</button></div>
+<div class="nav-legend">
+<span><span class="swatch answered"></span>Answered</span>
+<span><span class="swatch unanswered"></span>Unanswered</span>
+<span><span class="swatch flagged"></span>Flagged</span>
+<span><span class="swatch current"></span>Current</span>
+</div>
+<div class="nav-grid" id="nav-grid"></div>
+</div>
+
+<!-- ═══════════════════════════ REVIEW SCREEN ═══════════════════════════ -->
+<section id="screen-review" class="screen"><div class="wrap">
+<div class="eyebrow">Final check before submission</div>
+<h1>Ready to submit?</h1>
+
+<div class="review-summary" id="review-summary"></div>
+<div id="review-unanswered"></div>
+<div id="review-flagged"></div>
+
+<div class="btn-row">
+<button class="btn secondary" id="btn-back-to-exam">← Keep working</button>
+<button class="btn danger" id="btn-confirm-submit">Submit now</button>
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ RESULTS SCREEN ═══════════════════════════ -->
+<section id="screen-results" class="screen"><div class="wrap">
+
+<div class="shot-banner">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Send it to your instructor as proof of completion</span>
+</div>
+
+<div class="eyebrow">Examination result · Shamase Studios</div>
+<h1 id="results-name">—</h1>
+<p class="lede" id="results-date">—</p>
+
+<div class="result-hero" id="result-hero">
+<div class="verdict" id="result-verdict">—</div>
+<div class="score-big"><span id="result-score">0</span><span class="of">/150</span></div>
+<div class="pct" id="result-pct">— %</div>
+</div>
+
+<div class="result-meta">
+<div class="item"><div class="l">Attempt</div><div class="v" id="result-attempt">—</div></div>
+<div class="item"><div class="l">Pass mark</div><div class="v">135/150</div></div>
+<div class="item"><div class="l">Time taken</div><div class="v" id="result-duration">—</div></div>
+<div class="item"><div class="l">Correct</div><div class="v" id="result-correct">—</div></div>
+</div>
+
+<h2>Module breakdown</h2>
+<table class="mod-table" id="mod-table"><thead><tr><th>Module</th><th>Score</th><th>Performance</th></tr></thead><tbody id="mod-table-body"></tbody></table>
+
+<div class="wrong-list" id="wrong-list-section">
+<div class="heading">Questions answered incorrectly</div>
+<div class="wrong-pills" id="wrong-pills"></div>
+</div>
+
+<div class="weak-topics" id="weak-topics" style="display:none">
+<div class="head">Topics to revise before retaking</div>
+<ul id="weak-topics-list"></ul>
+</div>
+
+<button class="review-toggle" id="review-toggle">
+<span>Detailed review of wrong answers</span><span class="ico">▶</span>
+</button>
+<div class="review-details" id="review-details"></div>
+
+<div class="shot-banner" style="margin-top:2rem">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Don't forget — your instructor needs to see your score and your attempt number</span>
+</div>
+
+<div id="retake-block" style="margin-top:1.5rem"></div>
+
+</div></section>
+
+<!-- ═══════════════════════════ LOCKED SCREEN ═══════════════════════════ -->
+<section id="screen-locked" class="screen"><div class="wrap">
+<div class="eyebrow">Examination locked</div>
+<h1>No attempts remaining</h1>
+
+<div class="shot-banner">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Send to your instructor — this confirms your 3 attempts are complete</span>
+</div>
+
+<div class="lock-card">
+<div class="ico">🔒</div>
+<p>You have used all <strong>3 attempts</strong> for this examination on this device. Contact your instructor to discuss next steps.</p>
+</div>
+
+<h2>Your attempt history</h2>
+<div id="locked-attempts"></div>
+
+<div class="shot-banner" style="margin-top:1.5rem">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Your instructor needs to see this attempt history</span>
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ PASSED SCREEN (if returning after pass) ═══════════════════════════ -->
+<section id="screen-passed" class="screen"><div class="wrap">
+<div class="eyebrow">Examination complete</div>
+<h1>You've already passed</h1>
+
+<div class="shot-banner">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Send to your instructor as proof of completion</span>
+</div>
+
+<div class="lock-card">
+<div class="ico">✓</div>
+<p id="passed-summary">—</p>
+</div>
+
+<h2>Your full attempt history</h2>
+<div id="passed-attempts"></div>
+
+<div class="shot-banner" style="margin-top:1.5rem">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ TIME-UP MODAL ═══════════════════════════ -->
+<div class="modal" id="time-up-modal"><div class="modal-card">
+<h2>Time's up</h2>
+<p>Five hours elapsed. Submitting your exam with answers as completed. Unanswered questions count as wrong.</p>
+<button class="btn" id="btn-time-up-ok">View results</button>
+</div></div>
+
+<footer class="app-footer">DaVinci Resolve Mastery · Mock Examination · Shamase Studios 2026</footer>
+
+</main>
+
+<script>
+// ════════════════════════════ DATA ════════════════════════════
+const QUESTIONS = [{"num":1,"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":"A client commissions a 12-minute corporate documentary, deliverable in 10 days. You are fluent in Premiere Pro but have never used Resolve. The client requires only an H.264 4K master and an Instagram-ready vertical cut.","stem":"What is the most professionally responsible decision?","options":["Switch to Resolve to learn it on a real project — the free version handles everything required.","Deliver the project in Premiere Pro and begin learning Resolve on a lower-stakes future project.","Use Resolve for the edit and Premiere for the colour grade to play to each app's strengths.","Subcontract the entire job to a Resolve specialist while you observe."],"correct":"B","recap":"12-minute documentary, 10 days, Premiere-fluent editor, no complex needs.","explanations":{"B":"The professional argument is risk management. A 10-day deadline on a deliverable that doesn't <em>need</em> Resolve isn't the right time to learn a new tool. Use the skills you have; learn the new tool on a lower-stakes project.","A":"Resolve is technically capable, but learning curve + deadline = unnecessary risk on a paid job.","C":"Mixing tools mid-project compounds risk: round-tripping problems, two software workflows, two debugging surfaces.","D":"Subcontracting is overkill for a 12-minute corporate piece; it shifts the work but adds coordination overhead."},"principle":"Match the tool to the project, not the project to the tool you want to learn."},{"num":2,"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":"You're spec'ing a workstation that will primarily handle 4K H.265 multicam interviews, light colour, no Fusion, and Fairlight mixes up to 24 tracks.","stem":"Which hardware spec is the weakest link to address first?","options":["CPU clock speed — H.265 decode is single-thread limited.","GPU VRAM — Resolve needs at least 12 GB for 4K colour work.","RAM — multitrack Fairlight projects load all audio into memory.","Storage I/O — H.265 multicam needs fast random reads to scrub smoothly."],"correct":"D","recap":"Spec for 4K H.265 multicam + light grading + Fairlight mixes.","explanations":{"D":"H.265 is a heavily compressed codec; multicam scrubbing demands many simultaneous random reads. Slow storage I/O is the most likely bottleneck for this exact workflow — slower than any GPU or CPU you'd realistically buy.","A":"CPU clock helps, but modern CPUs decode H.265 with hardware acceleration; this isn't the bottleneck.","B":"12 GB VRAM is enough for light grading; this isn't a Fusion or heavy-noise-reduction workload.","C":"Fairlight doesn't load all audio into memory; it streams from disk. 16 GB system RAM suffices."},"principle":"Diagnose the bottleneck by workload, not by component prestige."},{"num":3,"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"A colleague claims Resolve's free version cannot be used for commercial work because of licensing restrictions. How do you respond?","options":["They are correct — the free version is for personal projects only.","They are incorrect — the free version has no commercial-use restriction; Studio is bought for features, not licensing.","They are partially correct — commercial use is permitted up to a revenue cap, beyond which Studio is required.","They are partially correct — commercial use is permitted, but client redelivery requires Studio."],"correct":"B","recap":"Colleague claims free Resolve can't be used commercially.","explanations":{"B":"The free version has no commercial-use restriction whatsoever. Studio is sold for features (Resolve FX, AI tools, HDR, etc.), not for licensing.","A":"All variants of a common myth. There is no revenue cap, no client-redelivery restriction, no licensing wall on commercial use.","C":"All variants of a common myth. There is no revenue cap, no client-redelivery restriction, no licensing wall on commercial use.","D":"All variants of a common myth. There is no revenue cap, no client-redelivery restriction, no licensing wall on commercial use."},"principle":"Verify software licensing claims against the vendor's documentation, not hearsay."},{"num":4,"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"A client sends you a <code>.drp</code> file and asks you to \"open the project.\" Double-clicking launches Resolve but the project does not open. What is happening?","options":["The <code>.drp</code> is corrupted; ask the client to re-export.","A <code>.drp</code> is a project export, not a project file — you must import it into a library via the Project Manager.","The free version cannot open <code>.drp</code> files from Studio.","The <code>.drp</code> requires a matching <code>.drx</code> to open."],"correct":"B","recap":"Client sent <code>.drp</code>; double-clicking launches Resolve but doesn't open the project.","explanations":{"B":"A <code>.drp</code> is an exported project file, not a live project. Resolve manages projects through its library database; to use the <code>.drp</code>, import it via the Project Manager (right-click → Import Project).","A":"Corruption is rare; the symptom described matches the import-required behaviour.","C":"The free version opens Studio-exported projects fine — only Studio-specific features lock.","D":"A <code>.drx</code> is a stored grade (power grade), unrelated to opening a project."},"principle":"Resolve's project library is the source of truth; <code>.drp</code> is a moving van, not an apartment."},{"num":5,"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":"You must move a 90-minute project from your Mac to a colleague's PC running Resolve free for a single grading session.","stem":"The cleanest export strategy is:","options":["Copy your entire Resolve library folder and tell them to point Resolve at it.","Right-click the project → Export Project → send the <code>.drp</code> plus a hard drive with the linked media.","Render a high-quality H.265 file and have them reimport it.","Save to a cloud library so the colleague accesses it directly."],"correct":"B","recap":"Move project from Mac to a colleague's PC running free Resolve for one session.","explanations":{"B":"Export Project produces a <code>.drp</code> the colleague can import. They also need the linked media — copy that on a hard drive. If file paths break on their end, Resolve's Relink feature handles it.","A":"Copying the library folder is fragile — paths differ between machines and Resolve's library structure isn't designed for that.","C":"A rendered file can't be re-graded; the colleague is doing a grading session, so they need the project.","D":"Cloud libraries work, but require both ends to have the same cloud setup and Studio access for some features. Overkill for one session."},"principle":"<code>.drp</code> + linked media is the universal transport."},{"num":6,"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"A Studio-only effect stops working in a project that was briefly opened on a colleague's free version. The colleague returned it to you and the effect is locked. What's true?","options":["The effect was deleted automatically by the free version.","The effect is still applied — only its parameters are locked while in the free version. Your Studio version will resume control.","The effect must be re-applied; free version edits permanently strip Studio-only features.","The project file is permanently downgraded."],"correct":"B","recap":"Studio-only effect locked after a free-version round trip.","explanations":{"B":"The free version <em>doesn't delete</em> Studio-only effects; it shows them as locked. When the project returns to Studio, full control resumes.","A":"Effects aren't deleted, downgraded, or permanently stripped. This is a common misconception.","C":"Effects aren't deleted, downgraded, or permanently stripped. This is a common misconception.","D":"Effects aren't deleted, downgraded, or permanently stripped. This is a common misconception."},"principle":"Free Resolve is read/preserve, not destroy, for Studio features."},{"num":7,"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"In a typical post workflow, which Resolve page is used <em>last</em>?","options":["Color — colour is the final creative pass.","Fairlight — audio mixing happens after picture lock.","Deliver — exports the final file once all other work is complete.","Edit — final trims happen after grade and mix."],"correct":"C","recap":"Which page is used last in a typical workflow?","explanations":{"C":"Deliver is by definition the final step — converting your project into a deliverable file. The other pages' work precedes that conversion.","A":"Each of these is \"later\" in a sense, but rendering follows all of them.","B":"Each of these is \"later\" in a sense, but rendering follows all of them.","D":"Each of these is \"later\" in a sense, but rendering follows all of them."},"principle":"Workflow order: Media → Cut/Edit → Fusion → Color → Fairlight → Deliver."},{"num":8,"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":"A junior editor asks whether to learn Cut or Edit first. Their goal is narrative film.","stem":"The best answer is:","options":["Cut first — it's simpler and Edit extends its concepts.","Edit first — narrative demands its precision; Cut is for fast turnarounds.","Either is fine — they share the same timeline.","Skip Cut entirely — professional narrative editors never use it."],"correct":"B","recap":"Junior editor: learn Cut or Edit first, with narrative film as goal?","explanations":{"B":"Narrative work demands precise audio layering, complex track structures, and fine-grained timeline manipulation — Edit's strengths. Cut is for fast turnarounds, not narrative density.","A":"Cut isn't a \"simpler version\" of Edit — it's a different paradigm.","C":"True that timelines are shared, but you'll spend most of your narrative time in Edit; learn it deeply first.","D":"Cut has its place (multicam, vlogs) — never \"skip\" a major page."},"principle":"Tool choice should match the project's nature, not your familiarity."},{"num":9,"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":"You receive 6 hours of footage on a client drive, already organised into folders by camera and shoot day.","stem":"The fastest way to bring this in while preserving the folder hierarchy:","options":["Drag each folder one at a time into the Media Pool — Resolve creates bins automatically.","Drag all folders together into the Media Pool's <em>bin list</em> on the left — Resolve creates a matching bin hierarchy.","Use File → Import Media for each clip individually.","Drag all folders into Media Storage, then rebuild the bins manually."],"correct":"B","recap":"6 hours of footage in folders; fastest import preserving hierarchy.","explanations":{"B":"Dragging multiple folders to the <em>bin list</em> (left side of Media Pool) recreates the folder hierarchy as a bin structure. Dragging into the Pool itself flattens everything into one bin.","A":"Works but is slower and risks losing the hierarchy.","C":"One-at-a-time import is the slowest possible method.","D":"Media Storage is just a browser; rebuilding bins manually is wasted work."},"principle":"Bin list = hierarchy preserved; Pool itself = flat."},{"num":10,"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"The practical distinction between Media Storage and the Media Pool is:","options":["Media Storage holds camera files; Media Pool holds transcoded copies.","Media Storage is the file system browser; Media Pool is the project's database of clips Resolve tracks.","Media Storage is for video; Media Pool is for audio.","Media Storage shows local drives; Media Pool shows network drives."],"correct":"B","recap":"Media Storage vs Media Pool distinction.","explanations":{"B":"Media Storage is a view of your file system — Resolve can see it. The Media Pool is the project's <em>database</em> of clips Resolve <em>knows about</em> (and tracks metadata for).","A":"None of these distinctions are correct; they confuse codec, file type, or location with the conceptual database/browser split.","C":"None of these distinctions are correct; they confuse codec, file type, or location with the conceptual database/browser split.","D":"None of these distinctions are correct; they confuse codec, file type, or location with the conceptual database/browser split."},"principle":"Browser vs database — two tiers, two purposes."},{"num":11,"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":"You shot a wedding with a Zoom recorder capturing ceremony audio while two A7S III cameras recorded scratch audio. You want to replace camera audio with the Zoom track across all 18 ceremony clips.","stem":"Most efficient workflow:","options":["On the Edit page, drag the Zoom audio onto a new track and manually align each clip's waveform.","On the Media page, select all camera clips plus the Zoom recording, right-click → Auto-Sync Audio → Synchronize using Waveform.","On Fairlight, drag the Zoom and use dynamic timecode lock.","On the Cut page, set both cameras to the Sync Bin and let Resolve auto-pick the best audio."],"correct":"B","recap":"Replace 18 clips' camera audio with a Zoom recording.","explanations":{"B":"Media-page Auto-Sync Audio with Synchronize using Waveform is built for exactly this — Resolve matches waveforms across selected clips in a single operation.","A":"Manual alignment is the brute-force option; far slower than auto-sync.","C":"Fairlight doesn't have a magical \"dynamic timecode lock\" feature; this option is fabricated.","D":"Cut's Sync Bin is for multicam picture switching, not replacing camera audio with a separate boom recording."},"principle":"Waveform sync at the Media stage is the most batch-efficient."},{"num":12,"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"After Auto-Sync Audio across 30 clips, five report \"not synced.\" Most likely cause and next step:","options":["Those clips are corrupted — re-ingest from the source.","Those clips lack a matching audio signature in the reference — sync manually or check if they belong to a different take.","Sample rate mismatch — convert before syncing.","Resolve's sync only works on the first 25 clips; restart on the remaining five."],"correct":"B","recap":"5 clips fail auto-sync; cause and remedy.","explanations":{"B":"Auto-sync requires the audio in both clips to contain matching features. Failures usually mean: that clip lacks a matching transient (silent, or recorded from a different take or location). Investigate and sync manually if it's a real match.","A":"Sync failure is not the same as file corruption.","C":"Sample rate differences can cause drift but rarely a hard sync failure.","D":"There is no 25-clip limit."},"principle":"Sync failures usually mean the audio doesn't match, not that Resolve is broken."},{"num":13,"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":"A documentary has 400 clips across 12 shoot days. You need to find every clip tagged \"over the shoulder\" so an editor can work on conversational scenes.","stem":"Best Resolve feature:","options":["Smart Bin with a keyword filter — updates live as you tag more clips.","Bin colour coding — colour every OTS clip the same and visually scan.","Rename every OTS clip with \"OTS_\" prefix and sort alphabetically.","Resolve's IntelliSearch v21 — search OTS by AI vision analysis."],"correct":"A","recap":"Find 400 clips tagged \"OTS\" across 12 shoot days.","explanations":{"A":"A Smart Bin with a keyword filter is the right tool — it updates automatically as you tag more clips, surfaces all OTS clips regardless of their bin location, and is built for this exact use case.","B":"Bin colour coding is visual and doesn't scale; you can't filter or sort efficiently on colour alone.","C":"Renaming with prefixes is destructive and slow.","D":"IntelliSearch (v21) is powerful but currently identifies content from analysis — for an existing \"OTS\" tag, the keyword smart bin is more direct."},"principle":"Smart bins = live filters; tag once, query forever."},{"num":14,"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"In the Media Pool's List view, which metadata field is the <em>least</em> useful for narrative work?","options":["Scene","Take","Reel Number","Capture Application"],"correct":"D","recap":"Least useful metadata field for narrative work.","explanations":{"D":"Capture Application (the software the file was originally captured with) is rarely actionable for narrative editors. Scene, Take, and Reel Number all map directly to narrative shoot conventions."},"principle":"Metadata's value scales with how often you query it."},{"num":15,"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"A clip imported into Resolve shows 29.97 fps in a 23.976 timeline and plays back faster than intended. The right fix is:","options":["Right-click → Clip Attributes → Video → change frame rate to 23.976. Resolve reinterprets without rendering.","Right-click → Force conform to timeline.","Delete and re-import — frame rate cannot be changed.","Switch the timeline frame rate to 29.97 — clips dictate the project rate."],"correct":"A","recap":"Clip imported with wrong frame rate plays too fast.","explanations":{"A":"Clip Attributes lets you reinterpret the file's frame rate without rendering. Resolve trusts the metadata you set there.","B":"\"Force conform\" affects timeline interpretation differently and isn't the typical fix.","C":"Frame rate is reinterpretable in metadata.","D":"Clips do not dictate the project rate — the timeline does, and clips must conform."},"principle":"Frame rate is reinterpreted, not rendered."},{"num":16,"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"A client provides an FCP XML and a folder of camera files. After import, several clips show offline. Most likely cause:","options":["The XML references file paths that don't match Resolve's view — relink to the media folder.","FCP XML is incompatible with Resolve — request AAF.","The codec is not supported in the free version — needs Studio.","The XML was exported from a project with collaboration enabled."],"correct":"A","recap":"FCP XML import: some clips offline.","explanations":{"A":"Path mismatches are the overwhelming cause of offline clips after XML import. Relinking (right-click → Relink Selected Clips) points Resolve at the media folder.","B":"FCP XML is compatible with Resolve; an offline-clip symptom isn't a compatibility issue.","C":"Codec support is a separate diagnosis; \"offline\" means file not found.","D":"Collaboration export doesn't affect XML compatibility."},"principle":"Offline = file path. Always check the path first."},{"num":17,"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":"You're assembling a scene from 30 takes across 4 angles. The director joins you in 90 minutes to review.","stem":"Highest-leverage thing to complete first:","options":["Carefully grade the wide master so the director sees the final look.","Lay down a rough cut from master takes only — a watchable beginning-to-end version.","Sync all audio and run the full project through noise reduction.","Build complex transitions between every cut to demonstrate creative options."],"correct":"B","recap":"30 takes, 4 angles, director review in 90 minutes.","explanations":{"B":"A rough cut from master takes only gives the director a watchable beginning-to-end version — the basis for creative feedback. Director reviews are about the cut's <em>shape</em>, not its polish.","A":"Grading before the cut is wasted work — the cut may change.","C":"Audio sync and noise reduction matter, but not before there's anything to listen to.","D":"Transitions on every cut suggest amateurism; directors want the structure, not the decoration."},"principle":"Show shape first; polish later."},{"num":18,"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"Which edit button pushes later clips down the timeline to make space for the inserted clip?","options":["Overwrite","Insert","Replace","Place on Top"],"correct":"B","recap":"Which edit button pushes later clips down to make space?","explanations":{"B":"Insert pushes later clips down the timeline. Overwrite pastes over. Replace swaps in place. Place on Top adds to a new track without affecting existing clips."},"principle":"Insert = push later clips. Overwrite = preserve length."},{"num":19,"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":"A 4-minute interview clip has a 12-second dead pause in the middle ruining pacing.","stem":"Fastest method to remove those 12 seconds while keeping the rest intact:","options":["Trim from the left edge of the second half, then drag everything right back into place.","Position playhead at the pause start, split (<kbd>S</kbd>). Move to pause end, split. Delete the middle.","Use the Cut page's smart trim function to auto-detect silences.","Lasso the pause region with the Blade tool and use a gap-removal command."],"correct":"B","recap":"Remove 12-second pause from middle of a 4-minute clip.","explanations":{"B":"Split-Delete-Ripple is the cleanest approach. With a custom <kbd>S</kbd> shortcut for split, two presses delineate the pause; deleting the middle segment ripples earlier content right automatically (or use selection + delete with snapping).","A":"Trimming and dragging is multi-step and error-prone.","C":"Cut page silence detection exists but is not the fastest for a single 12-second region you can see.","D":"Blade lasso isn't a Resolve feature; Blade is one-click splitting."},"principle":"Split + delete = the cleanest dialogue cut."},{"num":20,"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"In Trim Tool (<kbd>T</kbd>), click-dragging the <em>lower</em> portion of a clip in its middle does what?","options":["Slips the clip — same in/out, different portion of source.","Slides the clip — moves in time, trimming neighbours.","Rolls the clip — moves its boundary with the next clip.","Rate-stretches the clip."],"correct":"B","recap":"Trim tool, lower portion drag in middle of clip.","explanations":{"B":"Lower half + drag = slide. The clip moves in time, trimming its neighbours. Upper half + drag = slip (same in/out, different portion of source)."},"principle":"Upper = slip (content shift); lower = slide (time shift)."},{"num":21,"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"A wide shot ends with the actor turning right; a close-up take also begins with them turning right. Cutting at the motion feels natural because:","options":["The viewer's eye is occupied by motion, masking the discontinuity between angles.","Resolve's interpolation smooths the gap automatically.","Matching motion vectors trigger a temporal coherence effect.","Wide and close-up share the same colour space."],"correct":"A","recap":"Why does cutting on motion feel natural?","explanations":{"A":"The viewer's eye is occupied by motion, masking the cut between angles. This is a foundational editing principle — \"cutting on action.\"","B":"Resolve doesn't have temporal interpolation between cuts, and colour space isn't what makes cuts seamless. These are fabricated technical explanations for a perceptual phenomenon.","C":"Resolve doesn't have temporal interpolation between cuts, and colour space isn't what makes cuts seamless. These are fabricated technical explanations for a perceptual phenomenon.","D":"Resolve doesn't have temporal interpolation between cuts, and colour space isn't what makes cuts seamless. These are fabricated technical explanations for a perceptual phenomenon."},"principle":"Eye follows motion; cuts hide in motion."},{"num":22,"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"Which keyboard setup most accelerates dialogue and podcast editing once learned?","options":["Defaults: <kbd>Ctrl</kbd>+<kbd>\\</kbd> split, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>[</kbd>/<kbd>]</kbd> for trim.","Custom: <kbd>Q</kbd> = trim start, <kbd>W</kbd> = trim end, <kbd>S</kbd> = split. Three fingers, one hand.","The Premiere preset for muscle-memory transfer.","The Final Cut Pro preset."],"correct":"B","recap":"Best keyboard setup for fast dialogue/podcast editing.","explanations":{"B":"Custom <kbd>Q</kbd>/<kbd>W</kbd>/<kbd>S</kbd> = three fingers on one hand. The default shortcuts require two hands and break flow.","A":"Two-hand defaults are slower than three-finger custom shortcuts.","C":"Premiere or FCP presets transfer muscle memory but aren't optimised for Resolve workflows.","D":"Premiere or FCP presets transfer muscle memory but aren't optimised for Resolve workflows."},"principle":"Speed comes from one-handed keyboard work."},{"num":23,"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":"You keyframe a title sliding in from offscreen-right to centre. The animation works but jerks to a stop.","stem":"Cause:","options":["Keyframes are linear by default — ease the outgoing keyframe by flattening its tangent in the Keyframes panel.","The title is too short — animations under 24 frames always jerk.","Resolve doesn't support keyframed titles on the Edit page — use Fusion.","The Inspector transform applies only once at clip start."],"correct":"A","recap":"Title animation jerks to a stop.","explanations":{"A":"Default keyframes are linear; the end keyframe needs to be eased (flatten its tangent in the Keyframes panel curve view) to decelerate naturally.","B":"Animation duration doesn't determine \"jerk\" — interpolation does.","C":"Edit-page keyframed titles work fine.","D":"Inspector transforms support keyframes throughout the clip."},"principle":"Linear keyframes jerk; ease them for natural deceleration."},{"num":24,"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"You keyframed a clip's position to move across screen. You duplicate the clip. The duplicate must animate identically. Most reliable approach:","options":["The duplicate inherits the animation — just duplicate normally.","Use Edit → Copy → Paste Attributes onto the duplicate.","Recreate keyframes manually on the duplicate.","Create a Compound Clip from the original first — duplicating compounds preserves animation."],"correct":"A","recap":"Duplicating a keyframed clip — does the duplicate inherit animation?","explanations":{"A":"Yes — duplicating in Resolve preserves keyframes on the duplicate.","B":"Paste Attributes works but is unnecessary; the duplicate already has the animation.","C":"Re-creating is wasted effort.","D":"Compound clips aren't needed — keyframes persist on duplicates."},"principle":"Duplicating preserves everything, including keyframes."},{"num":25,"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"Enabling Snapping (the magnet icon) in the Edit page affects what?","options":["Clips snap to nearby edit points, markers, and the playhead while dragging.","The viewer snaps to common aspect ratios.","Audio waveforms snap to even peaks for sync.","Clips snap to frame boundaries to prevent sub-frame edits."],"correct":"A","recap":"What does Snapping affect?","explanations":{"A":"Snapping snaps clips during drag to nearby edit points, markers, and the playhead.","B":"All fabricated. The viewer doesn't snap to aspect ratios; audio doesn't snap to peaks; sub-frame snapping isn't what the magnet does.","C":"All fabricated. The viewer doesn't snap to aspect ratios; audio doesn't snap to peaks; sub-frame snapping isn't what the magnet does.","D":"All fabricated. The viewer doesn't snap to aspect ratios; audio doesn't snap to peaks; sub-frame snapping isn't what the magnet does."},"principle":"Snapping = clip-position assist during drag."},{"num":26,"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":"A clip has good dialogue then 4 seconds of crew noise. You want to keep the dialogue and replace the noisy audio (only) with clean wild track audio. Video must stay intact.","stem":"","options":["Split the clip at the noise boundary, delete the noisy half, ripple-trim earlier content right.","Unlink V/A (chain icon), then on audio only: split, delete the noisy section, replace with the wild track.","Apply Audio FX → Noise Reduction on the noisy section.","Cut the whole video clip and re-edit from the source viewer's audio-only mode."],"correct":"B","recap":"Replace noisy audio in part of a clip, keep video intact.","explanations":{"B":"Unlink video/audio (chain-link icon), then audio-only split + delete + replace. Video remains untouched.","A":"This deletes good video along with bad audio.","C":"Noise reduction won't replace \"ruined\" audio with clean alternative content.","D":"Re-editing from scratch isn't necessary; unlinking solves it cleanly."},"principle":"Unlink V/A when fixing one without disturbing the other."},{"num":27,"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"Simplest way to fade in a generator title:","options":["Right-click the clip → Add Transition → Cross Dissolve.","Drag the small white triangle handle at the clip's top-left corner inward.","Apply a Fade-In effect from the Effects panel.","Keyframe opacity from 0 to 100% in the Inspector."],"correct":"B","recap":"Simplest fade-in for a generator title.","explanations":{"B":"The little white triangle handles at the clip's corners are dedicated fade handles. Drag inward for instant fade-in or fade-out.","A":"Cross Dissolve works but adds an extra clip element.","C":"Fade-In effect exists but is overkill for a simple fade.","D":"Manual opacity keyframing is the slowest path."},"principle":"Use the built-in fade handles for the common case."},{"num":28,"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":"A 1-hour interview timeline. You need to render only minutes 12 to 18 for client preview without destroying timeline integrity.","stem":"","options":["Duplicate the timeline, delete everything outside that range, render the duplicate.","Set in/out (<kbd>I</kbd>/<kbd>O</kbd>) around the range, switch to Deliver, set render range to \"In to Out.\"","Use the Cut page to chop out a sub-timeline, deliver from it.","Export the whole timeline as H.264 then trim the resulting file externally."],"correct":"B","recap":"Render only minutes 12–18 without destroying timeline.","explanations":{"B":"Set <kbd>I</kbd>/<kbd>O</kbd> on the timeline; on the Deliver page, set Render Range to \"In to Out.\" Non-destructive, immediate.","A":"Duplicating works but is unnecessary overhead.","C":"Cut-page sub-timeline is a workaround for what in/out solves directly.","D":"Rendering the whole and trimming externally is the worst path — wastes time and adds compression rounds."},"principle":"In/Out + render range = the standard partial render."},{"num":29,"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":null,"stem":"The defining structural feature of the Cut page that Edit lacks:","options":["Two separate timelines — full-project zoom-out plus detail zoom-in — simultaneously visible.","A built-in colour grading tool unavailable in Edit.","Faster rendering through GPU acceleration.","Native vertical aspect-ratio support."],"correct":"A","recap":"Defining feature of the Cut page that Edit lacks.","explanations":{"A":"Two simultaneous timelines (zoomed-out + zoomed-in) — Cut's signature feature. Eliminates the constant zoom in/out that consumes Edit-page time.","B":"Cut and Edit share grading, rendering, and aspect-ratio support — none of these are unique to Cut.","C":"Cut and Edit share grading, rendering, and aspect-ratio support — none of these are unique to Cut.","D":"Cut and Edit share grading, rendering, and aspect-ratio support — none of these are unique to Cut."},"principle":"Two timelines = the Cut page's design DNA."},{"num":30,"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":"A 4-camera podcast records 90 minutes; cut delivery is due tomorrow.","stem":"Strongest reason to pick Cut over Edit:","options":["Sync Bin — auto-sync cameras and switch between angles live at the playhead.","Source Tape — scrub all clips end-to-end as one source.","The Smart Insert button.","Built-in autocut from voice-activity detection."],"correct":"A","recap":"Why pick Cut over Edit for a 4-camera podcast.","explanations":{"A":"The Sync Bin is the genuine multicam killer feature. Drop a spine, then switch angles live at the playhead by drag-dropping. Fastest multicam workflow in any NLE.","B":"Source Tape is useful but not multicam-specific.","C":"Smart Insert is a small productivity gain, not multicam-specific.","D":"Autocut from VAD isn't a Resolve native feature."},"principle":"Multicam interview = Sync Bin = Cut page."},{"num":31,"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":null,"stem":"On the Cut page, clicking Insert with the playhead roughly between two clips does:","options":["Splits the nearer clip at the playhead and inserts there.","Snaps to the nearest edit point (the boundary) and inserts there.","Inserts at the start of the timeline regardless.","Inserts on a new track above."],"correct":"B","recap":"Cut page Insert with playhead between clips.","explanations":{"B":"Cut page smart-inserts at the nearest edit point. This is a design choice to optimise for speed — micro-positioning the playhead isn't required.","A":"Splitting at the playhead is Edit-page behaviour.","C":"Fabricated behaviours.","D":"Fabricated behaviours."},"principle":"Cut prioritises speed via smart snapping to edit points."},{"num":32,"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":"After Sync by Audio on a 4-camera shoot, one camera is offset by 2 seconds in the result.","stem":"Cause and remedy:","options":["That camera's audio was too low to match — sync that camera manually using a sharp transient.","Save Sync corrupts the project — restart Resolve.","Resolve cannot sync 4 cameras simultaneously — sync in pairs.","Cut's sync is approximate by design; a 2-second drift is normal."],"correct":"A","recap":"Sync result: one camera offset by 2 seconds.","explanations":{"A":"Audio matching needs sufficient signal strength and matching features. If one camera's audio is too low or too noisy, the auto-sync may pick a wrong match. Manually sync that camera using a sharp transient (clap, door slam).","B":"Fabricated causes. Resolve handles multi-camera sync without 2-camera limits; the offset isn't \"normal\" or expected.","C":"Fabricated causes. Resolve handles multi-camera sync without 2-camera limits; the offset isn't \"normal\" or expected.","D":"Fabricated causes. Resolve handles multi-camera sync without 2-camera limits; the offset isn't \"normal\" or expected."},"principle":"Auto-sync needs distinctive audio; failure means audio is too weak or different."},{"num":33,"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":null,"stem":"With Sync Bin active and the wide camera dropped as a spine, what does the Sync Bin display?","options":["All clips for the entire shoot, sorted alphabetically.","Only the cameras whose audio matches the current playhead.","All cameras' angles aligned to the playhead position live — switch by drag-dropping with Place on Top.","The single best angle for each moment, chosen by Resolve's AI."],"correct":"C","recap":"Sync Bin behaviour with the wide camera on the timeline.","explanations":{"C":"Live multicam view — all cameras' angles aligned to the playhead position, switchable by drag-dropping with Place on Top.","A":"The Sync Bin filters to current playhead position, not the whole shoot.","B":"The Sync Bin matches all synced cameras at the playhead — not \"only those with matching audio.\"","D":"Resolve doesn't auto-pick the best angle; you choose."},"principle":"Sync Bin = live angle selector at the playhead."},{"num":34,"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":null,"stem":"A narrative drama with layered audio, custom motion graphics, and dual-monitor reference grading is best suited to:","options":["Cut — its dual timeline suits narrative density.","Edit — precision tools and full track control suit complex narrative.","Fusion — narrative work happens in the compositing page.","Color — grade first, then assemble."],"correct":"B","recap":"Narrative drama with complex audio and motion graphics — best page?","explanations":{"B":"Edit's precision tools, full track control, and detailed inspector are made for complex narrative work.","A":"Cut's dual timeline is speed-oriented; narrative density isn't its strength.","C":"Fusion is for compositing, Color is for grading — narrative <em>assembly</em> happens in Edit.","D":"Fusion is for compositing, Color is for grading — narrative <em>assembly</em> happens in Edit."},"principle":"Edit = complexity. Cut = speed."},{"num":35,"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"A clip opens in Fusion. The two default nodes present are:","options":["Camera and Renderer — reads the source and outputs to the timeline.","MediaIn and MediaOut — imports the clip and returns the result to the timeline.","Source and Sink — loads and writes to disk.","Import and Export — reads and renders."],"correct":"B","recap":null,"explanations":{"B":"MediaIn imports the timeline clip into Fusion; MediaOut returns the composite to the timeline. These two bracket every Fusion graph.","A":"Fabricated node names.","C":"Fabricated node names.","D":"Fabricated node names."},"principle":"MediaIn → composition → MediaOut."},{"num":36,"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"A Merge node has three inputs (yellow, green, blue). Each accepts:","options":["Yellow = background, green = foreground, blue = effect mask.","Yellow = source A, green = source B, blue = source C — combined equally.","Yellow = colour, green = alpha, blue = depth.","Yellow = video, green = audio, blue = metadata."],"correct":"A","recap":null,"explanations":{"A":"Yellow = background, green = foreground, blue = effect mask. Universal convention across Fusion.","B":"Fabricated schemes; the colours are consistent throughout.","C":"Fabricated schemes; the colours are consistent throughout.","D":"Fabricated schemes; the colours are consistent throughout."},"principle":"Yellow/green/blue = bg/fg/mask, everywhere."},{"num":37,"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"A polygon mask drawn at frame 1 was adjusted at frame 30. On playback it morphs between the two shapes unintentionally. Cause:","options":["Bezier handles are unstable — reset them.","Polygons automatically keyframe shape changes — right-click in Inspector → Remove Polygon1 → Polyline.","The MediaIn is keyframed — disable its keyframes.","The Merge node is rendering inconsistently."],"correct":"B","recap":null,"explanations":{"B":"Polygon masks auto-keyframe shape changes. Remove via right-click → Remove Polygon1 → Polyline in the Inspector.","A":"Not handles, MediaIn, or Merge — the polyline itself carries the keyframes.","C":"Not handles, MediaIn, or Merge — the polyline itself carries the keyframes.","D":"Not handles, MediaIn, or Merge — the polyline itself carries the keyframes."},"principle":"Polygons keyframe automatically; remove the polyline to lock."},{"num":38,"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":"You want atmospheric smoke drifting only along a diagonal upper-frame streak.","stem":"Cleanest node graph:","options":["MediaIn → ColorCorrector (dark cloud colour) → MediaOut.","FastNoise (dark clouds) → masked by a Polygon (streak) → Merged over MediaIn → MediaOut.","MediaIn → heavy Blur → MediaOut, then desaturate.","Background generator (grey) → Merge over MediaIn with composite Multiply."],"correct":"B","recap":null,"explanations":{"B":"Generate dark clouds (FastNoise), restrict via Polygon mask, merge over the source.","A":"ColorCorrector tints the whole image, not localised smoke.","C":"Blur diffuses existing pixels, doesn't add cloud content.","D":"Multiply darkens globally, not a localised streak."},"principle":"Generate → mask → merge: the universal additive flow."},{"num":39,"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"You want to view one node in the left viewer while the final composite stays in the right viewer. Fastest method:","options":["Connect two MediaOut nodes — one to each viewer.","Select the node you want and press <kbd>1</kbd> (left viewer) or <kbd>2</kbd> (right viewer).","Right-click each viewer and choose \"follow node.\"","Drag the node onto the viewer header."],"correct":"B","recap":null,"explanations":{"B":"<kbd>1</kbd> loads the selected node into the left viewer; <kbd>2</kbd> into the right. Keyboard-driven.","A":"Fabricated. Fusion viewers are independent and node-assigned.","C":"Fabricated. Fusion viewers are independent and node-assigned.","D":"Fabricated. Fusion viewers are independent and node-assigned."},"principle":"1 and 2 = viewer assignment."},{"num":40,"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":"You're compositing an alien into a cockpit shot. The cockpit foreground plate and alien background plate are different resolutions.","stem":"The cleanest way to scale the alien to fit the cockpit window:","options":["Run the alien MediaIn through a Transform node and use its size/position controls.","Open the source clip in Edit and pre-scale before sending to Fusion.","Use the Merge node's \"size\" parameter on the green input.","Convert both plates to the same resolution via the Project Settings."],"correct":"A","recap":null,"explanations":{"A":"Transform node = Fusion's standard tool for scaling elements within a composite.","B":"Pre-scaling in Edit is destructive.","C":"Merge has size, but it's for fine offset, not principal scaling.","D":"Project Settings affect the whole timeline."},"principle":"Transform scales individual elements non-destructively."},{"num":41,"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":"A FastNoise node generates clouds you want to use as smoke. You want the clouds to drift gently across the frame over time.","stem":"The right control:","options":["Keyframe the FastNoise <em>Center</em> control to translate horizontally over the clip's duration.","Animate the FastNoise <em>Seethe</em> rate from 0 to 1.","Wrap FastNoise in a Transform node and keyframe the Transform's position.","Apply a Glow node to the FastNoise output."],"correct":"A","recap":null,"explanations":{"A":"Center keyframed = directional drift of the noise pattern.","B":"Seethe animates the noise's internal evolution (wiggle), not direction.","C":"Transform wrapper works but is unnecessary.","D":"Glow doesn't move things."},"principle":"Center = position; Seethe = internal change."},{"num":42,"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"You want to track a moving person's eye and stick a graphic to it. The cleanest Fusion approach:","options":["Tracker node with target on the eye, set Operation to Match Move, feed the graphic into the green input.","Use a Polygon mask drawn on the eye and keyframed.","Apply Resolve's Color-page Tracker to the timeline clip.","Use Magic Mask on the eye."],"correct":"A","recap":null,"explanations":{"A":"Tracker node + target on eye + Operation = Match Move + graphic into green input. Tracker drives the graphic.","B":"Keyframed polygon = manual; Tracker automates.","C":"Color page tracker handles windows, not Fusion composites.","D":"Magic Mask creates moving masks, not tracked attachment points."},"principle":"Tracker + Match Move = stick a graphic to motion."},{"num":43,"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"A node graph has MediaIn → ColorCorrector → Blur → MediaOut. You want the Blur to apply <em>before</em> the ColorCorrector. Best approach:","options":["Re-wire: MediaIn → Blur → ColorCorrector → MediaOut.","Drag the ColorCorrector to the right of Blur visually — Fusion reorders by position.","Delete both, re-add in the desired order.","Reverse the connection direction on each cable."],"correct":"A","recap":null,"explanations":{"A":"Re-wire to MediaIn → Blur → ColorCorrector → MediaOut. Connection order = operation order.","B":"Visual position doesn't determine order — connections do.","C":"Delete-and-recreate wastes work.","D":"Cable direction reflects flow; reversing breaks the graph."},"principle":"Connection order = operation order."},{"num":44,"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"A Polygon mask connected to the blue input of a Brightness/Contrast node — what does that node now do?","options":["Inverts the polygon area's brightness only.","Applies its brightness/contrast adjustment only inside the polygon's white area.","Erases the polygon shape from the image.","Multiplies the polygon by the brightness output."],"correct":"B","recap":null,"explanations":{"B":"A mask on the blue input restricts the host node's effect to the mask's white area.","A":"Masks don't invert, erase, or multiply; they limit.","C":"Masks don't invert, erase, or multiply; they limit.","D":"Masks don't invert, erase, or multiply; they limit."},"principle":"Blue input = \"operate only here.\""},{"num":45,"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"Magic Mask (Studio) is most useful for which of the following?","options":["Generating cloud textures.","AI-driven rotoscoping — moving masks that follow a subject across a shot.","Colour-correcting individual frames.","Compositing two plates using a Merge node."],"correct":"B","recap":null,"explanations":{"B":"AI rotoscoping — Magic Mask's purpose is moving subject masks.","A":"Fabricated uses.","C":"Fabricated uses.","D":"Fabricated uses."},"principle":"Magic Mask = AI roto (Studio only)."},{"num":46,"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"Best approach to bring a second timeline clip into the current Fusion composition (so both clips can be composited together):","options":["Drag the second clip from the Media Pool while inside the Fusion page — it becomes a second MediaIn.","Render the second clip and re-import as new media.","Use the Cut page Sync Bin to merge them first.","Apply a Generator effect referencing the other clip."],"correct":"A","recap":null,"explanations":{"A":"Drag from Media Pool while inside Fusion → second MediaIn appears.","B":"Re-rendering loses non-destructive flexibility.","C":"Sync Bin = multicam editing, not Fusion.","D":"Generators create content, not references."},"principle":"Drag from Pool into Fusion to layer clips."},{"num":47,"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"The Color page operates on the principle that:","options":["You select an effect from a panel and drag it onto a clip.","Whichever clip the playhead is over is automatically the clip being graded.","Each timeline must be re-imported into a separate grading project.","Grades are applied to tracks, not clips."],"correct":"B","recap":null,"explanations":{"B":"The clip under the playhead is automatically the clip being graded — no effect drag, no clip-select toggle.","A":"Effect-drag (Premiere-style), per-timeline import, and track-grading aren't Resolve's model.","C":"Effect-drag (Premiere-style), per-timeline import, and track-grading aren't Resolve's model.","D":"Effect-drag (Premiere-style), per-timeline import, and track-grading aren't Resolve's model."},"principle":"Playhead position = active clip."},{"num":48,"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"In the Primaries palette, dragging the master wheel under the <em>Gain</em> wheel to the right does:","options":["Increases saturation across the image.","Brightens the entire image, with the strongest effect on highlights.","Adds blue to the highlights.","Increases contrast."],"correct":"B","recap":null,"explanations":{"B":"Gain master wheel right = brightens whole image, strongest in highlights.","A":"Saturation isn't controlled by the master wheel.","C":"Blue requires moving the centre dot, not the slider.","D":"Contrast = combining lift + gain opposites."},"principle":"Master wheel = brightness; centre dot = colour."},{"num":49,"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"An S-curve in the Custom Curves panel (lift the upper midtones, depress the lower midtones) produces:","options":["Increased contrast in a filmic way — deeper blacks and brighter highlights.","Reduced contrast across the whole tonal range.","A blue colour cast across the image.","Inversion of the image's brightness."],"correct":"A","recap":null,"explanations":{"A":"S-curve = filmic contrast. Upper midtones up, lower midtones down.","B":"S-curve increases contrast, not reduces.","C":"Hue isn't affected by a luminance curve.","D":"Inversion requires flipping the whole curve."},"principle":"S-curve = universal contrast move."},{"num":50,"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"Looking at the Parade scope on a shot where the wall should be neutral grey: the red channel is noticeably higher than green and blue at the wall's horizontal position. The image is:","options":["Tinted red — correct by pulling the Offset wheel toward cyan until R, G, B align.","Underexposed — lift the gamma.","Saturated correctly — leave alone.","Showing chromatic aberration — apply a lens correction."],"correct":"A","recap":null,"explanations":{"A":"R > G,B at a neutral wall = red tint. Pull Offset toward cyan until aligned.","B":"Different diagnoses; the parade clearly shows colour cast.","C":"Different diagnoses; the parade clearly shows colour cast.","D":"Different diagnoses; the parade clearly shows colour cast."},"principle":"Channel imbalance at neutral = white balance."},{"num":51,"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"The Vectorscope shows your skin tones cluster far from the diagonal \"skin line.\" Which is the strongest action?","options":["Stylistic skin off the skin line is always wrong — pull skin onto the line immediately.","Use the Main Object isolation node and shift skin toward the line, unless a stylistic choice intentionally deviates.","Apply Face Refinement at full strength.","Lower global saturation until skin is grey."],"correct":"B","recap":null,"explanations":{"B":"The skin line is a target, not a law. Adjust via Main Object isolation; stylistic deviation is valid.","A":"Too dogmatic.","C":"Face Refinement handles surface detail, not hue placement.","D":"Desaturating is a different problem."},"principle":"Skin line = aim point, deliberate deviation is fine."},{"num":52,"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"Fastest way to copy a grade from one timeline clip to another:","options":["Right-click source → Save Grade → right-click target → Apply Saved Grade.","Select target, mouse over source's thumbnail, middle-click.","Edit → Copy → switch to target → Paste Attributes.","Drag the source clip's node graph onto the target's clip thumbnail."],"correct":"B","recap":null,"explanations":{"B":"Middle-click the source thumbnail = instant grade copy.","A":"Save Grade is for permanent presets, not quick copies.","C":"Paste Attributes works but slower in Color.","D":"Node-graph drag isn't a Resolve action."},"principle":"Middle-click = instant copy."},{"num":53,"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"You want a creative look that affects every clip in the timeline simultaneously. The right scope for that grade is:","options":["Each clip individually with copy-paste.","A timeline-level node — switch to the timeline node graph using the small dots above the node graph.","A pre-clip group grade.","A post-clip group grade."],"correct":"B","recap":null,"explanations":{"B":"Timeline-level nodes apply to every clip. Switch via the dots above the node graph.","A":"Per-clip copy is brittle.","C":"Group grades affect group members only.","D":"Group grades affect group members only."},"principle":"Timeline node = once, everywhere."},{"num":54,"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"Disabling a single colour node temporarily (to see its contribution) is done by:","options":["Right-click → Delete Node.","Click the small number on the node.","Drag the node off the cable.","Set its opacity to zero."],"correct":"B","recap":null,"explanations":{"B":"Click the node number to toggle. Quick A/B testing of a correction's contribution.","A":"Delete is destructive.","C":"Fabricated.","D":"Fabricated."},"principle":"Node number click = toggle."},{"num":55,"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":"A still has been grabbed of a beautifully graded shot — it sits in the Gallery as your reference.","stem":"To compare other shots to this reference side-by-side on the viewer:","options":["Drag the still onto the viewer.","Right-click the still → Play Still.","Double-click the still — it replaces the timeline.","Save the still as a power grade and apply it."],"correct":"B","recap":null,"explanations":{"B":"Right-click still → Play Still overlays it for split-screen comparison.","A":"Dragging onto viewer copies the grade, doesn't compare.","C":"Double-click doesn't replace timeline.","D":"Power grades apply, don't compare."},"principle":"Play Still = visual split-screen."},{"num":56,"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":"Your project has 80 shots. By shot 50 you realise the look you started with isn't quite right and you slightly shift saturation and contrast as you go.","stem":"The \"drift\" problem is best prevented by:","options":["Frequent breaks to reset your eyes.","Comparing every shot to a single \"hero shot\" still — never compare shot N to shot N-1.","Working in a colour-neutral grading suite.","Using Resolve's automatic shot matching tool."],"correct":"B","recap":null,"explanations":{"B":"Hero shot technique — compare to one constant reference, prevents drift.","A":"Breaks help but don't solve structural drift.","C":"Environment matters, secondary.","D":"Auto-match is a start, not a substitute."},"principle":"One hero, compared to all."},{"num":57,"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"You can hear your music tracks but the dialogue is barely audible. You add a Compressor to the dialogue. Threshold is set to -10 dB, ratio 4:1, makeup gain 0 dB. Why is the dialogue still quiet?","options":["Makeup gain must be positive to compensate for the compression — try +6 dB.","The Compressor only affects audio above -10 dB; if dialogue averages below that, no compression and no makeup happens.","The dialogue track is muted — check the mute button.","The Compressor cannot work on dialogue tracks; use Limiter instead."],"correct":"A","recap":null,"explanations":{"A":"Compression reduces level above threshold; makeup gain compensates. Without makeup, the track is quieter overall.","B":"Partly true — but the fix is still makeup gain.","C":"Mute is possible but unlikely given the scenario.","D":"Compressor works fine on dialogue."},"principle":"Compressor reduces; makeup restores."},{"num":58,"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":"A character's voice is heard from another room through a closed door.","stem":"The audio treatment that best sells the \"in another room\" feel:","options":["Increase volume on that track.","Roll off high frequencies with an EQ (high-cut), and reduce overall track volume slightly.","Add chorus and reverb generously.","Apply a flanger effect."],"correct":"B","recap":null,"explanations":{"B":"High-cut EQ + volume reduction = muffled \"through-the-wall\" feel.","A":"Volume alone doesn't muffle.","C":"Chorus/heavy reverb = stylised, not realistic isolation.","D":"Flanger is metallic, not muffling."},"principle":"Muffled = high-cut EQ."},{"num":59,"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"An audio recording imports as a stereo clip but contains the voice only on the left channel. The right approach:","options":["Pan the stereo track left to centre the voice — leave it stereo.","Right-click in Media Pool → Clip Attributes → Audio → set format to mono / both channels. Then on the timeline track header, right-click → Change Track Type → Mono.","Duplicate the clip and stack copies to fake mono.","Use Fairlight's \"channel rebalance\" plugin."],"correct":"B","recap":null,"explanations":{"B":"Clip Attributes restructures channel mapping; track type ensures mono playback through both speakers.","A":"Panning doesn't fix mono content stuck on one channel.","C":"Duplication doesn't fix channel mapping.","D":"No \"rebalance\" plugin — structural fix needed."},"principle":"Mono-on-one-channel = Clip Attributes + track type."},{"num":60,"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"A scene has 5 body-drop sound effects on 5 separate tracks. You want to apply consistent compression and reverb across all 5 with one set of controls. The right structure:","options":["Apply compression and reverb individually to each track — Fairlight is per-track.","Group the 5 tracks (<kbd>Ctrl</kbd>+<kbd>G</kbd>) and apply effects to the group.","Route all 5 tracks to a single Bus, apply compression and reverb on the Bus.","Render all 5 to a single audio file and apply effects to that."],"correct":"C","recap":null,"explanations":{"C":"Route all 5 tracks to one Bus; apply effects on the Bus once.","A":"Per-track is what we're avoiding.","B":"Track group links faders, not shared processing.","D":"Rendering loses flexibility."},"principle":"Shared processing → Bus."},{"num":61,"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"In the channel strip, the green strip near the top opens what?","options":["Equalizer.","Dynamics — Compressor, Gate, Expander, Limiter.","Bus routing.","Effects rack."],"correct":"B","recap":null,"explanations":{"B":"Green strip = Dynamics.","A":"EQ is cyan.","C":"Bus routing and effects rack have their own controls.","D":"Bus routing and effects rack have their own controls."},"principle":"Cyan = EQ; green = Dynamics."},{"num":62,"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"A 30-second music clip needs to fit a 20-second sequence on beat. The non-AI approach to shorten it:","options":["Decrease the timeline frame rate.","Find similar waveform peaks at the start and end of a section you want to keep, blade at those points, splice, add a short crossfade at the splice.","Apply a time-stretch effect with 67% rate.","Render and re-import at a faster speed."],"correct":"B","recap":null,"explanations":{"B":"Splice on similar waveform peaks = on-beat splice; short crossfade hides the seam.","A":"Frame rate affects video, not audio timing.","C":"Time-stretch creates pitch artefacts.","D":"Faster speed = higher pitch."},"principle":"Waveform-matched splice = invisible cut."},{"num":63,"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"In Range mode on the Fairlight timeline, dragging across part of an audio clip does what?","options":["Selects only that range — backspace deletes it; you can apply effects or pull volume keyframes inside it without splitting the clip.","Splits the clip at both ends of the drag.","Creates a new audio track for that range.","Moves the audio waveform vertically."],"correct":"A","recap":null,"explanations":{"A":"Range mode selects without splitting; backspace deletes; volume keyframes can be pulled within it.","B":"Range doesn't auto-split.","C":"Fabricated.","D":"Fabricated."},"principle":"Range = surgical regions, no destructive splits."},{"num":64,"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"The dialogue audio level varies wildly between very loud and very quiet across one clip. Quickest path to consistent perceived loudness without re-recording:","options":["Manually keyframe volume on every change.","Apply a Compressor with the Dialog Compression preset; refine threshold/ratio so the gain-reduction meter shows -3 to -6 dB on peaks.","Apply a Limiter set to 0 dB.","Increase the track fader to maximum."],"correct":"B","recap":null,"explanations":{"B":"Dialog Compression preset is the right starting point; refine to -3 to -6 dB peak reduction.","A":"Manual keyframing = the slow path.","C":"Limiter at 0 dB just hard-clips peaks.","D":"Maximum fader is uncontrolled."},"principle":"Dialog Compression preset + refine."},{"num":65,"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"Three audio tracks (dialogue, music, SFX) all route to Bus 1 (main mix). You want all dialogue to share one EQ but not the music or SFX. The correct route:","options":["Add EQ to Bus 1 — it filters dialogue only by frequency.","Create a Dialogue Bus, route dialogue tracks there, route the Dialogue Bus to Bus 1, apply EQ on the Dialogue Bus.","Apply EQ to each dialogue clip individually.","Group the dialogue tracks and apply EQ to the group."],"correct":"B","recap":null,"explanations":{"B":"Sub-bus for dialogue collects only dialogue tracks; its EQ affects only that group.","A":"Bus 1 EQ affects music and SFX too.","C":"Per-clip EQ is repetitive and inconsistent.","D":"Track groups link faders, not EQ."},"principle":"Sub-bus = shared category processing."},{"num":66,"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"A new bus is created (Fairlight → Bus Format) but nothing routed to it plays through. Most likely cause:","options":["The bus has no output assigned — it must be routed to Bus 1 or a final output.","The bus is muted by default.","Buses cannot carry audio in the free version.","The sample rate is wrong."],"correct":"A","recap":null,"explanations":{"A":"A new bus has no output by default. Route to Bus 1 to be audible.","B":"Buses aren't muted by default.","C":"Fabricated.","D":"Fabricated."},"principle":"A bus needs an output."},{"num":67,"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"A client wants a master file to archive that they can re-edit in five years if needed. The right codec choice is:","options":["H.264 — universally compatible.","H.265 — smallest file size.","ProRes 422 HQ or 4444 — large but visually pristine and easy to decode in any future NLE.","QuickTime Animation — lossless."],"correct":"C","recap":null,"explanations":{"C":"ProRes 422 HQ or 4444 — pristine, easily decoded in any future NLE, stays gradeable.","A":"H.264 loses quality each re-edit pass.","B":"H.265 same problem; smaller but heavily compressed.","D":"QuickTime Animation is for transparency-preserving graphics."},"principle":"Archive = ProRes / DNxHR."},{"num":68,"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"A 1080p edit will be uploaded to YouTube. The \"trick\" to make it look noticeably cleaner after YouTube's re-encoding:","options":["Render in H.265 instead of H.264.","Upscale the deliver resolution to Ultra HD (3840×2160) — YouTube applies a different encoder to 4K uploads, improving final quality.","Render at 10-bit colour depth.","Increase the bitrate to 50 Mbps."],"correct":"B","recap":null,"explanations":{"B":"YouTube applies a better encoder to 4K uploads. Upload 1080p content at UHD to access that pipeline.","A":"H.265 alone doesn't trigger the better encoder; resolution does.","C":"Bit depth and bitrate matter, but the resolution trick is the documented YouTube quality improvement.","D":"Bit depth and bitrate matter, but the resolution trick is the documented YouTube quality improvement."},"principle":"Upload 1080p as UHD for YouTube's better encoder."},{"num":69,"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"A client asks for an MP4 video file. The container is MP4. What codec is conventionally used inside it?","options":["ProRes.","H.264 (sometimes H.265) — these are the typical codecs paired with MP4.","DNxHR.","QuickTime Animation."],"correct":"B","recap":null,"explanations":{"B":"MP4 containers conventionally hold H.264 or H.265.","A":"ProRes lives in QuickTime; DNxHR in MOV/MXF; Animation in MOV.","C":"ProRes lives in QuickTime; DNxHR in MOV/MXF; Animation in MOV.","D":"ProRes lives in QuickTime; DNxHR in MOV/MXF; Animation in MOV."},"principle":"MP4 = H.264/H.265."},{"num":70,"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"After hitting Render, the rendered file plays back with white blocks appearing randomly across the image. Most likely cause:","options":["The codec is corrupted.","The Mac is overheating during render and skipping frames — render in a cooler environment with better airflow.","The deliver resolution is too high for the source.","Resolve free is rate-limited at low frame rates."],"correct":"B","recap":null,"explanations":{"B":"Thermal throttling causes the GPU/CPU to skip frames; white blocks are the classic symptom. Improve cooling.","A":"Codec corruption is rare.","C":"Resolution mismatch doesn't produce white blocks.","D":"No free-version rate limit exists."},"principle":"Render artefacts often = thermal throttling."},{"num":71,"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"You add a subtitle track in the Edit page using the Subtitle generator. After delivery the subtitles do not appear in the output file. Most likely cause:","options":["The subtitle format wasn't set to \"Burn into video\" in the Deliver page subtitle settings.","The subtitle clip is on a separate timeline.","Subtitles only render in H.265.","The subtitle track was muted."],"correct":"A","recap":null,"explanations":{"A":"Subtitles need Format → Burn into video on the Deliver page.","B":"Location, codec, mute aren't the issue — the format toggle is.","C":"Location, codec, mute aren't the issue — the format toggle is.","D":"Location, codec, mute aren't the issue — the format toggle is."},"principle":"Subtitled exports require \"Burn into video.\""},{"num":72,"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":"You need to render the same timeline as three deliverables: a YouTube version, a client preview, and a ProRes archive. You want them all to render unattended overnight.","stem":"The right approach:","options":["Open three Resolves and start each render in parallel.","Configure each as a separate render job, Add to Render Queue, then Render All — they process sequentially.","Render manually one at a time during the day.","Use the Cut page's batch export."],"correct":"B","recap":null,"explanations":{"B":"Render Queue handles multiple jobs sequentially overnight.","A":"Parallel Resolve instances compete for GPU.","C":"Manual sequential = slow.","D":"Cut's batch export uses the same Render Queue."},"principle":"Render Queue = unattended batch."},{"num":73,"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"For an archive master, the audio settings should be:","options":["AAC, stereo, 16-bit — universally compatible.","Linear PCM (WAV-style), 32-bit float if available, with \"All Timeline Tracks\" rather than a stereo mixdown.","MP3 320 kbps.","Whatever the input audio was, unchanged."],"correct":"B","recap":null,"explanations":{"B":"Linear PCM, high bit depth, all timeline tracks separately. Preserves every audio decision for re-edits.","A":"AAC stereo loses individual tracks.","C":"MP3 is lossy.","D":"\"Unchanged\" doesn't apply after Fairlight mixing."},"principle":"Archive audio = PCM, high bit, all tracks."},{"num":74,"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"The \"Individual Clips\" render option does:","options":["Renders only the currently selected clip on the timeline.","Renders each timeline clip as a separate file — useful for batch-transcoding camera media to ProRes, or per-clip client review.","Renders the timeline as multiple parallel video tracks in one file.","Splits a single clip into multiple resolution variants."],"correct":"B","recap":null,"explanations":{"B":"Individual Clips renders every timeline clip as a separate file.","A":"Fabricated. Used for batch transcoding and per-clip packages.","C":"Fabricated. Used for batch transcoding and per-clip packages.","D":"Fabricated. Used for batch transcoding and per-clip packages."},"principle":"Individual Clips = per-clip render package."},{"num":75,"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"A render fails partway. Resolve's error log shows \"GPU memory exceeded.\" Best diagnostic step:","options":["Resolve is at fault — file a bug report.","Reduce GPU load: lower deliver resolution, disable Resolve FX on heavy clips, close other GPU-using apps, then re-render.","Switch to CPU-only rendering.","Restart the machine and try again at the same settings."],"correct":"B","recap":null,"explanations":{"B":"Reduce GPU load methodically: lower resolution, disable heavy FX, close other GPU apps.","A":"Bug-report-first isn't a diagnostic step.","C":"CPU-only is slow and rarely necessary.","D":"Retry without addressing the cause repeats the failure."},"principle":"GPU memory exceeded = reduce load, then retry."},{"num":76,"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"An H.265 export from the free version of Resolve on Windows fails to start. Most likely cause:","options":["The free Windows version cannot render H.265 — Studio is required for H.265 on Windows.","The codec is corrupt — reinstall Resolve.","The deliver page is misconfigured.","The footage is too low resolution for H.265."],"correct":"A","recap":null,"explanations":{"A":"Free Resolve on Windows cannot encode H.265 — Studio is required on that platform due to licensing.","B":"Codec, page config, resolution aren't the issue — the licensing wall is.","C":"Codec, page config, resolution aren't the issue — the licensing wall is.","D":"Codec, page config, resolution aren't the issue — the licensing wall is."},"principle":"Windows + free + H.265 = needs Studio."},{"num":77,"section_label":"SECTION IX · MODULE 09","module_num":9,"module_title":"Color Management Setup","scenario":null,"stem":"Why do professional cameras record in log instead of standard Rec.709?","options":["Log files are smaller than Rec.709.","Log packs maximum dynamic range and colour information into the file at the cost of an unattractive flat appearance — to be corrected in post.","Log is required for HDR delivery.","Log is faster to record."],"correct":"B","recap":null,"explanations":{"B":"Log packs maximum dynamic range and colour into the file via a flat curve. The flat look is corrected in post via colour management.","A":"Log files are usually larger, not smaller.","C":"HDR delivery is a separate concept; log is for capture latitude.","D":"Log doesn't change recording speed."},"principle":"Log = maximum data; flat by design."},{"num":78,"section_label":"SECTION IX · MODULE 09","module_num":9,"module_title":"Color Management Setup","scenario":null,"stem":"In Project Settings, the recommended \"future-proof\" Color Processing Mode for modern grading is:","options":["Rec.709 / Rec.709 — match input to output.","HDR DaVinci Wide Gamut Intermediate — wide enough for any camera, log-shaped for accurate maths.","SDR Rec.2020.","The camera's native log space."],"correct":"B","recap":null,"explanations":{"B":"HDR DaVinci Wide Gamut Intermediate = the modern future-proof working space.","A":"Rec.709 → Rec.709 collapses the workflow's latitude.","C":"SDR Rec.2020 isn't the standard intermediate.","D":"The camera's log isn't designed as a working space."},"principle":"DaVinci Wide Gamut Intermediate = working space."},{"num":79,"section_label":"SECTION IX · MODULE 09","module_num":9,"module_title":"Color Management Setup","scenario":"Mac users grading a feature for theatrical and streaming delivery.","stem":"Which Output Color Space best matches what the user will see on consumer playback (QuickTime, Safari)?","options":["Rec.709 Gamma 2.4.","Rec.709-A — Apple's slight gamma compensation matches Mac playback.","DCI-P3.","Rec.2020."],"correct":"B","recap":null,"explanations":{"B":"Rec.709-A is Apple's slight gamma compensation. Mac playback in QuickTime/Safari matches the viewer.","A":"2.4 is darker than Mac's default playback gamma; image will appear different.","C":"DCI-P3 and Rec.2020 are for theatrical and HDR, not standard Mac playback.","D":"DCI-P3 and Rec.2020 are for theatrical and HDR, not standard Mac playback."},"principle":"Mac output = Rec.709-A."},{"num":80,"section_label":"SECTION IX · MODULE 09","module_num":9,"module_title":"Color Management Setup","scenario":null,"stem":"A clip was shot on a Sony A7S III in S-Log3. What Input Color Space tag should it receive in the Media Pool?","options":["Sony S-Log3.","S-Gamut3.Cine / S-Log3.","Sony Rec.709.","DaVinci Wide Gamut."],"correct":"B","recap":null,"explanations":{"B":"Sony's S-Log3 colour science: S-Gamut3.Cine / S-Log3 is the correct Input Color Space tag.","A":"\"Sony S-Log3\" alone isn't the proper compound tag.","C":"Rec.709 is the wrong space — would invert the log curve incorrectly.","D":"DaVinci Wide Gamut is the working space, not the source."},"principle":"Tag with the camera's exact gamut + gamma."},{"num":81,"section_label":"SECTION IX · MODULE 09","module_num":9,"module_title":"Color Management Setup","scenario":null,"stem":"An iPhone shot in its default video mode (not Pro / not Apple Log) should be tagged as:","options":["Apple Log.","Rec.709 Gamma 2.4 — the iPhone's default output is Rec.709.","iPhone Log.","DaVinci Wide Gamut."],"correct":"B","recap":null,"explanations":{"B":"Default iPhone mode (non-Pro/non-Apple-Log) outputs Rec.709 Gamma 2.4.","A":"Apple Log only applies if explicitly enabled (iPhone 15 Pro / 16 Pro Pro modes).","C":"\"iPhone Log\" isn't a real input space.","D":"DaVinci Wide Gamut is the working space."},"principle":"Default iPhone = Rec.709."},{"num":82,"section_label":"SECTION IX · MODULE 09","module_num":9,"module_title":"Color Management Setup","scenario":null,"stem":"A clip is mislabelled in the Input Color Space — set to Rec.709 when it's actually S-Log3. The image looks \"almost right\" but slightly off. The danger is:","options":["None — small mislabels don't affect the grade.","A subtle, hard-to-spot wrongness propagates through every downstream grade choice — much harder to diagnose than an obvious error.","The clip will refuse to render.","The CST node will turn red."],"correct":"B","recap":null,"explanations":{"B":"Subtle wrongness propagates through downstream grades — much harder to diagnose than an obvious error.","A":"Mislabels do affect the grade.","C":"Resolve doesn't refuse to render or flag the CST as wrong.","D":"Resolve doesn't refuse to render or flag the CST as wrong."},"principle":"\"Almost right\" is the most dangerous failure mode."},{"num":83,"section_label":"SECTION IX · MODULE 09","module_num":9,"module_title":"Color Management Setup","scenario":null,"stem":"Rather than project-wide colour management, an alternative is to handle conversion per-clip using:","options":["A Color Space Transform (CST) node as the first node in the grade.","A LUT applied at the project level.","A custom RAW decoder.","The Studio-only HDR module."],"correct":"A","recap":null,"explanations":{"A":"CST node as the first node = per-clip colour space control.","B":"A project-wide LUT is destructive and not what's wanted.","C":"Custom RAW decoders are codec-specific, not colour space conversion.","D":"HDR module is for delivery, not source conversion."},"principle":"CST node = per-clip colour management."},{"num":84,"section_label":"SECTION IX · MODULE 09","module_num":9,"module_title":"Color Management Setup","scenario":"You're given mixed footage: Sony A7S III in S-Log3, an iPhone in Apple Log, and broadcast B-roll already in Rec.709.","stem":"The clean workflow:","options":["Convert all clips to Rec.709 before importing.","Tag each clip's Input Color Space in the Media Pool — project-wide colour management handles each correctly into the working space.","Make three separate projects, one per camera.","Disable colour management and grade each clip differently by eye."],"correct":"B","recap":null,"explanations":{"B":"Per-clip tagging in the Media Pool — Resolve handles each correctly into the working space.","A":"Pre-converting destroys log latitude.","C":"Three projects = three workflows; unnecessary.","D":"Disabling colour management for mixed footage is the worst choice."},"principle":"Tag each clip; let colour management do the work."},{"num":85,"section_label":"SECTION X · MODULE 10","module_num":10,"module_title":"The Node Tree Architecture","scenario":null,"stem":"The three conceptual columns of the Notary Structure, in order:","options":["Look — Balance — Isolate.","Balance — Isolate — Global Look.","Isolate — Balance — Sharpen.","Curves — Wheels — Effects."],"correct":"B","recap":null,"explanations":{"B":"Balance → Isolate → Look. Technical foundation before creative work.","A":"Other orderings reverse cause and effect.","C":"Other orderings reverse cause and effect.","D":"Other orderings reverse cause and effect."},"principle":"Technical foundation, then creative."},{"num":86,"section_label":"SECTION X · MODULE 10","module_num":10,"module_title":"The Node Tree Architecture","scenario":null,"stem":"A Serial node connection means:","options":["Multiple corrections operate on the same source image simultaneously.","Each node operates on the previous node's output — order matters.","Connections render in the background.","The two nodes share a single set of controls."],"correct":"B","recap":null,"explanations":{"B":"Serial = sequential; each node operates on the previous output. Order matters.","A":"That's parallel mixer behaviour.","C":"Fabricated.","D":"Fabricated."},"principle":"Serial = sequential; order matters."},{"num":87,"section_label":"SECTION X · MODULE 10","module_num":10,"module_title":"The Node Tree Architecture","scenario":null,"stem":"A Parallel Mixer node combines its inputs how?","options":["Bottom branches override top branches (priority order).","All branches start from the same source and sum equally — no precision compounding loss.","Branches multiply together.","The mixer picks the most-saturated branch at each pixel."],"correct":"B","recap":null,"explanations":{"B":"Parallel = all branches start from source, sum equally. No compounding precision loss.","A":"That's layer mixer behaviour.","C":"Fabricated.","D":"Fabricated."},"principle":"Parallel = equal sums from source."},{"num":88,"section_label":"SECTION X · MODULE 10","module_num":10,"module_title":"The Node Tree Architecture","scenario":null,"stem":"A Layer Mixer node combines its branches how?","options":["Equally summed.","Bottom branches take priority — they sit on top, like Photoshop layers.","Branches are blended by image hue.","The brightest branch wins per pixel."],"correct":"B","recap":null,"explanations":{"B":"Layer Mixer = bottom branches override top, like Photoshop layers.","A":"Equal summing = parallel.","C":"Fabricated.","D":"Fabricated."},"principle":"Layer mixer = bottom takes priority."},{"num":89,"section_label":"SECTION X · MODULE 10","module_num":10,"module_title":"The Node Tree Architecture","scenario":null,"stem":"In the Notary Structure, the Main Object node is wired as the <em>bottom</em> branch of the Layer Mixer because:","options":["Layer mixers process bottom-first.","The Main Object should take priority — corrections applied to the background must not affect it. Bottom branches override top branches in a Layer Mixer.","It connects naturally to the CST out.","Convention only — order doesn't actually matter."],"correct":"B","recap":null,"explanations":{"B":"The Main Object should override background corrections. Bottom-branch priority in a Layer Mixer ensures this.","A":"Layer Mixers process all branches, not bottom-first as an order operation.","C":"CST out connection is unrelated.","D":"Order absolutely matters in a Layer Mixer."},"principle":"Bottom = priority in Layer Mixer."},{"num":90,"section_label":"SECTION X · MODULE 10","module_num":10,"module_title":"The Node Tree Architecture","scenario":null,"stem":"A grade involves: exposure correction, contrast adjustment, blue tint, skin isolation, vignette, and final film grain. The right distribution across node types:","options":["Everything in serial nodes — simplest.","Balance (exposure, contrast) in serial; skin isolation via Layer Mixer; tint and vignette via Parallel Mixer; grain in a final serial node.","Everything in one parallel mixer.","One Layer Mixer per correction."],"correct":"B","recap":null,"explanations":{"B":"Right tool, right job: serial for sequential balance; Layer Mixer for priority isolation; Parallel Mixer for grouped adjustments; serial for additive grain.","A":"All-serial works but loses isolation and layered structure.","C":"One Parallel Mixer can't handle isolation priority.","D":"One Layer Mixer per correction is wasteful."},"principle":"Match node type to its job."},{"num":91,"section_label":"SECTION X · MODULE 10","module_num":10,"module_title":"The Node Tree Architecture","scenario":null,"stem":"A custom keyboard shortcut for \"Label Selected Node\" is most useful because:","options":["It makes the node graph print more legibly.","Naming nodes as you work (with <kbd>F2</kbd>) preserves understanding when you return to the project days later — you can see what each node is for.","It enables Studio-only features.","Labels render automatically into the export."],"correct":"B","recap":null,"explanations":{"B":"Labels survive your memory. Returning to a project days later, you can read intent off the node names.","A":"Print legibility is incidental.","C":"Labels are organisational, not feature-gated or output-related.","D":"Labels are organisational, not feature-gated or output-related."},"principle":"Labels = future you's memory."},{"num":92,"section_label":"SECTION X · MODULE 10","module_num":10,"module_title":"The Node Tree Architecture","scenario":null,"stem":"A power grade (<code>.drx</code> file) imported into the Gallery's Power Grades folder lets you:","options":["Apply a complete pre-built node tree to any clip with one click — the entire Notary Structure can be inherited.","Lock the grade so it can't be modified.","Convert the grade to a single LUT.","Apply only the colour wheel positions, not the node structure."],"correct":"A","recap":null,"explanations":{"A":"Power grades store complete node structures — one click applies the entire Notary Structure.","B":"Power grades aren't locked.","C":"A LUT is a destructive single-layer pixel mapping, very different.","D":"Power grades carry the full node structure."},"principle":"Power grade = entire node tree as a preset."},{"num":93,"section_label":"SECTION XI · MODULE 11","module_num":11,"module_title":"Balancing Nodes","scenario":null,"stem":"The Parade scope shows the waveform of your image bunched in the lower third (everything dark) with no signal reaching the top. The right initial move:","options":["Push gain up to extend highlights toward 1023, then refine gamma to lift midtones.","Increase saturation.","Apply a sharpening filter.","Change the Output Color Space."],"correct":"A","recap":null,"explanations":{"A":"Stretch the waveform. Push gain to extend highlights; refine gamma for midtones.","B":"Saturation doesn't fix exposure.","C":"Sharpening doesn't change tonal distribution.","D":"Output Color Space affects display, not source exposure."},"principle":"Stretch the waveform first."},{"num":94,"section_label":"SECTION XI · MODULE 11","module_num":11,"module_title":"Balancing Nodes","scenario":null,"stem":"The top of the waveform shows a flat horizontal line at 1023. This indicates:","options":["Perfect exposure.","Highlights are clipped — pixel values exceeding 1023 are all recorded as 1023, and the original detail is lost.","The image is over-saturated.","The codec is failing."],"correct":"B","recap":null,"explanations":{"B":"Flat line at 1023 = clipped highlights. Data is lost.","A":"Flat at 1023 is the opposite of perfect — it means information's gone.","C":"Saturation isn't measured on the waveform's brightness axis.","D":"Codec failure isn't the diagnostic."},"principle":"Flat at 1023 = clipped, data gone."},{"num":95,"section_label":"SECTION XI · MODULE 11","module_num":11,"module_title":"Balancing Nodes","scenario":null,"stem":"A \"muddy\" image — skin tones feel dark and blotchy. The cleanest fix in the Contrast node:","options":["Apply heavy global contrast.","Apply moderate contrast with the pivot pulled left, so blacks deepen without crushing midtones.","Apply a Glow effect.","Push saturation up."],"correct":"B","recap":null,"explanations":{"B":"Moderate contrast with pivot pulled left — deepens blacks without crushing midtones.","A":"Heavy global contrast crushes midtones.","C":"Glow softens, doesn't fix muddiness.","D":"Saturation doesn't address tonal muddiness."},"principle":"Pivot left = blacks deepen without midtone loss."},{"num":96,"section_label":"SECTION XI · MODULE 11","module_num":11,"module_title":"Balancing Nodes","scenario":null,"stem":"At the balancing stage, the right amount of saturation to add is:","options":["Maximum — push to full so the grade has plenty to work with.","Modest — just enough that the qualifier can distinguish regions (e.g. skin from sky).","Zero — desaturate completely until the global look.","None of the above — saturation isn't part of balancing."],"correct":"B","recap":null,"explanations":{"B":"Modest — enough for qualifiers to distinguish regions; creative saturation comes in the Global Look.","A":"Maxing now means undoing later.","C":"Zero defeats isolation.","D":"Saturation is part of balancing — modestly."},"principle":"Just enough saturation to enable isolation."},{"num":97,"section_label":"SECTION XI · MODULE 11","module_num":11,"module_title":"Balancing Nodes","scenario":"A scene was shot in a candle-lit room and reads as warm orange throughout.","stem":"Should you white-balance it to neutral?","options":["Yes — every scene must be neutralised first.","No — balancing fixes <em>errors</em>, not character. Candle light is warm by nature; leave the warmth as the scene's identity.","Only if delivering for broadcast.","Only if there's skin in the frame."],"correct":"B","recap":null,"explanations":{"B":"Balancing fixes errors, not character. Candle light is warm by design — leave it.","A":"Dogmatic neutralising kills scene character.","C":"Skin presence and broadcast aren't the deciding factor — scene intent is.","D":"Skin presence and broadcast aren't the deciding factor — scene intent is."},"principle":"Balance errors; preserve character."},{"num":98,"section_label":"SECTION XI · MODULE 11","module_num":11,"module_title":"Balancing Nodes","scenario":null,"stem":"In Studio, the HDR Wheels palette differs from standard Primaries by:","options":["Six tonal regions instead of three (lift/gamma/gain), each with independent thresholds.","HDR-only colour space support.","Required for 4K work.","Different colour wheel mathematics."],"correct":"A","recap":null,"explanations":{"A":"Six tonal regions vs three; independent thresholds for surgical control.","B":"HDR Wheels work in SDR too.","C":"Not 4K-specific.","D":"The maths is the same; the regions differ."},"principle":"HDR Wheels = six regions, surgical control."},{"num":99,"section_label":"SECTION XI · MODULE 11","module_num":11,"module_title":"Balancing Nodes","scenario":null,"stem":"Why use HDR Wheels for balancing rather than standard Primaries?","options":["HDR Wheels are faster.","You can pull Lights down to recover a blown sky while Shadows stays untouched — surgical control standard wheels can't match cleanly.","They produce better skin tones automatically.","They reduce noise."],"correct":"B","recap":null,"explanations":{"B":"Recover blown sky via Lights while Shadows stays untouched — impossible cleanly with three-region primaries.","A":"Speed isn't the differentiator.","C":"No automatic skin behaviour.","D":"Noise reduction is a separate tool."},"principle":"HDR Wheels = surgical region grading."},{"num":100,"section_label":"SECTION XI · MODULE 11","module_num":11,"module_title":"Balancing Nodes","scenario":null,"stem":"After balancing, the image should look:","options":["Like the final grade — the look is now built.","Neutral, well-exposed, with full tonal range — a clean starting point for creative work.","Heavily saturated — saturation defines the look.","Identical to the camera's preview."],"correct":"B","recap":null,"explanations":{"B":"Neutral, well-exposed, with full tonal range — the clean canvas for creative work.","A":"The Global Look hasn't started yet.","C":"Saturation defines no look at balancing stage.","D":"Camera preview is uncorrected log."},"principle":"Balancing = clean canvas."},{"num":101,"section_label":"SECTION XII · MODULE 12","module_num":12,"module_title":"Color Isolation & the Layer Mixer","scenario":null,"stem":"A Qualifier picks pixels by:","options":["Hue, Saturation, and Luminance.","Position in the frame.","Time on the timeline.","Codec encoding values."],"correct":"A","recap":null,"explanations":{"A":"Qualifier picks by HSL — Hue, Saturation, Luminance.","B":"Position is what Power Windows control.","C":"Fabricated.","D":"Fabricated."},"principle":"Qualifier = HSL picker."},{"num":102,"section_label":"SECTION XII · MODULE 12","module_num":12,"module_title":"Color Isolation & the Layer Mixer","scenario":null,"stem":"A skin qualifier selection looks broken and blocky on 8-bit phone footage. The most effective remedies:","options":["Use a Square mask.","Increase Denoise and Blur Radius in Matte Finesse; consider Pre-filter; add a Power Window around the face to limit spurious picks.","Convert the footage to 16-bit.","Apply Sharpen first."],"correct":"B","recap":null,"explanations":{"B":"Denoise, Blur Radius, Pre-filter, and a face Power Window in combination = the standard remedy for limited-bit qualifier mattes.","A":"Square mask doesn't fix qualifier quality.","C":"8-bit can't be promoted to 16-bit usefully.","D":"Sharpening worsens qualifier matters."},"principle":"Soften and window the matte on weak footage."},{"num":103,"section_label":"SECTION XII · MODULE 12","module_num":12,"module_title":"Color Isolation & the Layer Mixer","scenario":null,"stem":"A Power Window is best used:","options":["Instead of a Qualifier.","With a Qualifier — the qualifier picks pixels by colour; the window adds a geometric constraint so the correction applies only inside the window AND inside the qualifier selection.","For light leak effects.","For audio mixing."],"correct":"B","recap":null,"explanations":{"B":"Qualifier + Window = colour-based pick AND geometric constraint, together.","A":"They complement, don't replace.","C":"Power Windows aren't for light leaks or audio.","D":"Power Windows aren't for light leaks or audio."},"principle":"Combine qualifier + window for clean selections."},{"num":104,"section_label":"SECTION XII · MODULE 12","module_num":12,"module_title":"Color Isolation & the Layer Mixer","scenario":null,"stem":"A Power Window is drawn around a subject's face. The subject walks across the frame. Without intervention, the window stays fixed and the face leaves it. The fix:","options":["Make the window much larger to cover the path.","On the window's Tracker tab, click \"Track Forward and Reverse\" — Resolve auto-tracks the window to follow the face.","Keyframe the window position by hand on every frame.","Apply Magic Mask instead."],"correct":"B","recap":null,"explanations":{"B":"Tracker tab → Track Forward and Reverse = auto-keyframed window following.","A":"Oversized window means the correction bleeds outside the face.","C":"Manual keyframing every frame is the slow path.","D":"Magic Mask is an alternative but not the named tool here."},"principle":"Power Window tracker = auto-follow."},{"num":105,"section_label":"SECTION XII · MODULE 12","module_num":12,"module_title":"Color Isolation & the Layer Mixer","scenario":null,"stem":"Magic Mask is most useful when:","options":["You need a moving mask that follows a subject (a person, a face, an object) across a shot, and you have Studio.","You need to apply a global colour cast.","You're working in the free version.","You need to denoise audio."],"correct":"A","recap":null,"explanations":{"A":"Moving subject mask via AI = Magic Mask's whole purpose.","B":"Global colour casts are a different tool.","C":"Free version doesn't include Magic Mask.","D":"Audio denoising is a different toolkit."},"principle":"Magic Mask = AI moving roto."},{"num":106,"section_label":"SECTION XII · MODULE 12","module_num":12,"module_title":"Color Isolation & the Layer Mixer","scenario":null,"stem":"In the Layer Mixer pattern of the Notary Structure, when you push blue into the Background node, the skin (isolated in the Main Object node) stays unchanged. Why?","options":["The Background's qualifier is set to skin colour.","The Main Object is on the bottom branch of the Layer Mixer, which takes priority over higher branches.","The skin is automatically protected by Resolve's AI.","Background corrections never apply to skin areas."],"correct":"B","recap":null,"explanations":{"B":"Bottom branch of a Layer Mixer takes priority — skin stays protected from background corrections.","A":"Background's qualifier targets non-skin, not skin.","C":"No automatic protection; the architecture provides it.","D":"Background corrections do apply — but the Layer Mixer overrides them where Main Object is selected."},"principle":"Bottom branch = protected region."},{"num":107,"section_label":"SECTION XII · MODULE 12","module_num":12,"module_title":"Color Isolation & the Layer Mixer","scenario":null,"stem":"The Vectorscope's \"skin tone indicator\" line runs diagonally from centre toward approximately:","options":["3 o'clock.","11 o'clock — the typical position of healthy human skin tones regardless of ethnicity.","9 o'clock.","5 o'clock."],"correct":"B","recap":null,"explanations":{"B":"The skin tone line runs diagonally from centre toward roughly 11 o'clock on the vectorscope.","A":"Fabricated positions.","C":"Fabricated positions.","D":"Fabricated positions."},"principle":"11 o'clock = skin line."},{"num":108,"section_label":"SECTION XII · MODULE 12","module_num":12,"module_title":"Color Isolation & the Layer Mixer","scenario":null,"stem":"A skin qualifier selection has spurious noise picks on a wall that happens to be skin-coloured. The cleanest way to exclude the wall without re-doing the qualifier:","options":["Reduce Hue width on the qualifier until skin selects but the wall doesn't.","Add a Power Window around the face — the correction now applies only where the qualifier selects AND inside the window.","Apply Magic Mask on top.","Add a tracking marker on the face."],"correct":"B","recap":null,"explanations":{"B":"Power Window restricts the qualifier to inside the face area — fastest way to exclude spurious skin-coloured walls.","A":"Reducing Hue width can over-trim the actual skin selection.","C":"Magic Mask is an alternative but heavier hammer.","D":"Tracking markers aren't a Resolve concept here."},"principle":"Window = the geometric trim for false picks."},{"num":109,"section_label":"SECTION XII · MODULE 12","module_num":12,"module_title":"Color Isolation & the Layer Mixer","scenario":null,"stem":"A common error: a colourist pushes the Main Object skin grade aggressively (very strong shift) and notices \"halos\" or fringing around the face. Cause:","options":["The codec is too compressed.","Imperfections in the qualifier matte become visible as the correction grows more extreme. Strong isolation looks worst on cheap footage; restraint always wins.","The vectorscope is misconfigured.","Resolve's free version limits isolation strength."],"correct":"B","recap":null,"explanations":{"B":"Strong isolation amplifies matte imperfections. Restraint wins.","A":"Codec compression alone doesn't produce halos.","C":"Vectorscope configuration is unrelated.","D":"No free-version limit on isolation strength."},"principle":"The more extreme the push, the more visible the matte."},{"num":110,"section_label":"SECTION XII · MODULE 12","module_num":12,"module_title":"Color Isolation & the Layer Mixer","scenario":"A 4-camera dialogue scene. Each camera has slightly different colour. You want the skin tones to look identical across cameras while leaving the backgrounds untouched (the backgrounds in each angle are different parts of the room).","stem":"The right approach:","options":["Apply one global LUT to all clips.","Per clip: isolate skin in the Main Object node, then use the still-comparison technique with a hero shot to match skin while leaving each background as graded for that angle.","Render each camera separately, grade afterwards.","Crop the backgrounds out."],"correct":"B","recap":null,"explanations":{"B":"Per-clip skin isolation + hero-still comparison — match skin across cameras while preserving each angle's unique background.","A":"Global LUT doesn't differentiate skin from background.","C":"Render-then-grade workflow is destructive.","D":"Cropping backgrounds isn't the goal."},"principle":"Isolate, compare to hero, leave backgrounds alone."},{"num":111,"section_label":"SECTION XIII · MODULE 13","module_num":13,"module_title":"The Global Look","scenario":null,"stem":"Before pushing a single slider in the Global Look, you should:","options":["Apply a stylistic LUT for inspiration.","Choose a hero frame — one frame that represents the look you're aiming for, well-lit, with the main subject — and grade against that frame first.","Increase saturation globally.","Grade the first frame of the timeline."],"correct":"B","recap":null,"explanations":{"B":"Pick a hero frame first — design the look against the strongest reference frame, then carry it across the timeline.","A":"A LUT short-circuits the look-design process.","C":"Saturation isn't a starting point.","D":"Frame 1 might be a bad reference (cut-in, slate, dark, atypical)."},"principle":"Choose your hero frame deliberately."},{"num":112,"section_label":"SECTION XIII · MODULE 13","module_num":13,"module_title":"The Global Look","scenario":null,"stem":"An \"S-curve\" in Custom Curves typically means:","options":["A curve that resembles the letter S — upper midtones lifted, lower midtones depressed — adding film-like contrast.","A curve set to \"Spline\" interpolation.","A saturation curve.","A curve mirrored on the Y axis."],"correct":"A","recap":null,"explanations":{"A":"S-curve = letter S shape — film-print-like contrast.","B":"Spline interpolation, saturation, mirroring — none of these define an S-curve.","C":"Spline interpolation, saturation, mirroring — none of these define an S-curve.","D":"Spline interpolation, saturation, mirroring — none of these define an S-curve."},"principle":"S-curve = filmic contrast shape."},{"num":113,"section_label":"SECTION XIII · MODULE 13","module_num":13,"module_title":"The Global Look","scenario":null,"stem":"A reference still imported into the Gallery is most useful for:","options":["Copying its grade onto your shot.","Visual comparison against your shot via split-screen — guiding your eye toward similar tonal distribution without literally copying.","Permanently locking the look.","Replacing your shot."],"correct":"B","recap":null,"explanations":{"B":"Visual comparison — give your eye a target. Not literal copying.","A":"Reference grades are inspirational, not destination.","C":"Stills don't lock looks.","D":"Stills don't replace your shot."},"principle":"Reference = visual target, not destination."},{"num":114,"section_label":"SECTION XIII · MODULE 13","module_num":13,"module_title":"The Global Look","scenario":null,"stem":"The \"teal-orange\" look means:","options":["Teal in the shadows, orange in the highlights — the modern blockbuster look. Restraint is essential.","Orange in the shadows, teal in the highlights.","The whole image tinted teal.","Skin in teal, sky in orange."],"correct":"A","recap":null,"explanations":{"A":"Teal shadows, orange highlights — the modern blockbuster look. Restraint essential.","B":"Reversed; uncommon and unflattering.","C":"Other distributions but not \"teal-orange.\"","D":"Other distributions but not \"teal-orange.\""},"principle":"Teal in shadows, orange in highlights."},{"num":115,"section_label":"SECTION XIII · MODULE 13","module_num":13,"module_title":"The Global Look","scenario":null,"stem":"After applying the Global Look, the skin tone looks wrong. The correct fix in the Notary Structure:","options":["Re-do the Global Look from scratch.","Adjust the Main Object node — because skin is isolated there, you can shift skin back toward the skin line independently of the global tint.","Disable the Global Look entirely.","Reduce overall saturation."],"correct":"B","recap":null,"explanations":{"B":"Main Object isolation — adjust skin independently after the Global Look.","A":"Re-doing the look is unnecessary.","C":"Disabling the look loses the creative direction.","D":"Lowering saturation affects the whole image."},"principle":"Isolation lets you fix skin without redoing the look."},{"num":116,"section_label":"SECTION XIII · MODULE 13","module_num":13,"module_title":"The Global Look","scenario":null,"stem":"The Color Slicer's \"HSV saturation\" differs from the standard saturation slider by:","options":["Affecting only red and orange channels.","Boosting saturation without changing the image's brightness or contrast.","Being available only in the free version.","Working only in HDR projects."],"correct":"B","recap":null,"explanations":{"B":"HSV saturation boosts colour without changing brightness or contrast — cleaner than the standard saturation slider.","A":"Affects all channels.","C":"Available in Studio only, but not exclusive to HDR projects.","D":"Available in Studio only, but not exclusive to HDR projects."},"principle":"HSV saturation = pure colour, no luminance side-effects."},{"num":117,"section_label":"SECTION XIII · MODULE 13","module_num":13,"module_title":"The Global Look","scenario":null,"stem":"Why does the Notary Structure use a Parallel Mixer (not Serial) around the Global Look adjustments?","options":["Parallel renders faster.","All Global adjustments start from the same source and sum equally — preventing precision compounding loss across multiple operations.","Parallel allows non-sequential keyframes.","It looks cleaner in the node graph."],"correct":"B","recap":null,"explanations":{"B":"Parallel mixer prevents precision compounding loss across multiple operations.","A":"Render speed isn't the design reason.","C":"Keyframes work in both.","D":"Aesthetic isn't the point."},"principle":"Parallel = no precision compounding."},{"num":118,"section_label":"SECTION XIII · MODULE 13","module_num":13,"module_title":"The Global Look","scenario":null,"stem":"A grade is described as \"strong\" or \"extreme.\" The trade-off:","options":["The stronger the look, the more visible any imperfection in the underlying isolations or footage.","Strong grades render faster.","Strong grades work better on phone footage.","Strong grades pass YouTube compression more cleanly."],"correct":"A","recap":null,"explanations":{"A":"Strong looks amplify any underlying imperfection in isolations or footage.","B":"Strength doesn't change render speed.","C":"Strong on phone footage = more banding.","D":"Strong looks survive compression worse, not better."},"principle":"Strong looks reveal everything beneath."},{"num":119,"section_label":"SECTION XIII · MODULE 13","module_num":13,"module_title":"The Global Look","scenario":null,"stem":"Toggling the entire grade on and off, a viewer should feel:","options":["\"Wow, that's a huge difference\" — the louder the grade the better.","A subtle but felt improvement — the grade enhances rather than replaces the underlying image.","Nothing — a perfect grade is invisible.","Confused — a good grade should surprise the viewer."],"correct":"B","recap":null,"explanations":{"B":"A subtle but felt improvement — the grade enhances rather than replaces.","A":"\"Wow\" usually means overcooked.","C":"Invisible is too restrictive; subtle but felt is the goal.","D":"Surprise isn't the metric."},"principle":"Felt, not seen, not shocking."},{"num":120,"section_label":"SECTION XIII · MODULE 13","module_num":13,"module_title":"The Global Look","scenario":null,"stem":"A junior colourist applies an aggressive teal-orange look and the wide shots match the close-ups poorly. Most likely cause:","options":["Strong looks amplify exposure and white-balance differences between angles — match shots more carefully before pushing the look further.","Resolve's Color page glitches at high saturation.","The looks were applied at different times of day.","Teal-orange specifically doesn't work in multi-camera setups."],"correct":"A","recap":null,"explanations":{"A":"Strong looks amplify shot-to-shot differences. Match shots more carefully before pushing the look further.","B":"Resolve doesn't glitch at saturation.","C":"Time of day matters only if it was unaccounted for.","D":"Teal-orange works in multicam if balanced first."},"principle":"Match shots first; push the look second."},{"num":121,"section_label":"SECTION XIV · MODULE 14","module_num":14,"module_title":"Power Windows & Adjustments","scenario":null,"stem":"A vignette is typically built as:","options":["A circle Power Window with the Key Output set to Invert, then offset pulled down to darken the inverted (outer) area.","A polygon mask around the corners.","A Glow effect with negative gain.","A LUT named \"Vignette.\""],"correct":"A","recap":null,"explanations":{"A":"Circle Window + Key Output: Invert + offset down = standard vignette.","B":"Polygon corners is much more work.","C":"Glow does the opposite of vignette.","D":"Named LUTs are presets, not the canonical tool."},"principle":"Vignette = inverted soft circle + offset down."},{"num":122,"section_label":"SECTION XIV · MODULE 14","module_num":14,"module_title":"Power Windows & Adjustments","scenario":null,"stem":"The \"subject brightening\" Power Window technique works because:","options":["The eye is drawn to lit areas — gently lifting the subject's face draws attention there. Cinematographers have used this principle for a century.","Brighter areas render faster.","Subject brightening fixes underexposure.","It removes shadows from the background."],"correct":"A","recap":null,"explanations":{"A":"Eye follows light — universal cinematic principle, used for a century.","B":"Render speed is unrelated.","C":"Subject brightening doesn't fix underexposure of the whole shot.","D":"Background shadows aren't removed."},"principle":"Light leads the eye."},{"num":123,"section_label":"SECTION XIV · MODULE 14","module_num":14,"module_title":"Power Windows & Adjustments","scenario":null,"stem":"Face Refinement's \"skin smoothing\" is most natural-looking when:","options":["Set to maximum strength.","Set subtly — around 0.3–0.5 — with the Scaling control pulled down so skin texture isn't completely wiped.","Combined with full sharpening.","Applied to every clip uniformly."],"correct":"B","recap":null,"explanations":{"B":"Subtle (0.3–0.5) + Scaling down preserves natural texture.","A":"Maximum = plastic look.","C":"Sharpening + smoothing fight each other.","D":"Uniform application ignores per-shot needs."},"principle":"Face Refinement: light touch + low Scaling."},{"num":124,"section_label":"SECTION XIV · MODULE 14","module_num":14,"module_title":"Power Windows & Adjustments","scenario":null,"stem":"The Color Warper differs from Hue vs Hue curves in that it:","options":["Affects luminance instead of hue.","Lets you click a colour on the viewer to add a hexagonal-grid control point, then drag the point to shift that hue, with selective falloff controlled by a radius — surgical changes other tools can't match.","Is faster to render.","Works only in 8-sided mode."],"correct":"B","recap":null,"explanations":{"B":"Click-drag a hue on the hexagonal grid with selective radius falloff — surgical hue shifts other tools can't match.","A":"Hue is what Warper controls.","C":"Render speed and mode are incidental.","D":"Render speed and mode are incidental."},"principle":"Warper = surgical hue/sat dragging."},{"num":125,"section_label":"SECTION XIV · MODULE 14","module_num":14,"module_title":"Power Windows & Adjustments","scenario":null,"stem":"A Power Window is built around a face. The subject's head turns slightly. The grade now \"drifts\" off the face. The most reliable solution:","options":["Disable the Power Window.","Track the window via its Tracker tab — Resolve auto-keyframes the window to follow the face.","Make the window much larger.","Use Magic Mask instead."],"correct":"B","recap":null,"explanations":{"B":"Auto-track via Tracker tab. Resolve keyframes the window to follow.","A":"Disabling kills the correction.","C":"Oversized = bleed.","D":"Magic Mask is alternative; Tracker is the named tool."},"principle":"Track the window to follow the subject."},{"num":126,"section_label":"SECTION XIV · MODULE 14","module_num":14,"module_title":"Power Windows & Adjustments","scenario":null,"stem":"Face Refinement's Eye Bag Removal is most appropriate when:","options":["The performer has dark under-eye shadows and a subtle lightening serves the scene — used very gently.","The performer is tired but the scene calls for it.","Always — eyebags should be removed in all professional work.","Never — Face Refinement should not touch eyes."],"correct":"A","recap":null,"explanations":{"A":"Subtle application when the scene needs it. Restrained, in service of performance.","B":"Removal conflicts with scene intent.","C":"Both too dogmatic.","D":"Both too dogmatic."},"principle":"Apply when it serves; never always or never."},{"num":127,"section_label":"SECTION XIV · MODULE 14","module_num":14,"module_title":"Power Windows & Adjustments","scenario":null,"stem":"A common visual failure with Face Refinement is:","options":["It crashes Resolve.","Pushed past about 30% strength on any control, skin looks plastic — like a video-game character. Viewers should think \"they look good,\" not \"they look retouched.\"","It only works in studio lighting.","It can't track moving faces."],"correct":"B","recap":null,"explanations":{"B":"Past ~30% = plastic. Viewers should think \"they look good,\" not \"retouched.\"","A":"Doesn't crash.","C":"Works in any lighting.","D":"Tracks moving faces fine."},"principle":"Restraint = the secret of Face Refinement."},{"num":128,"section_label":"SECTION XIV · MODULE 14","module_num":14,"module_title":"Power Windows & Adjustments","scenario":null,"stem":"A Power Window has been positioned and tracked. The track drifts halfway through the shot. The right next step:","options":["Re-track from the start with different settings.","Manually keyframe the window's position on the drifting frames — Resolve uses your keyframes to override the auto-tracker.","Abandon power windows; use Magic Mask.","Apply a Gaussian blur to mask the drift."],"correct":"B","recap":null,"explanations":{"B":"Manual keyframes on drifting frames override the auto-tracker.","A":"Re-tracking from scratch is wasted work.","C":"Magic Mask is heavier than necessary.","D":"Gaussian blur masks symptoms, not the drift cause."},"principle":"Combine auto-track + manual overrides."},{"num":129,"section_label":"SECTION XV · MODULE 15","module_num":15,"module_title":"Final Look & Refinement","scenario":null,"stem":"A Final Look node sits in serial after the Global Look node. Its purpose:","options":["To redo the Global Look.","To push the image one more step further on top of the parallel-mixer's output — final darkening, casts, or curve adjustments.","To apply a LUT.","To render the file."],"correct":"B","recap":null,"explanations":{"B":"Push the image one more step further on top of the parallel-mixer output — final darkening, casts, curve refinement.","A":"Don't redo the Global Look.","C":"LUTs are different beasts.","D":"Rendering is the Deliver page."},"principle":"Final Look = serial push on top of Global."},{"num":130,"section_label":"SECTION XV · MODULE 15","module_num":15,"module_title":"Final Look & Refinement","scenario":null,"stem":"In Studio's native Film Grain effect, \"Advanced Controls\" allow you to:","options":["Add grain only at specific tonal ranges (e.g., reduce grain in shadows to keep black areas clean).","Animate grain size over time.","Sync grain to audio peaks.","Replace grain with a LUT."],"correct":"A","recap":null,"explanations":{"A":"Apply grain selectively to shadows, midtones, or highlights — keep blacks clean by lowering shadow grain.","B":"Grain size animation isn't an Advanced Control.","C":"No audio sync.","D":"Grain isn't replaced by a LUT."},"principle":"Advanced Controls = tonal-region grain weighting."},{"num":131,"section_label":"SECTION XV · MODULE 15","module_num":15,"module_title":"Final Look & Refinement","scenario":null,"stem":"In the free version, film grain is typically added by:","options":["The native Film Grain effect.","An overlay video file placed on a track above the edit, with composite mode set to Overlay.","A LUT.","An audio plugin."],"correct":"B","recap":null,"explanations":{"B":"Overlay video file + composite mode Overlay = free version grain workflow.","A":"Native Film Grain is Studio-only.","C":"LUTs don't add grain.","D":"Audio plugins are unrelated."},"principle":"Free version grain = overlay file."},{"num":132,"section_label":"SECTION XV · MODULE 15","module_num":15,"module_title":"Final Look & Refinement","scenario":null,"stem":"In the Blur palette (Color page), the Radius slider behavior is:","options":["Always blurs — higher values blur more.","Below 0.5 = sharpen, above 0.5 = blur. Default 0.5 is no effect.","Always sharpens — higher values sharpen more.","Radius affects only luminance, not chroma."],"correct":"B","recap":null,"explanations":{"B":"Below 0.5 sharpens, above 0.5 blurs. Default 0.5 = no effect.","A":"The Radius behaviour is bidirectional, hinged on 0.5.","C":"The Radius behaviour is bidirectional, hinged on 0.5.","D":"The Radius behaviour is bidirectional, hinged on 0.5."},"principle":"Radius 0.5 is neutral; below = sharpen."},{"num":133,"section_label":"SECTION XV · MODULE 15","module_num":15,"module_title":"Final Look & Refinement","scenario":null,"stem":"The under-discussed Sharpening control \"Scaling\" determines:","options":["The output resolution of the sharpen.","Which pixel-size features get sharpened — higher scaling targets larger features (eyes, lips); lower scaling targets fine texture. Pushing scaling toward 1.0 produces strikingly detailed images for social media.","The Resolve render priority.","The colour space of the sharpen filter."],"correct":"B","recap":null,"explanations":{"B":"Scaling determines which pixel-size features the sharpen targets. Toward 1.0 produces strikingly detailed images for social compression.","A":"Resolution, render priority, colour space — none are the function.","C":"Resolution, render priority, colour space — none are the function.","D":"Resolution, render priority, colour space — none are the function."},"principle":"Scaling = target pixel size of sharpen."},{"num":134,"section_label":"SECTION XV · MODULE 15","module_num":15,"module_title":"Final Look & Refinement","scenario":null,"stem":"To deliver a cinematic 2.39:1 image without re-cropping the footage:","options":["Re-shoot in anamorphic.","Use Output Blanking → 2.39:1 in the Color page. Black bars top and bottom; image stays full-frame. Re-frame inside the bars using Sizing → Input.","Add black bars manually in Fusion.","Crop the timeline to 2.39:1 in Project Settings."],"correct":"B","recap":null,"explanations":{"B":"Output Blanking adds black bars without cropping; reframe inside with Sizing → Input.","A":"Reshoot is the destructive alternative.","C":"Manual bars in Fusion is overcomplicated.","D":"Project crop is destructive."},"principle":"Output Blanking = non-destructive cinema framing."},{"num":135,"section_label":"SECTION XV · MODULE 15","module_num":15,"module_title":"Final Look & Refinement","scenario":null,"stem":"Adding a tiny Gaussian Blur (radius 0.05–0.15) in the Fine Tune node serves to:","options":["Mask noise that grading exposed.","Take the digital \"edge\" off footage — emulating the soft optics of film lenses; combined with grain, produces an analogue feel.","Reduce file size.","Prevent banding."],"correct":"B","recap":null,"explanations":{"B":"Soft optics emulation — combined with grain, achieves analogue feel.","A":"Noise masking is a side benefit, not the primary purpose.","C":"File size unaffected meaningfully.","D":"Banding has different fixes."},"principle":"Gentle blur softens digital edge."},{"num":136,"section_label":"SECTION XV · MODULE 15","module_num":15,"module_title":"Final Look & Refinement","scenario":null,"stem":"A common pitfall when applying film grain in the Studio version:","options":["The grain has no parameters.","Grain is computationally expensive — playback may slow noticeably; render at full quality only when finalising, or use the proxy mode while grading.","Grain renders incorrectly at 4K.","Grain only works in HDR projects."],"correct":"B","recap":null,"explanations":{"B":"Grain is computationally expensive — slows playback. Use proxy/half-resolution playback while grading; full quality only when finalising.","A":"Grain has many parameters.","C":"Renders correctly at 4K.","D":"Works in SDR projects."},"principle":"Grain is heavy; manage playback while editing."},{"num":137,"section_label":"SECTION XVI · MODULE 16","module_num":16,"module_title":"Grading Different Footage Types","scenario":null,"stem":"An iPhone shot in default (Rec.709) mode imports into the Notary Structure. The CST in node should be configured as:","options":["Apple Log input.","Input Rec.709 → Output Rec.709 (effectively a bypass — the footage is already in display space).","S-Log3 input.","Wide Gamut Intermediate input."],"correct":"B","recap":null,"explanations":{"B":"Input Rec.709 → Output Rec.709 effectively bypasses the CST. The footage is already display-ready.","A":"Wrong colour spaces produce inverted curves.","C":"Wrong colour spaces produce inverted curves.","D":"Wrong colour spaces produce inverted curves."},"principle":"Default iPhone = Rec.709 in, Rec.709 out."},{"num":138,"section_label":"SECTION XVI · MODULE 16","module_num":16,"module_title":"Grading Different Footage Types","scenario":null,"stem":"A heavy creative push on 8-bit phone footage typically reveals:","options":["Higher dynamic range than expected.","Banding in skies, blocky qualifier mattes, and broken-up isolations — the bit depth limits the latitude.","Improved sharpness.","Cleaner skin tones than log footage."],"correct":"B","recap":null,"explanations":{"B":"8-bit limits everything — banding, blocky mattes, broken isolations on hard pushes.","A":"Phone footage has less dynamic range, not more.","C":"Sharpness doesn't increase from heavy grades.","D":"Phone skin doesn't beat log skin."},"principle":"8-bit = limited latitude."},{"num":139,"section_label":"SECTION XVI · MODULE 16","module_num":16,"module_title":"Grading Different Footage Types","scenario":null,"stem":"A common high-leverage move on phone footage is:","options":["Maximum saturation push.","White-balance correction — phones often produce cool indoor footage that warms naturally with one Offset shift.","Extreme colour isolation.","Skipping the balancing column."],"correct":"B","recap":null,"explanations":{"B":"Phone white-balance correction yields disproportionate quality gain — one Offset shift fixes the most common phone problem.","A":"Maximum saturation breaks the footage.","C":"Extreme isolation breaks on 8-bit.","D":"Skipping balancing = compounding problems downstream."},"principle":"WB correction is the phone's highest-leverage fix."},{"num":140,"section_label":"SECTION XVI · MODULE 16","module_num":16,"module_title":"Grading Different Footage Types","scenario":null,"stem":"An iPhone 15 Pro shooting in Apple Log should be treated as:","options":["Phone footage — limited latitude.","A proper log camera — 10-bit Apple Log grades comparably to mid-tier mirrorless. CST in: Input Apple Log.","Inferior to S-Log3.","Rec.709 with a hidden curve."],"correct":"B","recap":null,"explanations":{"B":"Apple Log is a proper log space — 10-bit, with grading latitude comparable to mid-tier mirrorless. CST in: Apple Log.","A":"Apple Log isn't \"phone footage\" in the limited-latitude sense.","C":"Comparable to S-Log3, not categorically inferior.","D":"It's actual log, not hidden curve."},"principle":"Apple Log = real log; treat accordingly."},{"num":141,"section_label":"SECTION XVI · MODULE 16","module_num":16,"module_title":"Grading Different Footage Types","scenario":null,"stem":"Stock footage downloaded from a library is typically in Rec.709 and arrives \"over-graded.\" The right preparation before adding your own grade:","options":["Apply your grade on top — the original grade adds character.","Use the balancing column to neutralise — pull saturation down to a working level, fix exposure if needed — then grade. Otherwise you're stacking grade on grade.","Re-export the footage at 16-bit first.","Apply a \"Reset to Camera\" LUT."],"correct":"B","recap":null,"explanations":{"B":"Use the balancing column to neutralise — saturation down, exposure check — before adding your own grade. Otherwise you stack grade on grade.","A":"Stacking grades produces compounded over-saturation.","C":"Bit-depth re-export gains nothing if data is already lost.","D":"No \"Reset to Camera\" LUT exists."},"principle":"Stock footage: neutralise before re-grading."},{"num":142,"section_label":"SECTION XVI · MODULE 16","module_num":16,"module_title":"Grading Different Footage Types","scenario":null,"stem":"A DJI drone clip recorded in D-Log shows strong magenta colour fringing along high-contrast edges. The right place to address this:","options":["Increase saturation to mask the fringing.","Use the balancing column (or a dedicated chromatic aberration / lens correction effect) before the creative grade — addressing optical issues before stylistic choices.","Apply the magenta in the Global Look.","Re-export the clip and reimport."],"correct":"B","recap":null,"explanations":{"B":"Optical issues (CA, ND casts) belong in balancing — fix before stylistic grading. Otherwise the style amplifies the optics problem.","A":"Saturation can't mask CA.","C":"The Global Look isn't for optics fixes.","D":"Re-export-reimport is unrelated."},"principle":"Optics first, style second."},{"num":143,"section_label":"SECTION XVI · MODULE 16","module_num":16,"module_title":"Grading Different Footage Types","scenario":null,"stem":"A mixed-source project: 10-bit Sony S-Log3 from one camera, 10-bit Apple Log iPhone from another. After tagging each clip's Input Color Space, the Notary Structure applied identically to each clip will:","options":["Produce visibly different results between the two cameras.","Produce a consistent starting point on each, because colour management has converted both into the same working space — the same structure operates on equivalent base images.","Crash Resolve.","Force you to re-balance every clip individually."],"correct":"B","recap":null,"explanations":{"B":"Properly tagged + colour managed = both cameras land in the same working space. The same Notary Structure produces equivalent results on equivalent bases.","A":"If properly tagged, results converge.","C":"Resolve handles mixed footage fine.","D":"Tagging eliminates per-clip re-balancing."},"principle":"Tag = converge to common ground."},{"num":144,"section_label":"SECTION XVI · MODULE 16","module_num":16,"module_title":"Grading Different Footage Types","scenario":null,"stem":"A junior colourist insists every clip in their project must have its Skin tone perfectly on the vectorscope's skin line. Which is the strongest correction to that view?","options":["They're right — skin must always be on the line.","They're partly right — natural skin lives on the line. Stylistic choices (sci-fi, period, dream sequences) can deliberately deviate. The line is a target to land on or deliberately leave, not a law.","They're wrong — the line is irrelevant.","The line only applies to bright skin tones."],"correct":"B","recap":null,"explanations":{"B":"Skin line is a target, not a law. Natural lives on it; stylistic choices can deviate intentionally.","A":"Too dogmatic.","C":"The line is meaningful.","D":"Applies to all skin tones, not just bright."},"principle":"Skin line = aim; deliberate deviation is fine."},{"num":145,"section_label":"SECTION XVII · CROSS-MODULE SYNTHESIS","module_num":99,"module_title":"Decisions Under Pressure","scenario":"A client delivers 2 hours of S-Log3 footage from a Sony FX6, shot mostly handheld. They need: (a) a 90-second hero edit for Instagram (vertical), (b) a 3-minute web cut (16:9), (c) a ProRes master archive. Deadline is 5 days. You work alone.","stem":"The most efficient sequencing of the work:","options":["Build all three timelines first, then grade each separately, then mix audio, then deliver in batch.","Cut the 3-minute master in 16:9; lock picture; grade once on this timeline with the Notary Structure; duplicate the timeline to create the Instagram vertical cut and re-frame in Sizing → Input; mix audio on the master; render all three (web H.265, Instagram H.265 vertical, ProRes archive) via the Render Queue.","Grade every clip separately; then assemble three timelines from graded clips.","Render the master first in H.264 then re-edit from that for the other deliverables."],"correct":"B","recap":null,"explanations":{"B":"Cut once, lock picture, grade once, duplicate-and-reframe for vertical, mix once, render all variants in the Render Queue. Each step's work compounds; you avoid grading three times.","A":"Three separate workflows = three times the effort.","C":"Per-clip grading before assembly is the slow path.","D":"Re-editing from compressed renders loses quality and time."},"principle":"Cut → grade → mix → render-many. Do work once."},{"num":146,"section_label":"SECTION XVII · CROSS-MODULE SYNTHESIS","module_num":99,"module_title":"Decisions Under Pressure","scenario":"A long-take interview was shot in 4K H.265 on a 25 fps timeline. Playback stutters in the Edit page. You have 4 hours until the client review.","stem":"The fastest fix that doesn't compromise final quality:","options":["Buy a new GPU before the meeting.","Generate optimised media or proxies (Playback menu → Render Cache / Optimised Media); the edit experience becomes smooth, final output remains from the original files.","Re-export the source to H.264 and re-import.","Drop the timeline to 1080p resolution."],"correct":"B","recap":null,"explanations":{"B":"Optimised media / proxies = smooth playback without changing final output quality. The non-destructive fix.","A":"Buying hardware before a meeting is impractical.","C":"Re-export to H.264 is destructive.","D":"Dropping timeline resolution affects every step downstream."},"principle":"Proxies are the right tool for playback issues."},{"num":147,"section_label":"SECTION XVII · CROSS-MODULE SYNTHESIS","module_num":99,"module_title":"Decisions Under Pressure","scenario":"A documentary protagonist filmed his own interviews on his iPhone over a year. His skin tone is consistently warmer than your studio-shot footage. The director wants every shot to feel like one consistent world.","stem":"The principled approach:","options":["Pull the warm shots back to neutral so all skin matches.","Decide whether warmth is character (e.g. lived-in, intimate) or error. If character, embrace it across both — push your studio shots warmer to match. If error, neutralise the phone footage's warmth with a per-clip white-balance correction in the balancing column.","Use Magic Mask on every face.","Apply face refinement to all faces equally."],"correct":"B","recap":null,"explanations":{"B":"Decide if warmth is character or error. If character, embrace it on the studio shots too. If error, neutralise. The question isn't \"match,\" it's \"what does the film want to feel like?\"","A":"Cold neutrality may erase the protagonist's identity.","C":"Magic Mask is a hammer when nuance is needed.","D":"Uniform face refinement doesn't address warmth."},"principle":"Decide intent first, then technique."},{"num":148,"section_label":"SECTION XVII · CROSS-MODULE SYNTHESIS","module_num":99,"module_title":"Decisions Under Pressure","scenario":"You complete a grade on a hero shot using a strong stylised look. When you copy the grade (middle-click) to a second shot, the second shot looks unbalanced — the look \"fits\" the hero but reveals problems on the new shot.","stem":"The correct response:","options":["The look is wrong — start over.","The look amplifies underlying differences between shots. Adjust the second shot's Clip-level Balancing nodes (exposure, contrast, white balance) until it matches the hero's starting point — then the same look will sit better.","Use a different look on the second shot.","Disable timeline-level grades."],"correct":"B","recap":null,"explanations":{"B":"Strong looks amplify shot-to-shot differences. Fix the second shot's balance to match the hero's starting point before judging the look.","A":"The look isn't wrong if it works on the hero.","C":"Per-shot looks defeat consistency.","D":"Timeline grades affect the test fairly."},"principle":"Balance the shot to the hero; the look will fit."},{"num":149,"section_label":"SECTION XVII · CROSS-MODULE SYNTHESIS","module_num":99,"module_title":"Decisions Under Pressure","scenario":"An editor cuts a podcast in the Cut page and hands you the project. You open it on the Edit page to finesse. Some clips have split points but no cuts (through-edits). You also notice volume keyframes that look harsh between sections.","stem":"The cleanest cleanup:","options":["Re-cut from scratch.","Right-click each through-edit → Delete Through Edit (joins the clip back). For the harsh volume changes, add short audio crossfades at the volume transitions, or smooth the keyframes by replacing them with a crossfade.","Delete all keyframes globally.","Disable audio tracks and re-mix from raw."],"correct":"B","recap":null,"explanations":{"B":"Delete Through Edits to rejoin, add audio crossfades to smooth harsh volume changes. Surgical cleanup, not destructive re-cutting.","A":"Re-cut from scratch wastes hours.","C":"Mass keyframe delete is too aggressive.","D":"Disabling audio loses the cut's pacing."},"principle":"Surgical cleanup, not destructive restart."},{"num":150,"section_label":"SECTION XVII · CROSS-MODULE SYNTHESIS","module_num":99,"module_title":"Decisions Under Pressure","scenario":"A client signs off on your final cut on Monday. On Wednesday, they request that the lead actor's blue jumper become red throughout the film \"for brand reasons.\" There are 60 shots featuring the jumper.","stem":"The expert-level workflow that respects time and quality:","options":["Re-shoot.","Group all 60 clips into a Color page Group. In the Group's post-clip node graph, qualify the blue jumper (Hue vs Hue or Qualifier + Power Window per clip if necessary), shift hue to red. Apply once, propagates to all 60. Track windows per-clip where needed.","Edit each clip individually with no shared workflow.","Tell the client the change is impossible."],"correct":"B","recap":null,"explanations":{"B":"Group the 60 clips. In the group's post-clip node, qualify blue (Hue vs Hue), shift to red. Track windows where the qualifier picks up noise. One workflow, sixty clips changed simultaneously, fully reversible if the brand brief changes.","A":"Reshoot is the nuclear option — financially absurd for a colour change.","C":"Per-clip individual edits = no consistency, hours of work.","D":"\"Impossible\" is the wrong answer to a routine grading task."},"principle":"Group grading + qualifier = scale changes elegantly."}];
+const TOTAL_Q = 150;
+const PASS_MARK = 135;       // 90% of 150
+const MAX_ATTEMPTS = 3;
+const TIME_LIMIT_MS = 5 * 60 * 60 * 1000;
+
+const MODULE_TITLES = {
+  1:"Foundations & Philosophy", 2:"Media Page", 3:"Edit Page", 4:"Cut Page",
+  5:"Fusion Page", 6:"Color Basics", 7:"Fairlight Page", 8:"Deliver Page",
+  9:"Color Management Setup", 10:"Node Tree Architecture", 11:"Balancing Nodes",
+  12:"Color Isolation & Layer Mixer", 13:"Global Look", 14:"Power Windows & Adjustments",
+  15:"Final Look & Refinement", 16:"Grading Different Footage Types",
+  99:"Cross-Module Synthesis"
+};
+const STORAGE_KEY = "drm_exam_v1";
+
+// ════════════════════════════ STATE ════════════════════════════
+let state = { attempts: [], inProgress: null };
+let timerInterval = null;
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(parsed.attempts) state.attempts = parsed.attempts;
+      if(parsed.inProgress) state.inProgress = parsed.inProgress;
+    }
+  }catch(e){ console.warn("Could not load state:", e); }
+}
+function saveState(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch(e){ console.warn("Could not save state:", e); }
+}
+
+// ════════════════════════════ SCREEN ROUTING ════════════════════════════
+function showScreen(name){
+  document.body.setAttribute("data-active", name);
+  window.scrollTo(0, 0);
+}
+
+// ════════════════════════════ START SCREEN ════════════════════════════
+function renderStart(){
+  const passedAttempt = state.attempts.find(a => a.passed);
+  if(passedAttempt){
+    return renderPassedAlready(passedAttempt);
+  }
+  if(state.attempts.length >= MAX_ATTEMPTS){
+    return renderLocked();
+  }
+
+  const remaining = MAX_ATTEMPTS - state.attempts.length;
+  const attemptNum = state.attempts.length + 1;
+  document.getElementById("attempts-remaining").textContent =
+    `Attempt ${attemptNum} of ${MAX_ATTEMPTS}`;
+
+  // Show history if any
+  const log = document.getElementById("attempts-log");
+  const list = document.getElementById("attempts-list");
+  if(state.attempts.length > 0){
+    list.innerHTML = state.attempts.map((a, i) => {
+      const cls = a.passed ? "pass" : "fail";
+      const verdict = a.passed ? "PASS" : "FAIL";
+      const pct = ((a.score / TOTAL_Q) * 100).toFixed(1);
+      return `<div class="attempt-row">
+        <span class="a-num">Attempt ${i+1}</span>
+        <span class="a-score">${a.score}/${TOTAL_Q} (${pct}%)</span>
+        <span class="a-result ${cls}">${verdict}</span>
+      </div>`;
+    }).join("");
+    log.style.display = "block";
+  } else {
+    log.style.display = "none";
+  }
+
+  // Resume in-progress
+  const resumeBtn = document.getElementById("btn-resume");
+  if(state.inProgress){
+    resumeBtn.style.display = "block";
+    resumeBtn.textContent = `Resume in-progress attempt (${state.inProgress.name})`;
+  } else {
+    resumeBtn.style.display = "none";
+  }
+
+  showScreen("start");
+}
+
+function renderPassedAlready(attempt){
+  const idx = state.attempts.indexOf(attempt);
+  const pct = ((attempt.score / TOTAL_Q) * 100).toFixed(1);
+  const minutes = Math.floor(attempt.durationMs / 60000);
+  document.getElementById("passed-summary").innerHTML =
+    `<strong>${attempt.name}</strong> passed on <strong>attempt ${idx+1}</strong> of ${MAX_ATTEMPTS} with a score of <strong>${attempt.score}/${TOTAL_Q}</strong> (${pct}%) in ${formatDuration(attempt.durationMs)}.`;
+  document.getElementById("passed-attempts").innerHTML = renderAttemptList(state.attempts);
+  showScreen("passed");
+}
+
+function renderLocked(){
+  document.getElementById("locked-attempts").innerHTML = renderAttemptList(state.attempts);
+  showScreen("locked");
+}
+
+function renderAttemptList(attempts){
+  return attempts.map((a, i) => {
+    const cls = a.passed ? "pass" : "fail";
+    const verdict = a.passed ? "PASS" : "FAIL";
+    const pct = ((a.score / TOTAL_Q) * 100).toFixed(1);
+    return `<div class="attempt-row">
+      <span class="a-num">Attempt ${i+1}</span>
+      <span class="a-score">${a.score}/${TOTAL_Q} (${pct}%)</span>
+      <span class="a-result ${cls}">${verdict}</span>
+    </div>`;
+  }).join("");
+}
+
+// ════════════════════════════ EXAM ════════════════════════════
+function startNewAttempt(name){
+  state.inProgress = {
+    name: name.trim(),
+    started: Date.now(),
+    answers: {},   // qIdx (0-149) -> letter
+    flagged: [],   // qIdx
+    currentQ: 0,
+  };
+  saveState();
+  enterExam();
+}
+
+function resumeAttempt(){
+  if(!state.inProgress) return;
+  enterExam();
+}
+
+function enterExam(){
+  document.getElementById("bar-candidate").textContent = state.inProgress.name;
+  showScreen("exam");
+  renderQuestion();
+  startTimer();
+}
+
+function renderQuestion(){
+  const idx = state.inProgress.currentQ;
+  const q = QUESTIONS[idx];
+  const answered = state.inProgress.answers[idx];
+  const flagged = state.inProgress.flagged.includes(idx);
+
+  document.getElementById("bar-qcount").textContent = `${idx+1}/${TOTAL_Q}`;
+  document.getElementById("progress-fill").style.width =
+    `${((idx+1) / TOTAL_Q) * 100}%`;
+
+  const wrap = document.getElementById("q-wrap");
+  const letters = ["A","B","C","D"];
+  wrap.innerHTML = `
+    <div class="q-meta">${q.section_label}</div>
+    <div class="q-stem">${q.stem}</div>
+    ${q.scenario ? `<div class="q-scenario">${q.scenario}</div>` : ""}
+    <ul class="opts-list">
+      ${q.options.map((opt, i) => `
+        <li>
+          <button class="opt-btn ${answered === letters[i] ? "selected" : ""}" data-letter="${letters[i]}">
+            <span class="letter">${letters[i]}</span>
+            <span class="text">${opt}</span>
+          </button>
+        </li>
+      `).join("")}
+    </ul>
+  `;
+  wrap.querySelectorAll(".opt-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const letter = btn.dataset.letter;
+      state.inProgress.answers[idx] = letter;
+      saveState();
+      renderQuestion();
+    });
+  });
+
+  // Flag button state
+  document.getElementById("btn-flag").classList.toggle("active", flagged);
+  document.getElementById("flag-label").textContent = flagged ? "Flagged" : "Flag for review";
+
+  // Nav buttons
+  document.getElementById("btn-prev").disabled = idx === 0;
+  const nextBtn = document.getElementById("btn-next");
+  if(idx === TOTAL_Q - 1){
+    nextBtn.textContent = "Review →";
+  } else {
+    nextBtn.textContent = "Next →";
+  }
+}
+
+function goToQuestion(idx){
+  if(idx < 0 || idx >= TOTAL_Q) return;
+  state.inProgress.currentQ = idx;
+  saveState();
+  renderQuestion();
+  closeNavigator();
+}
+
+function nextQuestion(){
+  const idx = state.inProgress.currentQ;
+  if(idx === TOTAL_Q - 1){
+    enterReview();
+  } else {
+    goToQuestion(idx + 1);
+  }
+}
+
+function prevQuestion(){
+  goToQuestion(state.inProgress.currentQ - 1);
+}
+
+function toggleFlag(){
+  const idx = state.inProgress.currentQ;
+  const i = state.inProgress.flagged.indexOf(idx);
+  if(i >= 0) state.inProgress.flagged.splice(i, 1);
+  else state.inProgress.flagged.push(idx);
+  saveState();
+  renderQuestion();
+}
+
+// ════════════════════════════ TIMER ════════════════════════════
+function startTimer(){
+  if(timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(updateTimer, 1000);
+  updateTimer();
+}
+function stopTimer(){
+  if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+}
+function updateTimer(){
+  if(!state.inProgress) return;
+  const elapsed = Date.now() - state.inProgress.started;
+  const remaining = TIME_LIMIT_MS - elapsed;
+  const timerEl = document.getElementById("bar-timer");
+  if(remaining <= 0){
+    timerEl.textContent = "0:00:00";
+    timeUp();
+    return;
+  }
+  const hours = Math.floor(remaining / 3600000);
+  const mins = Math.floor((remaining % 3600000) / 60000);
+  const secs = Math.floor((remaining % 60000) / 1000);
+  timerEl.textContent = `${hours}:${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+  timerEl.classList.toggle("warning", remaining < 10 * 60 * 1000);  // last 10 minutes
+}
+function timeUp(){
+  stopTimer();
+  document.getElementById("time-up-modal").classList.add("open");
+}
+
+// ════════════════════════════ NAVIGATOR ════════════════════════════
+function openNavigator(){
+  const grid = document.getElementById("nav-grid");
+  grid.innerHTML = "";
+  const answers = state.inProgress.answers;
+  const flagged = state.inProgress.flagged;
+  const current = state.inProgress.currentQ;
+  for(let i = 0; i < TOTAL_Q; i++){
+    const cell = document.createElement("button");
+    cell.className = "nav-cell";
+    if(answers[i]) cell.classList.add("answered");
+    if(flagged.includes(i)) cell.classList.add("flagged");
+    if(i === current) cell.classList.add("current");
+    cell.textContent = String(i + 1);
+    cell.addEventListener("click", () => goToQuestion(i));
+    grid.appendChild(cell);
+  }
+  document.getElementById("navigator").classList.add("open");
+}
+function closeNavigator(){
+  document.getElementById("navigator").classList.remove("open");
+}
+
+// ════════════════════════════ REVIEW SCREEN ════════════════════════════
+function enterReview(){
+  const ip = state.inProgress;
+  const answered = Object.keys(ip.answers).length;
+  const unanswered = TOTAL_Q - answered;
+  const flagged = ip.flagged.length;
+
+  document.getElementById("review-summary").innerHTML = `
+    <div class="row"><span class="l">Answered</span><span class="v ${unanswered===0?"ok":""}">${answered} / ${TOTAL_Q}</span></div>
+    <div class="row"><span class="l">Unanswered</span><span class="v ${unanswered>0?"warn":""}">${unanswered}</span></div>
+    <div class="row"><span class="l">Flagged for review</span><span class="v">${flagged}</span></div>
+  `;
+
+  const unEl = document.getElementById("review-unanswered");
+  if(unanswered > 0){
+    const unanswered_q = [];
+    for(let i = 0; i < TOTAL_Q; i++) if(!ip.answers[i]) unanswered_q.push(i + 1);
+    unEl.innerHTML = `
+      <h3 style="color:var(--red)">Unanswered questions</h3>
+      <p style="color:var(--muted);font-size:.88rem;margin:.4rem 0 .6rem">These will be marked wrong if you submit now.</p>
+      <div class="q-list-pills">${unanswered_q.map(n =>
+        `<button class="q-pill" data-q="${n-1}">Q${String(n).padStart(3,"0")}</button>`
+      ).join("")}</div>`;
+    unEl.querySelectorAll(".q-pill").forEach(p =>
+      p.addEventListener("click", e => { goToQuestion(+e.target.dataset.q); showScreen("exam"); }));
+  } else { unEl.innerHTML = ""; }
+
+  const flEl = document.getElementById("review-flagged");
+  if(flagged > 0){
+    flEl.innerHTML = `
+      <h3>Flagged for review</h3>
+      <div class="q-list-pills">${ip.flagged.sort((a,b)=>a-b).map(i =>
+        `<button class="q-pill flagged" data-q="${i}">Q${String(i+1).padStart(3,"0")}</button>`
+      ).join("")}</div>`;
+    flEl.querySelectorAll(".q-pill").forEach(p =>
+      p.addEventListener("click", e => { goToQuestion(+e.target.dataset.q); showScreen("exam"); }));
+  } else { flEl.innerHTML = ""; }
+
+  showScreen("review");
+}
+
+// ════════════════════════════ SUBMIT & SCORE ════════════════════════════
+function submitExam(){
+  const ip = state.inProgress;
+  const finished = Date.now();
+  let correct = 0;
+  for(let i = 0; i < TOTAL_Q; i++){
+    if(ip.answers[i] === QUESTIONS[i].correct) correct++;
+  }
+  const attempt = {
+    name: ip.name,
+    started: ip.started,
+    finished,
+    score: correct,
+    passed: correct >= PASS_MARK,
+    durationMs: finished - ip.started,
+    answers: ip.answers,
+  };
+  state.attempts.push(attempt);
+  state.inProgress = null;
+  saveState();
+  stopTimer();
+  renderResults(attempt);
+}
+
+function renderResults(attempt){
+  const attemptIdx = state.attempts.indexOf(attempt);
+  document.getElementById("results-name").textContent = attempt.name;
+  const date = new Date(attempt.finished);
+  document.getElementById("results-date").textContent =
+    date.toLocaleDateString("en-ZA", {year:"numeric", month:"long", day:"numeric"}) +
+    " at " + date.toLocaleTimeString("en-ZA", {hour:"2-digit", minute:"2-digit"});
+
+  const hero = document.getElementById("result-hero");
+  hero.className = "result-hero " + (attempt.passed ? "pass" : "fail");
+  document.getElementById("result-verdict").textContent = attempt.passed ? "PASSED" : "FAILED";
+  document.getElementById("result-score").textContent = attempt.score;
+  const pct = ((attempt.score / TOTAL_Q) * 100).toFixed(1);
+  document.getElementById("result-pct").textContent = pct + "%";
+  document.getElementById("result-attempt").textContent =
+    `${attemptIdx + 1} of ${MAX_ATTEMPTS}`;
+  document.getElementById("result-duration").textContent = formatDuration(attempt.durationMs);
+  document.getElementById("result-correct").textContent = `${attempt.score} correct`;
+
+  // Module breakdown
+  const modScores = {};
+  for(let i = 0; i < TOTAL_Q; i++){
+    const m = QUESTIONS[i].module_num;
+    if(!modScores[m]) modScores[m] = { correct: 0, total: 0 };
+    modScores[m].total++;
+    if(attempt.answers[i] === QUESTIONS[i].correct) modScores[m].correct++;
+  }
+  const tbody = document.getElementById("mod-table-body");
+  tbody.innerHTML = "";
+  const weakMods = [];
+  Object.keys(modScores).sort((a,b) => +a - +b).forEach(m => {
+    const s = modScores[m];
+    const pctMod = (s.correct / s.total) * 100;
+    const modName = MODULE_TITLES[m] || `Module ${m}`;
+    const modLabel = m === "99" ? "Synthesis" : `M${String(m).padStart(2,"0")}`;
+    let cls = "";
+    if(pctMod >= 90) cls = "strong";
+    else if(pctMod < 60) { cls = "weak"; weakMods.push({ num: m, name: modName, score: s.correct, total: s.total }); }
+    tbody.innerHTML += `
+      <tr>
+        <td><strong style="color:var(--text)">${modLabel}</strong><br><span style="color:var(--muted);font-size:.78rem">${modName}</span></td>
+        <td class="score">${s.correct}/${s.total}</td>
+        <td class="bar"><div class="mod-bar-bg"><div class="mod-bar-fill ${cls}" style="width:${pctMod}%"></div></div></td>
+      </tr>`;
+  });
+
+  // Wrong question pills
+  const wrong = [];
+  for(let i = 0; i < TOTAL_Q; i++){
+    if(attempt.answers[i] !== QUESTIONS[i].correct) wrong.push(i + 1);
+  }
+  if(wrong.length === 0){
+    document.getElementById("wrong-list-section").innerHTML = `
+      <div class="heading" style="color:var(--green)">Every question answered correctly</div>`;
+  } else {
+    document.getElementById("wrong-pills").innerHTML =
+      wrong.map(n => `<span class="wrong-pill">Q${String(n).padStart(3,"0")}</span>`).join("");
+  }
+
+  // Weak topics callout
+  const wt = document.getElementById("weak-topics");
+  const wtList = document.getElementById("weak-topics-list");
+  if(weakMods.length > 0 && !attempt.passed){
+    wtList.innerHTML = weakMods.map(m =>
+      `<li><em>${m.name}</em> — ${m.score}/${m.total} correct. Re-read course module ${m.num === "99" ? "synthesis" : m.num} and the related memo entries.</li>`
+    ).join("");
+    wt.style.display = "block";
+  } else {
+    wt.style.display = "none";
+  }
+
+  // Detailed review (collapsed by default)
+  renderReviewDetails(attempt);
+
+  // Retake / next steps block
+  const retakeBlock = document.getElementById("retake-block");
+  const used = state.attempts.length;
+  const remaining = MAX_ATTEMPTS - used;
+  if(attempt.passed){
+    retakeBlock.innerHTML = `
+      <div class="lock-card" style="background:rgba(126,201,142,.06);border-color:rgba(126,201,142,.3)">
+        <p style="margin:0">You've passed on attempt ${attemptIdx+1} of ${MAX_ATTEMPTS}. Send the screenshot to your instructor.</p>
+      </div>`;
+  } else if(remaining > 0){
+    retakeBlock.innerHTML = `
+      <p style="text-align:center;color:var(--muted);margin:1.2rem 0 .6rem">You have <strong>${remaining}</strong> attempt${remaining===1?"":"s"} remaining.</p>
+      <button class="btn" id="btn-retake">Start retake</button>
+      <button class="btn secondary" id="btn-home">Back to home (later)</button>`;
+    document.getElementById("btn-retake").addEventListener("click", () => {
+      if(confirm("Start a new attempt? Your current results are saved and your instructor still needs the screenshot.")){
+        renderStart();
+      }
+    });
+    document.getElementById("btn-home").addEventListener("click", () => renderStart());
+  } else {
+    retakeBlock.innerHTML = `
+      <div class="lock-card" style="background:rgba(236,90,90,.06);border-color:rgba(236,90,90,.3)">
+        <div class="ico" style="font-size:2rem">🔒</div>
+        <p>All 3 attempts used. Contact your instructor to discuss next steps.</p>
+      </div>`;
+  }
+
+  showScreen("results");
+}
+
+function renderReviewDetails(attempt){
+  const wrongIdx = [];
+  for(let i = 0; i < TOTAL_Q; i++){
+    if(attempt.answers[i] !== QUESTIONS[i].correct) wrongIdx.push(i);
+  }
+  const details = document.getElementById("review-details");
+  if(wrongIdx.length === 0){
+    details.innerHTML = "<p>No wrong answers to review.</p>";
+    return;
+  }
+  details.innerHTML = wrongIdx.map(i => {
+    const q = QUESTIONS[i];
+    const userLetter = attempt.answers[i] || "—";
+    const userAnswer = userLetter === "—"
+      ? '<em>(left blank)</em>'
+      : q.options[["A","B","C","D"].indexOf(userLetter)];
+    const correctAnswer = q.options[["A","B","C","D"].indexOf(q.correct)];
+    const userExp = userLetter !== "—" ? (q.explanations[userLetter] || "") : "";
+    const correctExp = q.explanations[q.correct] || "";
+    const modLabel = q.module_num === 99 ? "Synthesis" : `M${String(q.module_num).padStart(2,"0")}`;
+    return `
+      <div class="review-card">
+        <div class="rc-head">
+          <span class="rc-num">Q${String(q.num).padStart(3,"0")}</span>
+          <span class="rc-mod">${modLabel} · ${q.module_title}</span>
+        </div>
+        ${q.scenario ? `<div class="rc-scenario">${q.scenario}</div>` : ""}
+        <div class="rc-stem">${q.stem}</div>
+        <div class="rc-choice user-wrong"><span class="l">YOU CHOSE ${userLetter}:</span>${userAnswer}</div>
+        <div class="rc-choice correct-was"><span class="l">CORRECT ${q.correct}:</span>${correctAnswer}</div>
+        ${userExp ? `<div class="rc-exp"><strong class="label">Why ${userLetter} is wrong</strong>${userExp}</div>` : ""}
+        <div class="rc-exp"><strong class="label">Why ${q.correct} is correct</strong>${correctExp}</div>
+        ${q.principle ? `<div class="rc-principle">Principle · ${q.principle}</div>` : ""}
+      </div>`;
+  }).join("");
+}
+
+function formatDuration(ms){
+  const totalMins = Math.floor(ms / 60000);
+  const h = Math.floor(totalMins / 60);
+  const m = totalMins % 60;
+  if(h > 0) return `${h}h ${m}m`;
+  return `${m}m`;
+}
+
+// ════════════════════════════ EVENT WIRING ════════════════════════════
+document.addEventListener("DOMContentLoaded", () => {
+  loadState();
+  renderStart();
+
+  // Start screen
+  const nameInput = document.getElementById("candidate-name");
+  const startBtn = document.getElementById("btn-start");
+  nameInput.addEventListener("input", () => {
+    startBtn.disabled = nameInput.value.trim().length < 2;
+  });
+  startBtn.addEventListener("click", () => {
+    const name = nameInput.value.trim();
+    if(name.length < 2) return;
+    if(confirm(`Start examination as "${name}"? The 5-hour timer begins now.`)){
+      startNewAttempt(name);
+    }
+  });
+  document.getElementById("btn-resume").addEventListener("click", () => resumeAttempt());
+
+  // Exam navigation
+  document.getElementById("btn-next").addEventListener("click", () => nextQuestion());
+  document.getElementById("btn-prev").addEventListener("click", () => prevQuestion());
+  document.getElementById("btn-submit-top").addEventListener("click", () => enterReview());
+  document.getElementById("btn-flag").addEventListener("click", () => toggleFlag());
+  document.getElementById("btn-navigator").addEventListener("click", () => openNavigator());
+  document.getElementById("nav-close").addEventListener("click", () => closeNavigator());
+
+  // Review screen
+  document.getElementById("btn-back-to-exam").addEventListener("click", () => showScreen("exam"));
+  document.getElementById("btn-confirm-submit").addEventListener("click", () => {
+    if(confirm("Submit your exam now? You can't change answers after submitting.")) submitExam();
+  });
+
+  // Results screen
+  document.getElementById("review-toggle").addEventListener("click", (e) => {
+    const tog = e.currentTarget;
+    const det = document.getElementById("review-details");
+    tog.classList.toggle("open");
+    det.classList.toggle("show");
+  });
+
+  // Time-up modal
+  document.getElementById("btn-time-up-ok").addEventListener("click", () => {
+    document.getElementById("time-up-modal").classList.remove("open");
+    submitExam();
+  });
+
+  // Warn before leaving in the middle of exam
+  window.addEventListener("beforeunload", (e) => {
+    if(state.inProgress && document.body.dataset.active === "exam"){
+      e.preventDefault();
+      e.returnValue = "";
+    }
+  });
+});
+</script>
+</body></html>
