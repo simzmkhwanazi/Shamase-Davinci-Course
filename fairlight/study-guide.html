@@ -1,0 +1,1022 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d0f17">
+<title>Fairlight Certification — Study Guide — Shamase Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0f17;--surface:#161a24;--surface-2:#1c2130;--surface-3:#232936;
+--border:#252a36;--border-2:#343b4a;--text:#e8e6e0;--muted:#8b8e98;--dim:#5d626d;
+--gold:#d4a574;--gold-dim:#a07d52;--teal:#5dc8b7;--red:#ec5a5a;--green:#7ec98e;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;line-height:1.6;font-size:16px}
+body{background-image:radial-gradient(ellipse at top,rgba(212,165,116,.05),transparent 60%);min-height:100vh}
+a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:820px;margin:0 auto;padding:2.5rem 1.25rem 6rem}
+h1,h2,h3{font-family:'Fraunces',serif;letter-spacing:-.015em;font-weight:400}
+h1{font-size:clamp(2.1rem,7vw,3rem);margin:0 0 .4rem;font-variation-settings:"opsz" 144}
+h2{font-size:1.7rem;color:var(--gold);font-style:italic;margin:2.4rem 0 .8rem}
+h3{font-size:1.12rem;color:var(--teal);margin:1.6rem 0 .6rem;font-style:normal}
+h4{font-family:'JetBrains Mono',monospace;font-size:.74rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin:1.4rem 0 .6rem;font-weight:600}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.22em;color:var(--teal);margin-bottom:1rem}
+.lede{font-family:'Fraunces',serif;font-style:italic;font-size:1.12rem;color:var(--muted);margin:.6rem 0 1.6rem}
+strong{color:var(--gold);font-weight:600}em{color:var(--teal);font-style:italic}
+p{margin:.7rem 0}ul{margin:.6rem 0;padding-left:1.3rem}li{margin:.4rem 0}
+code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--surface-2);padding:.12em .42em;border-radius:3px;color:var(--gold);border:1px solid var(--border)}
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin:1.6rem 0 2.4rem}
+.toc h4{margin-top:0}
+.toc ol{margin:.4rem 0;padding-left:1.3rem}.toc li{margin:.45rem 0}
+.module{border-top:2px solid var(--border-2);padding-top:1rem;margin-top:3rem}
+.module .mnum{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.18em;color:var(--gold-dim);text-transform:uppercase}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.3rem;margin:1rem 0}
+.card.teal{border-left:3px solid var(--teal)}
+.card.gold{border-left:3px solid var(--gold)}
+.card.red{border-left:3px solid var(--red)}
+.kbd-table{width:100%;border-collapse:collapse;margin:.6rem 0;font-size:.92rem}
+.kbd-table td{padding:.5rem .7rem;border-bottom:1px solid var(--border);vertical-align:top}
+.kbd-table td.k{font-family:'JetBrains Mono',monospace;color:var(--gold);white-space:nowrap;width:38%}
+.checks{margin:1rem 0}
+.check{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin:.8rem 0}
+.check .qq{font-weight:500;margin-bottom:.7rem}
+.check .qnum{font-family:'JetBrains Mono',monospace;color:var(--gold-dim);font-size:.75rem;margin-right:.4rem}
+.opt{display:block;width:100%;text-align:left;background:var(--surface-2);border:1.5px solid var(--border-2);border-radius:8px;color:var(--text);padding:.7rem .9rem;margin:.4rem 0;font-family:'Sora',sans-serif;font-size:.92rem;cursor:pointer;transition:all .12s}
+.opt:hover{border-color:var(--gold-dim)}
+.opt .l{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--teal);margin-right:.5rem}
+.opt.correct{background:rgba(126,201,142,.14);border-color:var(--green)}
+.opt.correct .l{color:var(--green)}
+.opt.wrong{background:rgba(236,90,90,.12);border-color:var(--red)}
+.opt.wrong .l{color:var(--red)}
+.exp{display:none;margin-top:.7rem;padding-top:.7rem;border-top:1px dashed var(--border-2);color:var(--muted);font-size:.9rem}
+.exp.show{display:block}
+.exp strong.lbl{display:block;font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;color:var(--teal);text-transform:uppercase;margin-bottom:.3rem}
+footer{text-align:center;padding:2.5rem 1rem 0;color:var(--dim);font-size:.7rem;font-family:'JetBrains Mono',monospace;letter-spacing:.1em}
+.backlink{display:inline-block;margin-bottom:1.5rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.05em}
+</style></head><body><main class="wrap">
+<a class="backlink" href="index.html">← Fairlight Certification</a>
+<div class="eyebrow">Shamase Studios · Fairlight · Study Guide</div>
+<h1>The Fairlight Audio Course</h1>
+<p class="lede">A complete written curriculum for audio post in DaVinci Resolve — built for talking-head,
+commercial, corporate and location work. Work through each module, then test yourself with the
+Knowledge Checks before sitting the certification exams.</p>
+
+<div class="toc"><h4>Modules</h4><ol>
+<li><a href="#m1">Introduction to Audio &amp; the Fairlight Page</a></li>
+<li><a href="#m2">Editing Dialogue</a></li>
+<li><a href="#m3">Sound Design &amp; Effects Editing</a></li>
+<li><a href="#m4">Recording Voiceover &amp; ADR</a></li>
+<li><a href="#m5">Mixing</a></li>
+<li><a href="#m6">Repairing &amp; Restoring Audio</a></li>
+<li><a href="#m7">Delivering &amp; Mastering</a></li>
+</ol></div>
+<section class="module" id="m1">
+<div class="mnum">Module 01</div>
+<h2>Introduction to Audio &amp; the Fairlight Page</h2>
+<h3>Chapter overview</h3>
+<p>Fairlight is DaVinci Resolve's built-in digital audio workstation (DAW). This module orients you in the page, the meters and the core vocabulary so every later skill has a home. Because Fairlight and the Edit page share one timeline, you move into serious audio work without exporting or re-importing anything.</p>
+<h3>Detailed lesson notes</h3>
+<h4>The page layout</h4><ul>
+<li>The <strong>timeline</strong> sits in the centre with one lane (track) per audio element.</li>
+<li>The <strong>Index</strong> (left) lists tracks and markers and controls track visibility.</li>
+<li>The <strong>Mixer</strong> (right) is the channel-strip view: a fader, pan, EQ, dynamics and bus routing for every track, plus the buses and the Main.</li>
+<li><strong>Transport controls and the toolbar</strong> run along the bottom.</li>
+</ul>
+<h4>Reading levels</h4><ul>
+<li>Digital meters read <strong>dBFS</strong> (decibels relative to full scale). <strong>0 dBFS is the ceiling</strong> — go above it and you clip (distort).</li>
+<li>Meters turning <em>red</em> at the top warn you of clipping. Pull the level down to restore headroom.</li>
+<li>Perceived loudness for delivery is measured separately in <strong>LUFS</strong> (covered in Module 7).</li>
+</ul>
+<h4>Core vocabulary</h4><ul>
+<li><strong>Clip</strong>: one segment of audio sitting on a track. <strong>Track</strong>: the lane that holds clips. <strong>Bus</strong>: a destination that sums multiple tracks.</li>
+<li><strong>Playhead</strong>: your current position in the timeline.</li>
+<li><strong>Clip gain</strong> changes one clip's level; the <strong>track fader</strong> changes the whole track's level. Set clip gain first, then mix with faders.</li>
+<li>Track formats describe channel count: <strong>mono</strong> (1), <strong>stereo</strong> (2), <strong>5.1</strong> (6), <strong>adaptive</strong> (variable).</li>
+</ul>
+<h4>Transport &amp; navigation</h4><ul>
+<li><strong>Spacebar</strong> plays/stops. <strong>J-K-L</strong> shuttles: J back, K stop, L forward — tap L or J repeatedly to speed up.</li>
+<li>Zoom in horizontally to see waveform detail down to sample level; this precision underpins editing and repair.</li>
+</ul>
+<div class="card gold"><h4>Key takeaways</h4><ul>
+<li>Fairlight is a full DAW inside Resolve, sharing the Edit page's timeline.</li>
+<li>0 dBFS is the hard digital ceiling — never clip; keep headroom.</li>
+<li>Clip gain = one clip; fader = whole track. Balance clip gain before mixing.</li>
+<li>Solo (S) and Mute (M) on track headers are non-destructive monitoring tools.</li>
+</ul></div>
+<h3>Important shortcuts &amp; controls</h3>
+<table class="kbd-table">
+<tr><td class="k">Spacebar</td><td>Play / stop</td></tr>
+<tr><td class="k">J / K / L</td><td>Shuttle back / stop / forward (repeat to speed up)</td></tr>
+<tr><td class="k">S / M</td><td>Solo / Mute a track</td></tr>
+<tr><td class="k">Cmd/Ctrl + S</td><td>Save project</td></tr>
+</table>
+<div class="card red"><h4>Common mistakes</h4><ul>
+<li>Treating red meters as &#x27;good and loud&#x27; — red means clipping.</li>
+<li>Riding the track fader to fix one loud clip instead of using clip gain.</li>
+<li>Exporting/re-importing audio instead of just switching to the Fairlight page.</li>
+<li>Ignoring headroom and mixing everything near 0 dBFS.</li>
+</ul></div>
+<div class="card teal"><h4>Practical exercise</h4>
+<p>Open a finished interview edit, switch to Fairlight, and identify the Index, Mixer, timeline and transport. Solo each track in turn, watch the meters, and bring any clipping clip down with clip gain until peaks sit comfortably below 0 dBFS.</p></div>
+<div class="card"><h4>Exam preparation notes</h4><ul>
+<li>Know the role of each panel: Index, Mixer, timeline, transport.</li>
+<li>dBFS vs LUFS; 0 dBFS = clipping ceiling.</li>
+<li>Clip gain vs track fader; mono/stereo/5.1/adaptive formats.</li>
+<li>J-K-L and spacebar transport behaviour.</li>
+</ul></div>
+<h3>Knowledge check</h3>
+<div class="checks">
+<div class="check">
+<div class="qq"><span class="qnum">1.1</span>Which page is Resolve&#x27;s dedicated audio workstation?</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Edit</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Fairlight</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Color</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Cut</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Fairlight is the full DAW page; Edit has tracks but is picture-led.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">1.2</span>0 dBFS represents…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Silence</button>
+<button class="opt" data-correct="1"><span class="l">B</span>The digital clipping ceiling</button>
+<button class="opt" data-correct="0"><span class="l">C</span>The loudness target</button>
+<button class="opt" data-correct="0"><span class="l">D</span>A pan position</button>
+<div class="exp"><strong class="lbl">Explanation</strong>0 dBFS is the maximum digital level; above it the signal clips.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">1.3</span>Clip gain adjusts…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>The whole track</button>
+<button class="opt" data-correct="1"><span class="l">B</span>One clip&#x27;s level</button>
+<button class="opt" data-correct="0"><span class="l">C</span>The Main bus</button>
+<button class="opt" data-correct="0"><span class="l">D</span>The monitor only</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Clip gain is per-clip; the fader is per-track.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">1.4</span>J-K-L keys control…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>EQ</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Transport/shuttle</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Pan</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Buses</button>
+<div class="exp"><strong class="lbl">Explanation</strong>J back, K stop, L forward; repeat taps speed up.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">1.5</span>The Mixer panel contains…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Markers</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Faders, pan, EQ, dynamics, routing</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Imported media</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Grades</button>
+<div class="exp"><strong class="lbl">Explanation</strong>The Mixer is the channel-strip workspace.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">1.6</span>A mono track carries…</div>
+<button class="opt" data-correct="1"><span class="l">A</span>One channel</button>
+<button class="opt" data-correct="0"><span class="l">B</span>Two channels</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Six channels</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Variable channels</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Mono = 1 channel; stereo = 2; 5.1 = 6; adaptive = variable.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">1.7</span>Red at the top of a meter means…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Muted</button>
+<button class="opt" data-correct="0"><span class="l">B</span>Soloed</button>
+<button class="opt" data-correct="1"><span class="l">C</span>Clipping</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Flagged</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Red = the signal hit/exceeded 0 dBFS.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">1.8</span>Fairlight and the Edit page…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Are separate projects</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Share one timeline</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Need a render to sync</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Can&#x27;t both edit audio</button>
+<div class="exp"><strong class="lbl">Explanation</strong>They&#x27;re two views of the same timeline.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">1.9</span>The S button on a track header…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Saves</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Solos</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Splits</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Shows spectrogram</button>
+<div class="exp"><strong class="lbl">Explanation</strong>S solos; M mutes.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">1.10</span>Spacebar in Fairlight…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Splits the clip</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Plays/stops</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Adds a marker</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Opens the Mixer</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Spacebar is play/stop.</div>
+</div>
+</div>
+</section>
+<section class="module" id="m2">
+<div class="mnum">Module 02</div>
+<h2>Editing Dialogue</h2>
+<h3>Chapter overview</h3>
+<p>Dialogue is the spine of talking-head, interview and corporate work. This module covers organising production sound, cutting cleanly, smoothing edits, and keeping picture and audio in sync — the day-to-day craft that makes speech sound effortless.</p>
+<h3>Detailed lesson notes</h3>
+<h4>Organise first</h4><ul>
+<li>Put each character / microphone on its <strong>own track</strong> so you can choose the best mic, balance levels and process each voice independently.</li>
+<li>Keep and reuse <strong>room tone</strong> (ambient 'silence' recorded on location) — it fills gaps so cuts don't drop to dead digital silence.</li>
+</ul>
+<h4>Cutting &amp; smoothing</h4><ul>
+<li>Split clips with the <strong>razor / Cmd-Ctrl+B</strong> at the playhead.</li>
+<li>Add small <strong>fades</strong> to clip edges and <strong>crossfades</strong> between overlapping takes — they remove the clicks caused by cutting on a non-zero waveform point.</li>
+<li><strong>Edit Selection (A)</strong> moves whole clips; <strong>Range Selection (R)</strong> selects a span of time across tracks regardless of clip boundaries.</li>
+</ul>
+<h4>Levelling &amp; sync</h4><ul>
+<li>Use <strong>clip gain / volume keyframes</strong> to lift quiet words and tame loud ones <em>before</em> compression.</li>
+<li>Use <strong>snapping</strong> plus <strong>nudge keys</strong> for frame-accurate placement and lip-sync.</li>
+<li><strong>Link/group</strong> related clips so trims keep them in sync; <strong>disable</strong> (don't delete) a clip to silence it non-destructively.</li>
+</ul>
+<h4>Comping the best performance</h4><ul>
+<li>A/B takes by soloing each in place.</li>
+<li>Splice the clearest word or phrase from another take and match its level/EQ so the join is invisible.</li>
+<li>Keep natural breaths (or gently reduce them) — stripping every breath makes speech robotic.</li>
+</ul>
+<div class="card gold"><h4>Key takeaways</h4><ul>
+<li>Separate characters/mics onto their own tracks.</li>
+<li>Fades and crossfades kill edit-point clicks.</li>
+<li>Room tone fills gaps so cuts are inaudible.</li>
+<li>Level with clip gain before EQ and compression.</li>
+</ul></div>
+<h3>Important shortcuts &amp; controls</h3>
+<table class="kbd-table">
+<tr><td class="k">A</td><td>Edit Selection mode (move whole clips)</td></tr>
+<tr><td class="k">R</td><td>Range Selection mode (select a time span)</td></tr>
+<tr><td class="k">Cmd/Ctrl + B</td><td>Split clip at playhead</td></tr>
+<tr><td class="k">M</td><td>Add marker</td></tr>
+<tr><td class="k">N</td><td>Toggle snapping (commonly)</td></tr>
+</table>
+<div class="card red"><h4>Common mistakes</h4><ul>
+<li>Cutting without fades, leaving clicks at every edit.</li>
+<li>Deleting room tone, then fighting dead-silent gaps.</li>
+<li>Stripping every breath until speech sounds unnatural.</li>
+<li>Compressing before levelling, so the compressor chases a moving target.</li>
+</ul></div>
+<div class="card teal"><h4>Practical exercise</h4>
+<p>Take a two-minute interview. Separate the speaker onto a clean track, remove an &#x27;umm&#x27; and a chair creak, patch the gaps with room tone, add edge fades, and even out two quiet words with clip gain. The cut should sound continuous and natural.</p></div>
+<div class="card"><h4>Exam preparation notes</h4><ul>
+<li>A vs R selection modes; razor/split.</li>
+<li>Why fades/crossfades remove clicks.</li>
+<li>Role of room tone in gap-filling.</li>
+<li>Order: edit → clean → level → process.</li>
+</ul></div>
+<h3>Knowledge check</h3>
+<div class="checks">
+<div class="check">
+<div class="qq"><span class="qnum">2.1</span>First step organising production dialogue?</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Bounce to one clip</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Each character/mic on its own track</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Delete room tone</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Add reverb</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Separate sources for independent control.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">2.2</span>Small fades on clip edges…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Change pitch</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Remove edit-point clicks</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Raise sample rate</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Create surround</button>
+<div class="exp"><strong class="lbl">Explanation</strong>They smooth the waveform discontinuity that clicks.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">2.3</span>Room tone is used to…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Replace dialogue</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Fill gaps so silence isn&#x27;t dead</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Set loudness</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Act as a click track</button>
+<div class="exp"><strong class="lbl">Explanation</strong>It keeps ambience continuous across cuts.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">2.4</span>Range Selection (R) selects…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Whole clips only</button>
+<button class="opt" data-correct="1"><span class="l">B</span>A time span across tracks</button>
+<button class="opt" data-correct="0"><span class="l">C</span>The Main bus</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Markers</button>
+<div class="exp"><strong class="lbl">Explanation</strong>R selects by time; A selects whole clips.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">2.5</span>Blend two overlapping takes with a…</div>
+<button class="opt" data-correct="1"><span class="l">A</span>Crossfade</button>
+<button class="opt" data-correct="0"><span class="l">B</span>Bus</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Marker</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Submix</button>
+<div class="exp"><strong class="lbl">Explanation</strong>A crossfade fades one out as the other fades in.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">2.6</span>To even out level swings within one lav clip, use…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>A gate</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Clip gain / volume keyframes</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Reverb</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Pitch shift</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Ride clip gain before compression.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">2.7</span>Disabling a clip…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Deletes it</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Silences it non-destructively</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Exports it</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Makes it a marker</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Disabled clips stay in place, silent, reversible.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">2.8</span>Frame-accurate sync uses…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Reverb + chorus</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Snapping + nudge keys</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Solo + mute</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Pan + EQ</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Snapping locks to references; nudge fine-tunes.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">2.9</span>Best practice on breaths?</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Remove all</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Keep/reduce, not eliminate</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Replace with silence</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Add reverb</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Natural breaths keep speech human.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">2.10</span>Correct order of operations?</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Compress then level</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Edit/level/clean, then EQ/compress</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Master first</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Music before dialogue</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Clean and even the source before shaping it.</div>
+</div>
+</div>
+</section>
+<section class="module" id="m3">
+<div class="mnum">Module 03</div>
+<h2>Sound Design &amp; Effects Editing</h2>
+<h3>Chapter overview</h3>
+<p>Sound design adds impact, realism and emotion. In Fairlight that means a disciplined spotting pass, smart use of the Sound Library, layering elements into custom effects, and building believable ambience — all routed so you can control whole layers at once.</p>
+<h3>Detailed lesson notes</h3>
+<h4>Spot before you build</h4><ul>
+<li>Do a <strong>spotting pass</strong>: place <strong>named markers (M)</strong> at every point that needs a sound. This is your build map.</li>
+</ul>
+<h4>The Sound Library</h4><ul>
+<li>Search, <strong>preview/audition</strong> and drag in effects from the built-in library; you can <strong>mount your own folders</strong> so your whole collection is searchable in-app.</li>
+</ul>
+<h4>Layering &amp; organisation</h4><ul>
+<li>Keep <strong>hard FX</strong> (footsteps, slams), <strong>designed elements</strong> (whooshes, impacts, drones) and <strong>ambience</strong> on separate tracks.</li>
+<li><strong>Layer</strong> multiple elements into one richer effect (e.g. whoosh + low boom + transient).</li>
+<li><strong>Colour-code</strong> tracks by type (dialogue / Foley / ambience / SFX) so a dense session stays readable.</li>
+</ul>
+<h4>Control the layer with a bus</h4><ul>
+<li>Route all SFX tracks to a single <strong>SFX sub-bus</strong> so one fader rides the entire effects layer.</li>
+<li>Use <strong>clip gain</strong> for per-effect level tweaks without touching the rest.</li>
+<li><strong>Foley</strong> is performed everyday sound (footsteps, cloth, props) recorded to picture for realism.</li>
+</ul>
+<div class="card gold"><h4>Key takeaways</h4><ul>
+<li>Spot with named markers first; design second.</li>
+<li>Audition in the Sound Library, commit only the keeper.</li>
+<li>Layer elements for custom, impactful sounds.</li>
+<li>Bus a layer to one fader for instant control.</li>
+</ul></div>
+<h3>Important shortcuts &amp; controls</h3>
+<table class="kbd-table">
+<tr><td class="k">M</td><td>Add marker (build your spotting list)</td></tr>
+<tr><td class="k">Double-click marker</td><td>Name/note the cue</td></tr>
+<tr><td class="k">Drag from Sound Library</td><td>Place an effect on a track</td></tr>
+</table>
+<div class="card red"><h4>Common mistakes</h4><ul>
+<li>Dropping effects randomly instead of spotting first.</li>
+<li>Mixing SFX onto the dialogue track, losing independent control.</li>
+<li>Relying on one thin library file instead of layering for weight.</li>
+<li>Audible loop seams in short ambience beds (fix with crossfades).</li>
+</ul></div>
+<div class="card teal"><h4>Practical exercise</h4>
+<p>Spot a 30-second advert with named markers. Build one &#x27;whoosh-to-impact&#x27; transition by layering three elements, add an ambience bed under the scene, route all SFX to one sub-bus, and balance the whole layer with a single fader.</p></div>
+<div class="card"><h4>Exam preparation notes</h4><ul>
+<li>Spotting list via markers; Sound Library audition/mount.</li>
+<li>Track separation: hard FX / design / ambience.</li>
+<li>Layering concept; SFX sub-bus for group control.</li>
+<li>Foley vs ADR distinction.</li>
+</ul></div>
+<h3>Knowledge check</h3>
+<div class="checks">
+<div class="check">
+<div class="qq"><span class="qnum">3.1</span>A spotting list is built with…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Buses</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Named markers</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Grades</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Codecs</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Markers map every needed sound.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">3.2</span>Audition an effect before committing in the…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Deliver queue</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Sound Library</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Index</button>
+<button class="opt" data-correct="0"><span class="l">D</span>ADR panel</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Preview in the Sound Library, then drag in.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">3.3</span>Hard FX belong on…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>The dialogue track</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Dedicated SFX tracks</button>
+<button class="opt" data-correct="0"><span class="l">C</span>The Main bus</button>
+<button class="opt" data-correct="0"><span class="l">D</span>A muted track</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Separate so you can group and balance them.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">3.4</span>Layering means…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Normalising</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Combining elements into one richer sound</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Bouncing</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Patching</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Stack complementary elements into one effect.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">3.5</span>Route all SFX to one bus to…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Delete dialogue</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Ride the whole layer with one fader</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Change sample rate</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Export faster</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Group control via a sub-bus.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">3.6</span>Foley is…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Dialogue replacement</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Performed everyday sounds to picture</button>
+<button class="opt" data-correct="0"><span class="l">C</span>A loudness standard</button>
+<button class="opt" data-correct="0"><span class="l">D</span>A bus type</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Footsteps, cloth, props performed in sync.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">3.7</span>Ambience beds provide…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>A click track</button>
+<button class="opt" data-correct="1"><span class="l">B</span>A continuous sense of place</button>
+<button class="opt" data-correct="0"><span class="l">C</span>The loudness meter</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Pan automation</button>
+<div class="exp"><strong class="lbl">Explanation</strong>They ground a scene&#x27;s environment.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">3.8</span>Per-effect level changes use…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>The Main fader</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Clip gain</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Monitor level</button>
+<button class="opt" data-correct="0"><span class="l">D</span>The loudness target</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Clip gain rides one effect independently.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">3.9</span>Colour-coding tracks mainly helps with…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Loudness</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Reading a busy session</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Sample rate</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Pitch</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Visual organisation of complex sessions.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">3.10</span>Audible loop in a short ambience is fixed by…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Muting</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Crossfading overlapping copies</button>
+<button class="opt" data-correct="0"><span class="l">C</span>A marker</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Higher bit depth</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Crossfades hide the loop seam.</div>
+</div>
+</div>
+</section>
+<section class="module" id="m4">
+<div class="mnum">Module 04</div>
+<h2>Recording Voiceover &amp; ADR</h2>
+<h3>Chapter overview</h3>
+<p>Sometimes you must capture new audio: a narration to picture, or replacement dialogue when production sound is unusable. This module covers routing inputs, arming tracks, setting safe levels, the ADR panel, and blending new recordings into the scene.</p>
+<h3>Detailed lesson notes</h3>
+<h4>Setting up to record</h4><ul>
+<li>Use <strong>Patch Input/Output</strong> to route your mic/source input to a track and route tracks to outputs.</li>
+<li><strong>Record-enable (arm)</strong> only the target track — stray arms risk recording onto the wrong track.</li>
+<li>Set a <strong>healthy level with headroom</strong>: peaks well below 0 dBFS. Clipped recordings can't be fixed.</li>
+<li><strong>Monitor on headphones</strong> when recording live to picture so speaker output doesn't bleed into the mic.</li>
+</ul>
+<h4>ADR (Automated Dialogue Replacement)</h4><ul>
+<li>ADR re-records a line in sync to replace ruined production audio.</li>
+<li>The <strong>ADR panel</strong> manages a cue list, take recording, and <strong>count-in beeps/streamers</strong> plus a <strong>guide track</strong> so the performer lands exactly on time.</li>
+<li><strong>Loop/punch recording</strong> lets you re-take a section without rebuilding the session.</li>
+</ul>
+<h4>Blending the new audio</h4><ul>
+<li>Record <strong>multiple takes</strong>, then audition and comp the best performance.</li>
+<li>Match <strong>level, EQ and the scene's space</strong> (room tone/reverb) so the new line sits believably — a pristine line stands out against a noisy scene.</li>
+</ul>
+<div class="card gold"><h4>Key takeaways</h4><ul>
+<li>Patch input → arm the target track → set safe level → record.</li>
+<li>Headphones prevent mic bleed when recording to picture.</li>
+<li>ADR uses guide track + count-in cues for tight timing.</li>
+<li>Blend new recordings by matching level, EQ and ambience.</li>
+</ul></div>
+<h3>Important shortcuts &amp; controls</h3>
+<table class="kbd-table">
+<tr><td class="k">Arm/Record-enable button</td><td>Marks the track that will capture audio</td></tr>
+<tr><td class="k">Patch Input/Output</td><td>Route inputs to tracks, tracks to outputs</td></tr>
+<tr><td class="k">ADR panel</td><td>Cue list, guide track, count-in, take recording</td></tr>
+</table>
+<div class="card red"><h4>Common mistakes</h4><ul>
+<li>Recording with several tracks armed and overwriting the wrong one.</li>
+<li>Monitoring on speakers and capturing bleed/feedback.</li>
+<li>Peaking at 0 dBFS with no headroom.</li>
+<li>Leaving ADR too &#x27;clean&#x27; so it doesn&#x27;t match the scene.</li>
+</ul></div>
+<div class="card teal"><h4>Practical exercise</h4>
+<p>Add a narration track, patch your mic, arm only that track, set levels for safe headroom on headphones, and record three takes of a line. Comp the best, then drop matching room tone under it so it blends with the scene.</p></div>
+<div class="card"><h4>Exam preparation notes</h4><ul>
+<li>Patch Input/Output and arming workflow.</li>
+<li>Why headphones for live-to-picture recording.</li>
+<li>ADR = Automated Dialogue Replacement; guide track + cues.</li>
+<li>Blending: level/EQ/ambience matching.</li>
+</ul></div>
+<h3>Knowledge check</h3>
+<div class="checks">
+<div class="check">
+<div class="qq"><span class="qnum">4.1</span>Before recording onto a track you must…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Render</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Arm it and set its input</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Delete the Main</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Open Color</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Arm the target track and patch an input.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">4.2</span>Patch Input/Output is for…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Grading</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Routing inputs to tracks/outputs</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Loudness</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Markers</button>
+<div class="exp"><strong class="lbl">Explanation</strong>It&#x27;s the routing matrix.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">4.3</span>ADR stands for…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Audio Data Recording</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Automated Dialogue Replacement</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Ambient Dynamic Range</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Adaptive Direct Routing</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Re-recording dialogue to picture.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">4.4</span>Monitor on headphones when recording to picture to…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Raise sample rate</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Prevent speaker bleed into the mic</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Change codec</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Add reverb</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Stops feedback/bleed into the live mic.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">4.5</span>The ADR guide track…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Is the Main bus</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Plays the original line for timing reference</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Is a meter</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Is a colour preset</button>
+<div class="exp"><strong class="lbl">Explanation</strong>The performer matches its timing.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">4.6</span>Set record levels so peaks…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Hit 0 dBFS</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Sit safely below 0 dBFS (headroom)</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Stay in the red</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Are muted</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Headroom protects against clipping.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">4.7</span>Recording multiple takes lets you…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Reduce bit depth</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Choose the best performance</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Skip editing</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Export faster</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Comp the strongest take.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">4.8</span>Count-in beeps/streamers exist to…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Trigger render</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Cue the performer to start on time</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Set codec</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Add a fade</button>
+<div class="exp"><strong class="lbl">Explanation</strong>They give a precise start point.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">4.9</span>Loop recording is used to…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Render in a loop</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Capture repeated takes without stopping</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Change bus format</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Solo the Main</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Cycle a cue for multiple takes.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">4.10</span>To make clean ADR sit in a noisy scene…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Leave it pristine</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Add the scene&#x27;s room tone/ambience under it</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Add heavy reverb everywhere</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Lower the whole mix</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Match the scene&#x27;s noise floor and space.</div>
+</div>
+</div>
+</section>
+<section class="module" id="m5">
+<div class="mnum">Module 05</div>
+<h2>Mixing</h2>
+<h3>Chapter overview</h3>
+<p>Mixing balances every element into a clear, controlled whole. This module covers panning, EQ, dynamics (compressor, limiter, gate), buses and sends, and automation — with dialogue intelligibility as the constant priority.</p>
+<h3>Detailed lesson notes</h3>
+<h4>Balance &amp; space</h4><ul>
+<li>The <strong>fader</strong> sets a track's overall level — your primary balancing tool.</li>
+<li><strong>Pan</strong> places sound across the stereo field. Keep <strong>lead dialogue centred</strong>; widen music/ambience to make space for the voice.</li>
+</ul>
+<h4>Tone &amp; dynamics</h4><ul>
+<li><strong>EQ</strong> boosts/cuts frequency bands. A <strong>high-pass (low-cut)</strong> on dialogue clears rumble below the voice.</li>
+<li>A <strong>compressor</strong> reduces dynamic range (evens loud/soft); <strong>threshold</strong> sets where it acts, <strong>ratio</strong> how hard.</li>
+<li>A <strong>limiter</strong> is a brick-wall ceiling that stops peaks exceeding a set level. A <strong>noise gate</strong> silences signal below a threshold (cleaning gaps).</li>
+<li>Track EQ shapes a whole track; Clip EQ fixes one clip; bus EQ shapes a group.</li>
+</ul>
+<h4>Routing &amp; automation</h4><ul>
+<li>A <strong>bus</strong> sums tracks. <strong>Main 1</strong> is the master output. An <strong>Aux send</strong> feeds several tracks to one shared effect (e.g. reverb).</li>
+<li><strong>Automation</strong> records fader/pan/plugin moves that replay over time. <strong>Touch</strong> writes only while you hold the control; <strong>Latch</strong> keeps the last value; <strong>Write</strong> overwrites continuously.</li>
+<li><strong>Duck</strong> music under speech with level automation or side-chain ducking so dialogue always leads.</li>
+<li><strong>Monitor/Control-Room level</strong> changes only what you hear — never the actual mix.</li>
+</ul>
+<div class="card gold"><h4>Key takeaways</h4><ul>
+<li>Dialogue leads: keep it centred and clear; duck the bed under it.</li>
+<li>High-pass dialogue to clear rumble; compress to even dynamics.</li>
+<li>Use sub-buses for cohesive group processing; aux sends for shared reverb.</li>
+<li>Monitor level ≠ mix level.</li>
+</ul></div>
+<h3>Important shortcuts &amp; controls</h3>
+<table class="kbd-table">
+<tr><td class="k">Fader</td><td>Track output level</td></tr>
+<tr><td class="k">S / M</td><td>Solo / Mute while balancing</td></tr>
+<tr><td class="k">Automation mode (Touch/Latch/Write)</td><td>How moves are recorded</td></tr>
+</table>
+<div class="card red"><h4>Common mistakes</h4><ul>
+<li>Letting dialogue get buried so it vanishes at low volume.</li>
+<li>Compressing noisy audio hard, making it &#x27;pump&#x27;.</li>
+<li>Putting reverb on every clip instead of one aux send.</li>
+<li>Mixing to a too-quiet monitor and over-pushing levels.</li>
+</ul></div>
+<div class="card teal"><h4>Practical exercise</h4>
+<p>Mix a talking-head with music: high-pass and gently compress the dialogue on a dialogue sub-bus, centre the voice, widen the music, and automate the music to duck under the presenter. Confirm the voice stays clear at low volume on a phone.</p></div>
+<div class="card"><h4>Exam preparation notes</h4><ul>
+<li>Compressor threshold/ratio; limiter vs compressor; gate.</li>
+<li>High-pass purpose on dialogue.</li>
+<li>Bus vs Aux send; Main 1 as master.</li>
+<li>Automation modes; monitor level vs mix level.</li>
+</ul></div>
+<h3>Knowledge check</h3>
+<div class="checks">
+<div class="check">
+<div class="qq"><span class="qnum">5.1</span>Lead dialogue is usually panned…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Hard left</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Centre</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Hard right</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Randomly</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Centred voice anchors the mix.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">5.2</span>A high-pass filter on dialogue…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Adds bass</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Removes low rumble</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Boosts loudness</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Creates reverb</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Low-cut clears rumble below the voice.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">5.3</span>A compressor…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Adds echo</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Reduces dynamic range</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Changes pitch</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Makes markers</button>
+<div class="exp"><strong class="lbl">Explanation</strong>It evens out loud and soft.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">5.4</span>A limiter…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Boosts bass</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Acts as a hard ceiling on peaks</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Changes frame rate</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Only works on buses</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Brick-wall ceiling that protects against clipping.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">5.5</span>A noise gate…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Adds reverb</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Silences signal below a threshold</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Raises loudness</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Pans the track</button>
+<div class="exp"><strong class="lbl">Explanation</strong>It closes on quiet passages.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">5.6</span>The default master bus is…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Aux 1</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Main 1</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Solo bus</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Sound Library</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Main 1 carries the final mix.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">5.7</span>An Aux send is used to…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Replace dialogue</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Share one effect (e.g. reverb) across tracks</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Set frame rate</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Disable a track</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Send tracks to a shared effect.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">5.8</span>Touch automation writes…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Always</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Only while you hold the control</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Never</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Only on buses</button>
+<div class="exp"><strong class="lbl">Explanation</strong>It reverts when released; Write overwrites continuously.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">5.9</span>To keep a voiceover clear over music, you…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Pan VO hard left</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Duck the music under the VO</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Raise both to 0 dBFS</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Mute the VO</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Automate/side-chain the music down under speech.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">5.10</span>Monitor/Control-Room level affects…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>The exported mix</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Only what you hear</button>
+<button class="opt" data-correct="0"><span class="l">C</span>The codec</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Marker colour</button>
+<div class="exp"><strong class="lbl">Explanation</strong>It&#x27;s your listening volume, not the mix.</div>
+</div>
+</div>
+</section>
+<section class="module" id="m6">
+<div class="mnum">Module 06</div>
+<h2>Repairing &amp; Restoring Audio</h2>
+<h3>Chapter overview</h3>
+<p>Location work means rooms you can't treat: hum, hiss, clicks and reverberant spaces. Fairlight FX is the bundled plugin set for fixing them. The golden rule: diagnose first, repair before you mix, and use the least processing that works.</p>
+<h3>Detailed lesson notes</h3>
+<h4>Know your tools (Fairlight FX)</h4><ul>
+<li><strong>De-Hummer</strong>: removes mains hum (50/60 Hz) and harmonics from location power/lighting.</li>
+<li><strong>De-Esser</strong>: tames harsh sibilance ('s', 'sh') without dulling the whole voice.</li>
+<li><strong>Noise Reduction</strong>: learn a <em>profile</em> from a voice-free moment, then subtract that signature. Use conservatively — too much makes voices watery/metallic.</li>
+<li><strong>De-Click / De-Crackle</strong>: remove short transient pops and crackle.</li>
+<li><strong>Voice Isolation</strong> (recent versions): AI separation that pulls clean dialogue out of noisy/reverberant rooms.</li>
+</ul>
+<h4>Method</h4><ul>
+<li><strong>Diagnose first</strong>: listen and identify each specific defect (hum, hiss, click, reverb) before choosing a tool. A frequency analyser/spectrogram helps you see tones you might miss.</li>
+<li>Match repair <strong>scope</strong> to the problem: a one-off click gets a clip/sample-level fix; a consistent shoot-day defect gets a track-level chain or saved preset.</li>
+<li><strong>Repair before you mix</strong>: clean source makes EQ/compression/levels behave predictably; heavy compression on noisy audio pumps the noise.</li>
+</ul>
+<h4>Finishing</h4><ul>
+<li>After heavy de-noising, lay a low bed of <strong>matching room tone</strong> so cleaned gaps feel natural, and restore lost presence with a gentle EQ lift.</li>
+<li><strong>A/B bypass</strong> every repair and check on multiple systems — confirm a real improvement, not just a change.</li>
+<li><strong>Clipping at the source is largely unrecoverable</strong> — mitigate, consider ADR, and capture clean levels next time.</li>
+</ul>
+<div class="card gold"><h4>Key takeaways</h4><ul>
+<li>Diagnose, then pick the matching tool.</li>
+<li>Noise Reduction needs a clean noise profile; less is more.</li>
+<li>Repair before mixing.</li>
+<li>Clipping is destructive — prevention beats repair.</li>
+</ul></div>
+<h3>Important shortcuts &amp; controls</h3>
+<table class="kbd-table">
+<tr><td class="k">Zoom to sample level</td><td>Find and remove individual clicks</td></tr>
+<tr><td class="k">Insert on clip vs track</td><td>Fix one clip vs process the whole track</td></tr>
+<tr><td class="k">Bypass (A/B)</td><td>Verify the repair genuinely helps</td></tr>
+</table>
+<div class="card red"><h4>Common mistakes</h4><ul>
+<li>Over-applying noise reduction, leaving watery/metallic artefacts.</li>
+<li>Compressing before repairing, so the noise pumps.</li>
+<li>Blanket Main-bus repair that harms clean elements.</li>
+<li>Trusting the waveform instead of listening on multiple systems.</li>
+</ul></div>
+<div class="card teal"><h4>Practical exercise</h4>
+<p>Take an untreated-room interview with AC hiss and a single cable click. Capture a noise profile from a clean moment and reduce the hiss conservatively, de-click the single pop at sample level, lay subtle room tone under the cleaned gaps, then A/B bypass to confirm improvement.</p></div>
+<div class="card"><h4>Exam preparation notes</h4><ul>
+<li>De-Hummer / De-Esser / Noise Reduction / De-Click roles.</li>
+<li>Noise profile learning; artefacts from over-processing.</li>
+<li>Repair-before-mix order; scope matching.</li>
+<li>Clipping is unrecoverable; Voice Isolation for rooms.</li>
+</ul></div>
+<h3>Knowledge check</h3>
+<div class="checks">
+<div class="check">
+<div class="qq"><span class="qnum">6.1</span>The bundled audio plugins are called…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>ResolveFX</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Fairlight FX</button>
+<button class="opt" data-correct="0"><span class="l">C</span>OpenFX</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Color FX</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Fairlight FX = the audio plugin set.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">6.2</span>Steady 50/60 Hz mains hum is removed with…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>De-Esser</button>
+<button class="opt" data-correct="1"><span class="l">B</span>De-Hummer</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Reverb</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Chorus</button>
+<div class="exp"><strong class="lbl">Explanation</strong>De-Hummer targets hum and harmonics.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">6.3</span>Harsh &#x27;sss&#x27; sounds are tamed with…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>De-Hummer</button>
+<button class="opt" data-correct="1"><span class="l">B</span>De-Esser</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Gate</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Flanger</button>
+<div class="exp"><strong class="lbl">Explanation</strong>A de-esser targets sibilance.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">6.4</span>Noise Reduction works best when you…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Guess settings</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Capture a noise profile from clean noise</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Mute the track</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Raise loudness</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Teach it the noise, then subtract it.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">6.5</span>Over-applying noise reduction causes…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Perfect audio</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Watery/metallic artefacts</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Higher sample rate</button>
+<button class="opt" data-correct="0"><span class="l">D</span>More markers</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Use the least amount that works.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">6.6</span>A single click on one clip is best fixed…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>On the whole track</button>
+<button class="opt" data-correct="1"><span class="l">B</span>At clip/sample level on that clip</button>
+<button class="opt" data-correct="0"><span class="l">C</span>On the Main bus</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Across the timeline</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Match scope to the problem.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">6.7</span>Best processing order for noisy, uneven, dull dialogue?</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Compress, EQ, de-noise</button>
+<button class="opt" data-correct="1"><span class="l">B</span>De-noise, EQ, compress</button>
+<button class="opt" data-correct="0"><span class="l">C</span>EQ, de-noise, nothing</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Master first</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Clean first, then tone, then dynamics.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">6.8</span>Clipped source audio is…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Always fully recoverable</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Largely unrecoverable</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Fixed by noise reduction</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Fixed by loudness</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Clipping destroys data permanently.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">6.9</span>A reverberant, echoey room is best helped by…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>More reverb</button>
+<button class="opt" data-correct="1"><span class="l">B</span>AI Voice Isolation</button>
+<button class="opt" data-correct="0"><span class="l">C</span>A gate alone</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Pitch shift</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Voice Isolation separates dialogue from the room.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">6.10</span>To verify a repair really helped…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Trust it blindly</button>
+<button class="opt" data-correct="1"><span class="l">B</span>A/B bypass and check on multiple systems</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Look at the waveform only</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Master louder</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Confirm improvement by listening, not just looking.</div>
+</div>
+</div>
+</section>
+<section class="module" id="m7">
+<div class="mnum">Module 07</div>
+<h2>Delivering &amp; Mastering</h2>
+<h3>Chapter overview</h3>
+<p>Delivery makes your mix meet the spec of wherever it plays. This module covers loudness (LUFS), true peak, normalisation, the loudness meter, stems, and the Deliver page audio settings — so the same content lands correctly on broadcast, web and social.</p>
+<h3>Detailed lesson notes</h3>
+<h4>Loudness &amp; true peak</h4><ul>
+<li>Perceived loudness is measured in <strong>LUFS</strong>. Targets: <strong>broadcast ≈ -23 LUFS</strong> (EBU R128) / <strong>-24 LKFS</strong> (US ATSC A/85); <strong>online/social ≈ -14 LUFS</strong>; <strong>spoken-word/podcast ≈ -16 LUFS</strong>.</li>
+<li>Cap <strong>True Peak around -1 dBTP</strong> so lossy encoding doesn't push peaks into clipping.</li>
+<li>The Fairlight <strong>loudness meter</strong> shows Momentary, Short-term and <strong>Integrated</strong> (whole-programme average) — Integrated is what specs reference.</li>
+</ul>
+<h4>Hitting the target</h4><ul>
+<li><strong>Audio Normalization</strong> can target a peak level or a loudness standard (e.g. R128) to reach a target automatically.</li>
+<li>Watch the <strong>Main bus meter</strong> before export: no clipping, correct loudness, safe true peak.</li>
+<li>A clean master near <strong>-14 LUFS / -1 dBTP</strong> travels well across most social platforms; don't mix far hotter just to be turned down.</li>
+</ul>
+<h4>Stems &amp; export</h4><ul>
+<li>Set codec, sample rate and bit depth on the <strong>Deliver page → render settings → Audio tab</strong>. Professional masters are <strong>48 kHz / 24-bit</strong>.</li>
+<li>Deliver <strong>D/M/E stems</strong> (separate dialogue, music, effects buses) so clients can re-balance, re-version or dub. Keep <strong>dialogue separate + M&amp;E</strong> for translation.</li>
+<li>Confirm every sub-bus is routed to the <strong>Main</strong> and do a full-listen QC before sending.</li>
+</ul>
+<div class="card gold"><h4>Key takeaways</h4><ul>
+<li>LUFS targets differ by platform; integrated loudness is the spec number.</li>
+<li>True peak ≈ -1 dBTP protects against encoding clipping.</li>
+<li>Stems (D/M/E) enable re-balancing and translation.</li>
+<li>Deliver 48 kHz / 24-bit; QC by listening before sending.</li>
+</ul></div>
+<h3>Important shortcuts &amp; controls</h3>
+<table class="kbd-table">
+<tr><td class="k">Deliver page → Audio tab</td><td>Codec, sample rate, bit depth</td></tr>
+<tr><td class="k">Loudness meter</td><td>Integrated / Short-term / Momentary LUFS</td></tr>
+<tr><td class="k">Audio Normalization</td><td>Hit a peak or loudness target automatically</td></tr>
+</table>
+<div class="card red"><h4>Common mistakes</h4><ul>
+<li>Mastering to 0 dBFS / ignoring loudness specs.</li>
+<li>Forgetting to route a sub-bus to the Main (missing layer on export).</li>
+<li>Delivering a flat mix when the client needs stems for translation.</li>
+<li>Exporting without a full-listen QC.</li>
+</ul></div>
+<div class="card teal"><h4>Practical exercise</h4>
+<p>Master a finished talking-head to ≈ -14 LUFS with true peak ≤ -1 dBTP, verify on the loudness meter, route D/M/E to separate buses, and export both the full mix and the stems at 48 kHz / 24-bit. QC the file end-to-end before &#x27;delivery&#x27;.</p></div>
+<div class="card"><h4>Exam preparation notes</h4><ul>
+<li>LUFS targets: -23/-24 broadcast, -14 online, -16 podcast.</li>
+<li>True peak ≈ -1 dBTP; Integrated loudness meaning.</li>
+<li>Audio Normalization modes; 48 kHz/24-bit masters.</li>
+<li>Stems &amp; M&amp;E for re-versioning/translation; route to Main.</li>
+</ul></div>
+<h3>Knowledge check</h3>
+<div class="checks">
+<div class="check">
+<div class="qq"><span class="qnum">7.1</span>Loudness is measured in…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>dBFS peaks only</button>
+<button class="opt" data-correct="1"><span class="l">B</span>LUFS</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Hertz</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Pixels</button>
+<div class="exp"><strong class="lbl">Explanation</strong>LUFS measures perceived loudness over time.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">7.2</span>EBU R128 broadcast target is about…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>-9 LUFS</button>
+<button class="opt" data-correct="0"><span class="l">B</span>-14 LUFS</button>
+<button class="opt" data-correct="1"><span class="l">C</span>-23 LUFS</button>
+<button class="opt" data-correct="0"><span class="l">D</span>0 LUFS</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Broadcast ≈ -23 LUFS (US ATSC -24 LKFS).</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">7.3</span>Online/social platforms target roughly…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>-23 LUFS</button>
+<button class="opt" data-correct="1"><span class="l">B</span>-14 LUFS</button>
+<button class="opt" data-correct="0"><span class="l">C</span>-3 LUFS</button>
+<button class="opt" data-correct="0"><span class="l">D</span>+6 LUFS</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Around -14 LUFS.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">7.4</span>True Peak is usually capped at…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>0 dBTP</button>
+<button class="opt" data-correct="1"><span class="l">B</span>-1 dBTP</button>
+<button class="opt" data-correct="0"><span class="l">C</span>+3 dBTP</button>
+<button class="opt" data-correct="0"><span class="l">D</span>-23 dBTP</button>
+<div class="exp"><strong class="lbl">Explanation</strong>≈ -1 dBTP to survive encoding.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">7.5</span>Integrated loudness is…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>The loudest sample</button>
+<button class="opt" data-correct="1"><span class="l">B</span>The whole-programme average</button>
+<button class="opt" data-correct="0"><span class="l">C</span>The pan position</button>
+<button class="opt" data-correct="0"><span class="l">D</span>The codec</button>
+<div class="exp"><strong class="lbl">Explanation</strong>It&#x27;s the number specs reference.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">7.6</span>Audio export settings live on the…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Color page</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Deliver page Audio tab</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Sound Library</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Index</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Deliver → render settings → Audio.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">7.7</span>Delivering D/M/E stems lets clients…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Lower sample rate</button>
+<button class="opt" data-correct="1"><span class="l">B</span>Re-balance/re-version/dub</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Change the grade</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Add markers</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Separate stems enable re-versioning.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">7.8</span>For translation, keep separate…</div>
+<button class="opt" data-correct="1"><span class="l">A</span>The dialogue (with M&amp;E)</button>
+<button class="opt" data-correct="0"><span class="l">B</span>The grade</button>
+<button class="opt" data-correct="0"><span class="l">C</span>The markers</button>
+<button class="opt" data-correct="0"><span class="l">D</span>The thumbnail</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Dialogue separate + M&amp;E allows dubbing.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">7.9</span>Professional master audio is…</div>
+<button class="opt" data-correct="1"><span class="l">A</span>48 kHz / 24-bit</button>
+<button class="opt" data-correct="0"><span class="l">B</span>8 kHz / 8-bit</button>
+<button class="opt" data-correct="0"><span class="l">C</span>22 kHz / 16-bit mono</button>
+<button class="opt" data-correct="0"><span class="l">D</span>96 kHz / 4-bit</button>
+<div class="exp"><strong class="lbl">Explanation</strong>48 kHz, 24-bit is the standard.</div>
+</div>
+<div class="check">
+<div class="qq"><span class="qnum">7.10</span>If a sub-bus isn&#x27;t routed to Main on export…</div>
+<button class="opt" data-correct="0"><span class="l">A</span>Nothing happens</button>
+<button class="opt" data-correct="1"><span class="l">B</span>That layer goes missing</button>
+<button class="opt" data-correct="0"><span class="l">C</span>Loudness changes</button>
+<button class="opt" data-correct="0"><span class="l">D</span>Frame rate changes</button>
+<div class="exp"><strong class="lbl">Explanation</strong>Verify routing before delivery.</div>
+</div>
+</div>
+</section>
+<footer>Fairlight Certification · Study Guide · Shamase Studios 2026</footer>
+</main><script>
+document.querySelectorAll('.opt').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var check = btn.closest('.check');
+    if(check.dataset.answered) return;
+    check.dataset.answered = '1';
+    var correct = btn.dataset.correct === '1';
+    btn.classList.add(correct ? 'correct' : 'wrong');
+    if(!correct){
+      var right = check.querySelector('.opt[data-correct="1"]');
+      if(right) right.classList.add('correct');
+    }
+    var exp = check.querySelector('.exp');
+    if(exp) exp.classList.add('show');
+  });
+});
+</script></body></html>

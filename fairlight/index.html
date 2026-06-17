@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d0f17">
+<title>Fairlight Audio Certification — Shamase Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0f17;--surface:#161a24;--surface-2:#1c2130;--border:#252a36;--border-2:#343b4a;
+--text:#e8e6e0;--muted:#8b8e98;--dim:#5d626d;--gold:#d4a574;--teal:#5dc8b7;--red:#ec5a5a;--red-bright:#ff3838;--green:#7ec98e;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;line-height:1.55;font-size:16px}
+body{background-image:radial-gradient(ellipse at top,rgba(212,165,116,.05),transparent 60%);min-height:100vh}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:760px;margin:0 auto;padding:2.5rem 1.25rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.22em;color:var(--teal);margin-bottom:1rem}
+.backlink{display:inline-block;margin-bottom:1.4rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.05em;color:var(--muted)}
+h1{font-family:'Fraunces',serif;letter-spacing:-.015em;font-weight:400;font-size:clamp(2.1rem,7vw,3rem);margin:0 0 .5rem;font-variation-settings:"opsz" 144}
+.lede{font-family:'Fraunces',serif;font-style:italic;font-size:1.12rem;color:var(--muted);line-height:1.5;margin:.6rem 0 2rem}
+h2{font-family:'Fraunces',serif;font-weight:400;font-style:italic;color:var(--gold);font-size:1.5rem;margin:2.4rem 0 .8rem}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin:1.4rem 0}
+.fact{background:var(--surface);padding:.85rem 1rem;border-radius:8px;border:1px solid var(--border)}
+.fact .l{font-family:'JetBrains Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:.25rem}
+.fact .v{font-size:1.05rem;color:var(--text);font-weight:600}
+p{color:var(--muted)}p strong{color:var(--gold);font-weight:600}
+.shot-banner{background:var(--red-bright);color:#fff;padding:1.2rem 1.4rem;border-radius:8px;font-weight:700;font-size:1.02rem;line-height:1.4;text-align:center;margin:1.6rem 0;box-shadow:0 4px 20px rgba(255,56,56,.22);border:2px solid #fff}
+.shot-banner .icon{font-size:1.6rem;display:block;margin-bottom:.4rem}
+.shot-banner .sub{display:block;font-size:.84rem;font-weight:500;margin-top:.4rem;opacity:.92}
+.ack{background:var(--surface);border:1px solid var(--border-2);border-radius:10px;padding:1.1rem 1.3rem;margin:1.4rem 0;display:flex;gap:.8rem;align-items:flex-start;cursor:pointer}
+.ack input{width:1.3rem;height:1.3rem;margin-top:.15rem;flex-shrink:0;accent-color:var(--gold)}
+.ack label{font-size:.95rem;color:var(--text);cursor:pointer}
+.card{display:block;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.4rem;margin:1rem 0;transition:border-color .15s,transform .05s,opacity .2s}
+.card:hover{border-color:var(--gold)}
+.card:active{transform:translateY(1px)}
+.card .num{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
+.card h3{font-family:'Fraunces',serif;font-weight:400;font-size:1.35rem;margin:.35rem 0 .4rem;color:var(--text)}
+.card p{margin:0 0 .8rem;color:var(--muted);font-size:.92rem;line-height:1.45}
+.card.exam{border-left:3px solid var(--teal)}
+.card.locked{opacity:.45;pointer-events:none}
+.pill{font-family:'JetBrains Mono',monospace;font-size:.74rem;letter-spacing:.05em;padding:.45rem .85rem;border-radius:6px;background:var(--surface-2);border:1px solid var(--border-2);color:var(--text);display:inline-flex;align-items:center;gap:.4rem}
+.pill.primary{background:var(--gold);color:#1a1308;border-color:var(--gold);font-weight:600}
+.pill.teal{background:rgba(93,200,183,.12);border-color:var(--teal);color:var(--teal);font-weight:600}
+.lock-note{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--red);letter-spacing:.05em;margin:.4rem 0 0}
+.steps{counter-reset:step;list-style:none;padding:0;margin:1rem 0}
+.steps li{position:relative;padding:.6rem 0 .6rem 2.4rem;border-bottom:1px dashed var(--border-2);color:var(--muted);font-size:.95rem}
+.steps li:last-child{border-bottom:0}
+.steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:.55rem;width:1.6rem;height:1.6rem;background:var(--surface-2);border:1px solid var(--border-2);border-radius:50%;color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+footer{text-align:center;padding:2.5rem 1rem 0;color:var(--dim);font-size:.7rem;font-family:'JetBrains Mono',monospace;letter-spacing:.1em}
+</style></head>
+<body>
+<main class="wrap">
+<a class="backlink" href="../index.html">← Shamase Studios · Post-Production Curriculum</a>
+<div class="eyebrow">Shamase Studios · Certification Program</div>
+<h1>Fairlight Audio Certification</h1>
+<p class="lede">A complete beginner-to-intermediate certification in audio post-production with DaVinci
+Resolve's Fairlight page — dialogue, sound design, recording, mixing, location-audio repair and delivery.
+Study the curriculum, then prove it on two examinations.</p>
+
+<div class="facts">
+  <div class="fact"><div class="l">Modules</div><div class="v">7</div></div>
+  <div class="fact"><div class="l">Examinations</div><div class="v">2 × 100 questions</div></div>
+  <div class="fact"><div class="l">Pass mark</div><div class="v">90%</div></div>
+  <div class="fact"><div class="l">Attempts each</div><div class="v">3 maximum</div></div>
+  <div class="fact"><div class="l">Time per exam</div><div class="v">2 hours</div></div>
+  <div class="fact"><div class="l">Certificate</div><div class="v">Pass both exams</div></div>
+</div>
+
+<h2>How certification works</h2>
+<ol class="steps">
+  <li>Work through the <strong>Study Guide</strong> — 7 modules with lesson notes and knowledge checks.</li>
+  <li>Sit <strong>Exam 1 — Fundamentals</strong> (interface, tools, terminology). Pass at 90%.</li>
+  <li>Sit <strong>Exam 2 — Workflow &amp; Decisions</strong> (real-world scenarios). Pass at 90%.</li>
+  <li>Pass <strong>both</strong> exams within 3 attempts each to unlock your printable certificate.</li>
+</ol>
+
+<div class="shot-banner">
+  <span class="icon">📸</span>
+  BEFORE YOU BEGIN — CONFIRM YOU CAN TAKE A SCREENSHOT
+  <span class="sub">At the end of each exam you MUST screenshot your final results page and send it to your
+  instructor. Failure to submit proof of completion may invalidate your certification.</span>
+</div>
+
+<label class="ack" for="ack">
+  <input type="checkbox" id="ack">
+  <label for="ack">I understand that I must screenshot my final results page after each exam and send it
+  to my instructor as proof of completion, and that I have a maximum of three attempts per exam.</label>
+</label>
+
+<h2>Study material</h2>
+<a class="card" href="study-guide.html">
+  <div class="num">Curriculum · Free study</div>
+  <h3>The Fairlight Audio Study Guide</h3>
+  <p>All 7 modules: lesson notes, key takeaways, shortcuts, common mistakes, practical exercises and
+  70 interactive knowledge-check questions. Study this first — no acknowledgement required.</p>
+  <span class="pill primary">Open study guide →</span>
+</a>
+
+<h2>Examinations</h2>
+<a class="card exam locked" id="exam1-card" href="exam1.html">
+  <div class="num">Examination 1 · Fundamentals</div>
+  <h3>Interface &amp; Software Fundamentals</h3>
+  <p>100 questions on the Fairlight page: navigation, tools, terminology and where every control lives.</p>
+  <span class="pill teal">▶ Begin Exam 1</span>
+  <p class="lock-note" id="lock1">🔒 Tick the acknowledgement above to unlock</p>
+</a>
+
+<a class="card exam locked" id="exam2-card" href="exam2.html">
+  <div class="num">Examination 2 · Workflow &amp; Decisions</div>
+  <h3>Workflow &amp; Decision Making</h3>
+  <p>100 scenario questions — talking-head, location-sound and delivery situations. Tests reasoning,
+  not recall.</p>
+  <span class="pill teal">▶ Begin Exam 2</span>
+  <p class="lock-note" id="lock2">🔒 Tick the acknowledgement above to unlock</p>
+</a>
+
+<h2>Certificate</h2>
+<a class="card" href="certificate.html">
+  <div class="num">Proof of completion</div>
+  <h3>View / print your certificate</h3>
+  <p>Once you've passed both exams at 90% within 3 attempts, your printable certificate is generated here
+  automatically from your saved results.</p>
+  <span class="pill primary">Open certificate →</span>
+</a>
+
+<footer>Fairlight Audio Certification · Shamase Studios 2026</footer>
+</main>
+<script>
+(function(){
+  var ack = document.getElementById('ack');
+  var c1 = document.getElementById('exam1-card');
+  var c2 = document.getElementById('exam2-card');
+  var KEY = 'flt_ack_v1';
+  function apply(on){
+    [c1,c2].forEach(function(c){ c.classList.toggle('locked', !on); });
+    document.getElementById('lock1').style.display = on ? 'none' : 'block';
+    document.getElementById('lock2').style.display = on ? 'none' : 'block';
+  }
+  // restore prior acknowledgement
+  if(localStorage.getItem(KEY) === '1'){ ack.checked = true; }
+  apply(ack.checked);
+  ack.addEventListener('change', function(){
+    localStorage.setItem(KEY, ack.checked ? '1' : '0');
+    apply(ack.checked);
+  });
+})();
+</script>
+</body></html>

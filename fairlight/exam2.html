@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0d0f17">
+<title>Fairlight Certification · Exam 2 — Workflow & Decisions — Shamase Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f17; --surface:#161a24; --surface-2:#1c2130; --surface-3:#232936;
+  --border:#252a36; --border-2:#343b4a;
+  --text:#e8e6e0; --muted:#8b8e98; --dim:#5d626d;
+  --gold:#d4a574; --gold-dim:#a07d52;
+  --teal:#5dc8b7; --teal-dim:#3a8d80;
+  --red:#ec5a5a; --red-bright:#ff3838;
+  --green:#7ec98e; --green-dim:#5a9f6a;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;line-height:1.55;font-size:16px;overflow-x:hidden}
+body{background-image:radial-gradient(ellipse at top,rgba(212,165,116,.04),transparent 60%)}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-size:inherit}
+input{font-family:inherit;font-size:inherit}
+
+.screen{display:none;padding:0;min-height:100vh}
+[data-active="start"] #screen-start,
+[data-active="exam"] #screen-exam,
+[data-active="review"] #screen-review,
+[data-active="results"] #screen-results,
+[data-active="locked"] #screen-locked,
+[data-active="passed"] #screen-passed{display:block}
+
+/* ─── SHARED ─────────────────────────────────────────────────── */
+.wrap{max-width:680px;margin:0 auto;padding:1.5rem 1.25rem 6rem}
+h1,h2,h3{font-family:'Fraunces',serif;letter-spacing:-.015em;font-weight:400}
+h1{font-size:clamp(2rem,7vw,2.8rem);margin:0 0 .5rem;font-variation-settings:"opsz" 144}
+h2{font-size:1.4rem;margin:1.8rem 0 .7rem;color:var(--gold);font-style:italic;font-variation-settings:"opsz" 100}
+h3{font-size:1.1rem;margin:1.3rem 0 .5rem;color:var(--teal)}
+strong{color:var(--gold);font-weight:600}em{color:var(--teal);font-style:italic}
+code,kbd{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--surface-2);padding:.12em .42em;border-radius:3px;color:var(--gold);border:1px solid var(--border)}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.22em;color:var(--teal);margin-bottom:1rem}
+
+/* ─── SCREENSHOT INSTRUCTION BANNER (the loud red bit) ───────── */
+.shot-banner{
+  background:var(--red-bright);
+  color:#fff;
+  padding:1.2rem 1.4rem;
+  border-radius:8px;
+  font-weight:700;
+  font-size:1.05rem;
+  line-height:1.4;
+  text-align:center;
+  letter-spacing:.01em;
+  margin:1.4rem 0;
+  box-shadow:0 4px 20px rgba(255,56,56,.25);
+  border:2px solid #fff;
+}
+.shot-banner .icon{font-size:1.6rem;display:block;margin-bottom:.4rem}
+.shot-banner .sub{display:block;font-size:.85rem;font-weight:500;margin-top:.4rem;opacity:.9}
+
+/* ─── START SCREEN ───────────────────────────────────────────── */
+.lede{font-family:'Fraunces',serif;font-style:italic;font-size:1.1rem;color:var(--muted);line-height:1.5;margin:.8rem 0 1.5rem}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin:1.4rem 0}
+.facts .fact{background:var(--surface);padding:.8rem 1rem;border-radius:6px;border:1px solid var(--border)}
+.facts .fact .l{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:.25rem}
+.facts .fact .v{font-size:1.05rem;color:var(--text);font-weight:500}
+.facts .fact.warn .v{color:var(--red)}
+
+.rules{background:var(--surface);border-left:3px solid var(--teal);padding:1rem 1.2rem;border-radius:6px;margin:1.4rem 0;font-size:.92rem}
+.rules p{margin:.45rem 0}
+.rules p.warn{color:var(--red);font-weight:500}
+
+.name-field{margin:1.6rem 0}
+.name-field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.18em;color:var(--teal);margin-bottom:.5rem}
+.name-field input{
+  width:100%;padding:.95rem 1rem;background:var(--surface-2);color:var(--text);
+  border:1px solid var(--border-2);border-radius:8px;font-size:1.05rem;
+  font-family:'Sora',sans-serif;
+}
+.name-field input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,165,116,.15)}
+
+.btn{display:block;width:100%;padding:1.1rem 1.4rem;background:var(--gold);color:#1a1308;border-radius:8px;font-weight:600;font-size:1.05rem;letter-spacing:.02em;margin:1rem 0;transition:opacity .15s,transform .05s;border:none}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn.secondary{background:var(--surface-2);color:var(--text);border:1px solid var(--border-2)}
+.btn.danger{background:var(--red);color:#fff}
+.btn.success{background:var(--green);color:#0d1410}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.btn-row .btn{margin:0}
+
+.attempts-log{margin-top:2rem;padding-top:1.4rem;border-top:1px solid var(--border)}
+.attempts-log h3{margin-top:0;color:var(--gold);font-size:.95rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.15em;font-style:normal}
+.attempt-row{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem;background:var(--surface);border-radius:6px;margin:.5rem 0;font-size:.9rem;border:1px solid var(--border)}
+.attempt-row .a-num{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:.8rem}
+.attempt-row .a-score{font-family:'JetBrains Mono',monospace;color:var(--text);font-weight:600}
+.attempt-row .a-result{font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.2rem .6rem;border-radius:3px;letter-spacing:.1em;font-weight:600}
+.attempt-row .a-result.pass{background:rgba(126,201,142,.15);color:var(--green);border:1px solid rgba(126,201,142,.4)}
+.attempt-row .a-result.fail{background:rgba(236,90,90,.12);color:var(--red);border:1px solid rgba(236,90,90,.4)}
+
+/* ─── EXAM SCREEN ────────────────────────────────────────────── */
+.exam-bar{position:sticky;top:0;background:rgba(13,15,23,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:.7rem 1rem;z-index:50;display:flex;align-items:center;gap:.8rem;font-family:'JetBrains Mono',monospace;font-size:.78rem}
+.exam-bar .candidate{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
+.exam-bar .timer{color:var(--gold);font-weight:600;letter-spacing:.05em;font-size:.85rem}
+.exam-bar .timer.warning{color:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+.exam-bar .qcount{color:var(--teal);font-weight:600}
+
+.progress-bar{height:3px;background:var(--surface);position:sticky;top:38px;z-index:50}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));transition:width .3s}
+
+.q-wrap{padding:1rem 1.25rem 0}
+.q-meta{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;color:var(--gold-dim);text-transform:uppercase;margin:1rem 0 .5rem}
+.q-scenario{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);font-size:1rem;line-height:1.5;margin:.8rem 0;padding-left:1rem;border-left:2px solid var(--gold-dim)}
+.q-stem{font-size:1.08rem;line-height:1.45;margin:1rem 0 1.2rem;color:var(--text)}
+
+.opts-list{list-style:none;padding:0;margin:0}
+.opt-btn{
+  display:flex;width:100%;padding:1rem 1.1rem;background:var(--surface);
+  border:1.5px solid var(--border-2);border-radius:10px;color:var(--text);
+  text-align:left;margin:.6rem 0;gap:.85rem;align-items:flex-start;
+  font-size:.95rem;line-height:1.4;transition:all .15s;font-family:'Sora',sans-serif;
+}
+.opt-btn:active{transform:scale(.985)}
+.opt-btn.selected{background:rgba(212,165,116,.15);border-color:var(--gold);box-shadow:0 0 0 2px rgba(212,165,116,.2)}
+.opt-btn .letter{
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.85rem;
+  background:var(--surface-2);color:var(--teal);padding:.25rem .55rem;border-radius:5px;
+  flex-shrink:0;border:1px solid var(--border-2);min-width:1.8rem;text-align:center;
+}
+.opt-btn.selected .letter{background:var(--gold);color:#1a1308;border-color:var(--gold)}
+
+.q-tools{display:flex;gap:.6rem;margin:1.4rem 0 1rem}
+.q-tool{flex:1;padding:.65rem .8rem;background:var(--surface);border:1px solid var(--border-2);border-radius:6px;color:var(--muted);font-size:.82rem;font-family:'JetBrains Mono',monospace;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.q-tool.active{background:rgba(236,90,90,.1);border-color:var(--red);color:var(--red)}
+.q-tool .ico{font-size:.95rem}
+
+.exam-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(13,15,23,.97);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:.7rem 1rem;display:flex;gap:.5rem;z-index:50;padding-bottom:max(.7rem,env(safe-area-inset-bottom))}
+.nav-btn{flex:1;padding:.85rem 1rem;background:var(--surface-2);color:var(--text);border:1px solid var(--border-2);border-radius:8px;font-weight:500;font-size:.92rem;letter-spacing:.02em;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.nav-btn:disabled{opacity:.3}
+.nav-btn.primary{background:var(--gold);color:#1a1308;border-color:var(--gold);font-weight:600}
+.nav-btn.danger{background:var(--red);color:#fff;border-color:var(--red);font-weight:600}
+.nav-btn.center{flex:0 0 auto;padding:.85rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.08em}
+
+/* ─── NAVIGATOR OVERLAY ──────────────────────────────────────── */
+.overlay{position:fixed;inset:0;background:rgba(13,15,23,.92);backdrop-filter:blur(8px);z-index:100;display:none;flex-direction:column;padding:1rem;overflow-y:auto}
+.overlay.open{display:flex}
+.overlay-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1rem;padding:.5rem .25rem}
+.overlay-head h2{margin:0;color:var(--gold);font-size:1.2rem;font-style:normal;font-family:'Fraunces',serif}
+.overlay-head .close{background:var(--surface-2);padding:.5rem .8rem;border-radius:6px;font-size:1.4rem;color:var(--text);border:1px solid var(--border-2);line-height:1}
+.nav-legend{display:flex;flex-wrap:wrap;gap:.8rem;font-size:.75rem;color:var(--muted);margin-bottom:1rem;padding:.5rem .25rem;font-family:'JetBrains Mono',monospace}
+.nav-legend span{display:flex;align-items:center;gap:.35rem}
+.nav-legend .swatch{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid var(--border-2)}
+.nav-legend .swatch.answered{background:var(--gold)}
+.nav-legend .swatch.unanswered{background:var(--surface)}
+.nav-legend .swatch.flagged{background:var(--surface);border:2px solid var(--red)}
+.nav-legend .swatch.current{background:var(--teal)}
+
+.nav-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.45rem;margin-bottom:5rem}
+@media(min-width:480px){.nav-grid{grid-template-columns:repeat(7,1fr)}}
+@media(min-width:640px){.nav-grid{grid-template-columns:repeat(10,1fr)}}
+.nav-cell{padding:.7rem .25rem;background:var(--surface);border:1px solid var(--border-2);border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;color:var(--muted);text-align:center;transition:all .1s}
+.nav-cell.answered{background:var(--gold);color:#1a1308;border-color:var(--gold)}
+.nav-cell.flagged{border:2px solid var(--red)}
+.nav-cell.current{background:var(--teal);color:#0d1410;border-color:var(--teal)}
+.nav-cell:active{transform:scale(.95)}
+
+/* ─── REVIEW SCREEN ──────────────────────────────────────────── */
+.review-summary{background:var(--surface);border-radius:8px;padding:1rem 1.2rem;margin:1.2rem 0;border:1px solid var(--border)}
+.review-summary .row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px dashed var(--border-2);font-size:.95rem}
+.review-summary .row:last-child{border-bottom:0}
+.review-summary .row .l{color:var(--muted)}
+.review-summary .row .v{color:var(--text);font-weight:600;font-family:'JetBrains Mono',monospace}
+.review-summary .row .v.warn{color:var(--red)}
+.review-summary .row .v.ok{color:var(--green)}
+
+.q-list-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin:.8rem 0 1.4rem}
+.q-pill{padding:.4rem .7rem;background:var(--surface);border:1px solid var(--border-2);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--gold)}
+.q-pill.flagged{border-color:var(--red);color:var(--red)}
+
+/* ─── RESULTS SCREEN ─────────────────────────────────────────── */
+.result-hero{padding:1.5rem 1.2rem;border-radius:10px;margin:1rem 0 1.5rem;text-align:center;border:1px solid var(--border)}
+.result-hero.pass{background:linear-gradient(180deg,rgba(126,201,142,.15),rgba(126,201,142,.04));border-color:rgba(126,201,142,.4)}
+.result-hero.fail{background:linear-gradient(180deg,rgba(236,90,90,.12),rgba(236,90,90,.03));border-color:rgba(236,90,90,.4)}
+.result-hero .verdict{font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.3em;font-weight:700;margin-bottom:.5rem}
+.result-hero.pass .verdict{color:var(--green)}
+.result-hero.fail .verdict{color:var(--red)}
+.result-hero .score-big{font-family:'Fraunces',serif;font-size:3.4rem;font-weight:300;line-height:1;margin:.4rem 0;font-variation-settings:"opsz" 144}
+.result-hero .score-big .of{color:var(--muted);font-size:1.8rem}
+.result-hero .pct{font-family:'JetBrains Mono',monospace;font-size:1rem;color:var(--muted)}
+
+.result-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin:1.2rem 0}
+.result-meta .item{background:var(--surface);padding:.85rem 1rem;border-radius:6px;border:1px solid var(--border)}
+.result-meta .item .l{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:.25rem}
+.result-meta .item .v{font-size:1.05rem;color:var(--text);font-weight:600;font-family:'JetBrains Mono',monospace}
+
+.mod-table{width:100%;border-collapse:collapse;margin:1rem 0 1.6rem;background:var(--surface);border-radius:8px;overflow:hidden;font-size:.88rem}
+.mod-table th{padding:.7rem .9rem;background:var(--surface-2);text-align:left;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);border-bottom:1px solid var(--border)}
+.mod-table td{padding:.65rem .9rem;border-bottom:1px solid var(--border);vertical-align:middle}
+.mod-table tr:last-child td{border-bottom:0}
+.mod-table td.score{font-family:'JetBrains Mono',monospace;font-weight:600;text-align:right;color:var(--text);white-space:nowrap}
+.mod-table td.bar{width:35%}
+.mod-bar-bg{height:6px;background:var(--surface-3);border-radius:3px;overflow:hidden}
+.mod-bar-fill{height:100%;background:var(--gold);border-radius:3px;transition:width .5s}
+.mod-bar-fill.weak{background:var(--red)}
+.mod-bar-fill.strong{background:var(--green)}
+
+.wrong-list{margin:1rem 0}
+.wrong-list .heading{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.18em;color:var(--red);text-transform:uppercase;margin-bottom:.6rem;font-weight:600}
+.wrong-pills{display:flex;flex-wrap:wrap;gap:.35rem;margin:.4rem 0 1rem}
+.wrong-pill{background:rgba(236,90,90,.1);border:1px solid rgba(236,90,90,.4);color:var(--red);padding:.3rem .6rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:600}
+
+.weak-topics{background:var(--surface);border-left:3px solid var(--red);border-radius:6px;padding:.9rem 1.1rem;margin:1rem 0;font-size:.9rem}
+.weak-topics .head{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem;font-weight:600}
+.weak-topics ul{margin:.4rem 0 0;padding-left:1.2rem;color:var(--muted)}
+.weak-topics ul li{margin:.3rem 0;color:var(--text);font-size:.92rem}
+.weak-topics ul li em{color:var(--gold);font-style:normal;font-weight:600}
+
+.review-toggle{margin:1.6rem 0 0;padding:.85rem 1.1rem;background:var(--surface);border:1px solid var(--border-2);border-radius:8px;width:100%;color:var(--text);font-size:.95rem;text-align:left;display:flex;align-items:center;justify-content:space-between}
+.review-toggle .ico{color:var(--muted);transition:transform .2s}
+.review-toggle.open .ico{transform:rotate(90deg)}
+
+.review-details{display:none;margin-top:.8rem}
+.review-details.show{display:block}
+.review-card{background:var(--surface);border-radius:8px;border:1px solid var(--border);padding:1rem 1.1rem;margin:.7rem 0}
+.review-card .rc-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem;flex-wrap:wrap;gap:.5rem}
+.review-card .rc-num{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--gold-dim);letter-spacing:.12em}
+.review-card .rc-mod{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.1em}
+.review-card .rc-stem{font-size:.93rem;line-height:1.45;margin:.5rem 0}
+.review-card .rc-scenario{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);font-size:.86rem;line-height:1.45;margin:.4rem 0;padding-left:.8rem;border-left:2px solid var(--border-2)}
+.review-card .rc-choice{font-size:.85rem;padding:.4rem .6rem;border-radius:4px;margin:.4rem 0;line-height:1.4}
+.review-card .rc-choice.user-wrong{background:rgba(236,90,90,.08);border-left:3px solid var(--red)}
+.review-card .rc-choice.correct-was{background:rgba(126,201,142,.08);border-left:3px solid var(--green)}
+.review-card .rc-choice .l{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:.75rem;letter-spacing:.05em;margin-right:.45rem}
+.review-card .rc-choice.user-wrong .l{color:var(--red)}
+.review-card .rc-choice.correct-was .l{color:var(--green)}
+.review-card .rc-exp{font-size:.86rem;color:var(--muted);line-height:1.5;margin-top:.6rem;padding-top:.6rem;border-top:1px dashed var(--border-2)}
+.review-card .rc-exp strong.label{display:block;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.18em;color:var(--teal);text-transform:uppercase;margin-bottom:.3rem;font-weight:600}
+.review-card .rc-principle{font-style:italic;color:var(--gold);margin-top:.6rem;font-size:.85rem;line-height:1.4}
+
+/* ─── LOCKED SCREEN ──────────────────────────────────────────── */
+.lock-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem;text-align:center;margin:1.5rem 0}
+.lock-card .ico{font-size:2.5rem;margin-bottom:.5rem}
+
+/* ─── TIME-UP MODAL ──────────────────────────────────────────── */
+.modal{position:fixed;inset:0;background:rgba(13,15,23,.95);backdrop-filter:blur(8px);z-index:200;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.modal.open{display:flex}
+.modal-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem 1.4rem;max-width:480px;width:100%;text-align:center}
+.modal-card h2{margin-top:0;color:var(--red);font-style:normal;font-family:'Fraunces',serif}
+.modal-card .btn{margin-top:1rem}
+
+footer.app-footer{text-align:center;padding:2rem 1rem;color:var(--dim);font-size:.7rem;font-family:'JetBrains Mono',monospace;letter-spacing:.1em}
+
+/* Print-friendly results (in case anyone prints) */
+@media print{
+  body{background:#fff;color:#111;font-size:11pt}
+  .exam-nav,.q-tools,.exam-bar,.progress-bar,.overlay,.modal,.btn,.review-toggle{display:none !important}
+  .screen{display:block !important}
+  .shot-banner{background:#fff;color:#c00;border:2px solid #c00;box-shadow:none}
+  .review-details{display:block !important}
+}
+</style></head>
+<body data-active="start">
+
+<main id="app">
+
+<!-- ═══════════════════════════ START SCREEN ═══════════════════════════ -->
+<section id="screen-start" class="screen"><div class="wrap">
+<div class="eyebrow">Shamase Studios · Fairlight · Exam 2</div>
+<h1>Fairlight Exam 2 — Workflow & Decisions</h1>
+<p class="lede">A 100-question scenario examination. Real talking-head, location-sound and delivery situations. Tests reasoning, not recall. Two hours. Pass mark 90%. Three attempts maximum.</p>
+
+<div class="facts">
+<div class="fact"><div class="l">Questions</div><div class="v">100</div></div>
+<div class="fact"><div class="l">Duration</div><div class="v">2 hours</div></div>
+<div class="fact"><div class="l">Pass mark</div><div class="v">90% (90/100)</div></div>
+<div class="fact warn"><div class="l">Attempts</div><div class="v" id="attempts-remaining">3 maximum</div></div>
+</div>
+
+<div class="rules">
+<p><strong>Rules.</strong></p>
+<p>1. One best answer per question. Other options may be partially correct; pick the strongest.</p>
+<p>2. The timer starts when you tap <em>Begin</em>. At <strong>2:00:00</strong> the exam auto-submits. Unanswered questions are marked wrong.</p>
+<p>3. Pace yourself — that's <strong>72 seconds per question</strong>. </p>
+<p>4. Your progress is saved automatically. You can close the browser and resume — but the clock keeps running.</p>
+<p>5. You have a maximum of <strong>3 attempts total</strong>. Each attempt is tracked.</p>
+<p class="warn">6. When you finish — pass or fail — you must <strong>screenshot the result page and send it to your instructor</strong>. The page will remind you.</p>
+</div>
+
+<div class="name-field">
+<label for="candidate-name">Your full name (required)</label>
+<input id="candidate-name" type="text" placeholder="e.g. Lerato Khumalo" autocomplete="name" autocorrect="off" autocapitalize="words">
+</div>
+
+<button class="btn" id="btn-start" disabled>Begin examination</button>
+<button class="btn secondary" id="btn-resume" style="display:none">Resume in-progress attempt</button>
+
+<div class="attempts-log" id="attempts-log" style="display:none">
+<h3>Previous attempts on this device</h3>
+<div id="attempts-list"></div>
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ EXAM SCREEN ═══════════════════════════ -->
+<section id="screen-exam" class="screen">
+<div class="exam-bar">
+<span class="candidate" id="bar-candidate">—</span>
+<span class="qcount" id="bar-qcount">1/100</span>
+<span class="timer" id="bar-timer">2:00:00</span>
+</div>
+<div class="progress-bar"><div class="fill" id="progress-fill" style="width:0%"></div></div>
+
+<div class="q-wrap" id="q-wrap"></div>
+
+<div class="q-tools" id="q-tools" style="margin:1.4rem 1.25rem 1rem">
+<button class="q-tool" id="btn-flag"><span class="ico">⚑</span> <span id="flag-label">Flag for review</span></button>
+<button class="q-tool" id="btn-navigator"><span class="ico">▦</span> Navigator</button>
+</div>
+
+<div style="height:5rem"></div>
+
+<div class="exam-nav">
+<button class="nav-btn" id="btn-prev">← Prev</button>
+<button class="nav-btn center" id="btn-submit-top">Submit</button>
+<button class="nav-btn primary" id="btn-next">Next →</button>
+</div>
+</section>
+
+<!-- ═══════════════════════════ NAVIGATOR OVERLAY ═══════════════════════════ -->
+<div class="overlay" id="navigator">
+<div class="overlay-head"><h2>Jump to question</h2><button class="close" id="nav-close">×</button></div>
+<div class="nav-legend">
+<span><span class="swatch answered"></span>Answered</span>
+<span><span class="swatch unanswered"></span>Unanswered</span>
+<span><span class="swatch flagged"></span>Flagged</span>
+<span><span class="swatch current"></span>Current</span>
+</div>
+<div class="nav-grid" id="nav-grid"></div>
+</div>
+
+<!-- ═══════════════════════════ REVIEW SCREEN ═══════════════════════════ -->
+<section id="screen-review" class="screen"><div class="wrap">
+<div class="eyebrow">Final check before submission</div>
+<h1>Ready to submit?</h1>
+
+<div class="review-summary" id="review-summary"></div>
+<div id="review-unanswered"></div>
+<div id="review-flagged"></div>
+
+<div class="btn-row">
+<button class="btn secondary" id="btn-back-to-exam">← Keep working</button>
+<button class="btn danger" id="btn-confirm-submit">Submit now</button>
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ RESULTS SCREEN ═══════════════════════════ -->
+<section id="screen-results" class="screen"><div class="wrap">
+
+<div class="shot-banner">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Send it to your instructor as proof of completion</span>
+</div>
+
+<div class="eyebrow">Examination result · Shamase Studios</div>
+<h1 id="results-name">—</h1>
+<p class="lede" id="results-date">—</p>
+
+<div class="result-hero" id="result-hero">
+<div class="verdict" id="result-verdict">—</div>
+<div class="score-big"><span id="result-score">0</span><span class="of">/100</span></div>
+<div class="pct" id="result-pct">— %</div>
+</div>
+
+<div class="result-meta">
+<div class="item"><div class="l">Attempt</div><div class="v" id="result-attempt">—</div></div>
+<div class="item"><div class="l">Pass mark</div><div class="v">90/100</div></div>
+<div class="item"><div class="l">Time taken</div><div class="v" id="result-duration">—</div></div>
+<div class="item"><div class="l">Correct</div><div class="v" id="result-correct">—</div></div>
+</div>
+
+<h2>Module breakdown</h2>
+<table class="mod-table" id="mod-table"><thead><tr><th>Module</th><th>Score</th><th>Performance</th></tr></thead><tbody id="mod-table-body"></tbody></table>
+
+<div class="wrong-list" id="wrong-list-section">
+<div class="heading">Questions answered incorrectly</div>
+<div class="wrong-pills" id="wrong-pills"></div>
+</div>
+
+<div class="weak-topics" id="weak-topics" style="display:none">
+<div class="head">Topics to revise before retaking</div>
+<ul id="weak-topics-list"></ul>
+</div>
+
+<button class="review-toggle" id="review-toggle">
+<span>Detailed review of wrong answers</span><span class="ico">▶</span>
+</button>
+<div class="review-details" id="review-details"></div>
+
+<div class="shot-banner" style="margin-top:2rem">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Don't forget — your instructor needs to see your score and your attempt number</span>
+</div>
+
+<div id="retake-block" style="margin-top:1.5rem"></div>
+
+</div></section>
+
+<!-- ═══════════════════════════ LOCKED SCREEN ═══════════════════════════ -->
+<section id="screen-locked" class="screen"><div class="wrap">
+<div class="eyebrow">Examination locked</div>
+<h1>No attempts remaining</h1>
+
+<div class="shot-banner">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Send to your instructor — this confirms your 3 attempts are complete</span>
+</div>
+
+<div class="lock-card">
+<div class="ico">🔒</div>
+<p>You have used all <strong>3 attempts</strong> for this examination on this device. Contact your instructor to discuss next steps.</p>
+</div>
+
+<h2>Your attempt history</h2>
+<div id="locked-attempts"></div>
+
+<div class="shot-banner" style="margin-top:1.5rem">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Your instructor needs to see this attempt history</span>
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ PASSED SCREEN (if returning after pass) ═══════════════════════════ -->
+<section id="screen-passed" class="screen"><div class="wrap">
+<div class="eyebrow">Examination complete</div>
+<h1>You've already passed</h1>
+
+<div class="shot-banner">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Send to your instructor as proof of completion</span>
+</div>
+
+<div class="lock-card">
+<div class="ico">✓</div>
+<p id="passed-summary">—</p>
+</div>
+
+<h2>Your full attempt history</h2>
+<div id="passed-attempts"></div>
+
+<div class="shot-banner" style="margin-top:1.5rem">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ TIME-UP MODAL ═══════════════════════════ -->
+<div class="modal" id="time-up-modal"><div class="modal-card">
+<h2>Time's up</h2>
+<p>Two hours elapsed. Submitting your exam with answers as completed. Unanswered questions count as wrong.</p>
+<button class="btn" id="btn-time-up-ok">View results</button>
+</div></div>
+
+<footer class="app-footer">Fairlight Exam 2 — Workflow & Decisions · Shamase Studios 2026</footer>
+
+</main>
+
+<script>
+// ════════════════════════════ DATA ════════════════════════════
+const QUESTIONS = [{"module_num": 1, "scenario": "You've finished the picture edit of a corporate interview on the Edit page and now need to clean and balance the audio.", "stem": "What is the correct way to move into audio work?", "options": ["Export the audio, open a new project, and re-import it", "Switch to the Fairlight page — it's the same timeline, ready to work", "Re-edit everything on the Cut page first", "Render the video before touching audio"], "correct": "B", "explanations": {"A": "Unnecessary — Fairlight already has the live timeline; round-tripping wastes time and risks sync errors.", "B": "Correct: Fairlight and Edit share one timeline, so you just switch pages and start.", "C": "Re-editing on the Cut page doesn't help the audio work.", "D": "No render is needed to access audio in Fairlight."}, "principle": "Fairlight is a view of the same timeline — switch pages, no export/import.", "num": 1, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": "A client interview was recorded with a lav mic and a boom mic simultaneously on two channels.", "stem": "How should you set up the Fairlight session?", "options": ["Bounce both mics into one mono clip immediately", "Put each mic on its own track so you can choose/blend and process them separately", "Delete one mic at random", "Pan one mic hard left and forget about it"], "correct": "B", "explanations": {"A": "Flattening removes your ability to pick the better mic per moment.", "B": "Correct: separate tracks let you choose the best mic, blend, and process each independently.", "C": "Deleting blindly throws away your safety/quality option.", "D": "Hard-panning a mic isn't a cleanup strategy and breaks the centre image."}, "principle": "Keep each mic on its own track — choose and process the best source per moment.", "num": 2, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": "You open a noisy location interview and the meters are bouncing into the red on the loudest words.", "stem": "What does the red indicate and what's the first move?", "options": ["It's fine; red means good level", "Clipping — bring the clip gain/level down so peaks stay below 0 dBFS", "It means the track is muted; un-mute it", "It's the loudness target being met"], "correct": "B", "explanations": {"A": "Red is a warning, not a good sign.", "B": "Correct: red = clipping at 0 dBFS; reduce level so peaks have headroom.", "C": "Red isn't a mute indicator.", "D": "Red peaks aren't the loudness target."}, "principle": "Red meters = clipping; pull level down to restore headroom before doing anything else.", "num": 3, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": "Three interviews shot on different days arrive at noticeably different volumes.", "stem": "What's the most efficient first step toward a consistent edit?", "options": ["Mix purely by ear with no reference", "Rough-balance each clip's gain so they sit at a similar level before fine mixing", "Normalise to 0 dBFS peak", "Add reverb to match them"], "correct": "B", "explanations": {"A": "Working with no reference makes consistency slow and error-prone.", "B": "Correct: rough clip-gain balancing first gives a level playing field for the detailed mix.", "C": "Peak-normalising to 0 dBFS invites clipping and ignores perceived loudness.", "D": "Reverb changes space, not level consistency."}, "principle": "Rough-balance clip levels first, then refine — get clips in the same ballpark early.", "num": 4, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": "You'll be doing many similar talking-head edits and want a repeatable starting point.", "stem": "Which approach best supports consistency across projects?", "options": ["Rebuild routing and processing from scratch every time", "Save a template/preset with your track layout, buses and common processing", "Never use buses", "Mix each one at a random loudness"], "correct": "B", "explanations": {"A": "Rebuilding each time is slow and inconsistent.", "B": "Correct: a saved template/preset standardises layout, routing and processing across jobs.", "C": "Buses are exactly what makes group control repeatable.", "D": "Random loudness defeats consistency."}, "principle": "Standardise with templates/presets so every talking-head job starts from the same clean base.", "num": 5, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": "Your timeline has dialogue, music and sound effects all jumbled across unlabelled tracks.", "stem": "What organisational step pays off most before mixing?", "options": ["Leave it — organisation doesn't matter", "Group sound types onto labelled, colour-coded tracks (dialogue / music / SFX)", "Convert everything to mono", "Delete the music"], "correct": "B", "explanations": {"A": "Disorganisation slows every later decision.", "B": "Correct: grouping and colour-coding by type makes the mix fast and legible.", "C": "Forcing mono can harm stereo elements like music.", "D": "Deleting music may remove needed content."}, "principle": "Organise by sound type with labels and colours before mixing — speed and clarity.", "num": 6, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": "A junior asks why you don't just 'fix it all with one master EQ on the timeline.'", "stem": "What's the best reasoning to give?", "options": ["One master EQ is always best", "Different sources need different treatment; process per clip/track, then use the bus for shared polish", "EQ should never be used", "Only the Color page can fix audio"], "correct": "B", "explanations": {"A": "A single master EQ can't address per-source problems.", "B": "Correct: fix problems at the clip/track level, reserve the bus for cohesive, shared polish.", "C": "EQ is essential, not forbidden.", "D": "Color doesn't process audio."}, "principle": "Treat problems where they live (clip/track); use buses for shared, global polish.", "num": 7, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": "You want to hear just the boom mic on one line without permanently changing the session.", "stem": "Best approach?", "options": ["Delete every other track", "Solo the boom track temporarily", "Export the timeline", "Mute the Main bus"], "correct": "B", "explanations": {"A": "Deleting tracks is destructive and unnecessary.", "B": "Correct: solo isolates monitoring without altering the session.", "C": "Exporting doesn't help you audition.", "D": "Muting the Main silences everything."}, "principle": "Solo for non-destructive isolation while auditioning.", "num": 8, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": "An interview clip looks fine but you can barely see its waveform at the current zoom.", "stem": "What helps you edit breaths and clicks accurately?", "options": ["Open the Deliver page", "Zoom in horizontally (and vertically) to see waveform detail", "Add a bus", "Change the codec"], "correct": "B", "explanations": {"A": "Deliver is for export.", "B": "Correct: zooming reveals the detail needed to edit breaths, clicks and tight cuts.", "C": "Buses are routing, not viewing.", "D": "Codecs are export settings."}, "principle": "Zoom in to edit accurately — you can't trim what you can't see.", "num": 9, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": "You need to drop a sound effect at exactly 00:01:23:10 to hit an on-screen action.", "stem": "What's the precise method?", "options": ["Drag it roughly and hope", "Position the playhead/spot the clip to the exact timecode", "Normalise the clip", "Solo the Main"], "correct": "B", "explanations": {"A": "Eyeballing won't reliably hit a single frame.", "B": "Correct: spotting to an exact timecode lands the effect on the right frame.", "C": "Normalising changes level, not timing.", "D": "Soloing doesn't place clips."}, "principle": "Spot to timecode for frame-accurate placement against picture.", "num": 10, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": "Your client review happens on laptop speakers, but you mixed on good headphones.", "stem": "What's the wise final check?", "options": ["Skip checking other systems", "Also audition the mix on small/laptop speakers and phone to confirm it translates", "Only trust the headphones", "Master to 0 dBFS to be safe"], "correct": "B", "explanations": {"A": "Skipping translation checks risks a mix that fails on the client's device.", "B": "Correct: check on consumer playback (laptop/phone) so dialogue stays clear everywhere.", "C": "One system can mislead you.", "D": "0 dBFS mastering invites clipping."}, "principle": "Check the mix on the devices your audience actually uses — translation matters.", "num": 11, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": "You realise mid-project the timeline sample rate doesn't match your recordings.", "stem": "Why does this matter for audio?", "options": ["It doesn't matter at all", "Mismatched sample rates can cause pitch/sync issues; keep the project at the standard 48 kHz", "It changes the grade", "It only affects markers"], "correct": "B", "explanations": {"A": "Sample-rate handling absolutely matters.", "B": "Correct: mismatches risk pitch/speed/sync problems; standardise on 48 kHz for video.", "C": "Sample rate isn't a grade setting.", "D": "It affects audio, not just markers."}, "principle": "Keep projects at 48 kHz; sample-rate mismatches cause pitch and sync trouble.", "num": 12, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 2, "scenario": "Between two interview sentences there's an ugly chair creak you removed, leaving silence that 'thuds' against the room sound.", "stem": "Best fix?", "options": ["Leave the digital silence", "Fill the gap with matching room tone so the background stays continuous", "Add reverb over the gap", "Boost the gap's gain"], "correct": "B", "explanations": {"A": "Sudden digital silence is jarring against the recorded ambience.", "B": "Correct: matching room tone bridges the gap so the cut is inaudible.", "C": "Reverb won't replace missing ambience naturally.", "D": "Boosting silence just raises noise."}, "principle": "Patch removed sections with matching room tone so ambience never drops out.", "num": 13, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "Cutting tightly between two takes produces a faint click at the join.", "stem": "What removes it cleanly?", "options": ["Add a short crossfade or fades at the edit", "Increase the loudness target", "Pan the clip", "Change the codec"], "correct": "A", "explanations": {"A": "Correct: small fades/crossfade at the edit smooth the waveform discontinuity that clicks.", "B": "Loudness targets don't fix edit clicks.", "C": "Pan doesn't address the click.", "D": "Codec is unrelated to the edit."}, "principle": "Edit-point clicks come from cutting on a non-zero sample — fades/crossfades fix them.", "num": 14, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "An interviewee's answer is great but they start with a long 'ummm.'", "stem": "Cleanest way to remove it while keeping natural flow?", "options": ["Delete the whole answer", "Trim out the 'umm', then close the gap and smooth with room tone/fades", "Mute the entire track", "Add reverb to hide it"], "correct": "B", "explanations": {"A": "Deleting the whole answer loses the content.", "B": "Correct: surgically trim the filler, close the gap, and smooth so it sounds natural.", "C": "Muting the track removes everything.", "D": "Reverb won't remove the word."}, "principle": "Trim fillers surgically, then close and smooth the gap for natural pacing.", "num": 15, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "You have a single lav recording where the subject turns their head, causing level to drop on some words.", "stem": "Most appropriate first tool?", "options": ["Clip gain (or volume keyframes) to lift the quiet words", "A noise gate", "Reverb", "Pitch shift"], "correct": "A", "explanations": {"A": "Correct: ride clip gain / draw volume keyframes to even out the level changes.", "B": "A gate would cut quiet words entirely, making it worse.", "C": "Reverb doesn't fix level dips.", "D": "Pitch shift is irrelevant."}, "principle": "Use clip gain / volume automation to even out level swings before compression.", "num": 16, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "Two people talk over each other on separate mics, and you only want one voice in a section.", "stem": "Best approach?", "options": ["Delete both tracks", "Cut/trim or disable the unwanted voice's clip in that section", "Solo the Main bus", "Add a marker and move on"], "correct": "B", "explanations": {"A": "Deleting both removes the wanted voice too.", "B": "Correct: trim or disable the unwanted clip in that span so only the chosen voice remains.", "C": "Soloing the Main doesn't remove the overlap.", "D": "A marker alone doesn't fix the overlap."}, "principle": "Separate mics let you cut/disable the unwanted voice without harming the other.", "num": 17, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "After tightening an interview, the pacing feels rushed because you removed every breath.", "stem": "What's the professional view on breaths?", "options": ["Always remove all breaths", "Keep natural breaths (or reduce, not eliminate) so speech sounds human", "Replace breaths with silence", "Add reverb to breaths"], "correct": "B", "explanations": {"A": "Stripping all breaths makes speech robotic.", "B": "Correct: keep or gently lower breaths so dialogue stays natural and well-paced.", "C": "Hard silence where breaths were sounds unnatural.", "D": "Reverb on breaths is not the fix."}, "principle": "Don't strip every breath — natural breathing keeps dialogue human; tame only the distracting ones.", "num": 18, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "A clip's edit needs to land precisely on a video cut for sync.", "stem": "What two features best support frame accuracy?", "options": ["Snapping plus nudge keys", "Reverb plus chorus", "Solo plus mute", "Pan plus EQ"], "correct": "A", "explanations": {"A": "Correct: snapping locks to references and nudge keys fine-tune frame by frame.", "B": "Those are creative effects, not sync tools.", "C": "Solo/mute affect monitoring, not placement.", "D": "Pan/EQ shape sound, not timing."}, "principle": "Snapping + nudge keys give fast, frame-accurate dialogue sync.", "num": 19, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "You want the same EQ fix applied to every clip from one noisy lav across the timeline.", "stem": "Most efficient placement?", "options": ["Put the EQ on the track that holds those clips", "Add EQ to each clip one by one forever", "Put EQ on the Color page", "Skip EQ"], "correct": "A", "explanations": {"A": "Correct: track EQ processes all clips on that track at once — efficient and consistent.", "B": "Per-clip EQ is fine for one-offs but tedious for a whole track.", "C": "Color can't EQ audio.", "D": "Skipping leaves the problem."}, "principle": "Apply a shared fix at track level; reserve clip-level processing for one-off problems.", "num": 20, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "A particular take has a unique pop that no other clip has.", "stem": "Where should the repair go?", "options": ["On the whole track", "On just that clip (clip-level), so other clips are untouched", "On the Main bus", "On an Aux send"], "correct": "B", "explanations": {"A": "Track-level would needlessly process clean clips.", "B": "Correct: a one-off problem gets a clip-level fix.", "C": "The Main bus affects the entire mix.", "D": "An aux send is for shared effects like reverb."}, "principle": "Match the scope of the fix to the scope of the problem — one clip, clip-level.", "num": 21, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "You're comparing two takes of the same line to choose the better-sounding one.", "stem": "Quickest reliable method?", "options": ["Render both and listen in another app", "Stack them on linked tracks and solo each to A/B compare", "Delete one immediately", "Judge by the waveform colour"], "correct": "B", "explanations": {"A": "Round-tripping to another app is slow.", "B": "Correct: solo each in turn to A/B them directly in the session.", "C": "Deleting before comparing is risky.", "D": "Waveform colour tells you nothing about quality."}, "principle": "A/B takes by soloing each in place — fast, reversible comparison.", "num": 22, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "A sentence is perfect except one mumbled word that's also fine in a different take.", "stem": "Best dialogue-editing move?", "options": ["Re-shoot the interview", "Edit in the clearer word from the other take, matching level and tone", "Add reverb to hide the mumble", "Mute the whole sentence"], "correct": "B", "explanations": {"A": "A re-shoot is wildly disproportionate.", "B": "Correct: splice the better word in and match level/EQ so the join is seamless.", "C": "Reverb won't clarify a mumble.", "D": "Muting removes the sentence."}, "principle": "Comp the best words across takes, matching level and tone for an invisible edit.", "num": 23, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "Your dialogue track has consistent, even level now and you're ready for tone shaping.", "stem": "Correct order of operations?", "options": ["EQ and compress first, then fix level", "Edit/level/clean first, then EQ and compression", "Master to LUFS before editing", "Add music before cleaning dialogue"], "correct": "B", "explanations": {"A": "Processing before leveling makes the processors chase a moving target.", "B": "Correct: get clean, edited, evenly-leveled dialogue first, then shape with EQ/compression.", "C": "Mastering loudness comes at the end, not before editing.", "D": "Music comes after dialogue is solid."}, "principle": "Order: edit → clean → level → EQ/compress → mix → master.", "num": 24, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "Linked picture-and-audio clips keep shifting out of sync when you trim audio.", "stem": "What likely prevents accidental drift?", "options": ["Turning off all snapping forever", "Keeping linked clips grouped/linked so they move together, and using snapping", "Deleting the video track", "Randomly nudging until it lines up"], "correct": "B", "explanations": {"A": "Disabling snapping entirely makes accurate alignment harder.", "B": "Correct: link/group clips and use snapping so audio and picture stay locked.", "C": "Deleting video isn't a sync fix.", "D": "Random nudging is not a method."}, "principle": "Group/link related clips and use snapping to protect sync while editing.", "num": 25, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "An interview answer is usable but contains a phone notification 'ding' over a word.", "stem": "Most realistic clean fix?", "options": ["Cut to the same word from another take or repair the spot, then patch with room tone", "Leave the ding in", "Add music to cover it", "Lower the whole interview's volume"], "correct": "A", "explanations": {"A": "Correct: replace the affected word from another take or repair it, then blend with room tone.", "B": "Leaving an obvious ding looks unprofessional.", "C": "Music-as-coverup is a crude last resort, not a clean fix.", "D": "Lowering the whole interview doesn't remove the ding."}, "principle": "Replace or repair the spot, then patch ambience — don't just bury problems under music.", "num": 26, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "You're handed a 40-minute interview to cut to 3 minutes for social.", "stem": "Which Fairlight habit keeps the audio edit clean at speed?", "options": ["Cut anywhere and ignore joins", "Cut on natural pauses, add small fades, and keep room tone continuous", "Remove all room tone", "Compress first, edit later"], "correct": "B", "explanations": {"A": "Careless joins create clicks and jarring jumps.", "B": "Correct: cut at pauses, fade edits, maintain ambience — fast and clean.", "C": "Removing room tone makes cuts obvious.", "D": "Editing after compression fights the processor."}, "principle": "Cut on pauses, fade joins, keep ambience continuous — clean fast edits.", "num": 27, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": "A clip plays back fine but you accidentally left it disabled and exported silence in that spot.", "stem": "What's the lesson for your workflow?", "options": ["Disabled clips export their audio anyway", "Disabled clips are silent on export — check enable states before delivery", "Disabling is the same as soloing", "Disabling changes the codec"], "correct": "B", "explanations": {"A": "Disabled clips don't play, so they export silent.", "B": "Correct: verify clips are enabled (not just present) before final export.", "C": "Disable and solo are unrelated.", "D": "Disable doesn't touch codecs."}, "principle": "Disabled clips export as silence — sweep enable states before delivery.", "num": 28, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 3, "scenario": "You're scoring a 30-second product advert and need to map where every sound hit should land.", "stem": "Best first step?", "options": ["Start dropping effects randomly", "Do a spotting pass with named markers at each needed sound", "Master the loudness first", "Export a draft immediately"], "correct": "B", "explanations": {"A": "Random placement wastes time and misses beats.", "B": "Correct: a marker-based spotting list maps every cue before you build.", "C": "Loudness comes at the end.", "D": "Exporting before designing is premature."}, "principle": "Spot first with named markers — plan the sound before placing it.", "num": 29, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": "Your advert needs an impactful 'whoosh-to-impact' transition that no single library file nails.", "stem": "Best design approach?", "options": ["Use one file and turn it up loud", "Layer multiple elements (whoosh, low boom, transient) into one designed hit", "Add reverb to dialogue instead", "Skip the transition"], "correct": "B", "explanations": {"A": "One thin file rarely has the needed weight.", "B": "Correct: layering elements builds a fuller, custom-designed transition.", "C": "Reverb on dialogue is unrelated.", "D": "Skipping abandons the creative goal."}, "principle": "Design big moments by layering complementary elements into one cohesive sound.", "num": 30, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": "A corporate video cuts between an office and a street, but both feel 'dead' and disconnected.", "stem": "What grounds each location?", "options": ["Nothing — silence is fine", "Add appropriate ambience beds (office room tone, street atmos) under each scene", "More dialogue compression", "A louder music track only"], "correct": "B", "explanations": {"A": "Dead silence feels unnatural and unfinished.", "B": "Correct: ambience beds give each location a believable, continuous sense of place.", "C": "Compression won't create environment.", "D": "Music alone doesn't replace location atmosphere."}, "principle": "Ambience beds establish place and make cuts between locations feel grounded.", "num": 31, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": "You've added 20 sound effects across 8 tracks and riding each one is slow.", "stem": "How do you regain quick control of the whole effects layer?", "options": ["Route all SFX tracks to one SFX sub-bus and ride that fader", "Delete half the effects", "Put effects on the dialogue track", "Master to -23 LUFS now"], "correct": "A", "explanations": {"A": "Correct: a shared SFX sub-bus lets one fader control the entire effects layer.", "B": "Deleting effects sacrifices the design.", "C": "Mixing SFX onto dialogue removes independent control.", "D": "Mastering loudness isn't the issue here."}, "principle": "Bus a group to one fader for instant control over a whole layer.", "num": 32, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": "An advert's music is fighting the voiceover for attention.", "stem": "Cleanest way to keep the VO clear without manually dipping music everywhere?", "options": ["Delete the music", "Use level automation (or side-chain ducking) so music dips under the VO", "Pan the VO hard left", "Raise the whole mix to 0 dBFS"], "correct": "B", "explanations": {"A": "Deleting music abandons the creative bed.", "B": "Correct: automate music level (or duck it) under the VO so speech stays intelligible.", "C": "Hard-panning VO breaks the centre image.", "D": "Pushing to 0 dBFS clips."}, "principle": "Duck/automate music under voiceover — keep speech intelligible without losing the bed.", "num": 33, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": "You want consistent footsteps for a walking shot but the production audio has none usable.", "stem": "What discipline provides custom, sync-accurate steps?", "options": ["ADR", "Foley — performed footsteps recorded to picture", "Noise reduction", "Loudness normalisation"], "correct": "B", "explanations": {"A": "ADR replaces dialogue, not footsteps.", "B": "Correct: Foley is performed everyday sound (footsteps) recorded in sync to picture.", "C": "Noise reduction removes noise; it doesn't create steps.", "D": "Normalisation is a loudness tool."}, "principle": "Foley creates custom, sync-accurate performed sounds like footsteps and cloth.", "num": 34, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": "Your busy session is hard to read: dialogue, music, Foley and SFX all look the same.", "stem": "Fastest way to make it navigable?", "options": ["Colour-code tracks by sound type and label them", "Mute everything", "Convert all tracks to mono", "Render and re-import"], "correct": "A", "explanations": {"A": "Correct: colour-coding and labelling by type makes a dense session instantly legible.", "B": "Muting hides problems, doesn't organise them.", "C": "Forcing mono can damage stereo elements.", "D": "Re-importing doesn't organise tracks."}, "principle": "Colour and label by sound type so a complex session is readable at a glance.", "num": 35, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": "You found the perfect impact sound but it's slightly too quiet compared to neighbouring effects.", "stem": "Best level fix for that single effect?", "options": ["Raise the Main fader", "Raise that clip's clip gain", "Add reverb", "Re-record the dialogue"], "correct": "B", "explanations": {"A": "The Main fader moves the entire mix.", "B": "Correct: clip gain adjusts that one effect's level without touching anything else.", "C": "Reverb changes space, not level.", "D": "Dialogue re-recording is irrelevant."}, "principle": "Per-effect level = clip gain; whole-layer level = the sub-bus fader.", "num": 36, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": "A client wants the same brand 'sonic logo' sting placed identically at the end of 12 adverts.", "stem": "Most reliable way to keep it consistent?", "options": ["Re-design it each time", "Save the sting as an asset/preset and spot it to the same point in each timeline", "Eyeball the placement", "Use a different sound each time"], "correct": "B", "explanations": {"A": "Re-designing risks inconsistency.", "B": "Correct: reuse the saved asset and spot it to a precise point for identical results.", "C": "Eyeballing breaks consistency.", "D": "Varying the sound defeats branding."}, "principle": "Reuse saved branded assets and spot them precisely for consistent identity.", "num": 37, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": "An ambience bed loops audibly because it's too short for the scene.", "stem": "Cleanest way to extend it without an obvious seam?", "options": ["Let the loop click repeatedly", "Crossfade overlapping copies (or use a longer take) so the loop point is hidden", "Mute it", "Add a marker"], "correct": "B", "explanations": {"A": "An audible loop click is distracting.", "B": "Correct: crossfade overlapping copies to disguise the loop seam.", "C": "Muting removes the bed entirely.", "D": "A marker doesn't extend audio."}, "principle": "Crossfade overlapping copies to hide loop seams in ambience beds.", "num": 38, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": "You're auditioning effects for a UI 'tap' sound in a tech advert.", "stem": "Most efficient workflow inside Fairlight?", "options": ["Import dozens of files to the timeline to hear them", "Preview candidates in the Sound Library, then drag in the keeper", "Render each to test", "Guess by filename"], "correct": "B", "explanations": {"A": "Importing everything clutters the timeline.", "B": "Correct: audition in the Sound Library, then place only the winner.", "C": "Rendering to test is slow.", "D": "Filenames don't tell you how it sounds."}, "principle": "Audition in the Sound Library; commit only the chosen sound to the timeline.", "num": 39, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": "A scene's tension needs to build subtly under the dialogue without being noticed as 'music.'", "stem": "What design element suits this?", "options": ["A loud melodic theme", "A low, evolving drone/atmos layer that rises gradually", "A bright UI beep", "Footsteps"], "correct": "B", "explanations": {"A": "An overt theme draws attention to itself.", "B": "Correct: a subtle rising drone builds tension beneath dialogue unobtrusively.", "C": "A UI beep doesn't build tension.", "D": "Footsteps don't create mood."}, "principle": "Drones/atmos layers build mood subtly under dialogue — felt more than heard.", "num": 40, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": "You add a sweetener layer to an impact but now it's harsh on small speakers.", "stem": "Reasonable mix decision?", "options": ["Leave it harsh", "EQ the sweetener to tame harsh highs, or lower its level so it supports rather than dominates", "Delete the entire impact", "Master louder to hide it"], "correct": "B", "explanations": {"A": "Harshness will annoy viewers on phones/laptops.", "B": "Correct: shape the sweetener with EQ/level so it reinforces without harshness.", "C": "Deleting the impact overcorrects.", "D": "Louder mastering worsens harshness."}, "principle": "Sweeteners should support, not dominate — EQ/level them to sit under the main sound.", "num": 41, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": "Reviewing your advert, the SFX feel disconnected from the picture timing.", "stem": "What likely improves the 'hit' feeling?", "options": ["Random placement", "Spot effects precisely to the on-screen action frames (and add transient layers for impact)", "Lower the sample rate", "Remove all ambience"], "correct": "B", "explanations": {"A": "Random placement is the cause, not the cure.", "B": "Correct: tight sync to action frames (plus transient layering) makes hits land.", "C": "Sample rate doesn't affect sync feel.", "D": "Removing ambience won't fix SFX timing."}, "principle": "Sync effects tightly to action and add transients so hits feel connected to picture.", "num": 42, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 4, "scenario": "A client wants to add a voiceover narration to a finished corporate video, recorded at your desk.", "stem": "Correct Fairlight setup to record it?", "options": ["Render the video first", "Add a track, patch the mic input to it, arm/record-enable it, set a safe level, then record", "Record on the Color page", "Use the Main bus as the input"], "correct": "B", "explanations": {"A": "No render needed to record narration.", "B": "Correct: create a track, patch input, arm it, set a healthy level with headroom, then record.", "C": "Color can't record audio.", "D": "The Main bus is an output, not an input source."}, "principle": "Record VO: new track → patch input → arm → set safe level → record.", "num": 43, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": "Production dialogue on one line is unusable due to a passing siren, but the performance is needed.", "stem": "What's the standard professional remedy?", "options": ["Leave the siren in", "Re-record the line with ADR, matching sync to the original guide track", "Boost the siren", "Delete the scene"], "correct": "B", "explanations": {"A": "An unusable line stays unusable.", "B": "Correct: ADR re-records the line in sync to replace the ruined production audio.", "C": "Boosting the siren is the opposite of helpful.", "D": "Deleting the scene is disproportionate."}, "principle": "When production audio is unsalvageable, ADR re-records the line to picture.", "num": 44, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": "During a live VO record you monitor on studio speakers and the recording has a hollow doubled sound.", "stem": "Likely cause and fix?", "options": ["The codec; change it", "Speaker bleed into the mic; monitor on headphones instead", "Too few markers; add some", "The grade; fix on Color"], "correct": "B", "explanations": {"A": "Codec isn't causing acoustic bleed.", "B": "Correct: speakers leak into the mic; use headphones to prevent bleed/feedback.", "C": "Markers are unrelated.", "D": "Grade is unrelated to audio bleed."}, "principle": "Monitor on headphones when recording live to picture to avoid speaker bleed.", "num": 45, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": "You record three VO takes of a key line.", "stem": "Best practice after recording?", "options": ["Keep only the first take always", "Audition all takes and comp/select the best (or best parts)", "Delete all but the loudest", "Export immediately without listening"], "correct": "B", "explanations": {"A": "First isn't automatically best.", "B": "Correct: review all takes and choose/comp the strongest performance.", "C": "Loudest isn't best.", "D": "Exporting unheard risks shipping a weak take."}, "principle": "Capture options, then audition and comp the best take(s).", "num": 46, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": "An ADR performer keeps starting slightly late.", "stem": "Which ADR feature most directly helps their timing?", "options": ["The loudness meter", "The count-in beeps/streamers and the guide track", "The Color wheels", "The Deliver queue"], "correct": "B", "explanations": {"A": "The loudness meter doesn't cue performance.", "B": "Correct: count-in cues and the guide track let the performer start exactly on time.", "C": "Color wheels are unrelated.", "D": "The Deliver queue is for export."}, "principle": "ADR count-in cues + guide track lock the performer to the original timing.", "num": 47, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": "Setting record level, your loudest test words peak right at 0 dBFS.", "stem": "What should you do before the real take?", "options": ["Record as-is", "Lower the input gain to leave headroom so peaks sit safely below 0 dBFS", "Raise the input to clip", "Mute the input"], "correct": "B", "explanations": {"A": "Peaking at 0 dBFS risks clipping on louder delivery.", "B": "Correct: back off the input so there's headroom for unexpected loud moments.", "C": "Clipping ruins the recording.", "D": "Muting records nothing."}, "principle": "Leave recording headroom — peaks should land well under 0 dBFS.", "num": 48, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": "You need the new ADR line to sit believably in the scene's space.", "stem": "Which step helps it match the original?", "options": ["Master to -14 LUFS only", "Match level/EQ and add matching room tone/reverb so it blends with the scene", "Pan it hard right", "Leave it bone dry in a reverberant scene"], "correct": "B", "explanations": {"A": "Loudness mastering doesn't make ADR sit in the room.", "B": "Correct: match tone, level and space (room tone/reverb) so ADR blends with production sound.", "C": "Hard-panning dialogue breaks the image.", "D": "Dry ADR in a live room sounds pasted-on."}, "principle": "Blend ADR by matching level, EQ and the scene's acoustic space.", "num": 49, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": "Recording a long narration, you want to retry flubbed sentences without stopping the session.", "stem": "Which approach fits?", "options": ["Loop/punch recording over the flubbed section", "Re-open the project each time", "Render after every sentence", "Use the Cut page"], "correct": "A", "explanations": {"A": "Correct: loop/punch recording lets you re-take a section in place efficiently.", "B": "Re-opening the project each time is absurdly slow.", "C": "Rendering per sentence wastes time.", "D": "The Cut page isn't for VO capture."}, "principle": "Punch/loop record to retake sections without rebuilding the session.", "num": 50, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": "Your narration track records, but you hear nothing on playback though the meter moved while recording.", "stem": "Most likely cause?", "options": ["The audio wasn't captured at all", "The track is still in input/record-monitor mode or the clip is muted/disabled — check monitoring and enable state", "The sample rate is too high", "The Color page is open"], "correct": "B", "explanations": {"A": "The meter moving means signal was captured.", "B": "Correct: check track monitoring mode and that the clip is enabled/un-muted.", "C": "Sample rate wouldn't silence playback like this.", "D": "The Color page being open is irrelevant."}, "principle": "If it recorded but won't play, check monitoring mode and clip enable/mute state.", "num": 51, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": "A client provides a script and wants pickup lines recorded to match an existing VO's tone.", "stem": "What reference helps you match performance and level?", "options": ["Ignore the original VO", "Play the original VO as reference and match mic distance, level and tone", "Master to 0 dBFS", "Record in a different room with no reference"], "correct": "B", "explanations": {"A": "Ignoring the reference guarantees a mismatch.", "B": "Correct: reference the original and match mic technique, level and tone for continuity.", "C": "0 dBFS mastering doesn't address matching.", "D": "No reference makes matching guesswork."}, "principle": "Match pickups to the original by referencing its tone, level and mic technique.", "num": 52, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": "You're about to record but several other tracks are also record-enabled by accident.", "stem": "Why fix this first?", "options": ["It speeds up export", "You could overwrite/record onto unintended tracks — arm only the target track", "It changes loudness", "It affects the grade"], "correct": "B", "explanations": {"A": "Arming isn't an export-speed matter.", "B": "Correct: only the intended track should be armed to avoid recording onto the wrong tracks.", "C": "Arming doesn't set loudness.", "D": "It's unrelated to grade."}, "principle": "Arm only the target track — stray record-enables risk recording onto the wrong track.", "num": 53, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": "After ADR, the replaced line is clean but noticeably 'too clean' versus the noisy scene around it.", "stem": "Best blend decision?", "options": ["Leave it pristine", "Add a touch of the scene's room tone/ambience under the ADR so it matches the surrounding texture", "Add heavy reverb everywhere", "Lower the whole mix"], "correct": "B", "explanations": {"A": "A pristine line stands out against a textured scene.", "B": "Correct: lay matching room tone/ambience under the ADR to match the scene's noise floor.", "C": "Heavy reverb everywhere overcorrects.", "D": "Lowering the whole mix doesn't fix the mismatch."}, "principle": "Match ADR's cleanliness to the scene by adding the scene's own ambience underneath.", "num": 54, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 5, "scenario": "In a talking-head edit, the dialogue is centred but the background music is also dead-centre and crowding it.", "stem": "Best mix decision for clarity?", "options": ["Pan the dialogue hard left", "Keep dialogue centred and widen/pan the music outward to make space", "Mute the dialogue", "Raise both to 0 dBFS"], "correct": "B", "explanations": {"A": "Hard-panning lead dialogue breaks the natural centre image.", "B": "Correct: keep dialogue centred and spread music wider so the voice has its own space.", "C": "Muting dialogue defeats the purpose.", "D": "Pushing both to 0 dBFS clips and doesn't create space."}, "principle": "Keep dialogue centred; widen music/effects to carve space around the voice.", "num": 55, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "Dialogue level swings between a loud and a soft speaker even after clip-gain balancing.", "stem": "Which processor most directly evens the remaining dynamics?", "options": ["A compressor on the dialogue", "A reverb", "A chorus", "A high-pass only"], "correct": "A", "explanations": {"A": "Correct: compression reduces the loud/soft gap for a consistent dialogue level.", "B": "Reverb adds space, not consistency.", "C": "Chorus is a modulation effect.", "D": "A high-pass shapes lows, not dynamics."}, "principle": "Compression evens dialogue dynamics after you've done coarse clip-gain balancing.", "num": 56, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "Lavalier dialogue has a low rumbling sound from clothing and air conditioning.", "stem": "First EQ move?", "options": ["Boost the lows", "High-pass (low-cut) to remove sub-bass rumble below the voice", "Boost 10 kHz heavily", "Add reverb"], "correct": "B", "explanations": {"A": "Boosting lows worsens rumble.", "B": "Correct: a high-pass clears rumble below the voice's useful range.", "C": "A big high boost adds harshness, not rumble removal.", "D": "Reverb doesn't remove rumble."}, "principle": "High-pass dialogue to clear rumble below the voice — a near-universal first EQ.", "num": 57, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "You want a vocal-forward, polished sound but compressing each of 8 dialogue tracks separately is inconsistent.", "stem": "More efficient routing?", "options": ["Compress the Main bus only and hope", "Route dialogue to a dialogue sub-bus and apply shared compression/EQ there", "Delete tracks until it's even", "Add aux reverb to fix level"], "correct": "B", "explanations": {"A": "Main-bus-only processing also affects music/SFX.", "B": "Correct: a dialogue sub-bus lets you process all dialogue cohesively in one place.", "C": "Deleting tracks loses content.", "D": "Reverb doesn't fix level."}, "principle": "Group dialogue to a sub-bus for cohesive, shared processing without touching music/SFX.", "num": 58, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "Your mix sounds great loud but the dialogue disappears at low volume on a phone.", "stem": "What's the likely issue and fix?", "options": ["Dialogue is too loud; lower it", "Dialogue sits too low relative to music/SFX; raise dialogue or duck the bed so speech leads", "The codec is wrong", "Add more reverb to dialogue"], "correct": "B", "explanations": {"A": "Lowering dialogue makes it worse.", "B": "Correct: dialogue must lead the mix; raise it or duck music/SFX so speech stays clear at low volume.", "C": "Codec doesn't cause this balance issue.", "D": "Reverb reduces intelligibility."}, "principle": "Dialogue must lead — if it vanishes quietly, raise it or duck the bed.", "num": 59, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "You want music to automatically drop whenever the presenter speaks, then return.", "stem": "Which Fairlight technique achieves this cleanly?", "options": ["Manual clip deletion", "Level automation on the music (or side-chain ducking from the dialogue)", "Solo the music", "Pan automation only"], "correct": "B", "explanations": {"A": "Manual deletion is crude and not dynamic.", "B": "Correct: automate the music level (or side-chain duck it from dialogue) for clean dips.", "C": "Soloing won't duck under speech.", "D": "Pan won't reduce level under speech."}, "principle": "Duck music under speech with level automation or side-chain ducking.", "num": 60, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "You're riding the dialogue fader live to even out a tricky section and want only those moves recorded.", "stem": "Which automation mode is most appropriate?", "options": ["Touch", "Off", "Read-only", "No automation"], "correct": "A", "explanations": {"A": "Correct: Touch writes only while you hold the fader, then returns to existing automation.", "B": "Off won't record your moves.", "C": "Read-only plays back but doesn't record.", "D": "Disabling automation records nothing."}, "principle": "Touch mode records moves only while you hold the control — ideal for targeted rides.", "num": 61, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "A reverb is needed on several dialogue clips to place them in a hall, but inserting it on each is wasteful.", "stem": "Best routing?", "options": ["Insert reverb on every clip", "Send the relevant tracks to an Aux bus with one reverb, returning to the mix", "Put reverb on the Main bus", "Use clip gain"], "correct": "B", "explanations": {"A": "Per-clip reverb wastes resources and is inconsistent.", "B": "Correct: an aux send shares one reverb across tracks for a consistent space.", "C": "Main-bus reverb would wash the entire mix, including dry elements.", "D": "Clip gain is level, not reverb."}, "principle": "Share one reverb via an aux send for a consistent, efficient space.", "num": 62, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "Your final Main bus occasionally ticks into the red on loud SFX hits.", "stem": "Safest protective step before delivery?", "options": ["Ignore it", "Place a limiter on the Main bus set to a safe ceiling (e.g. -1 dBTP) and/or lower levels", "Boost everything", "Add reverb"], "correct": "B", "explanations": {"A": "Ignoring clipping risks distorted delivery.", "B": "Correct: a Main-bus limiter at a safe ceiling catches stray peaks; also re-check levels.", "C": "Boosting worsens clipping.", "D": "Reverb doesn't prevent clipping."}, "principle": "A Main-bus limiter at a safe ceiling protects against stray clipping peaks.", "num": 63, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "Two dialogue tracks sound thin alone but boxy together.", "stem": "What mixing concept explains the boxiness and a fix?", "options": ["Frequency build-up; gently cut shared low-mid frequencies on one or both", "Pan; centre them harder", "Sample rate; raise it", "Markers; add more"], "correct": "A", "explanations": {"A": "Correct: overlapping low-mid energy stacks up (build-up); EQ-cutting the shared range clears it.", "B": "Panning won't fix spectral build-up of centred dialogue.", "C": "Sample rate is unrelated.", "D": "Markers don't affect tone."}, "principle": "Stacked sources build up low-mids; carve overlapping frequencies to clear 'boxy' mixes.", "num": 64, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "You need consistent loudness across a 6-video corporate series.", "stem": "Best mixing target discipline?", "options": ["Mix each by ear with no target", "Mix every video to the same loudness target (e.g. ≈ -14 LUFS) and check on the loudness meter", "Master each at a random level", "Always hit 0 dBFS"], "correct": "B", "explanations": {"A": "By-ear with no target yields inconsistent loudness.", "B": "Correct: a shared LUFS target plus meter checks makes the series consistent.", "C": "Random levels break consistency.", "D": "0 dBFS is a clipping ceiling, not a loudness target."}, "principle": "Mix a series to one LUFS target and verify on the loudness meter for consistency.", "num": 65, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "Your compressor on dialogue is 'pumping' — the background noise rises and falls audibly.", "stem": "Likely cause and remedy?", "options": ["Too gentle; compress harder", "Too aggressive on noisy audio; clean/repair first, then use gentler compression", "Wrong codec", "Too few markers"], "correct": "B", "explanations": {"A": "Harder compression worsens pumping.", "B": "Correct: heavy compression on noisy dialogue pumps the noise; repair first, compress gently.", "C": "Codec doesn't cause pumping.", "D": "Markers are unrelated."}, "principle": "Repair noise before compressing — heavy compression on noisy audio pumps the noise floor.", "num": 66, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "A presenter's sibilance ('sss') got harsher after you brightened the dialogue with EQ.", "stem": "Best follow-up?", "options": ["Remove all high frequencies", "Add a de-esser after the brightening EQ to tame the sibilance", "Add reverb", "Lower the loudness target"], "correct": "B", "explanations": {"A": "Killing all highs dulls the whole voice.", "B": "Correct: a de-esser specifically tames the sibilance your brightening exaggerated.", "C": "Reverb doesn't address sibilance.", "D": "Loudness targets are unrelated."}, "principle": "Brightening can exaggerate 'ess' sounds — follow with a de-esser, not a broad high cut.", "num": 67, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "You want the viewer to feel a subtle stereo bed but keep the spoken word rock-solid and clear.", "stem": "Sound placement strategy?", "options": ["Spread dialogue wide, keep music centred", "Keep dialogue centred and mono-solid; place music/ambience in the stereo field", "Pan everything hard left", "Make everything mono"], "correct": "B", "explanations": {"A": "Wide dialogue smears the voice and risks mono-fold issues.", "B": "Correct: anchored, centred dialogue + a wider music/ambience bed keeps speech clear and the mix immersive.", "C": "Hard-left everything destroys the balance.", "D": "All-mono loses the stereo bed you want."}, "principle": "Anchor dialogue centre/mono-solid; use the stereo field for music and ambience.", "num": 68, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "Mid-mix you realise monitor volume is very low and you keep pushing faders up to compensate.", "stem": "Why is this risky?", "options": ["It isn't risky", "You may over-boost the actual mix; set a sensible monitor level and mix to the meters/target, not to a quiet room", "It changes the codec", "It edits the grade"], "correct": "B", "explanations": {"A": "It is a real risk to your levels.", "B": "Correct: a too-quiet monitor tempts you to over-push the mix; fix monitor level and trust the meters.", "C": "Monitor level doesn't change codecs.", "D": "It doesn't touch the grade."}, "principle": "Don't let a quiet monitor inflate your mix — set monitoring sensibly and trust the meters.", "num": 69, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": "A bus you created isn't outputting to the Main, so part of your mix is missing on export.", "stem": "What's the diagnostic step?", "options": ["Re-record everything", "Check the bus routing/assignment so every sub-bus feeds the Main output", "Lower the loudness target", "Add markers"], "correct": "B", "explanations": {"A": "Re-recording doesn't fix routing.", "B": "Correct: verify each sub-bus is assigned to the Main so nothing is dropped on export.", "C": "Loudness targets don't fix routing.", "D": "Markers are unrelated."}, "principle": "If a layer goes missing on export, check that its bus is routed to the Main.", "num": 70, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 6, "scenario": "A talking-head was shot in an untreated room with constant air-conditioning hiss behind the voice.", "stem": "Best repair workflow?", "options": ["Just turn the volume down", "Capture a noise profile from a voice-free moment and apply Noise Reduction (conservatively)", "Add reverb to mask it", "Boost the highs"], "correct": "B", "explanations": {"A": "Lowering volume reduces the voice too and doesn't remove hiss.", "B": "Correct: learn the AC-noise profile from a clean section, then reduce it carefully.", "C": "Reverb adds to the problem.", "D": "Boosting highs makes hiss worse."}, "principle": "Learn the noise from a clean sample, then apply conservative Noise Reduction.", "num": 71, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "After applying strong noise reduction, the presenter's voice sounds 'underwater' and metallic.", "stem": "What went wrong and the fix?", "options": ["Not enough reduction; push harder", "Too much reduction created artefacts; back it off to the least amount that still works", "Wrong codec; change it", "Too few markers"], "correct": "B", "explanations": {"A": "More reduction worsens artefacts.", "B": "Correct: dial back to the minimum effective amount to avoid watery artefacts.", "C": "Codec isn't the cause.", "D": "Markers are irrelevant."}, "principle": "Use the least noise reduction that works — over-processing makes voices watery and metallic.", "num": 72, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "Location power caused a steady 50 Hz hum under an entire interview.", "stem": "Most targeted tool?", "options": ["De-Esser", "De-Hummer", "Reverb", "Chorus"], "correct": "B", "explanations": {"A": "A de-esser targets sibilance, not hum.", "B": "Correct: the De-Hummer removes mains hum and its harmonics specifically.", "C": "Reverb adds space.", "D": "Chorus is a modulation effect."}, "principle": "De-Hummer removes mains hum (50/60 Hz) and harmonics — the right tool for electrical buzz.", "num": 73, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "A single clip has one loud click from a cable knock; the rest is clean.", "stem": "Most efficient repair scope?", "options": ["Apply de-click to the whole track", "Zoom in and de-click / repair just that spot on that clip", "Apply repair to the Main bus", "Noise-reduce the entire timeline"], "correct": "B", "explanations": {"A": "Whole-track repair needlessly processes clean audio.", "B": "Correct: target the single click at clip/sample level — minimal, precise repair.", "C": "Main-bus repair over-processes everything.", "D": "Timeline-wide reduction is overkill for one click."}, "principle": "Match repair scope to the problem — one click gets a surgical, local fix.", "num": 74, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "You must decide the order: the dialogue is noisy, uneven and a bit dull.", "stem": "Best processing order?", "options": ["Compress, then EQ, then de-noise", "De-noise/repair, then EQ, then compress/level", "EQ, then de-noise, then nothing", "Master loudness first"], "correct": "B", "explanations": {"A": "Compressing noisy audio first pumps the noise.", "B": "Correct: clean first, then shape tone, then control dynamics/level.", "C": "Skipping dynamics leaves it uneven.", "D": "Loudness mastering belongs at the end."}, "principle": "Repair → EQ → dynamics → level → master: clean the source before shaping it.", "num": 75, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "A recording is audibly clipped/distorted on the loudest words at the source.", "stem": "Realistic expectation?", "options": ["Noise reduction will fully restore it", "Clipping is largely unrecoverable — salvage what you can, or re-record/ADR; prevent it next time", "Raising loudness fixes it", "A de-esser fixes it"], "correct": "B", "explanations": {"A": "Noise reduction doesn't rebuild clipped data.", "B": "Correct: clipped audio is permanently damaged; mitigate, ADR if needed, and capture clean levels in future.", "C": "More loudness worsens clipping.", "D": "A de-esser targets sibilance, not clipping."}, "principle": "Clipping destroys data — it's largely unfixable; prevention and ADR are the real answers.", "num": 76, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "An interview shot in a hard, echoey room sounds reverberant and distant.", "stem": "Which modern Fairlight capability most helps recover clear dialogue?", "options": ["Add more reverb", "AI Voice Isolation / dialogue separation to pull the voice out of the room", "A noise gate alone", "Pitch shift"], "correct": "B", "explanations": {"A": "Adding reverb worsens the problem.", "B": "Correct: AI Voice Isolation separates dialogue from a difficult room/background.", "C": "A gate only cuts gaps, not the reverberant character within speech.", "D": "Pitch shift is irrelevant."}, "principle": "AI Voice Isolation extracts dialogue from noisy/reverberant rooms you couldn't treat on the day.", "num": 77, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "You de-noised a clip well, but the quiet gaps now sound unnaturally dead compared to the live room.", "stem": "Best finishing touch?", "options": ["Leave the dead gaps", "Lay a low bed of matching room tone so the silence feels natural", "Add a loud ambience", "Boost the noise back"], "correct": "B", "explanations": {"A": "Dead gaps reveal the processing.", "B": "Correct: a subtle room-tone bed restores a natural, continuous background.", "C": "A loud ambience would distract.", "D": "Re-adding noise undoes the repair."}, "principle": "After heavy de-noising, lay subtle room tone so cleaned gaps feel natural.", "num": 78, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "Two lav mics on two people both pick up each other faintly (bleed), muddying the mix.", "stem": "Sensible cleanup approach?", "options": ["Delete one mic", "Gate/automate each track so it's only open when its speaker talks, reducing the other's bleed", "Add reverb", "Master louder"], "correct": "B", "explanations": {"A": "Deleting a mic loses a needed source.", "B": "Correct: gating/automation opens each mic only for its speaker, cutting cross-bleed.", "C": "Reverb worsens muddiness.", "D": "Louder mastering amplifies bleed."}, "principle": "Gate/automate each mic to open only for its own speaker — reduces cross-bleed.", "num": 79, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "A clip has both broadband hiss and a separate sibilance problem.", "stem": "How should you treat them?", "options": ["One plugin fixes both", "Use Noise Reduction for the hiss and a separate De-Esser for the sibilance", "Ignore the hiss", "Only gate it"], "correct": "B", "explanations": {"A": "Distinct problems need distinct tools.", "B": "Correct: noise reduction for broadband hiss, de-esser for sibilant peaks — different tools.", "C": "Ignoring hiss leaves it audible.", "D": "A gate won't remove hiss within speech."}, "principle": "Match each problem to its specific repair tool — hiss vs sibilance need different plugins.", "num": 80, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "You're tempted to fix a noisy interview entirely on the Main bus to save time.", "stem": "Why is per-track/clip repair usually better?", "options": ["It isn't; Main-bus is best", "Each source has different noise; treating them individually avoids harming clean elements", "Main-bus repair changes frame rate", "Repair only works on the Main"], "correct": "B", "explanations": {"A": "Main-bus repair is a blunt instrument here.", "B": "Correct: noise differs per source; targeted repair avoids degrading clean material.", "C": "Repair doesn't change frame rate.", "D": "Repair works at clip/track/bus levels."}, "principle": "Repair where the problem lives; blanket Main-bus repair harms clean elements too.", "num": 81, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "A new noisy interview lands on your desk and you're tempted to start stacking repair plugins straight away.", "stem": "What's the smartest diagnostic habit before any repair?", "options": ["Apply plugins immediately", "Listen and identify each specific problem (hum, hiss, clicks, reverb) before choosing tools", "Master to LUFS first", "Render a draft"], "correct": "B", "explanations": {"A": "Blindly stacking plugins causes artefacts.", "B": "Correct: diagnose the specific issues first, then pick the matching tool for each.", "C": "Loudness mastering is last, not first.", "D": "A draft render doesn't diagnose problems."}, "principle": "Diagnose first — identify each specific defect, then apply the matching repair.", "num": 82, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "A clip sounds fine on your monitors but the client says it has a high-pitched whine you can't hear.", "stem": "Useful Fairlight aid to find it?", "options": ["The loudness meter", "The frequency analyser / spectrogram to see and locate the whine, then notch/repair it", "The Color scopes", "The marker list"], "correct": "B", "explanations": {"A": "The loudness meter shows level, not a specific tone.", "B": "Correct: a frequency analyser/spectrogram reveals the offending tone so you can notch it out.", "C": "Color scopes are for picture.", "D": "Markers don't reveal frequencies."}, "principle": "Use a frequency analyser/spectrogram to see tones you might miss, then notch them.", "num": 83, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "Your noise-reduced dialogue is clean but now slightly dull and lifeless.", "stem": "Reasonable repair-to-mix transition?", "options": ["Re-add noise", "Gently restore presence with EQ (a small high-mid lift) after repair", "Add heavy reverb", "Lower the loudness"], "correct": "B", "explanations": {"A": "Re-adding noise undoes the work.", "B": "Correct: a gentle high-mid EQ lift restores clarity/presence lost to aggressive cleanup.", "C": "Heavy reverb muddies it.", "D": "Loudness doesn't restore presence."}, "principle": "Cleanup can dull dialogue — restore presence with gentle EQ afterward.", "num": 84, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "An entire shoot day's audio has the same hum and hiss signature.", "stem": "Efficient repair strategy?", "options": ["Repair each clip from scratch individually", "Build a repair chain on the track (or save a preset) and apply it across the matching clips", "Only fix the first clip", "Avoid repair entirely"], "correct": "B", "explanations": {"A": "From-scratch per clip is needlessly slow when the problem is identical.", "B": "Correct: a track-level chain or saved preset applies the same fix consistently across matching clips.", "C": "Fixing one clip leaves the rest noisy.", "D": "Skipping repair ships the noise."}, "principle": "When the defect is consistent, reuse a repair chain/preset across all matching clips.", "num": 85, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": "You want to confirm a repair actually improved things, not just changed them.", "stem": "Best verification habit?", "options": ["Trust it blindly", "A/B bypass the repair (and check on different speakers/headphones) to confirm real improvement", "Only look at the waveform", "Master louder to decide"], "correct": "B", "explanations": {"A": "Blind trust ships artefacts.", "B": "Correct: bypass-compare and audition on multiple systems to confirm the fix genuinely helps.", "C": "Waveforms don't reveal artefacts you must hear.", "D": "Loudness isn't a quality test."}, "principle": "Always A/B bypass repairs and check on multiple systems — confirm improvement, not just change.", "num": 86, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 7, "scenario": "A client wants the same corporate video delivered for broadcast and for their YouTube channel.", "stem": "How should you handle loudness?", "options": ["One file for both at any level", "Deliver a broadcast version (≈ -23/-24 LUFS) and a separate online version (≈ -14 LUFS)", "Master both to 0 dBFS", "Ignore loudness specs"], "correct": "B", "explanations": {"A": "Broadcast and online have different loudness norms.", "B": "Correct: meet each platform's spec — ≈ -23/-24 LUFS broadcast, ≈ -14 LUFS online.", "C": "0 dBFS isn't a loudness spec and risks clipping.", "D": "Ignoring specs gets content rejected or auto-adjusted."}, "principle": "Master to each platform's loudness spec — broadcast and online differ.", "num": 87, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": "Your social videos sometimes sound quieter than competitors' after upload.", "stem": "Most likely reason and fix?", "options": ["The codec; change it", "You mixed too conservatively; mix to ≈ -14 LUFS with -1 dBTP so the platform doesn't turn you down disproportionately", "Add reverb", "Lower the dialogue"], "correct": "B", "explanations": {"A": "Codec isn't the loudness cause here.", "B": "Correct: target the platform's loudness (≈ -14 LUFS, -1 dBTP) so normalisation treats you fairly.", "C": "Reverb doesn't set loudness.", "D": "Lowering dialogue makes it quieter still."}, "principle": "Hit the platform's loudness target (≈ -14 LUFS) so normalisation doesn't leave you quiet.", "num": 88, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": "Before exporting, you check the Main bus and the integrated loudness reads -19 LUFS but the target is -14 LUFS.", "stem": "Best action?", "options": ["Export anyway", "Raise the overall level (carefully, watching true peak) to reach ≈ -14 LUFS, or use loudness normalisation", "Lower it further", "Change the frame rate"], "correct": "B", "explanations": {"A": "Exporting under-target ships a too-quiet file.", "B": "Correct: bring level up to target while keeping true peak safe (≤ -1 dBTP), or normalise to the spec.", "C": "Going quieter moves away from target.", "D": "Frame rate is unrelated to loudness."}, "principle": "Bring integrated loudness to target while protecting true peak; normalisation can automate it.", "num": 89, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": "A broadcaster requires separate dialogue, music and effects stems for the same programme.", "stem": "How do you produce them?", "options": ["Export one stereo mix only", "Route D/M/E to separate buses and export each bus as its own stem", "Delete the music", "Render the Color page"], "correct": "B", "explanations": {"A": "A single mix can't be re-balanced/localised.", "B": "Correct: separate D/M/E buses let you export discrete stems for re-versioning and dubbing.", "C": "Deleting music breaks the deliverable.", "D": "Color rendering isn't audio stems."}, "principle": "Bus by D/M/E and export each as a stem for re-balancing, localisation and compliance.", "num": 90, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": "The client may later translate the video into other languages.", "stem": "Which delivery protects that option?", "options": ["A flattened final mix only", "An M&E (music & effects) stem with dialogue kept separate", "A louder master", "A different codec"], "correct": "B", "explanations": {"A": "A flattened mix can't have dialogue swapped.", "B": "Correct: deliver M&E plus separate dialogue so translated dialogue can drop in over the M&E.", "C": "Loudness doesn't enable translation.", "D": "Codec choice doesn't enable dubbing."}, "principle": "Keep dialogue separate and provide M&E so the piece can be dubbed into other languages.", "num": 91, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": "On the Deliver page you're setting the audio export for a standard video master.", "stem": "Most appropriate audio settings?", "options": ["8 kHz / 8-bit", "48 kHz / 24-bit, with the codec your delivery spec requires", "Whatever is default, unchecked", "96 kHz / 4-bit"], "correct": "B", "explanations": {"A": "Telephone-grade is unacceptable for video.", "B": "Correct: 48 kHz / 24-bit is the professional standard; pick the spec's codec.", "C": "Blindly accepting defaults can mismatch the spec.", "D": "4-bit isn't a real professional depth."}, "principle": "Deliver 48 kHz / 24-bit and the codec your spec demands — verify, don't assume.", "num": 92, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": "After export you spot that one sub-bus wasn't routed to the Main, so the SFX layer is missing.", "stem": "What habit prevents this?", "options": ["Never check routing", "Verify all bus assignments feed the Main and listen to the full mix before exporting", "Master louder", "Add markers"], "correct": "B", "explanations": {"A": "Skipping checks is exactly how this happens.", "B": "Correct: confirm routing and do a final full-mix listen before delivering.", "C": "Loudness doesn't fix routing.", "D": "Markers don't verify routing."}, "principle": "Pre-export checklist: confirm bus routing to Main and listen to the whole mix.", "num": 93, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": "A vertical social cut and a horizontal web cut share the same audio mix.", "stem": "Most efficient audio approach?", "options": ["Re-mix from scratch for each", "Reuse the same mastered audio if the edit/timing matches; only adjust if the cuts differ", "Master each at a random level", "Strip the audio entirely"], "correct": "B", "explanations": {"A": "Re-mixing identical audio is wasteful.", "B": "Correct: if timing matches, reuse the mastered audio; only re-touch where the edits differ.", "C": "Random levels break consistency.", "D": "Stripping audio defeats the deliverable."}, "principle": "Reuse a good master across versions when timing matches — re-touch only where edits differ.", "num": 94, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": "Your delivery spec says max True Peak -1 dBTP, but your master hits -0.2 dBTP after the limiter.", "stem": "Correct response?", "options": ["Ship it; close enough", "Lower the ceiling/level so true peaks stay at or below -1 dBTP", "Raise it to 0 dBTP", "Change the sample rate"], "correct": "B", "explanations": {"A": "Exceeding the spec can get the file flagged or clip after encoding.", "B": "Correct: bring true peak to ≤ -1 dBTP to meet spec and survive lossy encoding.", "C": "0 dBTP is worse, not better.", "D": "Sample rate doesn't fix true peak."}, "principle": "Respect the true-peak ceiling exactly — set the limiter so peaks stay ≤ spec (e.g. -1 dBTP).", "num": 95, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": "A client asks for a 'clean' version with no music for their own re-edits.", "stem": "How do you provide it?", "options": ["Send only the full mix", "Export a dialogue (and optionally effects) stem without the music bus", "Delete the project", "Render a still"], "correct": "B", "explanations": {"A": "The full mix has music baked in.", "B": "Correct: export the relevant stems excluding music so they can re-edit freely.", "C": "Deleting the project is absurd.", "D": "A still isn't audio."}, "principle": "Provide stems (e.g. dialogue/effects without music) when clients need clean re-edit material.", "num": 96, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": "You delivered a file and the client reports the dialogue is hard to hear on their TV.", "stem": "Most likely mix issue to revisit?", "options": ["The grade", "Dialogue level/intelligibility relative to music/effects — raise/duck and re-check loudness", "The thumbnail", "The frame rate"], "correct": "B", "explanations": {"A": "The grade is picture, not audio clarity.", "B": "Correct: revisit the dialogue-to-bed balance and intelligibility, then re-verify loudness.", "C": "Thumbnails are unrelated.", "D": "Frame rate doesn't drive intelligibility."}, "principle": "Intelligibility complaints point to the dialogue-vs-bed balance — fix and re-check loudness.", "num": 97, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": "Final quality check before sending a master to a client.", "stem": "Which audio QC step matters most?", "options": ["Only watch the video muted", "Listen end-to-end for clicks/dropouts/clipping and confirm loudness/true-peak meet spec", "Trust the meters without listening", "Skip QC to save time"], "correct": "B", "explanations": {"A": "Muted review skips the audio entirely.", "B": "Correct: a full listen plus a loudness/true-peak check catches problems before the client does.", "C": "Meters alone miss audible glitches.", "D": "Skipping QC risks shipping faults."}, "principle": "QC by listening fully and verifying loudness/true-peak against the spec before delivery.", "num": 98, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": "A podcast-style talking-head will be distributed as audio too.", "stem": "Sensible loudness target for the audio-led platform?", "options": ["-23 LUFS broadcast", "Around -16 LUFS (common podcast/spoken-word target), -1 dBTP", "0 dBFS", "+3 LUFS"], "correct": "B", "explanations": {"A": "-23 LUFS is broadcast video, quieter than podcast norms.", "B": "Correct: spoken-word/podcast platforms commonly target around -16 LUFS with safe true peak.", "C": "0 dBFS is a clipping ceiling.", "D": "Positive LUFS isn't valid."}, "principle": "Spoken-word/podcast audio commonly targets ≈ -16 LUFS, -1 dBTP.", "num": 99, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": "You need to hand off a project so another editor can finish the mix.", "stem": "Best practice for a clean handoff?", "options": ["Send only the exported MP4", "Keep tracks organised/labelled, buses logical, and deliver the project (and media) so they can continue", "Flatten everything to one track", "Delete the buses first"], "correct": "B", "explanations": {"A": "An MP4 can't be re-mixed.", "B": "Correct: an organised, labelled session with logical routing lets another editor pick it up cleanly.", "C": "Flattening destroys their flexibility.", "D": "Deleting buses breaks the routing."}, "principle": "Hand off organised, labelled sessions with intact routing — not a flattened export.", "num": 100, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}];
+const TOTAL_Q = 100;
+const PASS_MARK = 90;        // 90% of 100
+const MAX_ATTEMPTS = 3;
+const TIME_LIMIT_MS = 2 * 60 * 60 * 1000;
+
+const MODULE_TITLES = {
+  1:"Introduction to Audio & the Fairlight Page",
+  2:"Editing Dialogue",
+  3:"Sound Design & Effects Editing",
+  4:"Recording Voiceover & ADR",
+  5:"Mixing",
+  6:"Repairing & Restoring Audio",
+  7:"Delivering & Mastering"
+};
+const STORAGE_KEY = "flt_exam2_v1";
+
+// ════════════════════════════ STATE ════════════════════════════
+let state = { attempts: [], inProgress: null };
+let timerInterval = null;
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(parsed.attempts) state.attempts = parsed.attempts;
+      if(parsed.inProgress) state.inProgress = parsed.inProgress;
+    }
+  }catch(e){ console.warn("Could not load state:", e); }
+}
+function saveState(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch(e){ console.warn("Could not save state:", e); }
+}
+
+// ════════════════════════════ SCREEN ROUTING ════════════════════════════
+function showScreen(name){
+  document.body.setAttribute("data-active", name);
+  window.scrollTo(0, 0);
+}
+
+// ════════════════════════════ START SCREEN ════════════════════════════
+function renderStart(){
+  const passedAttempt = state.attempts.find(a => a.passed);
+  if(passedAttempt){
+    return renderPassedAlready(passedAttempt);
+  }
+  if(state.attempts.length >= MAX_ATTEMPTS){
+    return renderLocked();
+  }
+
+  const remaining = MAX_ATTEMPTS - state.attempts.length;
+  const attemptNum = state.attempts.length + 1;
+  document.getElementById("attempts-remaining").textContent =
+    `Attempt ${attemptNum} of ${MAX_ATTEMPTS}`;
+
+  // Show history if any
+  const log = document.getElementById("attempts-log");
+  const list = document.getElementById("attempts-list");
+  if(state.attempts.length > 0){
+    list.innerHTML = state.attempts.map((a, i) => {
+      const cls = a.passed ? "pass" : "fail";
+      const verdict = a.passed ? "PASS" : "FAIL";
+      const pct = ((a.score / TOTAL_Q) * 100).toFixed(1);
+      return `<div class="attempt-row">
+        <span class="a-num">Attempt ${i+1}</span>
+        <span class="a-score">${a.score}/${TOTAL_Q} (${pct}%)</span>
+        <span class="a-result ${cls}">${verdict}</span>
+      </div>`;
+    }).join("");
+    log.style.display = "block";
+  } else {
+    log.style.display = "none";
+  }
+
+  // Resume in-progress
+  const resumeBtn = document.getElementById("btn-resume");
+  if(state.inProgress){
+    resumeBtn.style.display = "block";
+    resumeBtn.textContent = `Resume in-progress attempt (${state.inProgress.name})`;
+  } else {
+    resumeBtn.style.display = "none";
+  }
+
+  showScreen("start");
+}
+
+function renderPassedAlready(attempt){
+  const idx = state.attempts.indexOf(attempt);
+  const pct = ((attempt.score / TOTAL_Q) * 100).toFixed(1);
+  const minutes = Math.floor(attempt.durationMs / 60000);
+  document.getElementById("passed-summary").innerHTML =
+    `<strong>${attempt.name}</strong> passed on <strong>attempt ${idx+1}</strong> of ${MAX_ATTEMPTS} with a score of <strong>${attempt.score}/${TOTAL_Q}</strong> (${pct}%) in ${formatDuration(attempt.durationMs)}.`;
+  document.getElementById("passed-attempts").innerHTML = renderAttemptList(state.attempts);
+  showScreen("passed");
+}
+
+function renderLocked(){
+  document.getElementById("locked-attempts").innerHTML = renderAttemptList(state.attempts);
+  showScreen("locked");
+}
+
+function renderAttemptList(attempts){
+  return attempts.map((a, i) => {
+    const cls = a.passed ? "pass" : "fail";
+    const verdict = a.passed ? "PASS" : "FAIL";
+    const pct = ((a.score / TOTAL_Q) * 100).toFixed(1);
+    return `<div class="attempt-row">
+      <span class="a-num">Attempt ${i+1}</span>
+      <span class="a-score">${a.score}/${TOTAL_Q} (${pct}%)</span>
+      <span class="a-result ${cls}">${verdict}</span>
+    </div>`;
+  }).join("");
+}
+
+// ════════════════════════════ EXAM ════════════════════════════
+function startNewAttempt(name){
+  state.inProgress = {
+    name: name.trim(),
+    started: Date.now(),
+    answers: {},   // qIdx (0-149) -> letter
+    flagged: [],   // qIdx
+    currentQ: 0,
+  };
+  saveState();
+  enterExam();
+}
+
+function resumeAttempt(){
+  if(!state.inProgress) return;
+  enterExam();
+}
+
+function enterExam(){
+  document.getElementById("bar-candidate").textContent = state.inProgress.name;
+  showScreen("exam");
+  renderQuestion();
+  startTimer();
+}
+
+function renderQuestion(){
+  const idx = state.inProgress.currentQ;
+  const q = QUESTIONS[idx];
+  const answered = state.inProgress.answers[idx];
+  const flagged = state.inProgress.flagged.includes(idx);
+
+  document.getElementById("bar-qcount").textContent = `${idx+1}/${TOTAL_Q}`;
+  document.getElementById("progress-fill").style.width =
+    `${((idx+1) / TOTAL_Q) * 100}%`;
+
+  const wrap = document.getElementById("q-wrap");
+  const letters = ["A","B","C","D"];
+  wrap.innerHTML = `
+    <div class="q-meta">${q.section_label}</div>
+    <div class="q-stem">${q.stem}</div>
+    ${q.scenario ? `<div class="q-scenario">${q.scenario}</div>` : ""}
+    <ul class="opts-list">
+      ${q.options.map((opt, i) => `
+        <li>
+          <button class="opt-btn ${answered === letters[i] ? "selected" : ""}" data-letter="${letters[i]}">
+            <span class="letter">${letters[i]}</span>
+            <span class="text">${opt}</span>
+          </button>
+        </li>
+      `).join("")}
+    </ul>
+  `;
+  wrap.querySelectorAll(".opt-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const letter = btn.dataset.letter;
+      state.inProgress.answers[idx] = letter;
+      saveState();
+      renderQuestion();
+    });
+  });
+
+  // Flag button state
+  document.getElementById("btn-flag").classList.toggle("active", flagged);
+  document.getElementById("flag-label").textContent = flagged ? "Flagged" : "Flag for review";
+
+  // Nav buttons
+  document.getElementById("btn-prev").disabled = idx === 0;
+  const nextBtn = document.getElementById("btn-next");
+  if(idx === TOTAL_Q - 1){
+    nextBtn.textContent = "Review →";
+  } else {
+    nextBtn.textContent = "Next →";
+  }
+}
+
+function goToQuestion(idx){
+  if(idx < 0 || idx >= TOTAL_Q) return;
+  state.inProgress.currentQ = idx;
+  saveState();
+  renderQuestion();
+  closeNavigator();
+}
+
+function nextQuestion(){
+  const idx = state.inProgress.currentQ;
+  if(idx === TOTAL_Q - 1){
+    enterReview();
+  } else {
+    goToQuestion(idx + 1);
+  }
+}
+
+function prevQuestion(){
+  goToQuestion(state.inProgress.currentQ - 1);
+}
+
+function toggleFlag(){
+  const idx = state.inProgress.currentQ;
+  const i = state.inProgress.flagged.indexOf(idx);
+  if(i >= 0) state.inProgress.flagged.splice(i, 1);
+  else state.inProgress.flagged.push(idx);
+  saveState();
+  renderQuestion();
+}
+
+// ════════════════════════════ TIMER ════════════════════════════
+function startTimer(){
+  if(timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(updateTimer, 1000);
+  updateTimer();
+}
+function stopTimer(){
+  if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+}
+function updateTimer(){
+  if(!state.inProgress) return;
+  const elapsed = Date.now() - state.inProgress.started;
+  const remaining = TIME_LIMIT_MS - elapsed;
+  const timerEl = document.getElementById("bar-timer");
+  if(remaining <= 0){
+    timerEl.textContent = "0:00:00";
+    timeUp();
+    return;
+  }
+  const hours = Math.floor(remaining / 3600000);
+  const mins = Math.floor((remaining % 3600000) / 60000);
+  const secs = Math.floor((remaining % 60000) / 1000);
+  timerEl.textContent = `${hours}:${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+  timerEl.classList.toggle("warning", remaining < 10 * 60 * 1000);  // last 10 minutes
+}
+function timeUp(){
+  stopTimer();
+  document.getElementById("time-up-modal").classList.add("open");
+}
+
+// ════════════════════════════ NAVIGATOR ════════════════════════════
+function openNavigator(){
+  const grid = document.getElementById("nav-grid");
+  grid.innerHTML = "";
+  const answers = state.inProgress.answers;
+  const flagged = state.inProgress.flagged;
+  const current = state.inProgress.currentQ;
+  for(let i = 0; i < TOTAL_Q; i++){
+    const cell = document.createElement("button");
+    cell.className = "nav-cell";
+    if(answers[i]) cell.classList.add("answered");
+    if(flagged.includes(i)) cell.classList.add("flagged");
+    if(i === current) cell.classList.add("current");
+    cell.textContent = String(i + 1);
+    cell.addEventListener("click", () => goToQuestion(i));
+    grid.appendChild(cell);
+  }
+  document.getElementById("navigator").classList.add("open");
+}
+function closeNavigator(){
+  document.getElementById("navigator").classList.remove("open");
+}
+
+// ════════════════════════════ REVIEW SCREEN ════════════════════════════
+function enterReview(){
+  const ip = state.inProgress;
+  const answered = Object.keys(ip.answers).length;
+  const unanswered = TOTAL_Q - answered;
+  const flagged = ip.flagged.length;
+
+  document.getElementById("review-summary").innerHTML = `
+    <div class="row"><span class="l">Answered</span><span class="v ${unanswered===0?"ok":""}">${answered} / ${TOTAL_Q}</span></div>
+    <div class="row"><span class="l">Unanswered</span><span class="v ${unanswered>0?"warn":""}">${unanswered}</span></div>
+    <div class="row"><span class="l">Flagged for review</span><span class="v">${flagged}</span></div>
+  `;
+
+  const unEl = document.getElementById("review-unanswered");
+  if(unanswered > 0){
+    const unanswered_q = [];
+    for(let i = 0; i < TOTAL_Q; i++) if(!ip.answers[i]) unanswered_q.push(i + 1);
+    unEl.innerHTML = `
+      <h3 style="color:var(--red)">Unanswered questions</h3>
+      <p style="color:var(--muted);font-size:.88rem;margin:.4rem 0 .6rem">These will be marked wrong if you submit now.</p>
+      <div class="q-list-pills">${unanswered_q.map(n =>
+        `<button class="q-pill" data-q="${n-1}">Q${String(n).padStart(3,"0")}</button>`
+      ).join("")}</div>`;
+    unEl.querySelectorAll(".q-pill").forEach(p =>
+      p.addEventListener("click", e => { goToQuestion(+e.target.dataset.q); showScreen("exam"); }));
+  } else { unEl.innerHTML = ""; }
+
+  const flEl = document.getElementById("review-flagged");
+  if(flagged > 0){
+    flEl.innerHTML = `
+      <h3>Flagged for review</h3>
+      <div class="q-list-pills">${ip.flagged.sort((a,b)=>a-b).map(i =>
+        `<button class="q-pill flagged" data-q="${i}">Q${String(i+1).padStart(3,"0")}</button>`
+      ).join("")}</div>`;
+    flEl.querySelectorAll(".q-pill").forEach(p =>
+      p.addEventListener("click", e => { goToQuestion(+e.target.dataset.q); showScreen("exam"); }));
+  } else { flEl.innerHTML = ""; }
+
+  showScreen("review");
+}
+
+// ════════════════════════════ SUBMIT & SCORE ════════════════════════════
+function submitExam(){
+  const ip = state.inProgress;
+  const finished = Date.now();
+  let correct = 0;
+  for(let i = 0; i < TOTAL_Q; i++){
+    if(ip.answers[i] === QUESTIONS[i].correct) correct++;
+  }
+  const attempt = {
+    name: ip.name,
+    started: ip.started,
+    finished,
+    score: correct,
+    passed: correct >= PASS_MARK,
+    durationMs: finished - ip.started,
+    answers: ip.answers,
+  };
+  state.attempts.push(attempt);
+  state.inProgress = null;
+  saveState();
+  stopTimer();
+  renderResults(attempt);
+}
+
+function renderResults(attempt){
+  const attemptIdx = state.attempts.indexOf(attempt);
+  document.getElementById("results-name").textContent = attempt.name;
+  const date = new Date(attempt.finished);
+  document.getElementById("results-date").textContent =
+    date.toLocaleDateString("en-ZA", {year:"numeric", month:"long", day:"numeric"}) +
+    " at " + date.toLocaleTimeString("en-ZA", {hour:"2-digit", minute:"2-digit"});
+
+  const hero = document.getElementById("result-hero");
+  hero.className = "result-hero " + (attempt.passed ? "pass" : "fail");
+  document.getElementById("result-verdict").textContent = attempt.passed ? "PASSED" : "FAILED";
+  document.getElementById("result-score").textContent = attempt.score;
+  const pct = ((attempt.score / TOTAL_Q) * 100).toFixed(1);
+  document.getElementById("result-pct").textContent = pct + "%";
+  document.getElementById("result-attempt").textContent =
+    `${attemptIdx + 1} of ${MAX_ATTEMPTS}`;
+  document.getElementById("result-duration").textContent = formatDuration(attempt.durationMs);
+  document.getElementById("result-correct").textContent = `${attempt.score} correct`;
+
+  // Module breakdown
+  const modScores = {};
+  for(let i = 0; i < TOTAL_Q; i++){
+    const m = QUESTIONS[i].module_num;
+    if(!modScores[m]) modScores[m] = { correct: 0, total: 0 };
+    modScores[m].total++;
+    if(attempt.answers[i] === QUESTIONS[i].correct) modScores[m].correct++;
+  }
+  const tbody = document.getElementById("mod-table-body");
+  tbody.innerHTML = "";
+  const weakMods = [];
+  Object.keys(modScores).sort((a,b) => +a - +b).forEach(m => {
+    const s = modScores[m];
+    const pctMod = (s.correct / s.total) * 100;
+    const modName = MODULE_TITLES[m] || `Module ${m}`;
+    const modLabel = m === "99" ? "Synthesis" : `M${String(m).padStart(2,"0")}`;
+    let cls = "";
+    if(pctMod >= 90) cls = "strong";
+    else if(pctMod < 60) { cls = "weak"; weakMods.push({ num: m, name: modName, score: s.correct, total: s.total }); }
+    tbody.innerHTML += `
+      <tr>
+        <td><strong style="color:var(--text)">${modLabel}</strong><br><span style="color:var(--muted);font-size:.78rem">${modName}</span></td>
+        <td class="score">${s.correct}/${s.total}</td>
+        <td class="bar"><div class="mod-bar-bg"><div class="mod-bar-fill ${cls}" style="width:${pctMod}%"></div></div></td>
+      </tr>`;
+  });
+
+  // Wrong question pills
+  const wrong = [];
+  for(let i = 0; i < TOTAL_Q; i++){
+    if(attempt.answers[i] !== QUESTIONS[i].correct) wrong.push(i + 1);
+  }
+  if(wrong.length === 0){
+    document.getElementById("wrong-list-section").innerHTML = `
+      <div class="heading" style="color:var(--green)">Every question answered correctly</div>`;
+  } else {
+    document.getElementById("wrong-pills").innerHTML =
+      wrong.map(n => `<span class="wrong-pill">Q${String(n).padStart(3,"0")}</span>`).join("");
+  }
+
+  // Weak topics callout
+  const wt = document.getElementById("weak-topics");
+  const wtList = document.getElementById("weak-topics-list");
+  if(weakMods.length > 0 && !attempt.passed){
+    wtList.innerHTML = weakMods.map(m =>
+      `<li><em>${m.name}</em> — ${m.score}/${m.total} correct. Re-read course module ${m.num === "99" ? "synthesis" : m.num} and the related memo entries.</li>`
+    ).join("");
+    wt.style.display = "block";
+  } else {
+    wt.style.display = "none";
+  }
+
+  // Detailed review (collapsed by default)
+  renderReviewDetails(attempt);
+
+  // Retake / next steps block
+  const retakeBlock = document.getElementById("retake-block");
+  const used = state.attempts.length;
+  const remaining = MAX_ATTEMPTS - used;
+  if(attempt.passed){
+    retakeBlock.innerHTML = `
+      <div class="lock-card" style="background:rgba(126,201,142,.06);border-color:rgba(126,201,142,.3)">
+        <p style="margin:0">You've passed on attempt ${attemptIdx+1} of ${MAX_ATTEMPTS}. Send the screenshot to your instructor.</p>
+      </div>`;
+  } else if(remaining > 0){
+    retakeBlock.innerHTML = `
+      <p style="text-align:center;color:var(--muted);margin:1.2rem 0 .6rem">You have <strong>${remaining}</strong> attempt${remaining===1?"":"s"} remaining.</p>
+      <button class="btn" id="btn-retake">Start retake</button>
+      <button class="btn secondary" id="btn-home">Back to home (later)</button>`;
+    document.getElementById("btn-retake").addEventListener("click", () => {
+      if(confirm("Start a new attempt? Your current results are saved and your instructor still needs the screenshot.")){
+        renderStart();
+      }
+    });
+    document.getElementById("btn-home").addEventListener("click", () => renderStart());
+  } else {
+    retakeBlock.innerHTML = `
+      <div class="lock-card" style="background:rgba(236,90,90,.06);border-color:rgba(236,90,90,.3)">
+        <div class="ico" style="font-size:2rem">🔒</div>
+        <p>All 3 attempts used. Contact your instructor to discuss next steps.</p>
+      </div>`;
+  }
+
+  showScreen("results");
+}
+
+function renderReviewDetails(attempt){
+  const wrongIdx = [];
+  for(let i = 0; i < TOTAL_Q; i++){
+    if(attempt.answers[i] !== QUESTIONS[i].correct) wrongIdx.push(i);
+  }
+  const details = document.getElementById("review-details");
+  if(wrongIdx.length === 0){
+    details.innerHTML = "<p>No wrong answers to review.</p>";
+    return;
+  }
+  details.innerHTML = wrongIdx.map(i => {
+    const q = QUESTIONS[i];
+    const userLetter = attempt.answers[i] || "—";
+    const userAnswer = userLetter === "—"
+      ? '<em>(left blank)</em>'
+      : q.options[["A","B","C","D"].indexOf(userLetter)];
+    const correctAnswer = q.options[["A","B","C","D"].indexOf(q.correct)];
+    const userExp = userLetter !== "—" ? (q.explanations[userLetter] || "") : "";
+    const correctExp = q.explanations[q.correct] || "";
+    const modLabel = q.module_num === 99 ? "Synthesis" : `M${String(q.module_num).padStart(2,"0")}`;
+    return `
+      <div class="review-card">
+        <div class="rc-head">
+          <span class="rc-num">Q${String(q.num).padStart(3,"0")}</span>
+          <span class="rc-mod">${modLabel} · ${q.module_title}</span>
+        </div>
+        ${q.scenario ? `<div class="rc-scenario">${q.scenario}</div>` : ""}
+        <div class="rc-stem">${q.stem}</div>
+        <div class="rc-choice user-wrong"><span class="l">YOU CHOSE ${userLetter}:</span>${userAnswer}</div>
+        <div class="rc-choice correct-was"><span class="l">CORRECT ${q.correct}:</span>${correctAnswer}</div>
+        ${userExp ? `<div class="rc-exp"><strong class="label">Why ${userLetter} is wrong</strong>${userExp}</div>` : ""}
+        <div class="rc-exp"><strong class="label">Why ${q.correct} is correct</strong>${correctExp}</div>
+        ${q.principle ? `<div class="rc-principle">Principle · ${q.principle}</div>` : ""}
+      </div>`;
+  }).join("");
+}
+
+function formatDuration(ms){
+  const totalMins = Math.floor(ms / 60000);
+  const h = Math.floor(totalMins / 60);
+  const m = totalMins % 60;
+  if(h > 0) return `${h}h ${m}m`;
+  return `${m}m`;
+}
+
+// ════════════════════════════ EVENT WIRING ════════════════════════════
+document.addEventListener("DOMContentLoaded", () => {
+  loadState();
+  renderStart();
+
+  // Start screen
+  const nameInput = document.getElementById("candidate-name");
+  const startBtn = document.getElementById("btn-start");
+  nameInput.addEventListener("input", () => {
+    startBtn.disabled = nameInput.value.trim().length < 2;
+  });
+  startBtn.addEventListener("click", () => {
+    const name = nameInput.value.trim();
+    if(name.length < 2) return;
+    if(confirm(`Start examination as "${name}"? The 5-hour timer begins now.`)){
+      startNewAttempt(name);
+    }
+  });
+  document.getElementById("btn-resume").addEventListener("click", () => resumeAttempt());
+
+  // Exam navigation
+  document.getElementById("btn-next").addEventListener("click", () => nextQuestion());
+  document.getElementById("btn-prev").addEventListener("click", () => prevQuestion());
+  document.getElementById("btn-submit-top").addEventListener("click", () => enterReview());
+  document.getElementById("btn-flag").addEventListener("click", () => toggleFlag());
+  document.getElementById("btn-navigator").addEventListener("click", () => openNavigator());
+  document.getElementById("nav-close").addEventListener("click", () => closeNavigator());
+
+  // Review screen
+  document.getElementById("btn-back-to-exam").addEventListener("click", () => showScreen("exam"));
+  document.getElementById("btn-confirm-submit").addEventListener("click", () => {
+    if(confirm("Submit your exam now? You can't change answers after submitting.")) submitExam();
+  });
+
+  // Results screen
+  document.getElementById("review-toggle").addEventListener("click", (e) => {
+    const tog = e.currentTarget;
+    const det = document.getElementById("review-details");
+    tog.classList.toggle("open");
+    det.classList.toggle("show");
+  });
+
+  // Time-up modal
+  document.getElementById("btn-time-up-ok").addEventListener("click", () => {
+    document.getElementById("time-up-modal").classList.remove("open");
+    submitExam();
+  });
+
+  // Warn before leaving in the middle of exam
+  window.addEventListener("beforeunload", (e) => {
+    if(state.inProgress && document.body.dataset.active === "exam"){
+      e.preventDefault();
+      e.returnValue = "";
+    }
+  });
+});
+</script>
+</body></html>

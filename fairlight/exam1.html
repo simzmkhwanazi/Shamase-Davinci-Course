@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0d0f17">
+<title>Fairlight Certification · Exam 1 — Fundamentals — Shamase Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f17; --surface:#161a24; --surface-2:#1c2130; --surface-3:#232936;
+  --border:#252a36; --border-2:#343b4a;
+  --text:#e8e6e0; --muted:#8b8e98; --dim:#5d626d;
+  --gold:#d4a574; --gold-dim:#a07d52;
+  --teal:#5dc8b7; --teal-dim:#3a8d80;
+  --red:#ec5a5a; --red-bright:#ff3838;
+  --green:#7ec98e; --green-dim:#5a9f6a;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;line-height:1.55;font-size:16px;overflow-x:hidden}
+body{background-image:radial-gradient(ellipse at top,rgba(212,165,116,.04),transparent 60%)}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-size:inherit}
+input{font-family:inherit;font-size:inherit}
+
+.screen{display:none;padding:0;min-height:100vh}
+[data-active="start"] #screen-start,
+[data-active="exam"] #screen-exam,
+[data-active="review"] #screen-review,
+[data-active="results"] #screen-results,
+[data-active="locked"] #screen-locked,
+[data-active="passed"] #screen-passed{display:block}
+
+/* ─── SHARED ─────────────────────────────────────────────────── */
+.wrap{max-width:680px;margin:0 auto;padding:1.5rem 1.25rem 6rem}
+h1,h2,h3{font-family:'Fraunces',serif;letter-spacing:-.015em;font-weight:400}
+h1{font-size:clamp(2rem,7vw,2.8rem);margin:0 0 .5rem;font-variation-settings:"opsz" 144}
+h2{font-size:1.4rem;margin:1.8rem 0 .7rem;color:var(--gold);font-style:italic;font-variation-settings:"opsz" 100}
+h3{font-size:1.1rem;margin:1.3rem 0 .5rem;color:var(--teal)}
+strong{color:var(--gold);font-weight:600}em{color:var(--teal);font-style:italic}
+code,kbd{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--surface-2);padding:.12em .42em;border-radius:3px;color:var(--gold);border:1px solid var(--border)}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.22em;color:var(--teal);margin-bottom:1rem}
+
+/* ─── SCREENSHOT INSTRUCTION BANNER (the loud red bit) ───────── */
+.shot-banner{
+  background:var(--red-bright);
+  color:#fff;
+  padding:1.2rem 1.4rem;
+  border-radius:8px;
+  font-weight:700;
+  font-size:1.05rem;
+  line-height:1.4;
+  text-align:center;
+  letter-spacing:.01em;
+  margin:1.4rem 0;
+  box-shadow:0 4px 20px rgba(255,56,56,.25);
+  border:2px solid #fff;
+}
+.shot-banner .icon{font-size:1.6rem;display:block;margin-bottom:.4rem}
+.shot-banner .sub{display:block;font-size:.85rem;font-weight:500;margin-top:.4rem;opacity:.9}
+
+/* ─── START SCREEN ───────────────────────────────────────────── */
+.lede{font-family:'Fraunces',serif;font-style:italic;font-size:1.1rem;color:var(--muted);line-height:1.5;margin:.8rem 0 1.5rem}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin:1.4rem 0}
+.facts .fact{background:var(--surface);padding:.8rem 1rem;border-radius:6px;border:1px solid var(--border)}
+.facts .fact .l{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:.25rem}
+.facts .fact .v{font-size:1.05rem;color:var(--text);font-weight:500}
+.facts .fact.warn .v{color:var(--red)}
+
+.rules{background:var(--surface);border-left:3px solid var(--teal);padding:1rem 1.2rem;border-radius:6px;margin:1.4rem 0;font-size:.92rem}
+.rules p{margin:.45rem 0}
+.rules p.warn{color:var(--red);font-weight:500}
+
+.name-field{margin:1.6rem 0}
+.name-field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.18em;color:var(--teal);margin-bottom:.5rem}
+.name-field input{
+  width:100%;padding:.95rem 1rem;background:var(--surface-2);color:var(--text);
+  border:1px solid var(--border-2);border-radius:8px;font-size:1.05rem;
+  font-family:'Sora',sans-serif;
+}
+.name-field input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,165,116,.15)}
+
+.btn{display:block;width:100%;padding:1.1rem 1.4rem;background:var(--gold);color:#1a1308;border-radius:8px;font-weight:600;font-size:1.05rem;letter-spacing:.02em;margin:1rem 0;transition:opacity .15s,transform .05s;border:none}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn.secondary{background:var(--surface-2);color:var(--text);border:1px solid var(--border-2)}
+.btn.danger{background:var(--red);color:#fff}
+.btn.success{background:var(--green);color:#0d1410}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.btn-row .btn{margin:0}
+
+.attempts-log{margin-top:2rem;padding-top:1.4rem;border-top:1px solid var(--border)}
+.attempts-log h3{margin-top:0;color:var(--gold);font-size:.95rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.15em;font-style:normal}
+.attempt-row{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem;background:var(--surface);border-radius:6px;margin:.5rem 0;font-size:.9rem;border:1px solid var(--border)}
+.attempt-row .a-num{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:.8rem}
+.attempt-row .a-score{font-family:'JetBrains Mono',monospace;color:var(--text);font-weight:600}
+.attempt-row .a-result{font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.2rem .6rem;border-radius:3px;letter-spacing:.1em;font-weight:600}
+.attempt-row .a-result.pass{background:rgba(126,201,142,.15);color:var(--green);border:1px solid rgba(126,201,142,.4)}
+.attempt-row .a-result.fail{background:rgba(236,90,90,.12);color:var(--red);border:1px solid rgba(236,90,90,.4)}
+
+/* ─── EXAM SCREEN ────────────────────────────────────────────── */
+.exam-bar{position:sticky;top:0;background:rgba(13,15,23,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:.7rem 1rem;z-index:50;display:flex;align-items:center;gap:.8rem;font-family:'JetBrains Mono',monospace;font-size:.78rem}
+.exam-bar .candidate{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
+.exam-bar .timer{color:var(--gold);font-weight:600;letter-spacing:.05em;font-size:.85rem}
+.exam-bar .timer.warning{color:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+.exam-bar .qcount{color:var(--teal);font-weight:600}
+
+.progress-bar{height:3px;background:var(--surface);position:sticky;top:38px;z-index:50}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));transition:width .3s}
+
+.q-wrap{padding:1rem 1.25rem 0}
+.q-meta{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;color:var(--gold-dim);text-transform:uppercase;margin:1rem 0 .5rem}
+.q-scenario{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);font-size:1rem;line-height:1.5;margin:.8rem 0;padding-left:1rem;border-left:2px solid var(--gold-dim)}
+.q-stem{font-size:1.08rem;line-height:1.45;margin:1rem 0 1.2rem;color:var(--text)}
+
+.opts-list{list-style:none;padding:0;margin:0}
+.opt-btn{
+  display:flex;width:100%;padding:1rem 1.1rem;background:var(--surface);
+  border:1.5px solid var(--border-2);border-radius:10px;color:var(--text);
+  text-align:left;margin:.6rem 0;gap:.85rem;align-items:flex-start;
+  font-size:.95rem;line-height:1.4;transition:all .15s;font-family:'Sora',sans-serif;
+}
+.opt-btn:active{transform:scale(.985)}
+.opt-btn.selected{background:rgba(212,165,116,.15);border-color:var(--gold);box-shadow:0 0 0 2px rgba(212,165,116,.2)}
+.opt-btn .letter{
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.85rem;
+  background:var(--surface-2);color:var(--teal);padding:.25rem .55rem;border-radius:5px;
+  flex-shrink:0;border:1px solid var(--border-2);min-width:1.8rem;text-align:center;
+}
+.opt-btn.selected .letter{background:var(--gold);color:#1a1308;border-color:var(--gold)}
+
+.q-tools{display:flex;gap:.6rem;margin:1.4rem 0 1rem}
+.q-tool{flex:1;padding:.65rem .8rem;background:var(--surface);border:1px solid var(--border-2);border-radius:6px;color:var(--muted);font-size:.82rem;font-family:'JetBrains Mono',monospace;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.q-tool.active{background:rgba(236,90,90,.1);border-color:var(--red);color:var(--red)}
+.q-tool .ico{font-size:.95rem}
+
+.exam-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(13,15,23,.97);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:.7rem 1rem;display:flex;gap:.5rem;z-index:50;padding-bottom:max(.7rem,env(safe-area-inset-bottom))}
+.nav-btn{flex:1;padding:.85rem 1rem;background:var(--surface-2);color:var(--text);border:1px solid var(--border-2);border-radius:8px;font-weight:500;font-size:.92rem;letter-spacing:.02em;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.nav-btn:disabled{opacity:.3}
+.nav-btn.primary{background:var(--gold);color:#1a1308;border-color:var(--gold);font-weight:600}
+.nav-btn.danger{background:var(--red);color:#fff;border-color:var(--red);font-weight:600}
+.nav-btn.center{flex:0 0 auto;padding:.85rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.08em}
+
+/* ─── NAVIGATOR OVERLAY ──────────────────────────────────────── */
+.overlay{position:fixed;inset:0;background:rgba(13,15,23,.92);backdrop-filter:blur(8px);z-index:100;display:none;flex-direction:column;padding:1rem;overflow-y:auto}
+.overlay.open{display:flex}
+.overlay-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1rem;padding:.5rem .25rem}
+.overlay-head h2{margin:0;color:var(--gold);font-size:1.2rem;font-style:normal;font-family:'Fraunces',serif}
+.overlay-head .close{background:var(--surface-2);padding:.5rem .8rem;border-radius:6px;font-size:1.4rem;color:var(--text);border:1px solid var(--border-2);line-height:1}
+.nav-legend{display:flex;flex-wrap:wrap;gap:.8rem;font-size:.75rem;color:var(--muted);margin-bottom:1rem;padding:.5rem .25rem;font-family:'JetBrains Mono',monospace}
+.nav-legend span{display:flex;align-items:center;gap:.35rem}
+.nav-legend .swatch{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid var(--border-2)}
+.nav-legend .swatch.answered{background:var(--gold)}
+.nav-legend .swatch.unanswered{background:var(--surface)}
+.nav-legend .swatch.flagged{background:var(--surface);border:2px solid var(--red)}
+.nav-legend .swatch.current{background:var(--teal)}
+
+.nav-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.45rem;margin-bottom:5rem}
+@media(min-width:480px){.nav-grid{grid-template-columns:repeat(7,1fr)}}
+@media(min-width:640px){.nav-grid{grid-template-columns:repeat(10,1fr)}}
+.nav-cell{padding:.7rem .25rem;background:var(--surface);border:1px solid var(--border-2);border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;color:var(--muted);text-align:center;transition:all .1s}
+.nav-cell.answered{background:var(--gold);color:#1a1308;border-color:var(--gold)}
+.nav-cell.flagged{border:2px solid var(--red)}
+.nav-cell.current{background:var(--teal);color:#0d1410;border-color:var(--teal)}
+.nav-cell:active{transform:scale(.95)}
+
+/* ─── REVIEW SCREEN ──────────────────────────────────────────── */
+.review-summary{background:var(--surface);border-radius:8px;padding:1rem 1.2rem;margin:1.2rem 0;border:1px solid var(--border)}
+.review-summary .row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px dashed var(--border-2);font-size:.95rem}
+.review-summary .row:last-child{border-bottom:0}
+.review-summary .row .l{color:var(--muted)}
+.review-summary .row .v{color:var(--text);font-weight:600;font-family:'JetBrains Mono',monospace}
+.review-summary .row .v.warn{color:var(--red)}
+.review-summary .row .v.ok{color:var(--green)}
+
+.q-list-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin:.8rem 0 1.4rem}
+.q-pill{padding:.4rem .7rem;background:var(--surface);border:1px solid var(--border-2);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--gold)}
+.q-pill.flagged{border-color:var(--red);color:var(--red)}
+
+/* ─── RESULTS SCREEN ─────────────────────────────────────────── */
+.result-hero{padding:1.5rem 1.2rem;border-radius:10px;margin:1rem 0 1.5rem;text-align:center;border:1px solid var(--border)}
+.result-hero.pass{background:linear-gradient(180deg,rgba(126,201,142,.15),rgba(126,201,142,.04));border-color:rgba(126,201,142,.4)}
+.result-hero.fail{background:linear-gradient(180deg,rgba(236,90,90,.12),rgba(236,90,90,.03));border-color:rgba(236,90,90,.4)}
+.result-hero .verdict{font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.3em;font-weight:700;margin-bottom:.5rem}
+.result-hero.pass .verdict{color:var(--green)}
+.result-hero.fail .verdict{color:var(--red)}
+.result-hero .score-big{font-family:'Fraunces',serif;font-size:3.4rem;font-weight:300;line-height:1;margin:.4rem 0;font-variation-settings:"opsz" 144}
+.result-hero .score-big .of{color:var(--muted);font-size:1.8rem}
+.result-hero .pct{font-family:'JetBrains Mono',monospace;font-size:1rem;color:var(--muted)}
+
+.result-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin:1.2rem 0}
+.result-meta .item{background:var(--surface);padding:.85rem 1rem;border-radius:6px;border:1px solid var(--border)}
+.result-meta .item .l{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:.25rem}
+.result-meta .item .v{font-size:1.05rem;color:var(--text);font-weight:600;font-family:'JetBrains Mono',monospace}
+
+.mod-table{width:100%;border-collapse:collapse;margin:1rem 0 1.6rem;background:var(--surface);border-radius:8px;overflow:hidden;font-size:.88rem}
+.mod-table th{padding:.7rem .9rem;background:var(--surface-2);text-align:left;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);border-bottom:1px solid var(--border)}
+.mod-table td{padding:.65rem .9rem;border-bottom:1px solid var(--border);vertical-align:middle}
+.mod-table tr:last-child td{border-bottom:0}
+.mod-table td.score{font-family:'JetBrains Mono',monospace;font-weight:600;text-align:right;color:var(--text);white-space:nowrap}
+.mod-table td.bar{width:35%}
+.mod-bar-bg{height:6px;background:var(--surface-3);border-radius:3px;overflow:hidden}
+.mod-bar-fill{height:100%;background:var(--gold);border-radius:3px;transition:width .5s}
+.mod-bar-fill.weak{background:var(--red)}
+.mod-bar-fill.strong{background:var(--green)}
+
+.wrong-list{margin:1rem 0}
+.wrong-list .heading{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.18em;color:var(--red);text-transform:uppercase;margin-bottom:.6rem;font-weight:600}
+.wrong-pills{display:flex;flex-wrap:wrap;gap:.35rem;margin:.4rem 0 1rem}
+.wrong-pill{background:rgba(236,90,90,.1);border:1px solid rgba(236,90,90,.4);color:var(--red);padding:.3rem .6rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:600}
+
+.weak-topics{background:var(--surface);border-left:3px solid var(--red);border-radius:6px;padding:.9rem 1.1rem;margin:1rem 0;font-size:.9rem}
+.weak-topics .head{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem;font-weight:600}
+.weak-topics ul{margin:.4rem 0 0;padding-left:1.2rem;color:var(--muted)}
+.weak-topics ul li{margin:.3rem 0;color:var(--text);font-size:.92rem}
+.weak-topics ul li em{color:var(--gold);font-style:normal;font-weight:600}
+
+.review-toggle{margin:1.6rem 0 0;padding:.85rem 1.1rem;background:var(--surface);border:1px solid var(--border-2);border-radius:8px;width:100%;color:var(--text);font-size:.95rem;text-align:left;display:flex;align-items:center;justify-content:space-between}
+.review-toggle .ico{color:var(--muted);transition:transform .2s}
+.review-toggle.open .ico{transform:rotate(90deg)}
+
+.review-details{display:none;margin-top:.8rem}
+.review-details.show{display:block}
+.review-card{background:var(--surface);border-radius:8px;border:1px solid var(--border);padding:1rem 1.1rem;margin:.7rem 0}
+.review-card .rc-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem;flex-wrap:wrap;gap:.5rem}
+.review-card .rc-num{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--gold-dim);letter-spacing:.12em}
+.review-card .rc-mod{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.1em}
+.review-card .rc-stem{font-size:.93rem;line-height:1.45;margin:.5rem 0}
+.review-card .rc-scenario{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);font-size:.86rem;line-height:1.45;margin:.4rem 0;padding-left:.8rem;border-left:2px solid var(--border-2)}
+.review-card .rc-choice{font-size:.85rem;padding:.4rem .6rem;border-radius:4px;margin:.4rem 0;line-height:1.4}
+.review-card .rc-choice.user-wrong{background:rgba(236,90,90,.08);border-left:3px solid var(--red)}
+.review-card .rc-choice.correct-was{background:rgba(126,201,142,.08);border-left:3px solid var(--green)}
+.review-card .rc-choice .l{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:.75rem;letter-spacing:.05em;margin-right:.45rem}
+.review-card .rc-choice.user-wrong .l{color:var(--red)}
+.review-card .rc-choice.correct-was .l{color:var(--green)}
+.review-card .rc-exp{font-size:.86rem;color:var(--muted);line-height:1.5;margin-top:.6rem;padding-top:.6rem;border-top:1px dashed var(--border-2)}
+.review-card .rc-exp strong.label{display:block;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.18em;color:var(--teal);text-transform:uppercase;margin-bottom:.3rem;font-weight:600}
+.review-card .rc-principle{font-style:italic;color:var(--gold);margin-top:.6rem;font-size:.85rem;line-height:1.4}
+
+/* ─── LOCKED SCREEN ──────────────────────────────────────────── */
+.lock-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem;text-align:center;margin:1.5rem 0}
+.lock-card .ico{font-size:2.5rem;margin-bottom:.5rem}
+
+/* ─── TIME-UP MODAL ──────────────────────────────────────────── */
+.modal{position:fixed;inset:0;background:rgba(13,15,23,.95);backdrop-filter:blur(8px);z-index:200;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.modal.open{display:flex}
+.modal-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem 1.4rem;max-width:480px;width:100%;text-align:center}
+.modal-card h2{margin-top:0;color:var(--red);font-style:normal;font-family:'Fraunces',serif}
+.modal-card .btn{margin-top:1rem}
+
+footer.app-footer{text-align:center;padding:2rem 1rem;color:var(--dim);font-size:.7rem;font-family:'JetBrains Mono',monospace;letter-spacing:.1em}
+
+/* Print-friendly results (in case anyone prints) */
+@media print{
+  body{background:#fff;color:#111;font-size:11pt}
+  .exam-nav,.q-tools,.exam-bar,.progress-bar,.overlay,.modal,.btn,.review-toggle{display:none !important}
+  .screen{display:block !important}
+  .shot-banner{background:#fff;color:#c00;border:2px solid #c00;box-shadow:none}
+  .review-details{display:block !important}
+}
+</style></head>
+<body data-active="start">
+
+<main id="app">
+
+<!-- ═══════════════════════════ START SCREEN ═══════════════════════════ -->
+<section id="screen-start" class="screen"><div class="wrap">
+<div class="eyebrow">Shamase Studios · Fairlight · Exam 1</div>
+<h1>Fairlight Exam 1 — Fundamentals</h1>
+<p class="lede">A 100-question examination on the Fairlight page: interface, tools, terminology and where every control lives. Two hours. Pass mark 90%. Three attempts maximum.</p>
+
+<div class="facts">
+<div class="fact"><div class="l">Questions</div><div class="v">100</div></div>
+<div class="fact"><div class="l">Duration</div><div class="v">2 hours</div></div>
+<div class="fact"><div class="l">Pass mark</div><div class="v">90% (90/100)</div></div>
+<div class="fact warn"><div class="l">Attempts</div><div class="v" id="attempts-remaining">3 maximum</div></div>
+</div>
+
+<div class="rules">
+<p><strong>Rules.</strong></p>
+<p>1. One best answer per question. Other options may be partially correct; pick the strongest.</p>
+<p>2. The timer starts when you tap <em>Begin</em>. At <strong>2:00:00</strong> the exam auto-submits. Unanswered questions are marked wrong.</p>
+<p>3. Pace yourself — that's <strong>72 seconds per question</strong>. </p>
+<p>4. Your progress is saved automatically. You can close the browser and resume — but the clock keeps running.</p>
+<p>5. You have a maximum of <strong>3 attempts total</strong>. Each attempt is tracked.</p>
+<p class="warn">6. When you finish — pass or fail — you must <strong>screenshot the result page and send it to your instructor</strong>. The page will remind you.</p>
+</div>
+
+<div class="name-field">
+<label for="candidate-name">Your full name (required)</label>
+<input id="candidate-name" type="text" placeholder="e.g. Lerato Khumalo" autocomplete="name" autocorrect="off" autocapitalize="words">
+</div>
+
+<button class="btn" id="btn-start" disabled>Begin examination</button>
+<button class="btn secondary" id="btn-resume" style="display:none">Resume in-progress attempt</button>
+
+<div class="attempts-log" id="attempts-log" style="display:none">
+<h3>Previous attempts on this device</h3>
+<div id="attempts-list"></div>
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ EXAM SCREEN ═══════════════════════════ -->
+<section id="screen-exam" class="screen">
+<div class="exam-bar">
+<span class="candidate" id="bar-candidate">—</span>
+<span class="qcount" id="bar-qcount">1/100</span>
+<span class="timer" id="bar-timer">2:00:00</span>
+</div>
+<div class="progress-bar"><div class="fill" id="progress-fill" style="width:0%"></div></div>
+
+<div class="q-wrap" id="q-wrap"></div>
+
+<div class="q-tools" id="q-tools" style="margin:1.4rem 1.25rem 1rem">
+<button class="q-tool" id="btn-flag"><span class="ico">⚑</span> <span id="flag-label">Flag for review</span></button>
+<button class="q-tool" id="btn-navigator"><span class="ico">▦</span> Navigator</button>
+</div>
+
+<div style="height:5rem"></div>
+
+<div class="exam-nav">
+<button class="nav-btn" id="btn-prev">← Prev</button>
+<button class="nav-btn center" id="btn-submit-top">Submit</button>
+<button class="nav-btn primary" id="btn-next">Next →</button>
+</div>
+</section>
+
+<!-- ═══════════════════════════ NAVIGATOR OVERLAY ═══════════════════════════ -->
+<div class="overlay" id="navigator">
+<div class="overlay-head"><h2>Jump to question</h2><button class="close" id="nav-close">×</button></div>
+<div class="nav-legend">
+<span><span class="swatch answered"></span>Answered</span>
+<span><span class="swatch unanswered"></span>Unanswered</span>
+<span><span class="swatch flagged"></span>Flagged</span>
+<span><span class="swatch current"></span>Current</span>
+</div>
+<div class="nav-grid" id="nav-grid"></div>
+</div>
+
+<!-- ═══════════════════════════ REVIEW SCREEN ═══════════════════════════ -->
+<section id="screen-review" class="screen"><div class="wrap">
+<div class="eyebrow">Final check before submission</div>
+<h1>Ready to submit?</h1>
+
+<div class="review-summary" id="review-summary"></div>
+<div id="review-unanswered"></div>
+<div id="review-flagged"></div>
+
+<div class="btn-row">
+<button class="btn secondary" id="btn-back-to-exam">← Keep working</button>
+<button class="btn danger" id="btn-confirm-submit">Submit now</button>
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ RESULTS SCREEN ═══════════════════════════ -->
+<section id="screen-results" class="screen"><div class="wrap">
+
+<div class="shot-banner">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Send it to your instructor as proof of completion</span>
+</div>
+
+<div class="eyebrow">Examination result · Shamase Studios</div>
+<h1 id="results-name">—</h1>
+<p class="lede" id="results-date">—</p>
+
+<div class="result-hero" id="result-hero">
+<div class="verdict" id="result-verdict">—</div>
+<div class="score-big"><span id="result-score">0</span><span class="of">/100</span></div>
+<div class="pct" id="result-pct">— %</div>
+</div>
+
+<div class="result-meta">
+<div class="item"><div class="l">Attempt</div><div class="v" id="result-attempt">—</div></div>
+<div class="item"><div class="l">Pass mark</div><div class="v">90/100</div></div>
+<div class="item"><div class="l">Time taken</div><div class="v" id="result-duration">—</div></div>
+<div class="item"><div class="l">Correct</div><div class="v" id="result-correct">—</div></div>
+</div>
+
+<h2>Module breakdown</h2>
+<table class="mod-table" id="mod-table"><thead><tr><th>Module</th><th>Score</th><th>Performance</th></tr></thead><tbody id="mod-table-body"></tbody></table>
+
+<div class="wrong-list" id="wrong-list-section">
+<div class="heading">Questions answered incorrectly</div>
+<div class="wrong-pills" id="wrong-pills"></div>
+</div>
+
+<div class="weak-topics" id="weak-topics" style="display:none">
+<div class="head">Topics to revise before retaking</div>
+<ul id="weak-topics-list"></ul>
+</div>
+
+<button class="review-toggle" id="review-toggle">
+<span>Detailed review of wrong answers</span><span class="ico">▶</span>
+</button>
+<div class="review-details" id="review-details"></div>
+
+<div class="shot-banner" style="margin-top:2rem">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Don't forget — your instructor needs to see your score and your attempt number</span>
+</div>
+
+<div id="retake-block" style="margin-top:1.5rem"></div>
+
+</div></section>
+
+<!-- ═══════════════════════════ LOCKED SCREEN ═══════════════════════════ -->
+<section id="screen-locked" class="screen"><div class="wrap">
+<div class="eyebrow">Examination locked</div>
+<h1>No attempts remaining</h1>
+
+<div class="shot-banner">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Send to your instructor — this confirms your 3 attempts are complete</span>
+</div>
+
+<div class="lock-card">
+<div class="ico">🔒</div>
+<p>You have used all <strong>3 attempts</strong> for this examination on this device. Contact your instructor to discuss next steps.</p>
+</div>
+
+<h2>Your attempt history</h2>
+<div id="locked-attempts"></div>
+
+<div class="shot-banner" style="margin-top:1.5rem">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Your instructor needs to see this attempt history</span>
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ PASSED SCREEN (if returning after pass) ═══════════════════════════ -->
+<section id="screen-passed" class="screen"><div class="wrap">
+<div class="eyebrow">Examination complete</div>
+<h1>You've already passed</h1>
+
+<div class="shot-banner">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Send to your instructor as proof of completion</span>
+</div>
+
+<div class="lock-card">
+<div class="ico">✓</div>
+<p id="passed-summary">—</p>
+</div>
+
+<h2>Your full attempt history</h2>
+<div id="passed-attempts"></div>
+
+<div class="shot-banner" style="margin-top:1.5rem">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ TIME-UP MODAL ═══════════════════════════ -->
+<div class="modal" id="time-up-modal"><div class="modal-card">
+<h2>Time's up</h2>
+<p>Two hours elapsed. Submitting your exam with answers as completed. Unanswered questions count as wrong.</p>
+<button class="btn" id="btn-time-up-ok">View results</button>
+</div></div>
+
+<footer class="app-footer">Fairlight Exam 1 — Fundamentals · Shamase Studios 2026</footer>
+
+</main>
+
+<script>
+// ════════════════════════════ DATA ════════════════════════════
+const QUESTIONS = [{"module_num": 1, "scenario": null, "stem": "Which DaVinci Resolve page is dedicated to professional audio post-production?", "options": ["Edit", "Fairlight", "Color", "Fusion"], "correct": "B", "explanations": {"A": "The Edit page has audio tracks but is built around picture editing.", "B": "Correct: Fairlight is Resolve's full digital audio workstation (DAW) page.", "C": "Color is for grading, not audio.", "D": "Fusion is for compositing and VFX."}, "principle": "Fairlight is Resolve's built-in DAW for editing, mixing, recording and mastering audio.", "num": 1, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "On the Fairlight page, what runs along the very bottom of the timeline by default?", "options": ["The Mixer", "The transport / playback controls and toolbar", "The Inspector", "The Color wheels"], "correct": "B", "explanations": {"A": "The Mixer opens on the right-hand side, not the bottom.", "B": "Correct: transport controls and the toolbar sit at the bottom of the page.", "C": "Fairlight has no Inspector like the Edit page; clip controls live elsewhere.", "D": "Color wheels belong to the Color page."}, "principle": "Transport and tools live at the bottom; the Mixer docks on the right.", "num": 2, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "Which panel, toggled on the right of the Fairlight page, contains every track's fader, pan, EQ, dynamics and bus routing?", "options": ["Index", "Mixer", "Metadata", "Effects Library"], "correct": "B", "explanations": {"A": "The Index lists tracks/markers but has no faders.", "B": "Correct: the Mixer is the channel-strip view with faders, pan, EQ, dynamics and routing.", "C": "Metadata shows clip information, not mixing controls.", "D": "The Effects Library holds plugins you drag onto clips/tracks."}, "principle": "The Mixer is the channel-strip workspace: one strip per track plus the buses and Main.", "num": 3, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "In Fairlight, audio levels are measured in which unit on the meters?", "options": ["dB SPL", "dBFS (decibels relative to full scale)", "LUFS only", "Hertz"], "correct": "B", "explanations": {"A": "dB SPL measures acoustic loudness in air, not a digital meter scale.", "B": "Correct: digital peak meters read dBFS, where 0 dBFS is the clipping ceiling.", "C": "LUFS is a loudness scale shown separately, not the standard peak meter unit.", "D": "Hertz measures frequency, not level."}, "principle": "Digital peak meters are in dBFS; 0 dBFS is the absolute digital ceiling (clipping).", "num": 4, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "What is the standard professional sample rate for video audio that Fairlight projects use by default?", "options": ["44.1 kHz", "48 kHz", "96 kHz", "32 kHz"], "correct": "B", "explanations": {"A": "44.1 kHz is the CD standard, not the video standard.", "B": "Correct: 48 kHz is the standard sample rate for film and video audio.", "C": "96 kHz is high-resolution capture, not the default delivery standard.", "D": "32 kHz is below professional video standards."}, "principle": "48 kHz is the universal sample rate for film/video audio post.", "num": 5, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "Which keys give you JKL-style transport control in Fairlight?", "options": ["A, S, D", "J, K, L", "Q, W, E", "Z, X, C"], "correct": "B", "explanations": {"A": "A and S are selection/tool shortcuts, not shuttle keys.", "B": "Correct: J reverses, K stops, L plays forward; tap L/J repeatedly to shuttle faster.", "C": "Q/W/E are not the transport shortcuts.", "D": "Z/X/C are not the transport shortcuts."}, "principle": "J-K-L is the universal shuttle: J back, K stop, L forward, repeat to speed up.", "num": 6, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "Tapping the L key a second and third time during playback does what?", "options": ["Mutes the track", "Increases forward playback speed (2x, 4x…)", "Adds a marker", "Solos the clip"], "correct": "B", "explanations": {"A": "Muting is the M key on a track header, not L.", "B": "Correct: each extra tap of L shuttles forward faster.", "C": "Markers are added with M.", "D": "Solo is the S key on a track header."}, "principle": "Repeated L (or J) taps step playback speed up for fast scrubbing.", "num": 7, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "What does the 'S' button on a track header do?", "options": ["Saves the project", "Solos the track (mutes all others)", "Splits the clip", "Shows the spectrogram"], "correct": "B", "explanations": {"A": "Saving is Cmd/Ctrl+S, not the track S button.", "B": "Correct: S solos that track so you hear it in isolation.", "C": "Splitting/cutting uses the razor or Cmd/Ctrl+B.", "D": "The spectrogram is a view option, not the S button."}, "principle": "On a track header: S = Solo, M = Mute.", "num": 8, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "Where do you import media for use on the Fairlight page?", "options": ["The Media Pool", "The Deliver page", "The Fusion node graph", "The Color gallery"], "correct": "A", "explanations": {"A": "Correct: media is imported into the Media Pool, shared across all pages including Fairlight.", "B": "Deliver is for export, not import.", "C": "The Fusion node graph is for compositing.", "D": "The gallery stores colour grades."}, "principle": "The Media Pool is shared project-wide; Fairlight pulls clips from it.", "num": 9, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "A track that carries a single audio channel is described as which format?", "options": ["Stereo", "Mono", "5.1", "Adaptive"], "correct": "B", "explanations": {"A": "Stereo carries two channels (left/right).", "B": "Correct: a mono track carries one channel — typical for a single mic/lav.", "C": "5.1 carries six channels for surround.", "D": "Adaptive carries a variable number of channels in one track."}, "principle": "Track formats describe channel count: mono (1), stereo (2), 5.1 (6), adaptive (variable).", "num": 10, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "The vertical line that shows your current position in the timeline is the:", "options": ["Playhead", "Marker", "Fade handle", "Bus line"], "correct": "A", "explanations": {"A": "Correct: the playhead marks the current playback/edit position.", "B": "A marker is a coloured flag you place for reference.", "C": "Fade handles are the corner triangles on a clip.", "D": "There is no 'bus line' on the timeline."}, "principle": "The playhead is your current position; transport and editing happen relative to it.", "num": 11, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "Which left-side panel lists all your tracks, markers and an overview of the timeline?", "options": ["Index", "Mixer", "Sound Library", "ADR"], "correct": "A", "explanations": {"A": "Correct: the Index lists tracks and markers and lets you show/hide tracks.", "B": "The Mixer is the right-side faders panel.", "C": "The Sound Library browses sound effects.", "D": "ADR is the dialogue-replacement panel."}, "principle": "The Index (left) is your track/marker overview and visibility manager.", "num": 12, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "Pressing the spacebar in Fairlight does what?", "options": ["Splits the clip at the playhead", "Starts/stops playback", "Adds a fade", "Opens the Mixer"], "correct": "B", "explanations": {"A": "Splitting is Cmd/Ctrl+B or the razor.", "B": "Correct: spacebar toggles play/stop, the universal transport shortcut.", "C": "Fades are dragged with the clip's fade handles.", "D": "The Mixer has its own toggle button."}, "principle": "Spacebar = play/stop, the most-used transport control.", "num": 13, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "What does the term 'clip' refer to on the Fairlight timeline?", "options": ["A single segment of audio placed on a track", "An entire track", "A bus", "A keyframe"], "correct": "A", "explanations": {"A": "Correct: a clip is one piece of audio sitting on a track in the timeline.", "B": "A track is the lane that holds clips.", "C": "A bus is a routing/summing destination.", "D": "A keyframe is an automation point."}, "principle": "Clip = one audio segment on a track; tracks are the lanes that hold clips.", "num": 14, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "To zoom the timeline horizontally so you can see waveforms in fine detail, you typically:", "options": ["Press M", "Use the horizontal zoom control / scroll, or press the zoom shortcut", "Open the Deliver page", "Solo the track"], "correct": "B", "explanations": {"A": "M adds a marker.", "B": "Correct: horizontal zoom (slider, scroll-zoom, or shortcut) reveals waveform detail down to sample level.", "C": "Deliver is for export.", "D": "Solo isolates audio but doesn't zoom."}, "principle": "Horizontal zoom lets you work from whole-timeline down to sample-accurate detail.", "num": 15, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "Which statement about the Fairlight and Edit pages sharing a timeline is TRUE?", "options": ["They are completely separate projects", "They show the same timeline — audio edited in Fairlight updates everywhere", "Fairlight can only open exported audio files", "You must render before audio appears in Fairlight"], "correct": "B", "explanations": {"A": "They are the same timeline within one project, not separate.", "B": "Correct: Fairlight and Edit are two views of the same timeline; changes are shared live.", "C": "Fairlight works on the live timeline clips, not exports.", "D": "No render is needed; the timeline is shared instantly."}, "principle": "Fairlight and Edit are different views of one shared timeline — no round-tripping needed.", "num": 16, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "Clip gain (the volume overlay across the top of a clip) differs from the track fader because it:", "options": ["Affects the whole track", "Adjusts the level of that one clip only", "Only works on buses", "Is the same as solo"], "correct": "B", "explanations": {"A": "The track fader affects the whole track; clip gain does not.", "B": "Correct: clip gain changes the level of that single clip independently of the fader.", "C": "Clip gain is per clip, not per bus.", "D": "Solo isolates monitoring; it is unrelated to clip gain."}, "principle": "Clip gain = per-clip level; track fader = whole-track level. Set clip gain first, then mix.", "num": 17, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 1, "scenario": null, "stem": "The colour-coded meters in the Mixer turn red to warn you of what?", "options": ["A muted track", "Clipping (signal exceeding 0 dBFS)", "A flagged marker", "A soloed track"], "correct": "B", "explanations": {"A": "Mute is shown on the track header, not by a red meter peak.", "B": "Correct: red at the top of a meter means the signal has hit/exceeded 0 dBFS and is clipping.", "C": "Markers don't drive the meters.", "D": "Solo doesn't turn a meter red."}, "principle": "Red on a peak meter = clipping at 0 dBFS; pull the level down to avoid distortion.", "num": 18, "module_title": "Introduction to Audio & the Fairlight Page", "section_label": "SECTION I · MODULE 01"}, {"module_num": 2, "scenario": null, "stem": "A common first step when organising production dialogue is to:", "options": ["Delete all room tone", "Place each character / mic on its own track", "Bounce everything to one mono clip", "Add reverb to every clip"], "correct": "B", "explanations": {"A": "Room tone is valuable for filling gaps — you keep it, not delete it.", "B": "Correct: separating characters onto their own tracks lets you process each voice independently.", "C": "Flattening to one clip removes your ability to balance voices.", "D": "Reverb is a creative/mix choice, not an organising step."}, "principle": "Split dialogue so each character/mic has its own track — independent levels, EQ and processing.", "num": 19, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": null, "stem": "Which tool cuts a clip into two at the playhead?", "options": ["The razor / split (Cmd or Ctrl+B)", "The pan control", "The bus assign", "The solo button"], "correct": "A", "explanations": {"A": "Correct: the razor (or Cmd/Ctrl+B) splits a clip at the playhead.", "B": "Pan positions the sound in the stereo field.", "C": "Bus assign is routing, not cutting.", "D": "Solo isolates monitoring."}, "principle": "Split/razor (Cmd/Ctrl+B) cuts at the playhead — the basic edit for trimming dialogue.", "num": 20, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": null, "stem": "Why add short fades to the start and end of dialogue clips?", "options": ["To change the pitch", "To prevent clicks/pops at edit points and smooth transitions", "To raise the sample rate", "To create surround sound"], "correct": "B", "explanations": {"A": "Fades affect level over time, not pitch.", "B": "Correct: small fades stop the clicks caused by cutting on a non-zero waveform point.", "C": "Fades don't change sample rate.", "D": "Fades don't create surround."}, "principle": "Tiny fades on clip edges remove edit-point clicks and make cuts inaudible.", "num": 21, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": null, "stem": "Room tone (ambient silence recorded on location) is mainly used to:", "options": ["Replace the dialogue", "Fill gaps between dialogue so silence isn't 'dead'", "Boost the loudness target", "Act as a click track"], "correct": "B", "explanations": {"A": "Room tone supports dialogue; it doesn't replace it.", "B": "Correct: room tone fills holes left by cuts so the background doesn't drop to digital silence.", "C": "It isn't a loudness tool.", "D": "It isn't a metronome/click."}, "principle": "Room tone glues edits together — fill gaps so the ambience never abruptly cuts out.", "num": 22, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": null, "stem": "The Range Selection tool (shortcut R) is useful for:", "options": ["Selecting a time range across one or more tracks regardless of clip boundaries", "Soloing the Main bus", "Adding a bus", "Exporting the timeline"], "correct": "A", "explanations": {"A": "Correct: Range selection grabs a span of time/tracks independent of where clips start and end.", "B": "Soloing is unrelated to range selection.", "C": "Adding a bus is done in the Fairlight menu.", "D": "Export is on the Deliver page."}, "principle": "Range Selection (R) selects by time across tracks; Edit Selection (A) selects whole clips.", "num": 23, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": null, "stem": "Edit Selection Mode (shortcut A) lets you:", "options": ["Select and move whole clips", "Only draw automation", "Record ADR", "Set the loudness target"], "correct": "A", "explanations": {"A": "Correct: A is the standard arrow/selection mode for grabbing and moving clips.", "B": "Automation drawing is a separate mode.", "C": "ADR uses the ADR panel.", "D": "Loudness targets are set in project/monitor settings."}, "principle": "A = Edit Selection (move whole clips); R = Range Selection (select a time span).", "num": 24, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": null, "stem": "To make two overlapping dialogue takes blend smoothly you create a:", "options": ["Crossfade", "Bus", "Marker", "Submix"], "correct": "A", "explanations": {"A": "Correct: a crossfade fades one clip out while the next fades in, smoothing the join.", "B": "A bus is for routing/summing.", "C": "A marker is a reference flag.", "D": "A submix groups tracks but doesn't blend two clips."}, "principle": "Crossfades blend overlapping clips so transitions between takes are seamless.", "num": 25, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": null, "stem": "Linking a stereo or grouped set of dialogue clips so they move together is done by:", "options": ["Muting them", "Grouping / linking the clips", "Soloing them", "Normalising them"], "correct": "B", "explanations": {"A": "Muting silences monitoring; it doesn't lock clips together.", "B": "Correct: linking/grouping keeps related clips locked so edits stay in sync.", "C": "Soloing affects monitoring only.", "D": "Normalising changes level, not linkage."}, "principle": "Link/group related clips so trims and moves keep them in sync.", "num": 26, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": null, "stem": "When trimming dialogue, snapping (the magnet) helps you:", "options": ["Automatically lower the volume", "Align edits precisely to playhead, markers and clip edges", "Convert mono to stereo", "Add noise reduction"], "correct": "B", "explanations": {"A": "Snapping doesn't change level.", "B": "Correct: snapping locks your edit point to nearby references for accurate alignment.", "C": "Snapping doesn't change channel format.", "D": "Snapping is unrelated to repair."}, "principle": "Snapping aligns edits to playhead/markers/edges; toggle it off for free placement.", "num": 27, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": null, "stem": "The waveform shown on a dialogue clip represents:", "options": ["The colour of the clip", "The amplitude (level) of the audio over time", "The pan position", "The bus assignment"], "correct": "B", "explanations": {"A": "Clip colour is a labelling choice.", "B": "Correct: the waveform's height shows amplitude/level through the clip.", "C": "Pan is set in the mixer, not shown as the waveform.", "D": "Bus assignment is routing, not the waveform."}, "principle": "Waveform height = amplitude; reading it lets you spot loud peaks and quiet passages.", "num": 28, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": null, "stem": "To hear only the dialogue while editing out a noisy section, you would:", "options": ["Solo the dialogue track(s)", "Delete the Main bus", "Render the project", "Open the Color page"], "correct": "A", "explanations": {"A": "Correct: soloing the dialogue isolates it so you can focus on the edit.", "B": "Deleting the Main bus would break output.", "C": "Rendering is for delivery.", "D": "The Color page is unrelated."}, "principle": "Solo to isolate the part you're working on without deleting or muting permanently.", "num": 29, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": null, "stem": "Nudging a selected clip frame-by-frame for tight sync is typically done with:", "options": ["The comma/period (or arrow) keys", "The pan knob", "The fader", "The EQ"], "correct": "A", "explanations": {"A": "Correct: nudge keys move the selection a frame (or sub-frame) at a time for fine sync.", "B": "Pan changes position in the field, not timing.", "C": "The fader changes level.", "D": "EQ changes tone."}, "principle": "Nudge keys give frame-accurate clip moves — essential for lip-sync alignment.", "num": 30, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": null, "stem": "A 'spot' (placing a clip at an exact timecode) is most useful when you need to:", "options": ["Randomise placement", "Land a sound or line at a precise frame", "Mute a bus", "Add a fade"], "correct": "B", "explanations": {"A": "Spotting is precise, the opposite of random.", "B": "Correct: spotting drops a clip at an exact timecode for frame-accurate placement.", "C": "Muting is unrelated.", "D": "Fades are separate."}, "principle": "Spotting places audio at an exact timecode — precise sync for lines and effects.", "num": 31, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 2, "scenario": null, "stem": "Disabling a clip (rather than deleting it) is useful because it:", "options": ["Permanently removes the audio", "Silences it while keeping it in place for later", "Exports it", "Converts it to a marker"], "correct": "B", "explanations": {"A": "Disabling is reversible — nothing is removed.", "B": "Correct: a disabled clip stays on the track, silent, ready to re-enable.", "C": "Disabling doesn't export.", "D": "It doesn't become a marker."}, "principle": "Disable to silence a clip non-destructively while keeping it for later.", "num": 32, "module_title": "Editing Dialogue", "section_label": "SECTION II · MODULE 02"}, {"module_num": 3, "scenario": null, "stem": "The built-in browser for searching, previewing and dragging in sound effects is the:", "options": ["Sound Library", "Index", "ADR panel", "Deliver queue"], "correct": "A", "explanations": {"A": "Correct: the Sound Library searches, auditions and places sound effects.", "B": "The Index lists tracks/markers.", "C": "ADR is for dialogue replacement.", "D": "The Deliver queue is for renders."}, "principle": "The Sound Library browses, previews and drags in SFX; you can mount your own folders too.", "num": 33, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": null, "stem": "A 'spotting list' built with markers is used to:", "options": ["Note where sound effects and design elements are needed", "Set the loudness target", "Store grades", "Choose a codec"], "correct": "A", "explanations": {"A": "Correct: markers create a spotting list flagging every place a sound is needed.", "B": "Loudness targets are set elsewhere.", "C": "Grades belong to Color.", "D": "Codecs are a Deliver choice."}, "principle": "Markers form a spotting list — your map of every sound effect and design cue to add.", "num": 34, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": null, "stem": "Which shortcut adds a marker at the playhead?", "options": ["M", "B", "S", "F"], "correct": "A", "explanations": {"A": "Correct: M drops a marker at the playhead.", "B": "B is split/blade.", "C": "S is solo.", "D": "F is not the marker shortcut here."}, "principle": "M adds a marker; double-click it to add a name/note for your spotting list.", "num": 35, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": null, "stem": "Hard effects (footsteps, door slams, gunshots) are best placed on:", "options": ["The dialogue tracks", "Dedicated SFX tracks separate from dialogue", "The Main bus directly", "A muted track"], "correct": "B", "explanations": {"A": "Mixing them onto dialogue makes balancing impossible.", "B": "Correct: keep hard FX on their own tracks so you can level and route them as a group.", "C": "You place clips on tracks, not directly on a bus.", "D": "A muted track wouldn't be heard."}, "principle": "Separate SFX onto their own tracks (hard FX, design, ambience) for independent control.", "num": 36, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": null, "stem": "Layering several sounds to build one richer effect (e.g. a whoosh) is called:", "options": ["Normalising", "Sound design layering", "Bouncing", "Patching"], "correct": "B", "explanations": {"A": "Normalising changes level only.", "B": "Correct: layering combines multiple elements into a single designed sound.", "C": "Bouncing renders tracks down.", "D": "Patching is input/output routing."}, "principle": "Layering stacks elements (low end, body, transient, tail) into one designed effect.", "num": 37, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": null, "stem": "Ambience / atmosphere tracks (room tone, traffic, birds) are used to:", "options": ["Establish a believable continuous environment under the scene", "Replace dialogue", "Set the project frame rate", "Create the loudness meter"], "correct": "A", "explanations": {"A": "Correct: ambience beds create a consistent sense of place beneath the scene.", "B": "Ambience supports, not replaces, dialogue.", "C": "Frame rate is a project setting.", "D": "Meters aren't made from ambience."}, "principle": "Ambience beds give a scene a continuous, believable environment.", "num": 38, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": null, "stem": "Routing all your SFX tracks to a single bus lets you:", "options": ["Control the whole effects layer with one fader", "Delete the dialogue", "Change the sample rate", "Export faster"], "correct": "A", "explanations": {"A": "Correct: a shared SFX bus means one fader rides the entire effects layer.", "B": "It doesn't delete dialogue.", "C": "Bussing doesn't change sample rate.", "D": "It isn't an export speed feature."}, "principle": "Send a group of tracks to a sub/bus so one fader controls the whole layer.", "num": 39, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": null, "stem": "To audition a sound effect before committing it, you:", "options": ["Render the timeline", "Preview/audition it in the Sound Library", "Delete the track", "Open Deliver"], "correct": "B", "explanations": {"A": "Rendering is for final export.", "B": "Correct: the Sound Library lets you preview before dragging the clip in.", "C": "Deleting a track is unrelated.", "D": "Deliver is for export."}, "principle": "Audition in the Sound Library first, then drag in the keeper.", "num": 40, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": null, "stem": "Colour-coding tracks (dialogue, Foley, ambience, SFX) primarily helps with:", "options": ["Loudness", "Fast visual organisation of a busy session", "Sample rate", "Pitch"], "correct": "B", "explanations": {"A": "Colour doesn't change loudness.", "B": "Correct: colours make a dense, multi-layer session easy to read at a glance.", "C": "Colour doesn't affect sample rate.", "D": "Colour doesn't change pitch."}, "principle": "Track colours keep complex sessions readable — group by sound type.", "num": 41, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": null, "stem": "Foley refers to:", "options": ["Automatic dialogue replacement", "Custom-performed everyday sounds (footsteps, cloth, props) recorded to picture", "A loudness standard", "A type of bus"], "correct": "B", "explanations": {"A": "That describes ADR, not Foley.", "B": "Correct: Foley is performed sound — footsteps, movement, props — synced to picture.", "C": "It isn't a loudness standard.", "D": "It isn't a bus type."}, "principle": "Foley = performed everyday sounds recorded in sync with picture to add realism.", "num": 42, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": null, "stem": "Adjusting the level of a single sound effect without affecting others on the track is done with:", "options": ["Clip gain on that clip", "The Main fader", "The monitor level", "The loudness target"], "correct": "A", "explanations": {"A": "Correct: clip gain rides one clip's level independently.", "B": "The Main fader moves the whole mix.", "C": "Monitor level only changes what you hear, not the mix.", "D": "Loudness target is a delivery setting."}, "principle": "Use clip gain for per-effect level; the fader for the whole track.", "num": 43, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": null, "stem": "A 'sweetener' in sound design is:", "options": ["A subtle added layer that enhances an existing sound", "A loudness preset", "A type of marker", "A delivery codec"], "correct": "A", "explanations": {"A": "Correct: a sweetener is a small extra layer that reinforces or polishes a sound.", "B": "It isn't a loudness preset.", "C": "It isn't a marker.", "D": "It isn't a codec."}, "principle": "Sweeteners are subtle reinforcing layers that make a sound feel bigger or cleaner.", "num": 44, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": null, "stem": "Mounting your own folder of sound effects into the Sound Library lets you:", "options": ["Search and drag from your personal SFX collection inside Fairlight", "Change the project resolution", "Disable dialogue", "Add a Main bus"], "correct": "A", "explanations": {"A": "Correct: you can point the Sound Library at your own libraries to browse them in-app.", "B": "It doesn't affect resolution.", "C": "It doesn't touch dialogue.", "D": "It isn't bus creation."}, "principle": "Add your own folders to the Sound Library so your whole SFX collection is searchable in Fairlight.", "num": 45, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 3, "scenario": null, "stem": "Naming markers in your spotting list is valuable because it:", "options": ["Increases the bit depth", "Documents exactly what sound each cue needs", "Solos the track", "Renders the project"], "correct": "B", "explanations": {"A": "Marker names don't change bit depth.", "B": "Correct: named markers tell you (and collaborators) precisely what each cue requires.", "C": "Naming doesn't solo.", "D": "Naming doesn't render."}, "principle": "Named markers turn a spotting pass into a clear, actionable to-do list.", "num": 46, "module_title": "Sound Design & Effects Editing", "section_label": "SECTION III · MODULE 03"}, {"module_num": 4, "scenario": null, "stem": "Before recording a voiceover onto a track, you must first:", "options": ["Render the timeline", "Record-enable (arm) the track and set its input", "Delete the Main bus", "Open the Color page"], "correct": "B", "explanations": {"A": "Rendering is for export, not recording.", "B": "Correct: arm the track and assign an input source before you can record to it.", "C": "Deleting the bus would break monitoring/output.", "D": "Color is unrelated."}, "principle": "To record: arm (record-enable) the track and patch an input to it.", "num": 47, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": null, "stem": "Patch Input/Output in Fairlight is used to:", "options": ["Route hardware/audio inputs to tracks and tracks to outputs", "Change the grade", "Set the loudness", "Add markers"], "correct": "A", "explanations": {"A": "Correct: the Patch Input/Output panel connects physical/source inputs to tracks and routes outputs.", "B": "Grading is on Color.", "C": "Loudness is set elsewhere.", "D": "Markers use M."}, "principle": "Patch Input/Output is the routing matrix: get your mic input to the armed track.", "num": 48, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": null, "stem": "ADR stands for:", "options": ["Audio Data Recording", "Automated Dialogue Replacement", "Ambient Dynamic Range", "Adaptive Direct Routing"], "correct": "B", "explanations": {"A": "Not a real term here.", "B": "Correct: ADR is Automated Dialogue Replacement — re-recording lines in sync with picture.", "C": "Not a real term here.", "D": "Not a real term here."}, "principle": "ADR = Automated Dialogue Replacement: re-recording dialogue to picture to replace bad production audio.", "num": 49, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": null, "stem": "The Fairlight ADR panel provides:", "options": ["A cue list, record takes, and beeps/visual cues to guide the performer", "A colour grading toolset", "A delivery codec list", "A node graph"], "correct": "A", "explanations": {"A": "Correct: the ADR panel manages cues, take recording and performer guide cues (beeps/streamers).", "B": "Grading is on Color.", "C": "Codecs are on Deliver.", "D": "Node graphs are Fusion/Color."}, "principle": "The ADR panel runs the whole loop: cue list, guide beeps, take recording and selection.", "num": 50, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": null, "stem": "Why monitor with headphones (not speakers) when recording a voiceover live to picture?", "options": ["To raise the sample rate", "To prevent the speaker output bleeding back into the mic", "To change the codec", "To add reverb automatically"], "correct": "B", "explanations": {"A": "Headphones don't change sample rate.", "B": "Correct: headphones stop playback from leaking into the live microphone (feedback/bleed).", "C": "Headphones don't change codecs.", "D": "They don't add reverb."}, "principle": "Use headphones while recording so monitor audio doesn't bleed into the mic.", "num": 51, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": null, "stem": "Recording multiple takes of the same ADR line lets you:", "options": ["Reduce the bit depth", "Choose the best performance afterwards", "Skip editing", "Export faster"], "correct": "B", "explanations": {"A": "Takes don't change bit depth.", "B": "Correct: several takes give you options to pick the strongest performance.", "C": "You still edit/comp the takes.", "D": "Takes don't speed export."}, "principle": "Record several takes, then comp/choose the best — standard ADR and VO practice.", "num": 52, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": null, "stem": "Setting input levels before recording aims to:", "options": ["Peak as close to 0 dBFS as possible", "Capture a healthy level with headroom (peaks well below 0 dBFS)", "Record in red the whole time", "Mute the input"], "correct": "B", "explanations": {"A": "Peaking at 0 dBFS risks clipping on louder moments.", "B": "Correct: aim for a strong but safe level leaving headroom so peaks never clip.", "C": "Recording in the red is clipping — bad.", "D": "Muting the input records nothing."}, "principle": "Set levels for a healthy signal with headroom; clipped digital recordings can't be fixed.", "num": 53, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": null, "stem": "A 'guide track' during ADR is:", "options": ["The original production dialogue played to the performer for timing reference", "The Main bus", "The loudness meter", "A colour preset"], "correct": "A", "explanations": {"A": "Correct: the guide track is the original line the actor listens to so the new take matches timing.", "B": "It isn't the Main bus.", "C": "It isn't a meter.", "D": "It isn't a colour preset."}, "principle": "The guide track lets the performer match the original line's rhythm and sync.", "num": 54, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": null, "stem": "Three visual beeps/streamer cues before an ADR take exist to:", "options": ["Trigger the render", "Count the performer in so they start exactly on cue", "Set the codec", "Add a fade"], "correct": "B", "explanations": {"A": "They don't trigger renders.", "B": "Correct: the count-in cues the actor to begin precisely in sync.", "C": "They don't set codecs.", "D": "They don't add fades."}, "principle": "ADR count-in cues (beeps/streamers) give the performer a precise start point.", "num": 55, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": null, "stem": "After recording, the new voiceover clip appears:", "options": ["On the Deliver page only", "On the armed track in the timeline, ready to edit", "In the Color gallery", "As a marker"], "correct": "B", "explanations": {"A": "It isn't confined to Deliver.", "B": "Correct: the recording lands on the armed track as a normal clip you can edit.", "C": "It doesn't go to the gallery.", "D": "It isn't a marker."}, "principle": "Recorded audio becomes a normal timeline clip on the armed track.", "num": 56, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": null, "stem": "Loop recording in ADR repeatedly plays a section so you can:", "options": ["Render in a loop", "Record take after take of the same line without stopping", "Change the bus format", "Solo the Main"], "correct": "B", "explanations": {"A": "It isn't about rendering.", "B": "Correct: loop recording cycles the cue so the performer can lay down repeated takes quickly.", "C": "It doesn't change bus format.", "D": "It doesn't solo the Main."}, "principle": "Loop recording cycles a cue to capture multiple takes efficiently.", "num": 57, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 4, "scenario": null, "stem": "Record-enabling a track is indicated by which control on the track header?", "options": ["The pan knob", "A record (R/arm) button that lights up", "The fade handle", "The marker flag"], "correct": "B", "explanations": {"A": "Pan positions sound; it doesn't arm recording.", "B": "Correct: the arm/record-enable button lights to show the track will capture incoming audio.", "C": "Fade handles are on clips.", "D": "Markers are timeline flags."}, "principle": "The lit arm/record button shows which track will capture the incoming signal.", "num": 58, "module_title": "Recording Voiceover & ADR", "section_label": "SECTION IV · MODULE 04"}, {"module_num": 5, "scenario": null, "stem": "Panning a mono dialogue track to the centre means the sound:", "options": ["Comes only from the left", "Sits equally in left and right (the centre image)", "Is muted", "Is doubled in volume"], "correct": "B", "explanations": {"A": "Hard-left would be panned fully left.", "B": "Correct: centre pan places the sound equally in both speakers — standard for lead dialogue.", "C": "Centre pan isn't mute.", "D": "Panning doesn't double volume."}, "principle": "Lead dialogue usually sits centre; pan effects/music wider to create space.", "num": 59, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "The fader on a channel strip controls the track's:", "options": ["Pan position", "Overall output level", "EQ curve", "Bus format"], "correct": "B", "explanations": {"A": "Pan is a separate control.", "B": "Correct: the fader sets the track's overall level into its bus.", "C": "EQ is its own section.", "D": "Bus format is a routing property."}, "principle": "The fader = track level; it's your primary balancing control in the mix.", "num": 60, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "EQ (equalisation) is used to:", "options": ["Shift timing", "Boost or cut specific frequency ranges to shape tone", "Change the pan", "Set the sample rate"], "correct": "B", "explanations": {"A": "EQ doesn't move clips in time.", "B": "Correct: EQ raises or lowers chosen frequency bands to shape the sound's tone.", "C": "Pan is separate.", "D": "EQ doesn't set sample rate."}, "principle": "EQ shapes tone by boosting/cutting frequency bands — e.g. trimming low rumble from dialogue.", "num": 61, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "A high-pass filter on a dialogue track is commonly used to:", "options": ["Remove low-frequency rumble and handling noise", "Add bass", "Increase loudness to target", "Create reverb"], "correct": "A", "explanations": {"A": "Correct: a high-pass lets highs through and cuts lows, removing rumble/handling noise.", "B": "It cuts bass, not adds it.", "C": "It isn't a loudness tool.", "D": "It doesn't create reverb."}, "principle": "High-pass (low-cut) clears sub-bass rumble that clutters dialogue.", "num": 62, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "A compressor's main job is to:", "options": ["Reduce the dynamic range by taming loud peaks", "Add echo", "Change pitch", "Create markers"], "correct": "A", "explanations": {"A": "Correct: a compressor reduces the gap between loud and quiet, evening out level.", "B": "Echo is a delay/reverb effect.", "C": "Pitch is a different processor.", "D": "It doesn't make markers."}, "principle": "Compression evens out dynamics — controls peaks so dialogue sits at a consistent level.", "num": 63, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "On a compressor, the 'threshold' sets:", "options": ["The level above which compression starts acting", "The output sample rate", "The pan position", "The fade length"], "correct": "A", "explanations": {"A": "Correct: signal above the threshold gets compressed; below it passes untouched.", "B": "Threshold isn't sample rate.", "C": "It isn't pan.", "D": "It isn't a fade."}, "principle": "Threshold = the level where the compressor kicks in; ratio sets how hard it squeezes.", "num": 64, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "A limiter differs from a compressor by:", "options": ["Boosting bass only", "Acting as a hard ceiling that stops peaks exceeding a set level", "Changing the frame rate", "Only working on buses"], "correct": "B", "explanations": {"A": "A limiter isn't a bass tool.", "B": "Correct: a limiter is essentially a high-ratio compressor that prevents any peak passing the ceiling.", "C": "It doesn't change frame rate.", "D": "Limiters work on tracks and buses."}, "principle": "A limiter is a brick-wall ceiling — nothing exceeds the set output level (protects against clipping).", "num": 65, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "A noise gate is used to:", "options": ["Silence a track below a threshold (cutting hiss/bleed between phrases)", "Add reverb", "Raise loudness", "Pan the track"], "correct": "A", "explanations": {"A": "Correct: a gate mutes signal that falls below the threshold, cleaning up gaps between words.", "B": "Gates don't add reverb.", "C": "Gates don't set loudness.", "D": "Gates don't pan."}, "principle": "A gate closes on quiet passages, removing low-level noise between dialogue.", "num": 66, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "A bus in Fairlight is best described as:", "options": ["A single clip", "A destination that sums/combines multiple tracks for shared processing or output", "A marker", "A keyboard shortcut"], "correct": "B", "explanations": {"A": "A clip is a single segment of audio.", "B": "Correct: a bus sums signals from multiple tracks so you can process or route them together.", "C": "A marker is a reference flag.", "D": "A bus isn't a shortcut."}, "principle": "Buses sum and route groups of tracks — sub-mixes, the Main, and aux sends.", "num": 67, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "The default master output bus that everything feeds into is the:", "options": ["Aux 1", "Main 1", "Solo bus", "Sound Library"], "correct": "B", "explanations": {"A": "Aux buses are for sends like reverb.", "B": "Correct: Main 1 is the default master bus carrying your final mix.", "C": "There's no 'solo bus' as the master.", "D": "The Sound Library is unrelated."}, "principle": "Main 1 is the master bus — your final stereo (or surround) mix output.", "num": 68, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "An Aux bus (send) is commonly used to:", "options": ["Feed several tracks into one shared reverb or effect", "Replace the dialogue", "Set the project frame rate", "Disable a track"], "correct": "A", "explanations": {"A": "Correct: aux sends route tracks to a shared effect like reverb, returning to the mix.", "B": "It doesn't replace dialogue.", "C": "It isn't a frame-rate control.", "D": "It isn't a disable function."}, "principle": "Aux sends share one effect (e.g. reverb) across many tracks for a cohesive space.", "num": 69, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "Automation in the mix lets you:", "options": ["Record fader, pan and plugin moves so they replay automatically over time", "Change the codec", "Add markers only", "Re-link media"], "correct": "A", "explanations": {"A": "Correct: automation captures parameter moves (level, pan, etc.) that replay on playback.", "B": "It isn't a codec setting.", "C": "It's not limited to markers.", "D": "It isn't media relinking."}, "principle": "Automation records and replays mix moves over time — rides on dialogue, fades on music.", "num": 70, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "Which automation mode writes moves only while you actively touch a control, then returns to the existing value?", "options": ["Touch", "Write (always)", "Off", "Trim only"], "correct": "A", "explanations": {"A": "Correct: Touch writes while you hold the control and reverts when you let go.", "B": "Write writes constantly while running, overwriting existing automation.", "C": "Off disables automation writing.", "D": "'Trim only' isn't the matching mode here."}, "principle": "Touch writes while held then releases; Latch keeps the last value; Write overwrites continuously.", "num": 71, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "Gain staging means:", "options": ["Setting healthy levels at each stage so nothing clips or gets too quiet", "Choosing a codec", "Adding markers", "Colour-coding tracks"], "correct": "A", "explanations": {"A": "Correct: gain staging keeps levels sensible from clip → track → bus → Main.", "B": "Codecs are a delivery choice.", "C": "Markers are references.", "D": "Colour-coding is organisation."}, "principle": "Good gain staging keeps a clean signal path with headroom from input to Main.", "num": 72, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "Track EQ versus Clip EQ: Track EQ applies to:", "options": ["Only one clip", "Everything on that whole track", "Only the Main bus", "Only markers"], "correct": "B", "explanations": {"A": "That describes Clip EQ.", "B": "Correct: Track EQ processes the entire track's output.", "C": "Track EQ isn't limited to the Main.", "D": "EQ doesn't apply to markers."}, "principle": "Clip EQ fixes one clip; Track EQ shapes the whole track; bus EQ shapes a group.", "num": 73, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 5, "scenario": null, "stem": "The Control Room / monitor level in the Mixer affects:", "options": ["The recorded mix level", "Only how loud you hear playback, not the actual mix", "The codec", "The marker colour"], "correct": "B", "explanations": {"A": "It does not change the mix that gets exported.", "B": "Correct: monitor level changes your listening volume only — it's not part of the mix.", "C": "It isn't a codec control.", "D": "It isn't marker colour."}, "principle": "Monitor/Control-Room level changes what you hear, never the actual mixed output.", "num": 74, "module_title": "Mixing", "section_label": "SECTION V · MODULE 05"}, {"module_num": 6, "scenario": null, "stem": "The collection of audio plugins bundled with Fairlight is called:", "options": ["Fairlight FX", "ResolveFX", "OpenFX only", "Color FX"], "correct": "A", "explanations": {"A": "Correct: Fairlight FX is the bundled set of audio plugins (repair, dynamics, reverb, etc.).", "B": "ResolveFX are video effects.", "C": "OpenFX is a plugin standard, not the Fairlight bundle name.", "D": "There's no 'Color FX' audio bundle."}, "principle": "Fairlight FX = the bundled audio plugins: repair, dynamics, modulation, reverb and more.", "num": 75, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": null, "stem": "Which Fairlight FX plugin removes a steady electrical hum (e.g. 50/60 Hz mains buzz)?", "options": ["De-Hummer", "Chorus", "Reverb", "Pitch"], "correct": "A", "explanations": {"A": "Correct: the De-Hummer targets mains hum and its harmonics.", "B": "Chorus is a modulation effect.", "C": "Reverb adds space.", "D": "Pitch shifts pitch."}, "principle": "De-Hummer kills 50/60 Hz mains hum and harmonics — common with location power/lighting.", "num": 76, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": null, "stem": "Harsh 'sss' sounds on a sibilant voice are best tamed with the:", "options": ["De-Esser", "De-Hummer", "Gate", "Flanger"], "correct": "A", "explanations": {"A": "Correct: a De-Esser specifically attenuates sibilant 'ess' frequencies.", "B": "De-Hummer targets hum, not sibilance.", "C": "A gate mutes quiet passages, not sibilance.", "D": "Flanger is a modulation effect."}, "principle": "De-Esser tames sibilance ('s', 'sh', 't') without dulling the whole voice.", "num": 77, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": null, "stem": "The Noise Reduction plugin works most effectively when you:", "options": ["Guess settings blindly", "Capture a noise profile from a section of pure background noise", "Mute the track", "Raise the loudness target"], "correct": "B", "explanations": {"A": "Blind guessing gives poor, artefact-heavy results.", "B": "Correct: learning a profile from isolated noise lets it subtract that signature accurately.", "C": "Muting removes the audio entirely.", "D": "Loudness targets are unrelated to learning noise."}, "principle": "Teach Noise Reduction the noise (a clean noise-only sample), then it subtracts that profile.", "num": 78, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": null, "stem": "Over-applying noise reduction typically produces:", "options": ["Perfectly clean audio every time", "Watery/robotic artefacts and a hollow-sounding voice", "Higher sample rate", "More markers"], "correct": "B", "explanations": {"A": "Too much almost always damages the audio.", "B": "Correct: pushing it too far creates underwater/metallic artefacts and thins the voice.", "C": "It doesn't change sample rate.", "D": "It doesn't add markers."}, "principle": "Use the least noise reduction that works — too much leaves watery, artefact-ridden dialogue.", "num": 79, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": null, "stem": "A short clicking/crackle from a faulty connection is best fixed with:", "options": ["De-Crackle / De-Click type repair", "Reverb", "Chorus", "Pan"], "correct": "A", "explanations": {"A": "Correct: de-crackle/de-click repair removes short transient clicks and crackle.", "B": "Reverb adds space, not repair.", "C": "Chorus is modulation.", "D": "Pan is positioning."}, "principle": "De-Click/De-Crackle removes short transient pops and crackle from dialogue.", "num": 80, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": null, "stem": "Applying a Fairlight FX plugin to a single clip versus a whole track means:", "options": ["There is no difference", "A clip insert processes only that clip; a track insert processes the whole track", "Clip effects export but track effects don't", "Track effects only work on the Main"], "correct": "B", "explanations": {"A": "There's a real, important difference.", "B": "Correct: place an effect on a clip to fix one clip, or on the track to process everything on it.", "C": "Both export normally.", "D": "Track effects aren't limited to the Main."}, "principle": "Insert a plugin on a clip to repair one clip, or on the track to process all of it.", "num": 81, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": null, "stem": "Sample-level (zoom right in) editing is useful for repair because it lets you:", "options": ["Change the codec", "Pinpoint and remove a single click or pop precisely", "Add a bus", "Set loudness"], "correct": "B", "explanations": {"A": "It's unrelated to codecs.", "B": "Correct: zooming to sample level lets you surgically find and fix a single glitch.", "C": "It isn't bus creation.", "D": "It isn't loudness setting."}, "principle": "Zoom to sample level to hunt down and surgically remove individual clicks/pops.", "num": 82, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": null, "stem": "The Voice Isolation / dialogue-cleanup feature (in recent Resolve versions) uses AI to:", "options": ["Add reverb", "Separate spoken dialogue from background noise", "Change the grade", "Render faster"], "correct": "B", "explanations": {"A": "It isn't a reverb.", "B": "Correct: AI Voice Isolation pulls clean dialogue out from noisy backgrounds.", "C": "It doesn't grade.", "D": "It isn't a render-speed tool."}, "principle": "Voice Isolation (AI) extracts dialogue from noisy location audio — powerful for untreated rooms.", "num": 83, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": null, "stem": "Why repair before you mix (rather than after)?", "options": ["Mixing first is always faster", "A clean source lets EQ, compression and levels work predictably", "Repair only works on the Main bus", "It changes the frame rate"], "correct": "B", "explanations": {"A": "Order matters more than raw speed here.", "B": "Correct: fixing noise/clicks first means downstream processing isn't amplifying problems.", "C": "Repair isn't Main-only.", "D": "It doesn't change frame rate."}, "principle": "Repair first: clean dialogue makes every later EQ/compression/level decision predictable.", "num": 84, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": null, "stem": "Room tone is also a repair tool because it can:", "options": ["Patch a gap left after deleting a noise or word", "Increase bit depth", "Replace the Main bus", "Set the codec"], "correct": "A", "explanations": {"A": "Correct: dropping matching room tone into a gap hides the edit where audio was removed.", "B": "It doesn't change bit depth.", "C": "It isn't a bus.", "D": "It isn't a codec."}, "principle": "Fill repaired gaps with matching room tone so the patch is inaudible.", "num": 85, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": null, "stem": "A 'noise floor' refers to:", "options": ["The loudest peak", "The constant low-level background noise present in a recording", "The bus output", "A marker colour"], "correct": "B", "explanations": {"A": "That's the peak, not the floor.", "B": "Correct: the noise floor is the steady background level beneath the wanted signal.", "C": "It isn't a bus.", "D": "It isn't a marker."}, "principle": "The noise floor is the constant background level; good repair lowers it without harming the voice.", "num": 86, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": null, "stem": "The Dialogue Processor / Dialogue plugin in Fairlight FX bundles tools to:", "options": ["Grade colour", "Clean, level and shape dialogue (e.g. de-noise, EQ, leveling) in one place", "Render the timeline", "Create markers"], "correct": "B", "explanations": {"A": "It isn't a colour tool.", "B": "Correct: it combines common dialogue-cleanup stages into a single plugin.", "C": "It doesn't render.", "D": "It doesn't make markers."}, "principle": "The Dialogue Processor combines several dialogue-cleanup stages into one convenient plugin.", "num": 87, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 6, "scenario": null, "stem": "If a recording is already clipped/distorted at the source, the realistic outcome is:", "options": ["It can always be fully restored", "Distortion is hard or impossible to remove — prevention at recording is key", "Noise Reduction fixes it instantly", "Increasing loudness fixes it"], "correct": "B", "explanations": {"A": "Clipping destroys information that can't be perfectly recovered.", "B": "Correct: clipped audio loses data permanently; capture clean levels in the first place.", "C": "Noise Reduction targets noise, not clipping.", "D": "More loudness makes clipping worse."}, "principle": "Clipping is destructive and largely unfixable — get levels right at the source.", "num": 88, "module_title": "Repairing & Restoring Audio", "section_label": "SECTION VI · MODULE 06"}, {"module_num": 7, "scenario": null, "stem": "Loudness for delivery is measured in:", "options": ["dBFS peaks only", "LUFS (Loudness Units Full Scale)", "Hertz", "Pixels"], "correct": "B", "explanations": {"A": "Peak dBFS doesn't reflect perceived loudness over time.", "B": "Correct: LUFS measures integrated perceived loudness, the standard for delivery targets.", "C": "Hertz is frequency.", "D": "Pixels are image, not audio."}, "principle": "LUFS measures perceived loudness over time — the unit every delivery spec uses.", "num": 89, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": null, "stem": "The EBU R128 broadcast loudness target is approximately:", "options": ["-9 LUFS", "-14 LUFS", "-23 LUFS", "0 LUFS"], "correct": "C", "explanations": {"A": "-9 LUFS is far too hot for broadcast.", "B": "-14 LUFS is a streaming/online target, not EBU R128 broadcast.", "C": "Correct: EBU R128 broadcast is -23 LUFS integrated (US ATSC A/85 is -24 LKFS).", "D": "0 LUFS is not a delivery target."}, "principle": "Broadcast: EBU R128 = -23 LUFS; ATSC A/85 (US) = -24 LKFS.", "num": 90, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": null, "stem": "Most online/streaming platforms (YouTube, social) normalise toward roughly:", "options": ["-23 LUFS", "-14 LUFS", "-3 LUFS", "+6 LUFS"], "correct": "B", "explanations": {"A": "-23 LUFS is broadcast, quieter than streaming.", "B": "Correct: streaming/social typically sit around -14 LUFS (some platforms -13 to -16).", "C": "-3 LUFS would be extremely loud and distorted.", "D": "Positive LUFS isn't a valid loudness target."}, "principle": "Online/social target ≈ -14 LUFS; mixing far hotter just gets turned down by the platform.", "num": 91, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": null, "stem": "True Peak for delivery is usually capped at:", "options": ["0 dBTP", "-1 dBTP (or lower)", "+3 dBTP", "-23 dBTP"], "correct": "B", "explanations": {"A": "0 dBTP risks inter-sample peaks clipping after encoding.", "B": "Correct: -1 dBTP is the common ceiling to avoid clipping after lossy encoding.", "C": "Positive true peak clips.", "D": "-23 is a loudness figure, not a true-peak ceiling."}, "principle": "Cap True Peak around -1 dBTP so codec encoding doesn't push peaks into clipping.", "num": 92, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": null, "stem": "Audio Normalization on a clip/timeline in Fairlight can target either:", "options": ["Only pan", "Peak level or a loudness (LUFS) standard such as EBU R128", "Only frame rate", "Only colour"], "correct": "B", "explanations": {"A": "Normalization isn't a pan tool.", "B": "Correct: you can normalise to a peak level or to a loudness standard/target.", "C": "It doesn't set frame rate.", "D": "It isn't colour."}, "principle": "Audio Normalization offers peak or loudness (e.g. R128) modes to hit a target automatically.", "num": 93, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": null, "stem": "The loudness meter in Fairlight shows Integrated, Short-term and Momentary loudness. 'Integrated' means:", "options": ["The single loudest sample", "The average loudness over the whole programme", "The pan position", "The codec"], "correct": "B", "explanations": {"A": "That's a peak, not integrated loudness.", "B": "Correct: integrated loudness is the overall average across the entire programme — what specs target.", "C": "It isn't pan.", "D": "It isn't a codec."}, "principle": "Integrated LUFS = whole-programme average; that's the number delivery specs reference.", "num": 94, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": null, "stem": "Where do you set the final audio codec, sample rate and bit depth for export?", "options": ["The Color page", "The Deliver page's render settings (Audio tab)", "The Sound Library", "The Index"], "correct": "B", "explanations": {"A": "Color is for grading.", "B": "Correct: the Deliver page render settings include an Audio tab for codec, sample rate and bit depth.", "C": "The Sound Library browses SFX.", "D": "The Index lists tracks/markers."}, "principle": "Final audio export settings live in the Deliver page's render Audio tab.", "num": 95, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": null, "stem": "Before final delivery, soloing/checking the Main bus meter helps confirm:", "options": ["The grade is correct", "The mix isn't clipping and sits at the right loudness", "The frame rate", "The marker names"], "correct": "B", "explanations": {"A": "The Main bus meter is about audio, not grade.", "B": "Correct: watching the Main meter verifies no clipping and the correct loudness before export.", "C": "Frame rate is a project setting.", "D": "Marker names are unrelated."}, "principle": "Check the Main bus meter pre-export: no clipping, correct loudness target met.", "num": 96, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": null, "stem": "For a single talking-head clip exported to several platforms, the most efficient loudness approach is to:", "options": ["Re-mix from scratch for each platform", "Master to a sensible target (≈ -14 LUFS) with -1 dBTP and let platforms normalise", "Always master to 0 dBFS", "Skip loudness entirely"], "correct": "B", "explanations": {"A": "Re-mixing each time is wasteful.", "B": "Correct: a clean master near -14 LUFS / -1 dBTP travels well across social platforms.", "C": "0 dBFS invites clipping.", "D": "Ignoring loudness produces inconsistent results."}, "principle": "One well-mastered file (≈ -14 LUFS, -1 dBTP) serves most social platforms cleanly.", "num": 97, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": null, "stem": "A 'stem' or sub-mix export (separate dialogue/music/effects buses) is valuable because it:", "options": ["Reduces the sample rate", "Lets a client or broadcaster re-balance or re-version later", "Changes the grade", "Adds markers"], "correct": "B", "explanations": {"A": "Stems don't lower sample rate.", "B": "Correct: separated D/M/E stems allow re-balancing, dubbing or re-versioning without a full re-mix.", "C": "Stems don't grade.", "D": "Stems aren't markers."}, "principle": "Delivering D/M/E stems lets clients re-version, localise or re-balance without remixing.", "num": 98, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": null, "stem": "When delivering for international dubbing, the most important stem to keep separate is:", "options": ["The dialogue", "The colour grade", "The markers", "The thumbnail"], "correct": "A", "explanations": {"A": "Correct: isolating dialogue lets it be replaced with a translated track (M&E stays intact).", "B": "Grade is a video matter.", "C": "Markers aren't stems.", "D": "Thumbnails are unrelated."}, "principle": "Keep dialogue separate so an M&E (music & effects) mix can host translated dialogue.", "num": 99, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}, {"module_num": 7, "scenario": null, "stem": "The standard deliverable sample rate / bit depth for most professional video masters is:", "options": ["48 kHz / 24-bit (or higher)", "8 kHz / 8-bit", "22 kHz / 16-bit mono only", "96 kHz / 4-bit"], "correct": "A", "explanations": {"A": "Correct: 48 kHz, 24-bit is the professional video-audio master standard.", "B": "8 kHz/8-bit is telephone-grade, not professional.", "C": "22 kHz/16-bit mono is sub-standard for delivery.", "D": "4-bit is not a real professional depth."}, "principle": "Professional video masters: 48 kHz, 24-bit audio.", "num": 100, "module_title": "Delivering & Mastering", "section_label": "SECTION VII · MODULE 07"}];
+const TOTAL_Q = 100;
+const PASS_MARK = 90;        // 90% of 100
+const MAX_ATTEMPTS = 3;
+const TIME_LIMIT_MS = 2 * 60 * 60 * 1000;
+
+const MODULE_TITLES = {
+  1:"Introduction to Audio & the Fairlight Page",
+  2:"Editing Dialogue",
+  3:"Sound Design & Effects Editing",
+  4:"Recording Voiceover & ADR",
+  5:"Mixing",
+  6:"Repairing & Restoring Audio",
+  7:"Delivering & Mastering"
+};
+const STORAGE_KEY = "flt_exam1_v1";
+
+// ════════════════════════════ STATE ════════════════════════════
+let state = { attempts: [], inProgress: null };
+let timerInterval = null;
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(parsed.attempts) state.attempts = parsed.attempts;
+      if(parsed.inProgress) state.inProgress = parsed.inProgress;
+    }
+  }catch(e){ console.warn("Could not load state:", e); }
+}
+function saveState(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch(e){ console.warn("Could not save state:", e); }
+}
+
+// ════════════════════════════ SCREEN ROUTING ════════════════════════════
+function showScreen(name){
+  document.body.setAttribute("data-active", name);
+  window.scrollTo(0, 0);
+}
+
+// ════════════════════════════ START SCREEN ════════════════════════════
+function renderStart(){
+  const passedAttempt = state.attempts.find(a => a.passed);
+  if(passedAttempt){
+    return renderPassedAlready(passedAttempt);
+  }
+  if(state.attempts.length >= MAX_ATTEMPTS){
+    return renderLocked();
+  }
+
+  const remaining = MAX_ATTEMPTS - state.attempts.length;
+  const attemptNum = state.attempts.length + 1;
+  document.getElementById("attempts-remaining").textContent =
+    `Attempt ${attemptNum} of ${MAX_ATTEMPTS}`;
+
+  // Show history if any
+  const log = document.getElementById("attempts-log");
+  const list = document.getElementById("attempts-list");
+  if(state.attempts.length > 0){
+    list.innerHTML = state.attempts.map((a, i) => {
+      const cls = a.passed ? "pass" : "fail";
+      const verdict = a.passed ? "PASS" : "FAIL";
+      const pct = ((a.score / TOTAL_Q) * 100).toFixed(1);
+      return `<div class="attempt-row">
+        <span class="a-num">Attempt ${i+1}</span>
+        <span class="a-score">${a.score}/${TOTAL_Q} (${pct}%)</span>
+        <span class="a-result ${cls}">${verdict}</span>
+      </div>`;
+    }).join("");
+    log.style.display = "block";
+  } else {
+    log.style.display = "none";
+  }
+
+  // Resume in-progress
+  const resumeBtn = document.getElementById("btn-resume");
+  if(state.inProgress){
+    resumeBtn.style.display = "block";
+    resumeBtn.textContent = `Resume in-progress attempt (${state.inProgress.name})`;
+  } else {
+    resumeBtn.style.display = "none";
+  }
+
+  showScreen("start");
+}
+
+function renderPassedAlready(attempt){
+  const idx = state.attempts.indexOf(attempt);
+  const pct = ((attempt.score / TOTAL_Q) * 100).toFixed(1);
+  const minutes = Math.floor(attempt.durationMs / 60000);
+  document.getElementById("passed-summary").innerHTML =
+    `<strong>${attempt.name}</strong> passed on <strong>attempt ${idx+1}</strong> of ${MAX_ATTEMPTS} with a score of <strong>${attempt.score}/${TOTAL_Q}</strong> (${pct}%) in ${formatDuration(attempt.durationMs)}.`;
+  document.getElementById("passed-attempts").innerHTML = renderAttemptList(state.attempts);
+  showScreen("passed");
+}
+
+function renderLocked(){
+  document.getElementById("locked-attempts").innerHTML = renderAttemptList(state.attempts);
+  showScreen("locked");
+}
+
+function renderAttemptList(attempts){
+  return attempts.map((a, i) => {
+    const cls = a.passed ? "pass" : "fail";
+    const verdict = a.passed ? "PASS" : "FAIL";
+    const pct = ((a.score / TOTAL_Q) * 100).toFixed(1);
+    return `<div class="attempt-row">
+      <span class="a-num">Attempt ${i+1}</span>
+      <span class="a-score">${a.score}/${TOTAL_Q} (${pct}%)</span>
+      <span class="a-result ${cls}">${verdict}</span>
+    </div>`;
+  }).join("");
+}
+
+// ════════════════════════════ EXAM ════════════════════════════
+function startNewAttempt(name){
+  state.inProgress = {
+    name: name.trim(),
+    started: Date.now(),
+    answers: {},   // qIdx (0-149) -> letter
+    flagged: [],   // qIdx
+    currentQ: 0,
+  };
+  saveState();
+  enterExam();
+}
+
+function resumeAttempt(){
+  if(!state.inProgress) return;
+  enterExam();
+}
+
+function enterExam(){
+  document.getElementById("bar-candidate").textContent = state.inProgress.name;
+  showScreen("exam");
+  renderQuestion();
+  startTimer();
+}
+
+function renderQuestion(){
+  const idx = state.inProgress.currentQ;
+  const q = QUESTIONS[idx];
+  const answered = state.inProgress.answers[idx];
+  const flagged = state.inProgress.flagged.includes(idx);
+
+  document.getElementById("bar-qcount").textContent = `${idx+1}/${TOTAL_Q}`;
+  document.getElementById("progress-fill").style.width =
+    `${((idx+1) / TOTAL_Q) * 100}%`;
+
+  const wrap = document.getElementById("q-wrap");
+  const letters = ["A","B","C","D"];
+  wrap.innerHTML = `
+    <div class="q-meta">${q.section_label}</div>
+    <div class="q-stem">${q.stem}</div>
+    ${q.scenario ? `<div class="q-scenario">${q.scenario}</div>` : ""}
+    <ul class="opts-list">
+      ${q.options.map((opt, i) => `
+        <li>
+          <button class="opt-btn ${answered === letters[i] ? "selected" : ""}" data-letter="${letters[i]}">
+            <span class="letter">${letters[i]}</span>
+            <span class="text">${opt}</span>
+          </button>
+        </li>
+      `).join("")}
+    </ul>
+  `;
+  wrap.querySelectorAll(".opt-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const letter = btn.dataset.letter;
+      state.inProgress.answers[idx] = letter;
+      saveState();
+      renderQuestion();
+    });
+  });
+
+  // Flag button state
+  document.getElementById("btn-flag").classList.toggle("active", flagged);
+  document.getElementById("flag-label").textContent = flagged ? "Flagged" : "Flag for review";
+
+  // Nav buttons
+  document.getElementById("btn-prev").disabled = idx === 0;
+  const nextBtn = document.getElementById("btn-next");
+  if(idx === TOTAL_Q - 1){
+    nextBtn.textContent = "Review →";
+  } else {
+    nextBtn.textContent = "Next →";
+  }
+}
+
+function goToQuestion(idx){
+  if(idx < 0 || idx >= TOTAL_Q) return;
+  state.inProgress.currentQ = idx;
+  saveState();
+  renderQuestion();
+  closeNavigator();
+}
+
+function nextQuestion(){
+  const idx = state.inProgress.currentQ;
+  if(idx === TOTAL_Q - 1){
+    enterReview();
+  } else {
+    goToQuestion(idx + 1);
+  }
+}
+
+function prevQuestion(){
+  goToQuestion(state.inProgress.currentQ - 1);
+}
+
+function toggleFlag(){
+  const idx = state.inProgress.currentQ;
+  const i = state.inProgress.flagged.indexOf(idx);
+  if(i >= 0) state.inProgress.flagged.splice(i, 1);
+  else state.inProgress.flagged.push(idx);
+  saveState();
+  renderQuestion();
+}
+
+// ════════════════════════════ TIMER ════════════════════════════
+function startTimer(){
+  if(timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(updateTimer, 1000);
+  updateTimer();
+}
+function stopTimer(){
+  if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+}
+function updateTimer(){
+  if(!state.inProgress) return;
+  const elapsed = Date.now() - state.inProgress.started;
+  const remaining = TIME_LIMIT_MS - elapsed;
+  const timerEl = document.getElementById("bar-timer");
+  if(remaining <= 0){
+    timerEl.textContent = "0:00:00";
+    timeUp();
+    return;
+  }
+  const hours = Math.floor(remaining / 3600000);
+  const mins = Math.floor((remaining % 3600000) / 60000);
+  const secs = Math.floor((remaining % 60000) / 1000);
+  timerEl.textContent = `${hours}:${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+  timerEl.classList.toggle("warning", remaining < 10 * 60 * 1000);  // last 10 minutes
+}
+function timeUp(){
+  stopTimer();
+  document.getElementById("time-up-modal").classList.add("open");
+}
+
+// ════════════════════════════ NAVIGATOR ════════════════════════════
+function openNavigator(){
+  const grid = document.getElementById("nav-grid");
+  grid.innerHTML = "";
+  const answers = state.inProgress.answers;
+  const flagged = state.inProgress.flagged;
+  const current = state.inProgress.currentQ;
+  for(let i = 0; i < TOTAL_Q; i++){
+    const cell = document.createElement("button");
+    cell.className = "nav-cell";
+    if(answers[i]) cell.classList.add("answered");
+    if(flagged.includes(i)) cell.classList.add("flagged");
+    if(i === current) cell.classList.add("current");
+    cell.textContent = String(i + 1);
+    cell.addEventListener("click", () => goToQuestion(i));
+    grid.appendChild(cell);
+  }
+  document.getElementById("navigator").classList.add("open");
+}
+function closeNavigator(){
+  document.getElementById("navigator").classList.remove("open");
+}
+
+// ════════════════════════════ REVIEW SCREEN ════════════════════════════
+function enterReview(){
+  const ip = state.inProgress;
+  const answered = Object.keys(ip.answers).length;
+  const unanswered = TOTAL_Q - answered;
+  const flagged = ip.flagged.length;
+
+  document.getElementById("review-summary").innerHTML = `
+    <div class="row"><span class="l">Answered</span><span class="v ${unanswered===0?"ok":""}">${answered} / ${TOTAL_Q}</span></div>
+    <div class="row"><span class="l">Unanswered</span><span class="v ${unanswered>0?"warn":""}">${unanswered}</span></div>
+    <div class="row"><span class="l">Flagged for review</span><span class="v">${flagged}</span></div>
+  `;
+
+  const unEl = document.getElementById("review-unanswered");
+  if(unanswered > 0){
+    const unanswered_q = [];
+    for(let i = 0; i < TOTAL_Q; i++) if(!ip.answers[i]) unanswered_q.push(i + 1);
+    unEl.innerHTML = `
+      <h3 style="color:var(--red)">Unanswered questions</h3>
+      <p style="color:var(--muted);font-size:.88rem;margin:.4rem 0 .6rem">These will be marked wrong if you submit now.</p>
+      <div class="q-list-pills">${unanswered_q.map(n =>
+        `<button class="q-pill" data-q="${n-1}">Q${String(n).padStart(3,"0")}</button>`
+      ).join("")}</div>`;
+    unEl.querySelectorAll(".q-pill").forEach(p =>
+      p.addEventListener("click", e => { goToQuestion(+e.target.dataset.q); showScreen("exam"); }));
+  } else { unEl.innerHTML = ""; }
+
+  const flEl = document.getElementById("review-flagged");
+  if(flagged > 0){
+    flEl.innerHTML = `
+      <h3>Flagged for review</h3>
+      <div class="q-list-pills">${ip.flagged.sort((a,b)=>a-b).map(i =>
+        `<button class="q-pill flagged" data-q="${i}">Q${String(i+1).padStart(3,"0")}</button>`
+      ).join("")}</div>`;
+    flEl.querySelectorAll(".q-pill").forEach(p =>
+      p.addEventListener("click", e => { goToQuestion(+e.target.dataset.q); showScreen("exam"); }));
+  } else { flEl.innerHTML = ""; }
+
+  showScreen("review");
+}
+
+// ════════════════════════════ SUBMIT & SCORE ════════════════════════════
+function submitExam(){
+  const ip = state.inProgress;
+  const finished = Date.now();
+  let correct = 0;
+  for(let i = 0; i < TOTAL_Q; i++){
+    if(ip.answers[i] === QUESTIONS[i].correct) correct++;
+  }
+  const attempt = {
+    name: ip.name,
+    started: ip.started,
+    finished,
+    score: correct,
+    passed: correct >= PASS_MARK,
+    durationMs: finished - ip.started,
+    answers: ip.answers,
+  };
+  state.attempts.push(attempt);
+  state.inProgress = null;
+  saveState();
+  stopTimer();
+  renderResults(attempt);
+}
+
+function renderResults(attempt){
+  const attemptIdx = state.attempts.indexOf(attempt);
+  document.getElementById("results-name").textContent = attempt.name;
+  const date = new Date(attempt.finished);
+  document.getElementById("results-date").textContent =
+    date.toLocaleDateString("en-ZA", {year:"numeric", month:"long", day:"numeric"}) +
+    " at " + date.toLocaleTimeString("en-ZA", {hour:"2-digit", minute:"2-digit"});
+
+  const hero = document.getElementById("result-hero");
+  hero.className = "result-hero " + (attempt.passed ? "pass" : "fail");
+  document.getElementById("result-verdict").textContent = attempt.passed ? "PASSED" : "FAILED";
+  document.getElementById("result-score").textContent = attempt.score;
+  const pct = ((attempt.score / TOTAL_Q) * 100).toFixed(1);
+  document.getElementById("result-pct").textContent = pct + "%";
+  document.getElementById("result-attempt").textContent =
+    `${attemptIdx + 1} of ${MAX_ATTEMPTS}`;
+  document.getElementById("result-duration").textContent = formatDuration(attempt.durationMs);
+  document.getElementById("result-correct").textContent = `${attempt.score} correct`;
+
+  // Module breakdown
+  const modScores = {};
+  for(let i = 0; i < TOTAL_Q; i++){
+    const m = QUESTIONS[i].module_num;
+    if(!modScores[m]) modScores[m] = { correct: 0, total: 0 };
+    modScores[m].total++;
+    if(attempt.answers[i] === QUESTIONS[i].correct) modScores[m].correct++;
+  }
+  const tbody = document.getElementById("mod-table-body");
+  tbody.innerHTML = "";
+  const weakMods = [];
+  Object.keys(modScores).sort((a,b) => +a - +b).forEach(m => {
+    const s = modScores[m];
+    const pctMod = (s.correct / s.total) * 100;
+    const modName = MODULE_TITLES[m] || `Module ${m}`;
+    const modLabel = m === "99" ? "Synthesis" : `M${String(m).padStart(2,"0")}`;
+    let cls = "";
+    if(pctMod >= 90) cls = "strong";
+    else if(pctMod < 60) { cls = "weak"; weakMods.push({ num: m, name: modName, score: s.correct, total: s.total }); }
+    tbody.innerHTML += `
+      <tr>
+        <td><strong style="color:var(--text)">${modLabel}</strong><br><span style="color:var(--muted);font-size:.78rem">${modName}</span></td>
+        <td class="score">${s.correct}/${s.total}</td>
+        <td class="bar"><div class="mod-bar-bg"><div class="mod-bar-fill ${cls}" style="width:${pctMod}%"></div></div></td>
+      </tr>`;
+  });
+
+  // Wrong question pills
+  const wrong = [];
+  for(let i = 0; i < TOTAL_Q; i++){
+    if(attempt.answers[i] !== QUESTIONS[i].correct) wrong.push(i + 1);
+  }
+  if(wrong.length === 0){
+    document.getElementById("wrong-list-section").innerHTML = `
+      <div class="heading" style="color:var(--green)">Every question answered correctly</div>`;
+  } else {
+    document.getElementById("wrong-pills").innerHTML =
+      wrong.map(n => `<span class="wrong-pill">Q${String(n).padStart(3,"0")}</span>`).join("");
+  }
+
+  // Weak topics callout
+  const wt = document.getElementById("weak-topics");
+  const wtList = document.getElementById("weak-topics-list");
+  if(weakMods.length > 0 && !attempt.passed){
+    wtList.innerHTML = weakMods.map(m =>
+      `<li><em>${m.name}</em> — ${m.score}/${m.total} correct. Re-read course module ${m.num === "99" ? "synthesis" : m.num} and the related memo entries.</li>`
+    ).join("");
+    wt.style.display = "block";
+  } else {
+    wt.style.display = "none";
+  }
+
+  // Detailed review (collapsed by default)
+  renderReviewDetails(attempt);
+
+  // Retake / next steps block
+  const retakeBlock = document.getElementById("retake-block");
+  const used = state.attempts.length;
+  const remaining = MAX_ATTEMPTS - used;
+  if(attempt.passed){
+    retakeBlock.innerHTML = `
+      <div class="lock-card" style="background:rgba(126,201,142,.06);border-color:rgba(126,201,142,.3)">
+        <p style="margin:0">You've passed on attempt ${attemptIdx+1} of ${MAX_ATTEMPTS}. Send the screenshot to your instructor.</p>
+      </div>`;
+  } else if(remaining > 0){
+    retakeBlock.innerHTML = `
+      <p style="text-align:center;color:var(--muted);margin:1.2rem 0 .6rem">You have <strong>${remaining}</strong> attempt${remaining===1?"":"s"} remaining.</p>
+      <button class="btn" id="btn-retake">Start retake</button>
+      <button class="btn secondary" id="btn-home">Back to home (later)</button>`;
+    document.getElementById("btn-retake").addEventListener("click", () => {
+      if(confirm("Start a new attempt? Your current results are saved and your instructor still needs the screenshot.")){
+        renderStart();
+      }
+    });
+    document.getElementById("btn-home").addEventListener("click", () => renderStart());
+  } else {
+    retakeBlock.innerHTML = `
+      <div class="lock-card" style="background:rgba(236,90,90,.06);border-color:rgba(236,90,90,.3)">
+        <div class="ico" style="font-size:2rem">🔒</div>
+        <p>All 3 attempts used. Contact your instructor to discuss next steps.</p>
+      </div>`;
+  }
+
+  showScreen("results");
+}
+
+function renderReviewDetails(attempt){
+  const wrongIdx = [];
+  for(let i = 0; i < TOTAL_Q; i++){
+    if(attempt.answers[i] !== QUESTIONS[i].correct) wrongIdx.push(i);
+  }
+  const details = document.getElementById("review-details");
+  if(wrongIdx.length === 0){
+    details.innerHTML = "<p>No wrong answers to review.</p>";
+    return;
+  }
+  details.innerHTML = wrongIdx.map(i => {
+    const q = QUESTIONS[i];
+    const userLetter = attempt.answers[i] || "—";
+    const userAnswer = userLetter === "—"
+      ? '<em>(left blank)</em>'
+      : q.options[["A","B","C","D"].indexOf(userLetter)];
+    const correctAnswer = q.options[["A","B","C","D"].indexOf(q.correct)];
+    const userExp = userLetter !== "—" ? (q.explanations[userLetter] || "") : "";
+    const correctExp = q.explanations[q.correct] || "";
+    const modLabel = q.module_num === 99 ? "Synthesis" : `M${String(q.module_num).padStart(2,"0")}`;
+    return `
+      <div class="review-card">
+        <div class="rc-head">
+          <span class="rc-num">Q${String(q.num).padStart(3,"0")}</span>
+          <span class="rc-mod">${modLabel} · ${q.module_title}</span>
+        </div>
+        ${q.scenario ? `<div class="rc-scenario">${q.scenario}</div>` : ""}
+        <div class="rc-stem">${q.stem}</div>
+        <div class="rc-choice user-wrong"><span class="l">YOU CHOSE ${userLetter}:</span>${userAnswer}</div>
+        <div class="rc-choice correct-was"><span class="l">CORRECT ${q.correct}:</span>${correctAnswer}</div>
+        ${userExp ? `<div class="rc-exp"><strong class="label">Why ${userLetter} is wrong</strong>${userExp}</div>` : ""}
+        <div class="rc-exp"><strong class="label">Why ${q.correct} is correct</strong>${correctExp}</div>
+        ${q.principle ? `<div class="rc-principle">Principle · ${q.principle}</div>` : ""}
+      </div>`;
+  }).join("");
+}
+
+function formatDuration(ms){
+  const totalMins = Math.floor(ms / 60000);
+  const h = Math.floor(totalMins / 60);
+  const m = totalMins % 60;
+  if(h > 0) return `${h}h ${m}m`;
+  return `${m}m`;
+}
+
+// ════════════════════════════ EVENT WIRING ════════════════════════════
+document.addEventListener("DOMContentLoaded", () => {
+  loadState();
+  renderStart();
+
+  // Start screen
+  const nameInput = document.getElementById("candidate-name");
+  const startBtn = document.getElementById("btn-start");
+  nameInput.addEventListener("input", () => {
+    startBtn.disabled = nameInput.value.trim().length < 2;
+  });
+  startBtn.addEventListener("click", () => {
+    const name = nameInput.value.trim();
+    if(name.length < 2) return;
+    if(confirm(`Start examination as "${name}"? The 5-hour timer begins now.`)){
+      startNewAttempt(name);
+    }
+  });
+  document.getElementById("btn-resume").addEventListener("click", () => resumeAttempt());
+
+  // Exam navigation
+  document.getElementById("btn-next").addEventListener("click", () => nextQuestion());
+  document.getElementById("btn-prev").addEventListener("click", () => prevQuestion());
+  document.getElementById("btn-submit-top").addEventListener("click", () => enterReview());
+  document.getElementById("btn-flag").addEventListener("click", () => toggleFlag());
+  document.getElementById("btn-navigator").addEventListener("click", () => openNavigator());
+  document.getElementById("nav-close").addEventListener("click", () => closeNavigator());
+
+  // Review screen
+  document.getElementById("btn-back-to-exam").addEventListener("click", () => showScreen("exam"));
+  document.getElementById("btn-confirm-submit").addEventListener("click", () => {
+    if(confirm("Submit your exam now? You can't change answers after submitting.")) submitExam();
+  });
+
+  // Results screen
+  document.getElementById("review-toggle").addEventListener("click", (e) => {
+    const tog = e.currentTarget;
+    const det = document.getElementById("review-details");
+    tog.classList.toggle("open");
+    det.classList.toggle("show");
+  });
+
+  // Time-up modal
+  document.getElementById("btn-time-up-ok").addEventListener("click", () => {
+    document.getElementById("time-up-modal").classList.remove("open");
+    submitExam();
+  });
+
+  // Warn before leaving in the middle of exam
+  window.addEventListener("beforeunload", (e) => {
+    if(state.inProgress && document.body.dataset.active === "exam"){
+      e.preventDefault();
+      e.returnValue = "";
+    }
+  });
+});
+</script>
+</body></html>
