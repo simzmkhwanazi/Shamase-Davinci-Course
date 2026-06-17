@@ -1,0 +1,1014 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0d0f17">
+<title>DaVinci Resolve Basics — Mock Exam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f17; --surface:#161a24; --surface-2:#1c2130; --surface-3:#232936;
+  --border:#252a36; --border-2:#343b4a;
+  --text:#e8e6e0; --muted:#8b8e98; --dim:#5d626d;
+  --gold:#d4a574; --gold-dim:#a07d52;
+  --teal:#5dc8b7; --teal-dim:#3a8d80;
+  --red:#ec5a5a; --red-bright:#ff3838;
+  --green:#7ec98e; --green-dim:#5a9f6a;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;line-height:1.55;font-size:16px;overflow-x:hidden}
+body{background-image:radial-gradient(ellipse at top,rgba(212,165,116,.04),transparent 60%)}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-size:inherit}
+input{font-family:inherit;font-size:inherit}
+
+.screen{display:none;padding:0;min-height:100vh}
+[data-active="start"] #screen-start,
+[data-active="exam"] #screen-exam,
+[data-active="review"] #screen-review,
+[data-active="results"] #screen-results,
+[data-active="locked"] #screen-locked,
+[data-active="passed"] #screen-passed{display:block}
+
+/* ─── SHARED ─────────────────────────────────────────────────── */
+.wrap{max-width:680px;margin:0 auto;padding:1.5rem 1.25rem 6rem}
+h1,h2,h3{font-family:'Fraunces',serif;letter-spacing:-.015em;font-weight:400}
+h1{font-size:clamp(2rem,7vw,2.8rem);margin:0 0 .5rem;font-variation-settings:"opsz" 144}
+h2{font-size:1.4rem;margin:1.8rem 0 .7rem;color:var(--gold);font-style:italic;font-variation-settings:"opsz" 100}
+h3{font-size:1.1rem;margin:1.3rem 0 .5rem;color:var(--teal)}
+strong{color:var(--gold);font-weight:600}em{color:var(--teal);font-style:italic}
+code,kbd{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--surface-2);padding:.12em .42em;border-radius:3px;color:var(--gold);border:1px solid var(--border)}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.22em;color:var(--teal);margin-bottom:1rem}
+
+/* ─── SCREENSHOT INSTRUCTION BANNER (the loud red bit) ───────── */
+.shot-banner{
+  background:var(--red-bright);
+  color:#fff;
+  padding:1.2rem 1.4rem;
+  border-radius:8px;
+  font-weight:700;
+  font-size:1.05rem;
+  line-height:1.4;
+  text-align:center;
+  letter-spacing:.01em;
+  margin:1.4rem 0;
+  box-shadow:0 4px 20px rgba(255,56,56,.25);
+  border:2px solid #fff;
+}
+.shot-banner .icon{font-size:1.6rem;display:block;margin-bottom:.4rem}
+.shot-banner .sub{display:block;font-size:.85rem;font-weight:500;margin-top:.4rem;opacity:.9}
+
+/* ─── START SCREEN ───────────────────────────────────────────── */
+.lede{font-family:'Fraunces',serif;font-style:italic;font-size:1.1rem;color:var(--muted);line-height:1.5;margin:.8rem 0 1.5rem}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin:1.4rem 0}
+.facts .fact{background:var(--surface);padding:.8rem 1rem;border-radius:6px;border:1px solid var(--border)}
+.facts .fact .l{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:.25rem}
+.facts .fact .v{font-size:1.05rem;color:var(--text);font-weight:500}
+.facts .fact.warn .v{color:var(--red)}
+
+.rules{background:var(--surface);border-left:3px solid var(--teal);padding:1rem 1.2rem;border-radius:6px;margin:1.4rem 0;font-size:.92rem}
+.rules p{margin:.45rem 0}
+.rules p.warn{color:var(--red);font-weight:500}
+
+.name-field{margin:1.6rem 0}
+.name-field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.18em;color:var(--teal);margin-bottom:.5rem}
+.name-field input{
+  width:100%;padding:.95rem 1rem;background:var(--surface-2);color:var(--text);
+  border:1px solid var(--border-2);border-radius:8px;font-size:1.05rem;
+  font-family:'Sora',sans-serif;
+}
+.name-field input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,165,116,.15)}
+
+.btn{display:block;width:100%;padding:1.1rem 1.4rem;background:var(--gold);color:#1a1308;border-radius:8px;font-weight:600;font-size:1.05rem;letter-spacing:.02em;margin:1rem 0;transition:opacity .15s,transform .05s;border:none}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn.secondary{background:var(--surface-2);color:var(--text);border:1px solid var(--border-2)}
+.btn.danger{background:var(--red);color:#fff}
+.btn.success{background:var(--green);color:#0d1410}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.btn-row .btn{margin:0}
+
+.attempts-log{margin-top:2rem;padding-top:1.4rem;border-top:1px solid var(--border)}
+.attempts-log h3{margin-top:0;color:var(--gold);font-size:.95rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.15em;font-style:normal}
+.attempt-row{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem;background:var(--surface);border-radius:6px;margin:.5rem 0;font-size:.9rem;border:1px solid var(--border)}
+.attempt-row .a-num{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:.8rem}
+.attempt-row .a-score{font-family:'JetBrains Mono',monospace;color:var(--text);font-weight:600}
+.attempt-row .a-result{font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.2rem .6rem;border-radius:3px;letter-spacing:.1em;font-weight:600}
+.attempt-row .a-result.pass{background:rgba(126,201,142,.15);color:var(--green);border:1px solid rgba(126,201,142,.4)}
+.attempt-row .a-result.fail{background:rgba(236,90,90,.12);color:var(--red);border:1px solid rgba(236,90,90,.4)}
+
+/* ─── EXAM SCREEN ────────────────────────────────────────────── */
+.exam-bar{position:sticky;top:0;background:rgba(13,15,23,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:.7rem 1rem;z-index:50;display:flex;align-items:center;gap:.8rem;font-family:'JetBrains Mono',monospace;font-size:.78rem}
+.exam-bar .candidate{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
+.exam-bar .timer{color:var(--gold);font-weight:600;letter-spacing:.05em;font-size:.85rem}
+.exam-bar .timer.warning{color:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+.exam-bar .qcount{color:var(--teal);font-weight:600}
+
+.progress-bar{height:3px;background:var(--surface);position:sticky;top:38px;z-index:50}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));transition:width .3s}
+
+.q-wrap{padding:1rem 1.25rem 0}
+.q-meta{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.18em;color:var(--gold-dim);text-transform:uppercase;margin:1rem 0 .5rem}
+.q-scenario{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);font-size:1rem;line-height:1.5;margin:.8rem 0;padding-left:1rem;border-left:2px solid var(--gold-dim)}
+.q-stem{font-size:1.08rem;line-height:1.45;margin:1rem 0 1.2rem;color:var(--text)}
+
+.opts-list{list-style:none;padding:0;margin:0}
+.opt-btn{
+  display:flex;width:100%;padding:1rem 1.1rem;background:var(--surface);
+  border:1.5px solid var(--border-2);border-radius:10px;color:var(--text);
+  text-align:left;margin:.6rem 0;gap:.85rem;align-items:flex-start;
+  font-size:.95rem;line-height:1.4;transition:all .15s;font-family:'Sora',sans-serif;
+}
+.opt-btn:active{transform:scale(.985)}
+.opt-btn.selected{background:rgba(212,165,116,.15);border-color:var(--gold);box-shadow:0 0 0 2px rgba(212,165,116,.2)}
+.opt-btn .letter{
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.85rem;
+  background:var(--surface-2);color:var(--teal);padding:.25rem .55rem;border-radius:5px;
+  flex-shrink:0;border:1px solid var(--border-2);min-width:1.8rem;text-align:center;
+}
+.opt-btn.selected .letter{background:var(--gold);color:#1a1308;border-color:var(--gold)}
+
+.q-tools{display:flex;gap:.6rem;margin:1.4rem 0 1rem}
+.q-tool{flex:1;padding:.65rem .8rem;background:var(--surface);border:1px solid var(--border-2);border-radius:6px;color:var(--muted);font-size:.82rem;font-family:'JetBrains Mono',monospace;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.q-tool.active{background:rgba(236,90,90,.1);border-color:var(--red);color:var(--red)}
+.q-tool .ico{font-size:.95rem}
+
+.exam-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(13,15,23,.97);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:.7rem 1rem;display:flex;gap:.5rem;z-index:50;padding-bottom:max(.7rem,env(safe-area-inset-bottom))}
+.nav-btn{flex:1;padding:.85rem 1rem;background:var(--surface-2);color:var(--text);border:1px solid var(--border-2);border-radius:8px;font-weight:500;font-size:.92rem;letter-spacing:.02em;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.nav-btn:disabled{opacity:.3}
+.nav-btn.primary{background:var(--gold);color:#1a1308;border-color:var(--gold);font-weight:600}
+.nav-btn.danger{background:var(--red);color:#fff;border-color:var(--red);font-weight:600}
+.nav-btn.center{flex:0 0 auto;padding:.85rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.08em}
+
+/* ─── NAVIGATOR OVERLAY ──────────────────────────────────────── */
+.overlay{position:fixed;inset:0;background:rgba(13,15,23,.92);backdrop-filter:blur(8px);z-index:100;display:none;flex-direction:column;padding:1rem;overflow-y:auto}
+.overlay.open{display:flex}
+.overlay-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1rem;padding:.5rem .25rem}
+.overlay-head h2{margin:0;color:var(--gold);font-size:1.2rem;font-style:normal;font-family:'Fraunces',serif}
+.overlay-head .close{background:var(--surface-2);padding:.5rem .8rem;border-radius:6px;font-size:1.4rem;color:var(--text);border:1px solid var(--border-2);line-height:1}
+.nav-legend{display:flex;flex-wrap:wrap;gap:.8rem;font-size:.75rem;color:var(--muted);margin-bottom:1rem;padding:.5rem .25rem;font-family:'JetBrains Mono',monospace}
+.nav-legend span{display:flex;align-items:center;gap:.35rem}
+.nav-legend .swatch{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid var(--border-2)}
+.nav-legend .swatch.answered{background:var(--gold)}
+.nav-legend .swatch.unanswered{background:var(--surface)}
+.nav-legend .swatch.flagged{background:var(--surface);border:2px solid var(--red)}
+.nav-legend .swatch.current{background:var(--teal)}
+
+.nav-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.45rem;margin-bottom:5rem}
+@media(min-width:480px){.nav-grid{grid-template-columns:repeat(7,1fr)}}
+@media(min-width:640px){.nav-grid{grid-template-columns:repeat(10,1fr)}}
+.nav-cell{padding:.7rem .25rem;background:var(--surface);border:1px solid var(--border-2);border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:600;color:var(--muted);text-align:center;transition:all .1s}
+.nav-cell.answered{background:var(--gold);color:#1a1308;border-color:var(--gold)}
+.nav-cell.flagged{border:2px solid var(--red)}
+.nav-cell.current{background:var(--teal);color:#0d1410;border-color:var(--teal)}
+.nav-cell:active{transform:scale(.95)}
+
+/* ─── REVIEW SCREEN ──────────────────────────────────────────── */
+.review-summary{background:var(--surface);border-radius:8px;padding:1rem 1.2rem;margin:1.2rem 0;border:1px solid var(--border)}
+.review-summary .row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px dashed var(--border-2);font-size:.95rem}
+.review-summary .row:last-child{border-bottom:0}
+.review-summary .row .l{color:var(--muted)}
+.review-summary .row .v{color:var(--text);font-weight:600;font-family:'JetBrains Mono',monospace}
+.review-summary .row .v.warn{color:var(--red)}
+.review-summary .row .v.ok{color:var(--green)}
+
+.q-list-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin:.8rem 0 1.4rem}
+.q-pill{padding:.4rem .7rem;background:var(--surface);border:1px solid var(--border-2);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--gold)}
+.q-pill.flagged{border-color:var(--red);color:var(--red)}
+
+/* ─── RESULTS SCREEN ─────────────────────────────────────────── */
+.result-hero{padding:1.5rem 1.2rem;border-radius:10px;margin:1rem 0 1.5rem;text-align:center;border:1px solid var(--border)}
+.result-hero.pass{background:linear-gradient(180deg,rgba(126,201,142,.15),rgba(126,201,142,.04));border-color:rgba(126,201,142,.4)}
+.result-hero.fail{background:linear-gradient(180deg,rgba(236,90,90,.12),rgba(236,90,90,.03));border-color:rgba(236,90,90,.4)}
+.result-hero .verdict{font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.3em;font-weight:700;margin-bottom:.5rem}
+.result-hero.pass .verdict{color:var(--green)}
+.result-hero.fail .verdict{color:var(--red)}
+.result-hero .score-big{font-family:'Fraunces',serif;font-size:3.4rem;font-weight:300;line-height:1;margin:.4rem 0;font-variation-settings:"opsz" 144}
+.result-hero .score-big .of{color:var(--muted);font-size:1.8rem}
+.result-hero .pct{font-family:'JetBrains Mono',monospace;font-size:1rem;color:var(--muted)}
+
+.result-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin:1.2rem 0}
+.result-meta .item{background:var(--surface);padding:.85rem 1rem;border-radius:6px;border:1px solid var(--border)}
+.result-meta .item .l{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:.25rem}
+.result-meta .item .v{font-size:1.05rem;color:var(--text);font-weight:600;font-family:'JetBrains Mono',monospace}
+
+.mod-table{width:100%;border-collapse:collapse;margin:1rem 0 1.6rem;background:var(--surface);border-radius:8px;overflow:hidden;font-size:.88rem}
+.mod-table th{padding:.7rem .9rem;background:var(--surface-2);text-align:left;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);border-bottom:1px solid var(--border)}
+.mod-table td{padding:.65rem .9rem;border-bottom:1px solid var(--border);vertical-align:middle}
+.mod-table tr:last-child td{border-bottom:0}
+.mod-table td.score{font-family:'JetBrains Mono',monospace;font-weight:600;text-align:right;color:var(--text);white-space:nowrap}
+.mod-table td.bar{width:35%}
+.mod-bar-bg{height:6px;background:var(--surface-3);border-radius:3px;overflow:hidden}
+.mod-bar-fill{height:100%;background:var(--gold);border-radius:3px;transition:width .5s}
+.mod-bar-fill.weak{background:var(--red)}
+.mod-bar-fill.strong{background:var(--green)}
+
+.wrong-list{margin:1rem 0}
+.wrong-list .heading{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.18em;color:var(--red);text-transform:uppercase;margin-bottom:.6rem;font-weight:600}
+.wrong-pills{display:flex;flex-wrap:wrap;gap:.35rem;margin:.4rem 0 1rem}
+.wrong-pill{background:rgba(236,90,90,.1);border:1px solid rgba(236,90,90,.4);color:var(--red);padding:.3rem .6rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:600}
+
+.weak-topics{background:var(--surface);border-left:3px solid var(--red);border-radius:6px;padding:.9rem 1.1rem;margin:1rem 0;font-size:.9rem}
+.weak-topics .head{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem;font-weight:600}
+.weak-topics ul{margin:.4rem 0 0;padding-left:1.2rem;color:var(--muted)}
+.weak-topics ul li{margin:.3rem 0;color:var(--text);font-size:.92rem}
+.weak-topics ul li em{color:var(--gold);font-style:normal;font-weight:600}
+
+.review-toggle{margin:1.6rem 0 0;padding:.85rem 1.1rem;background:var(--surface);border:1px solid var(--border-2);border-radius:8px;width:100%;color:var(--text);font-size:.95rem;text-align:left;display:flex;align-items:center;justify-content:space-between}
+.review-toggle .ico{color:var(--muted);transition:transform .2s}
+.review-toggle.open .ico{transform:rotate(90deg)}
+
+.review-details{display:none;margin-top:.8rem}
+.review-details.show{display:block}
+.review-card{background:var(--surface);border-radius:8px;border:1px solid var(--border);padding:1rem 1.1rem;margin:.7rem 0}
+.review-card .rc-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem;flex-wrap:wrap;gap:.5rem}
+.review-card .rc-num{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--gold-dim);letter-spacing:.12em}
+.review-card .rc-mod{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.1em}
+.review-card .rc-stem{font-size:.93rem;line-height:1.45;margin:.5rem 0}
+.review-card .rc-scenario{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);font-size:.86rem;line-height:1.45;margin:.4rem 0;padding-left:.8rem;border-left:2px solid var(--border-2)}
+.review-card .rc-choice{font-size:.85rem;padding:.4rem .6rem;border-radius:4px;margin:.4rem 0;line-height:1.4}
+.review-card .rc-choice.user-wrong{background:rgba(236,90,90,.08);border-left:3px solid var(--red)}
+.review-card .rc-choice.correct-was{background:rgba(126,201,142,.08);border-left:3px solid var(--green)}
+.review-card .rc-choice .l{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:.75rem;letter-spacing:.05em;margin-right:.45rem}
+.review-card .rc-choice.user-wrong .l{color:var(--red)}
+.review-card .rc-choice.correct-was .l{color:var(--green)}
+.review-card .rc-exp{font-size:.86rem;color:var(--muted);line-height:1.5;margin-top:.6rem;padding-top:.6rem;border-top:1px dashed var(--border-2)}
+.review-card .rc-exp strong.label{display:block;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.18em;color:var(--teal);text-transform:uppercase;margin-bottom:.3rem;font-weight:600}
+.review-card .rc-principle{font-style:italic;color:var(--gold);margin-top:.6rem;font-size:.85rem;line-height:1.4}
+
+/* ─── LOCKED SCREEN ──────────────────────────────────────────── */
+.lock-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem;text-align:center;margin:1.5rem 0}
+.lock-card .ico{font-size:2.5rem;margin-bottom:.5rem}
+
+/* ─── TIME-UP MODAL ──────────────────────────────────────────── */
+.modal{position:fixed;inset:0;background:rgba(13,15,23,.95);backdrop-filter:blur(8px);z-index:200;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.modal.open{display:flex}
+.modal-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem 1.4rem;max-width:480px;width:100%;text-align:center}
+.modal-card h2{margin-top:0;color:var(--red);font-style:normal;font-family:'Fraunces',serif}
+.modal-card .btn{margin-top:1rem}
+
+footer.app-footer{text-align:center;padding:2rem 1rem;color:var(--dim);font-size:.7rem;font-family:'JetBrains Mono',monospace;letter-spacing:.1em}
+
+/* Print-friendly results (in case anyone prints) */
+@media print{
+  body{background:#fff;color:#111;font-size:11pt}
+  .exam-nav,.q-tools,.exam-bar,.progress-bar,.overlay,.modal,.btn,.review-toggle{display:none !important}
+  .screen{display:block !important}
+  .shot-banner{background:#fff;color:#c00;border:2px solid #c00;box-shadow:none}
+  .review-details{display:block !important}
+}
+</style></head>
+<body data-active="start">
+
+<main id="app">
+
+<!-- ═══════════════════════════ START SCREEN ═══════════════════════════ -->
+<section id="screen-start" class="screen"><div class="wrap">
+<div class="eyebrow">Shamase Studios · Basics Examination</div>
+<h1>DaVinci Resolve Basics</h1>
+<p class="lede">A 100-question interface-fluency examination. Two hours. Pass mark 90%. Three attempts maximum. Tests your knowledge of where everything lives, what each tool does, and how to navigate Resolve.</p>
+
+<div class="facts">
+<div class="fact"><div class="l">Questions</div><div class="v">100</div></div>
+<div class="fact"><div class="l">Duration</div><div class="v">2 hours</div></div>
+<div class="fact"><div class="l">Pass mark</div><div class="v">90% (90/100)</div></div>
+<div class="fact warn"><div class="l">Attempts</div><div class="v" id="attempts-remaining">3 maximum</div></div>
+</div>
+
+<div class="rules">
+<p><strong>Rules.</strong></p>
+<p>1. One best answer per question. Other options may be partially correct; pick the strongest.</p>
+<p>2. The timer starts when you tap <em>Begin</em>. At <strong>2:00:00</strong> the exam auto-submits. Unanswered questions are marked wrong.</p>
+<p>3. Pace yourself — that's <strong>72 seconds per question</strong>. Most are recall, so should be quick.</p>
+<p>4. Your progress is saved automatically. You can close the browser and resume — but the clock keeps running.</p>
+<p>5. You have a maximum of <strong>3 attempts total</strong>. Each attempt is tracked.</p>
+<p class="warn">6. When you finish — pass or fail — you must <strong>screenshot the result page and send it to your instructor</strong>. The page will remind you.</p>
+</div>
+
+<div class="name-field">
+<label for="candidate-name">Your full name (required)</label>
+<input id="candidate-name" type="text" placeholder="e.g. Lerato Khumalo" autocomplete="name" autocorrect="off" autocapitalize="words">
+</div>
+
+<button class="btn" id="btn-start" disabled>Begin examination</button>
+<button class="btn secondary" id="btn-resume" style="display:none">Resume in-progress attempt</button>
+
+<div class="attempts-log" id="attempts-log" style="display:none">
+<h3>Previous attempts on this device</h3>
+<div id="attempts-list"></div>
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ EXAM SCREEN ═══════════════════════════ -->
+<section id="screen-exam" class="screen">
+<div class="exam-bar">
+<span class="candidate" id="bar-candidate">—</span>
+<span class="qcount" id="bar-qcount">1/100</span>
+<span class="timer" id="bar-timer">2:00:00</span>
+</div>
+<div class="progress-bar"><div class="fill" id="progress-fill" style="width:0%"></div></div>
+
+<div class="q-wrap" id="q-wrap"></div>
+
+<div class="q-tools" id="q-tools" style="margin:1.4rem 1.25rem 1rem">
+<button class="q-tool" id="btn-flag"><span class="ico">⚑</span> <span id="flag-label">Flag for review</span></button>
+<button class="q-tool" id="btn-navigator"><span class="ico">▦</span> Navigator</button>
+</div>
+
+<div style="height:5rem"></div>
+
+<div class="exam-nav">
+<button class="nav-btn" id="btn-prev">← Prev</button>
+<button class="nav-btn center" id="btn-submit-top">Submit</button>
+<button class="nav-btn primary" id="btn-next">Next →</button>
+</div>
+</section>
+
+<!-- ═══════════════════════════ NAVIGATOR OVERLAY ═══════════════════════════ -->
+<div class="overlay" id="navigator">
+<div class="overlay-head"><h2>Jump to question</h2><button class="close" id="nav-close">×</button></div>
+<div class="nav-legend">
+<span><span class="swatch answered"></span>Answered</span>
+<span><span class="swatch unanswered"></span>Unanswered</span>
+<span><span class="swatch flagged"></span>Flagged</span>
+<span><span class="swatch current"></span>Current</span>
+</div>
+<div class="nav-grid" id="nav-grid"></div>
+</div>
+
+<!-- ═══════════════════════════ REVIEW SCREEN ═══════════════════════════ -->
+<section id="screen-review" class="screen"><div class="wrap">
+<div class="eyebrow">Final check before submission</div>
+<h1>Ready to submit?</h1>
+
+<div class="review-summary" id="review-summary"></div>
+<div id="review-unanswered"></div>
+<div id="review-flagged"></div>
+
+<div class="btn-row">
+<button class="btn secondary" id="btn-back-to-exam">← Keep working</button>
+<button class="btn danger" id="btn-confirm-submit">Submit now</button>
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ RESULTS SCREEN ═══════════════════════════ -->
+<section id="screen-results" class="screen"><div class="wrap">
+
+<div class="shot-banner">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Send it to your instructor as proof of completion</span>
+</div>
+
+<div class="eyebrow">Examination result · Shamase Studios</div>
+<h1 id="results-name">—</h1>
+<p class="lede" id="results-date">—</p>
+
+<div class="result-hero" id="result-hero">
+<div class="verdict" id="result-verdict">—</div>
+<div class="score-big"><span id="result-score">0</span><span class="of">/100</span></div>
+<div class="pct" id="result-pct">— %</div>
+</div>
+
+<div class="result-meta">
+<div class="item"><div class="l">Attempt</div><div class="v" id="result-attempt">—</div></div>
+<div class="item"><div class="l">Pass mark</div><div class="v">90/100</div></div>
+<div class="item"><div class="l">Time taken</div><div class="v" id="result-duration">—</div></div>
+<div class="item"><div class="l">Correct</div><div class="v" id="result-correct">—</div></div>
+</div>
+
+<h2>Module breakdown</h2>
+<table class="mod-table" id="mod-table"><thead><tr><th>Module</th><th>Score</th><th>Performance</th></tr></thead><tbody id="mod-table-body"></tbody></table>
+
+<div class="wrong-list" id="wrong-list-section">
+<div class="heading">Questions answered incorrectly</div>
+<div class="wrong-pills" id="wrong-pills"></div>
+</div>
+
+<div class="weak-topics" id="weak-topics" style="display:none">
+<div class="head">Topics to revise before retaking</div>
+<ul id="weak-topics-list"></ul>
+</div>
+
+<button class="review-toggle" id="review-toggle">
+<span>Detailed review of wrong answers</span><span class="ico">▶</span>
+</button>
+<div class="review-details" id="review-details"></div>
+
+<div class="shot-banner" style="margin-top:2rem">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Don't forget — your instructor needs to see your score and your attempt number</span>
+</div>
+
+<div id="retake-block" style="margin-top:1.5rem"></div>
+
+</div></section>
+
+<!-- ═══════════════════════════ LOCKED SCREEN ═══════════════════════════ -->
+<section id="screen-locked" class="screen"><div class="wrap">
+<div class="eyebrow">Examination locked</div>
+<h1>No attempts remaining</h1>
+
+<div class="shot-banner">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Send to your instructor — this confirms your 3 attempts are complete</span>
+</div>
+
+<div class="lock-card">
+<div class="ico">🔒</div>
+<p>You have used all <strong>3 attempts</strong> for this examination on this device. Contact your instructor to discuss next steps.</p>
+</div>
+
+<h2>Your attempt history</h2>
+<div id="locked-attempts"></div>
+
+<div class="shot-banner" style="margin-top:1.5rem">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Your instructor needs to see this attempt history</span>
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ PASSED SCREEN (if returning after pass) ═══════════════════════════ -->
+<section id="screen-passed" class="screen"><div class="wrap">
+<div class="eyebrow">Examination complete</div>
+<h1>You've already passed</h1>
+
+<div class="shot-banner">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+<span class="sub">Send to your instructor as proof of completion</span>
+</div>
+
+<div class="lock-card">
+<div class="ico">✓</div>
+<p id="passed-summary">—</p>
+</div>
+
+<h2>Your full attempt history</h2>
+<div id="passed-attempts"></div>
+
+<div class="shot-banner" style="margin-top:1.5rem">
+<span class="icon">📸</span>
+SCREENSHOT THIS PAGE
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ TIME-UP MODAL ═══════════════════════════ -->
+<div class="modal" id="time-up-modal"><div class="modal-card">
+<h2>Time's up</h2>
+<p>Two hours elapsed. Submitting your exam with answers as completed. Unanswered questions count as wrong.</p>
+<button class="btn" id="btn-time-up-ok">View results</button>
+</div></div>
+
+<footer class="app-footer">DaVinci Resolve Basics · Mock Examination · Shamase Studios 2026</footer>
+
+</main>
+
+<script>
+// ════════════════════════════ DATA ════════════════════════════
+const QUESTIONS = [{"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"How many main pages does DaVinci Resolve have?","options":["5","6","7","8"],"correct":"C","explanations":{"A":"Too few — Resolve has more than 5 dedicated workspaces.","B":"Close but missing one — there are 7, not 6.","C":"Correct: Media, Cut, Edit, Fusion, Color, Fairlight, Deliver.","D":"Too many — there are 7 main pages."},"principle":"The 7 pages: Media, Cut, Edit, Fusion, Color, Fairlight, Deliver.","num":1},{"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"Which of these is NOT one of Resolve's main pages?","options":["Cut","Compose","Fusion","Fairlight"],"correct":"B","explanations":{"A":"Cut is a real page — used for fast editing with dual timelines.","B":"Correct: there is no 'Compose' page in Resolve.","C":"Fusion is a real page — used for compositing and VFX.","D":"Fairlight is a real page — used for audio mixing."},"principle":"The 7 pages don't include a Compose page — Fusion handles that work.","num":2},{"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"In the standard post-production workflow, which page comes last?","options":["Color","Fairlight","Deliver","Edit"],"correct":"C","explanations":{"A":"Color comes before audio mixing in the standard workflow.","B":"Fairlight (audio) comes before Deliver but isn't the last step.","C":"Correct: Deliver is where you render the final file — the last step.","D":"Edit comes early — picture lock happens here before grading."},"principle":"Workflow order: Media → Cut/Edit → Fusion → Color → Fairlight → Deliver.","num":3},{"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"What's the main difference between Resolve Free and Resolve Studio?","options":["Studio is required for any commercial work","Studio unlocks additional features like Resolve FX, AI tools, and HDR support","Studio is faster at rendering","Studio allows projects longer than 30 minutes"],"correct":"B","explanations":{"A":"False — the free version has no commercial-use restriction.","B":"Correct: Studio is sold for features, not for licensing.","C":"Render speed is hardware-dependent, not version-dependent.","D":"There's no project length limit in either version."},"principle":"Free is fully commercial-usable; Studio unlocks pro features.","num":4},{"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"What file extension does a Resolve project export use?","options":[".drp",".drx",".prproj",".fcpxml"],"correct":"A","explanations":{"A":"Correct: .drp = DaVinci Resolve Project export.","B":".drx = DaVinci Resolve power grade (color preset).","C":".prproj is Premiere Pro's project format.","D":".fcpxml is Final Cut Pro's interchange format."},"principle":".drp exports projects; .drx exports grades.","num":5},{"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"Where does Resolve open by default when launched?","options":["The Edit page","The Media page","The Project Manager","The last project you used"],"correct":"C","explanations":{"A":"Edit page only appears once a project is open.","B":"Media page only appears once a project is open.","C":"Correct: The Project Manager appears first, letting you choose or create a project.","D":"Resolve doesn't auto-open the last project unless configured."},"principle":"Project Manager → choose project → page workspace.","num":6},{"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"Where do you find the page navigation bar in Resolve?","options":["Top of the screen","Bottom of the screen","Left sidebar","Right sidebar"],"correct":"B","explanations":{"A":"The top has the menu bar (File, Edit, Trim, etc.), not page navigation.","B":"Correct: page icons sit along the bottom of the Resolve window.","C":"The left sidebar holds page-specific panels (e.g. Media Pool).","D":"The right sidebar holds page-specific panels too (e.g. Inspector)."},"principle":"Pages are switched via icons at the bottom of the Resolve window.","num":7},{"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"The bottom page bar shows the pages in which order?","options":["Alphabetical","Workflow order (Media → Deliver)","Random","Most-recently-used first"],"correct":"B","explanations":{"A":"They're not in alphabetical order.","B":"Correct: left-to-right matches the typical workflow sequence.","C":"The order is deliberate, not random.","D":"The bar position is fixed, not adaptive."},"principle":"Pages are ordered by workflow: Media → Cut → Edit → Fusion → Color → Fairlight → Deliver.","num":8},{"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"How do you return to the Project Manager once you have a project open?","options":["File → New Project","Click the Project Manager icon (house) in the top-left","Restart Resolve","Press Escape"],"correct":"B","explanations":{"A":"This creates a new project rather than returning to the manager.","B":"Correct: the small home icon at the top-left returns to the Project Manager.","C":"Restarting works but is unnecessary.","D":"Escape doesn't switch projects."},"principle":"The Project Manager icon (top-left) toggles between project and manager view.","num":9},{"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"What does the floating panel toggle (icon top-right of each page) do?","options":["Closes the current project","Toggles fullscreen mode for the viewer","Toggles visibility of the panels (Media Pool, Inspector, etc.) on that page","Saves the project"],"correct":"C","explanations":{"A":"Closing the project is done via the home/Project Manager icon.","B":"Fullscreen viewer is a different toggle (Cmd/Ctrl+F).","C":"Correct: the panel toggles show/hide page-specific panels to expand the viewer area.","D":"Resolve auto-saves; there's no manual save button at the top-right."},"principle":"Panel toggles maximize the viewer by hiding side panels.","num":10},{"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"By default, Resolve automatically saves your project:","options":["Never — you must save manually","Continuously as you work — Live Save is on by default in current versions","Only when you close the project","Every 30 minutes"],"correct":"B","explanations":{"A":"False — modern Resolve includes auto-save.","B":"Correct: Live Save and Project Backups are both enabled by default in Resolve 18+.","C":"Closing without saving will still save changes due to Live Save.","D":"Auto-save is continuous, not interval-based."},"principle":"Resolve auto-saves; backups can also be restored from Project Manager.","num":11},{"section_label":"SECTION I · MODULE 01","module_num":1,"module_title":"Foundations & Philosophy","scenario":null,"stem":"Which of these is the correct page sequence for a typical edit-and-grade workflow?","options":["Media → Edit → Color → Deliver","Edit → Media → Color → Deliver","Color → Edit → Media → Deliver","Media → Color → Edit → Deliver"],"correct":"A","explanations":{"A":"Correct: ingest media first, edit picture, then grade, then deliver.","B":"Media comes before Edit — you need clips first.","C":"You can't grade before editing.","D":"You can't grade clips that aren't on a timeline yet."},"principle":"Always: ingest → edit → grade → deliver.","num":12},{"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"What is the Media Pool?","options":["Resolve's recycle bin for deleted clips","The database of all clips Resolve has registered in your project","The folder on disk where Resolve stores media","A temporary cache of preview files"],"correct":"B","explanations":{"A":"Deleted clips don't go to the Media Pool — they're removed.","B":"Correct: the Media Pool tracks every clip Resolve knows about in this project.","C":"That's where source media physically lives — different concept.","D":"Preview cache is a different system."},"principle":"The Media Pool is the project's clip registry, not a disk folder.","num":13},{"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"What's the difference between Media Storage and the Media Pool?","options":["Media Storage holds video; Media Pool holds audio","Media Storage is a file-system browser; Media Pool is the project's database of registered clips","Media Storage is for local drives; Media Pool is for cloud media","They're identical — just different views"],"correct":"B","explanations":{"A":"Both panels hold all media types.","B":"Correct: Storage lets you browse your drives; Pool tracks what you've imported into the project.","C":"Both can show local and network drives.","D":"They're functionally different: Storage = browser, Pool = database."},"principle":"Storage is the file browser; Pool is the project's tracked clip list.","num":14},{"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"What's the most efficient way to import a folder of clips while preserving the folder structure as bins?","options":["Drag each clip in one at a time","Drag the folders into the bin list on the left side of the Media Pool","Use File → Import Media for each clip","Copy the folders into Resolve's install directory"],"correct":"B","explanations":{"A":"Per-clip dragging loses the folder structure.","B":"Correct: dragging folders into the bin list creates a matching bin hierarchy.","C":"Import Media imports clips but not folder structure.","D":"Resolve doesn't read media from its install directory."},"principle":"Drag folders to the bin list; drag clips to the Pool body.","num":15},{"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"What is a Smart Bin?","options":["A bin that auto-deletes old clips","A bin that updates dynamically based on filter criteria you set","A bin that uses AI to categorize footage","A bin that only stores audio clips"],"correct":"B","explanations":{"A":"Smart Bins don't delete anything.","B":"Correct: define filter criteria (e.g. keyword='interview'), the bin auto-populates.","C":"AI auto-binning is a separate feature (IntelliSearch in v21).","D":"No audio-only restriction — Smart Bins filter any clip type."},"principle":"Smart Bins = dynamic filter results, not static folders.","num":16},{"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"Where do you find a clip's Clip Attributes panel (where you can change frame rate, audio channels, etc.)?","options":["Inspector panel on the Edit page","Right-click the clip in the Media Pool → Clip Attributes","Effects panel","Color page node graph"],"correct":"B","explanations":{"A":"The Edit page Inspector adjusts timeline parameters, not source attributes.","B":"Correct: right-click → Clip Attributes lets you reinterpret frame rate, audio channels, alpha, etc.","C":"Effects don't expose source attributes.","D":"The Color node graph is for grading."},"principle":"Right-click → Clip Attributes for source-level reinterpretation.","num":17},{"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"To sync separately-recorded audio (e.g. from a Zoom recorder) to video clips, the fastest method is:","options":["Drag the audio onto the video and manually align waveforms","Select all clips and audio → right-click → Auto-Sync Audio → Synchronize using Waveform","Render new clips with synced audio in a third-party app first","Use the Fairlight page's timecode lock"],"correct":"B","explanations":{"A":"Manual alignment works but is slow for many clips.","B":"Correct: Resolve's Auto-Sync Audio matches waveforms across selected clips.","C":"Resolve syncs natively — no external app needed.","D":"Timecode lock requires matching timecode, not just waveforms."},"principle":"Right-click selected clips → Auto-Sync Audio → Synchronize using Waveform.","num":18},{"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"What's a Power Bin in Resolve?","options":["A bin that holds files larger than 4K","A special bin whose contents are shared across all projects in your library","A bin that boosts render priority","A bin with encrypted contents"],"correct":"B","explanations":{"A":"No file-size requirement.","B":"Correct: Power Bins are shared across projects — useful for stock footage, logos, sound effects.","C":"Render priority isn't a bin property.","D":"Bins don't encrypt content."},"principle":"Power Bins share across projects; regular bins are project-scoped.","num":19},{"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"In the Media Page, where is the Source Viewer located?","options":["Top center","Top right","Bottom right","Top left"],"correct":"B","explanations":{"A":"The center area is where the Media Pool sits.","B":"Correct: the Source Viewer is in the top-right area of the Media page.","C":"The bottom typically shows the timeline (if present) or audio panel.","D":"The top-left holds Media Storage."},"principle":"Media page layout: Storage (top-left), Source Viewer (top-right), Pool (center/bottom).","num":20},{"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"How do you switch between List view and Thumbnail view in the Media Pool?","options":["File → Preferences → View Mode","Right-click the Media Pool → switch view","Use the small view-toggle icons at the top of the Media Pool","View modes can't be changed"],"correct":"C","explanations":{"A":"Preferences doesn't control Media Pool view.","B":"View options aren't on the right-click menu.","C":"Correct: small icons at the top of the Media Pool toggle between Thumbnail, List, and Filmstrip views.","D":"Views are absolutely changeable."},"principle":"View-toggle icons sit at the top of the Media Pool panel.","num":21},{"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"The bin list (showing your project's folder hierarchy) is located:","options":["On the right side of the Media Pool","On the left side of the Media Pool","Above the Media Pool","Below the Media Pool"],"correct":"B","explanations":{"A":"The right side typically shows the Source Viewer.","B":"Correct: the bin list is on the left side of the Media Pool panel.","C":"The top has view controls and column headers.","D":"The bottom may show metadata."},"principle":"Bin list = left side of Media Pool.","num":22},{"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"A clip imports with the wrong frame rate (29.97 instead of 23.976) and plays back too fast in your 23.976 timeline. How do you fix it?","options":["Delete and re-import the clip","Right-click the clip → Clip Attributes → Video → change frame rate to 23.976","Change the timeline's frame rate to 29.97","Use a speed effect to slow it down"],"correct":"B","explanations":{"A":"Reimporting won't change the metadata Resolve uses.","B":"Correct: Clip Attributes reinterprets frame rate without rendering.","C":"Don't change the timeline rate to match one wrong clip — fix the clip.","D":"Speed effects are destructive; reinterpretation is non-destructive."},"principle":"Use Clip Attributes to reinterpret frame rate non-destructively.","num":23},{"section_label":"SECTION II · MODULE 02","module_num":2,"module_title":"The Media Page","scenario":null,"stem":"Which metadata column is most useful for narrative editors organizing scene takes?","options":["Capture Application","Reel Number, Scene, Take","File Size","Color Space"],"correct":"B","explanations":{"A":"Capture Application identifies the recording software — rarely useful editorially.","B":"Correct: Reel/Scene/Take metadata aligns with traditional production logging.","C":"File size is a technical detail, not editorial.","D":"Color Space matters for grading, not narrative organization."},"principle":"Reel, Scene, and Take fields drive narrative organization.","num":24},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"How many viewers does the Edit page have by default?","options":["1","2","3","4"],"correct":"B","explanations":{"A":"That's a one-viewer mode you can toggle to, but not the default.","B":"Correct: Source Viewer (left) and Timeline Viewer (right) by default.","C":"There are two main viewers, not three.","D":"Four-viewer layouts exist in multicam, not as default."},"principle":"Edit page = dual viewer layout (Source + Timeline).","num":25},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"Which viewer shows the clip you're previewing before adding to the timeline?","options":["Timeline Viewer","Source Viewer","Inspector preview","Project Settings preview"],"correct":"B","explanations":{"A":"Timeline Viewer shows the current edit (timeline output).","B":"Correct: the Source Viewer (top-left) previews clips before editing.","C":"The Inspector doesn't have a preview area.","D":"Project Settings has no preview viewer."},"principle":"Source = clip preview; Timeline = edit output.","num":26},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"Where is the Inspector panel by default?","options":["Bottom of the screen","Top right","Left sidebar","It's not visible until you select a clip"],"correct":"B","explanations":{"A":"The bottom holds the timeline.","B":"Correct: the Inspector lives in the top-right area; toggle visibility with its button.","C":"The left sidebar holds the Media Pool by default.","D":"It is visible by default once toggled on — selecting a clip just populates it."},"principle":"Inspector lives in the top-right; toggle to hide/show.","num":27},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"Where do you find the Effects Library (transitions, titles, generators, etc.)?","options":["Top of the timeline","On the left, accessible via the 'Effects' button at the top-left","Right-click on the timeline","File → Effects"],"correct":"B","explanations":{"A":"The top of the timeline holds the toolbar.","B":"Correct: click 'Effects' at the top-left to open the Effects Library panel.","C":"Right-click on a clip shows clip options, not the full library.","D":"File menu doesn't list effects."},"principle":"Effects Library opens via the Effects button at the top-left of the Edit page.","num":28},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"What does the Edit Index show?","options":["A graphical thumbnail of every clip","A spreadsheet-style list of every edit in the timeline (in/out, source, name)","The history of every undo step","A list of media changes since last save"],"correct":"B","explanations":{"A":"That's the Filmstrip view in the Media Pool.","B":"Correct: the Edit Index is a text-based row-per-edit list — useful for navigation, search, and EDLs.","C":"Undo history is separate.","D":"No 'changes since last save' panel exists."},"principle":"Edit Index = spreadsheet of every cut in the timeline.","num":29},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"What's the default keyboard shortcut for the Selection (arrow) tool on the Edit page?","options":["A","S","V","Spacebar"],"correct":"A","explanations":{"A":"Correct: A = Selection tool (the standard arrow).","B":"S has no default tool binding (often customized for Split).","C":"V is timeline track selection in some NLEs, not Resolve's Selection.","D":"Spacebar plays/pauses, doesn't select a tool."},"principle":"A = Selection tool (the default cursor).","num":30},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"Which keyboard shortcut selects the Blade (razor) tool?","options":["A","B","T","X"],"correct":"B","explanations":{"A":"A is Selection.","B":"Correct: B = Blade tool.","C":"T is Trim Edit Mode, not Blade.","D":"X marks in/out around the current clip but isn't a tool."},"principle":"B = Blade tool; T = Trim Edit Mode.","num":31},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"Which shortcut activates the Trim Edit Mode?","options":["A","B","T","R"],"correct":"C","explanations":{"A":"A is Selection.","B":"B is Blade.","C":"Correct: T = Trim Edit Mode (for slip, slide, roll, ripple operations).","D":"R is not the trim shortcut."},"principle":"T = Trim Edit Mode.","num":32},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"What's the default keyboard shortcut to split a clip at the playhead?","options":["S","X","Ctrl/Cmd + \\","Spacebar"],"correct":"C","explanations":{"A":"S has no default split binding (many people customize S → split).","B":"X marks in/out, doesn't split.","C":"Correct: Ctrl/Cmd + \\ splits at the playhead by default.","D":"Spacebar is play/pause."},"principle":"Ctrl/Cmd + \\ = split at playhead (default; many remap to S).","num":33},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"What does the Snapping toggle (magnet icon) do on the Edit page?","options":["Snaps clips to a grid","Snaps clips to nearby edit points, markers, and the playhead while dragging","Locks the viewer to a fixed aspect ratio","Snaps audio to its nearest beat"],"correct":"B","explanations":{"A":"Snapping isn't to a fixed grid.","B":"Correct: dragged clips snap to edit points, markers, playhead position, and other clips.","C":"Aspect ratio is separate (Output Blanking).","D":"Audio doesn't snap to beats automatically."},"principle":"Snapping helps clips land on existing edit points and the playhead.","num":34},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"Which Edit page command pushes later clips down the timeline to make room for a new clip?","options":["Overwrite","Insert","Replace","Place on Top"],"correct":"B","explanations":{"A":"Overwrite pastes over existing clips, preserving timeline length.","B":"Correct: Insert pushes later clips down to make space.","C":"Replace swaps a clip in place with one of equal duration.","D":"Place on Top adds the clip on a new track above."},"principle":"Insert = push later clips; Overwrite = paste over.","num":35},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"Which Edit page command pastes a clip over existing timeline material without changing timeline length?","options":["Insert","Overwrite","Place on Top","Append"],"correct":"B","explanations":{"A":"Insert pushes later clips down.","B":"Correct: Overwrite pastes over existing material, replacing the underlying clips at that position.","C":"Place on Top adds to a new track above.","D":"Append adds to the end of the timeline."},"principle":"Overwrite replaces in place; timeline length unchanged.","num":36},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"What is the keyboard shortcut for marking an In point?","options":["I","O","M","P"],"correct":"A","explanations":{"A":"Correct: I = mark In point.","B":"O marks the Out point.","C":"M adds a marker at the playhead.","D":"P has no default in/out function."},"principle":"I = In; O = Out; M = Marker.","num":37},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"What is the keyboard shortcut for marking an Out point?","options":["I","O","M","P"],"correct":"B","explanations":{"A":"I marks the In point.","B":"Correct: O = mark Out point.","C":"M adds a marker.","D":"P has no default in/out function."},"principle":"O = Out point.","num":38},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"JKL keyboard playback works like:","options":["J = slower, K = stop, L = faster","J = back, K = playhead reset, L = forward","J = backward play, K = pause, L = forward play (tapping multiple times increases speed)","J/K/L are unused"],"correct":"C","explanations":{"A":"Closer but missing the multi-tap acceleration behaviour.","B":"K doesn't reset; it pauses.","C":"Correct: J = back, K = pause, L = forward; repeated taps speed up.","D":"JKL are very much used — they're standard NLE playback keys."},"principle":"J/K/L = reverse / pause / forward. Tap multiple times to accelerate.","num":39},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"What does the Linked Selection toggle (chain-link icon) control?","options":["Whether clips on different tracks are selected together when linked","Whether transitions automatically link to their adjacent clips","Whether audio and video selections also include each other (and other linked relationships)","Whether the timeline plays in linked mode with the source"],"correct":"C","explanations":{"A":"Track selection is separate.","B":"Transitions always attach to their clips regardless of this toggle.","C":"Correct: when Linked Selection is on, clicking a video clip also selects its linked audio (and any other linked items).","D":"Source-timeline link is a different feature."},"principle":"Linked Selection = picking a clip also picks its linked audio/video partners.","num":40},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"If you want to keyframe an effect parameter (e.g. clip Position) in Edit, where do you find that control?","options":["The Effects Library","The Inspector panel for the selected clip","The Color page","Right-click the clip → Animate"],"correct":"B","explanations":{"A":"Effects Library holds effects to add, not parameters of existing ones.","B":"Correct: select the clip → Inspector shows Transform, Cropping, Composite, etc. with keyframe icons next to each parameter.","C":"Color page is grading, not motion.","D":"There's no 'Animate' option on the right-click menu."},"principle":"Inspector → parameter → click keyframe icon to animate.","num":41},{"section_label":"SECTION III · MODULE 03","module_num":3,"module_title":"The Edit Page","scenario":null,"stem":"What's the simplest way to fade in a clip on the Edit page?","options":["Apply a Cross Dissolve transition between two clips","Drag the small white triangle handle at the top-left corner of the clip inward","Keyframe the opacity from 0 to 100% manually","Use Fusion to build a fade"],"correct":"B","explanations":{"A":"Cross Dissolve requires two clips; for a single fade-in the handle is fastest.","B":"Correct: every clip has fade handles at its top corners — drag inward for instant fade-in/out.","C":"Works but is more steps than the fade handles.","D":"Massive overkill for a fade."},"principle":"Top-corner triangles = built-in fade handles.","num":42},{"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":null,"stem":"What is the defining visual feature of the Cut page that the Edit page lacks?","options":["A built-in colour grading tool","Two simultaneous timelines (full-project zoom-out + detail zoom-in) visible at the same time","Voice-activated editing","GPU-accelerated rendering"],"correct":"B","explanations":{"A":"Both pages have access to the Color page for grading.","B":"Correct: the Cut page shows your whole project zoomed-out at the top and a detail view below — no constant zoom in/out.","C":"No voice-activated editing in Resolve.","D":"Both pages use the same render engine."},"principle":"Cut = dual timeline (overview + detail).","num":43},{"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":null,"stem":"What is Source Tape mode?","options":["A mode where Resolve only uses tape decks","A mode that strings every clip in a bin end-to-end as one continuous source you can scrub through","A backup mode for camera tapes","An audio recording mode"],"correct":"B","explanations":{"A":"No tape-deck restriction.","B":"Correct: Source Tape concatenates all selected clips so you can scrub through them in one stream, marking in/out as you go.","C":"Not a backup feature.","D":"Not an audio feature."},"principle":"Source Tape = scroll through every bin clip as if it were one long tape.","num":44},{"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":null,"stem":"What does the Sync Bin do on the Cut page?","options":["Syncs your project to a cloud backup","Auto-syncs multicam clips by audio and displays angles aligned to the playhead for live switching","Synchronizes export settings across multiple deliverables","Syncs the timeline frame rate to your camera"],"correct":"B","explanations":{"A":"Not a cloud-sync feature.","B":"Correct: Sync Bin auto-syncs cameras by audio; switching angles becomes drag-drop.","C":"No export sync feature.","D":"Frame rate is set in project settings."},"principle":"Sync Bin = live multicam angle switcher at the playhead.","num":45},{"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":null,"stem":"On the Cut page, what does the Smart Insert button do by default?","options":["Pushes the inserted clip to the timeline's end","Inserts at the nearest edit point — Resolve snaps the insertion to the closest clip boundary, not the exact playhead","Inserts only video, not audio","Inserts at the start of the timeline regardless of playhead"],"correct":"B","explanations":{"A":"That's Append, not Smart Insert.","B":"Correct: Smart Insert snaps to the nearest edit point — saving you from micro-positioning the playhead.","C":"Smart Insert respects link selection (both A and V by default).","D":"It uses your playhead, just snaps to the nearest cut."},"principle":"Smart Insert = insert at nearest edit point (not exact playhead).","num":46},{"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":null,"stem":"The Cut page is optimized for which kind of editing?","options":["Long-form narrative drama","Quick-turn editing like vlogs, news, social cuts, multicam podcasts","VFX-heavy compositing","Color grading"],"correct":"B","explanations":{"A":"Narrative drama generally uses the Edit page for precision.","B":"Correct: Cut is designed for speed — quick-turn delivery, multicam, vlog-style edits.","C":"VFX = Fusion page.","D":"Grading = Color page."},"principle":"Cut = speed-oriented editing. Edit = precision-oriented editing.","num":47},{"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":null,"stem":"What hardware control surface is the Cut page designed to work with?","options":["DaVinci Speed Editor","DaVinci Advanced Panel","DaVinci Micro Panel","Wacom tablets only"],"correct":"A","explanations":{"A":"Correct: the Speed Editor is the dedicated hardware companion for the Cut page workflow.","B":"Advanced Panel is for the Color page.","C":"Micro Panel is also for the Color page.","D":"Tablets are not Cut-specific."},"principle":"Cut page ↔ Speed Editor. Color page ↔ Micro/Mini/Advanced Panels.","num":48},{"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":null,"stem":"Where is the Quick Export button on the Cut page?","options":["Bottom-left of the timeline","Top-right of the page","Inside the Inspector","It doesn't exist on the Cut page"],"correct":"B","explanations":{"A":"That area holds timeline controls.","B":"Correct: Quick Export is a small icon in the top-right corner — one-click export to common presets without leaving Cut.","C":"Inspector doesn't host export controls.","D":"It absolutely exists on Cut; that's the point of the speed-oriented design."},"principle":"Quick Export = top-right corner of the Cut page.","num":49},{"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":null,"stem":"Cut and Edit both modify the same timeline. True or false?","options":["True — the underlying timeline is identical; only the workspace differs","False — Cut and Edit use separate timelines","True only for projects under 5 minutes","False — they're entirely different timeline formats"],"correct":"A","explanations":{"A":"Correct: the timeline is one — Cut and Edit just present different tools and views.","B":"There's only one timeline per sequence, accessible from either page.","C":"No project-length condition exists.","D":"Timelines are unified across pages."},"principle":"One timeline, multiple pages.","num":50},{"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":null,"stem":"The two timelines on the Cut page show:","options":["A and B rolls separately","The same timeline at two different zoom levels: full-project overview (top) + detailed view (bottom)","The original and a backup","Camera 1 and Camera 2 angles"],"correct":"B","explanations":{"A":"Resolve doesn't separate A/B rolls visually.","B":"Correct: top = whole project zoomed out; bottom = current section in detail. Same timeline, two zooms.","C":"Not a backup view.","D":"Camera angles appear in the Sync Bin, not the dual-timeline view."},"principle":"Dual timeline = overview zoom + detail zoom on the same edit.","num":51},{"section_label":"SECTION IV · MODULE 04","module_num":4,"module_title":"The Cut Page","scenario":null,"stem":"Where do you switch between Cut and Edit pages?","options":["File → Switch Page","Click the appropriate page icon in the bottom page navigation bar","Cmd/Ctrl + Tab","Right-click the timeline → switch view"],"correct":"B","explanations":{"A":"File menu doesn't list page switching.","B":"Correct: page icons at the bottom of Resolve let you switch between Cut, Edit, and all other pages.","C":"Cmd/Ctrl+Tab switches between system apps, not Resolve pages.","D":"Right-click on the timeline shows clip options."},"principle":"Bottom bar = page switching, for all 7 pages.","num":52},{"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"What is the main interface element on the Fusion page that's different from every other page?","options":["A timeline","A node graph (a flowchart of operations)","A spreadsheet","A 3D viewport"],"correct":"B","explanations":{"A":"All pages have timeline access, but it's not the defining feature here.","B":"Correct: Fusion uses a node-based compositing graph — each node is an operation, connections show data flow.","C":"No spreadsheet view.","D":"Fusion can do 3D, but the defining element is the node graph."},"principle":"Fusion = node-based compositing.","num":53},{"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"When you enter Fusion on a clip, what two nodes appear by default?","options":["Camera and Renderer","MediaIn and MediaOut","Input and Output","Source and Sink"],"correct":"B","explanations":{"A":"Not real Fusion node names.","B":"Correct: MediaIn imports the timeline clip into Fusion; MediaOut returns the composite to the timeline.","C":"Not the actual node names in Resolve.","D":"Not real Fusion node names."},"principle":"MediaIn → composition → MediaOut.","num":54},{"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"What is the Merge node used for?","options":["Merging two timelines together","Combining a foreground element over a background, with optional masking","Joining audio tracks","Combining two grades"],"correct":"B","explanations":{"A":"Timelines don't merge in Fusion.","B":"Correct: Merge combines a foreground (green input) over a background (yellow), with optional effect mask (blue).","C":"Audio isn't handled in Fusion.","D":"Grades belong to the Color page."},"principle":"Merge = composite foreground over background.","num":55},{"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"The Merge node has three inputs colored yellow, green, and blue. What do they represent?","options":["Yellow = audio, green = video, blue = effects","Yellow = background, green = foreground, blue = effect mask","Yellow = red channel, green = green channel, blue = blue channel","Yellow = R, green = G, blue = B alpha"],"correct":"B","explanations":{"A":"Audio isn't routed in Fusion.","B":"Correct: yellow = background, green = foreground, blue = optional effect mask. This convention is used across many Fusion nodes.","C":"That's RGB channel separation, not Merge inputs.","D":"Inputs aren't channel-based."},"principle":"Yellow/green/blue = background/foreground/mask, universally in Fusion.","num":56},{"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"Where is the Inspector panel located on the Fusion page?","options":["Bottom-left","Top-left","Right side","It's hidden by default"],"correct":"C","explanations":{"A":"Bottom-left holds the toolbar / spline editor area.","B":"Top-left has the Effects Library.","C":"Correct: the Inspector sits on the right; it shows the parameters of whatever node you select.","D":"It's visible by default."},"principle":"Fusion Inspector = right side, parameters of selected node.","num":57},{"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"How many viewers does the Fusion page have?","options":["1","2","3","4"],"correct":"B","explanations":{"A":"There are two for split-view inspection.","B":"Correct: two viewers — useful for comparing one node's output to another while working.","C":"Two by default.","D":"Two by default."},"principle":"Fusion has dual viewers for compare-while-working.","num":58},{"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"How do you load a selected node into the left viewer?","options":["Drag the node onto the viewer","Right-click → View","Press 1 on the keyboard with the node selected","Press V"],"correct":"C","explanations":{"A":"Drag-onto-viewer doesn't activate the view.","B":"Right-click has view options but the keyboard shortcut is faster.","C":"Correct: 1 loads to left viewer, 2 loads to right viewer.","D":"V has no view binding."},"principle":"Press 1 for left viewer, 2 for right viewer.","num":59},{"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"How do you add a new tool/node to the Fusion graph?","options":["Drag from the Effects Library, or use Shift+Spacebar to open a search dialog","Right-click → New Node","File → New Tool","Click the canvas → it auto-adds"],"correct":"A","explanations":{"A":"Correct: drag from the Effects Library (top-left) or press Shift+Spacebar for a searchable picker.","B":"Right-click has 'Add Tool' but it's slower than Shift+Spacebar.","C":"File menu doesn't host tool insertion.","D":"Clicking the canvas doesn't auto-add anything."},"principle":"Shift+Spacebar = fastest way to add a Fusion tool.","num":60},{"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"What is the Spline editor used for in Fusion?","options":["Drawing vector shapes","Editing the interpolation curve of animated parameters (keyframe easing)","Adjusting the color of a clip","Creating Bezier masks"],"correct":"B","explanations":{"A":"Vector drawing is a different tool.","B":"Correct: Spline lets you reshape how parameters animate between keyframes — for smooth easing, etc.","C":"Color belongs to the Color page.","D":"Bezier masks use Polygon tools, not the Spline editor."},"principle":"Spline editor = keyframe interpolation curves.","num":61},{"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"Where is the Effects Library / tool browser on the Fusion page?","options":["Top-left, by default","Top-right","Bottom","Hidden — accessed only via right-click"],"correct":"A","explanations":{"A":"Correct: the Effects Library opens from the top-left of the Fusion page.","B":"Top-right has the Inspector.","C":"Bottom area holds the node graph.","D":"It's a visible panel, not just a right-click menu."},"principle":"Effects Library = top-left of Fusion.","num":62},{"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"Where does the Fusion node graph appear?","options":["Top of the page","Bottom half of the page","Right sidebar","Inside the Inspector"],"correct":"B","explanations":{"A":"The top holds viewers.","B":"Correct: the node graph occupies the bottom half of the Fusion page; viewers sit above it.","C":"The right side holds the Inspector.","D":"The Inspector shows parameters, not the graph."},"principle":"Fusion node graph = bottom half of page.","num":63},{"section_label":"SECTION V · MODULE 05","module_num":5,"module_title":"The Fusion Page","scenario":null,"stem":"What does a Tracker node typically do in Fusion?","options":["Tracks render times","Tracks a feature in the image across frames so you can stick elements to it","Tracks your edit history","Tracks file paths"],"correct":"B","explanations":{"A":"Render tracking isn't a node function.","B":"Correct: Tracker follows a feature (e.g. an eye, a sign, a moving prop) so you can attach text or graphics to it via Match Move.","C":"Edit history is a separate concept.","D":"File paths aren't tracked nodally."},"principle":"Tracker node = follow a feature, drive a graphic with it.","num":64},{"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"What's the unique thing about how the Color page selects which clip to grade?","options":["You drag the clip onto a colour effect to grade it","Whichever clip the playhead is over is automatically the active clip being graded","You must double-click a clip to grade it","You select the clip from a dropdown"],"correct":"B","explanations":{"A":"No effect-drag concept on the Color page.","B":"Correct: position the playhead over a clip; that clip is what your grade applies to.","C":"No double-click needed.","D":"No dropdown selector."},"principle":"Color page: playhead = active clip.","num":65},{"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"Where does the Node Graph live on the Color page?","options":["Bottom-left","Top-right","Center bottom","Right sidebar"],"correct":"B","explanations":{"A":"Bottom-left often holds the Gallery or thumbnails.","B":"Correct: the node graph sits in the top-right by default.","C":"Center bottom holds the timeline strip.","D":"Right sidebar holds the Inspector / controls."},"principle":"Color node graph = top-right.","num":66},{"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"Where do the video scopes (Parade, Waveform, Vectorscope) live on the Color page?","options":["Bottom-right area","Top-left","Inside the viewer","On the Edit page only"],"correct":"A","explanations":{"A":"Correct: scopes occupy the bottom-right panel; you can switch between Parade, Waveform, Vectorscope, Histogram from there.","B":"Top-left holds the Gallery.","C":"The viewer shows the image, not the scopes.","D":"Scopes are a Color-page feature primarily."},"principle":"Scopes panel = bottom-right of the Color page.","num":67},{"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"Which video scope shows the three RGB channels side-by-side as separate waveforms?","options":["Histogram","Vectorscope","Parade","Curves"],"correct":"C","explanations":{"A":"Histogram shows brightness distribution.","B":"Vectorscope shows hue and saturation on a circular grid.","C":"Correct: Parade scope shows R, G, B as three side-by-side waveforms — used for spotting colour casts.","D":"Curves is a control, not a scope."},"principle":"Parade = R, G, B channels side by side.","num":68},{"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"Which scope is best for evaluating skin tones and saturation?","options":["Histogram","Vectorscope","Parade","Waveform"],"correct":"B","explanations":{"A":"Histogram is for luminance distribution.","B":"Correct: Vectorscope plots hue and saturation; the skin-tone line runs roughly from centre to 11 o'clock.","C":"Parade is for channel balance.","D":"Waveform shows brightness over time."},"principle":"Vectorscope = hue/saturation; skin tones live on the 11 o'clock line.","num":69},{"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"In the Primaries Wheels palette, what are the three default colour wheels named?","options":["Red / Green / Blue","Shadows / Midtones / Highlights","Lift / Gamma / Gain","Black / Grey / White"],"correct":"C","explanations":{"A":"R/G/B are channel labels, not wheel names.","B":"Conceptually correct, but the labelled controls are Lift/Gamma/Gain.","C":"Correct: Lift (shadows), Gamma (midtones), Gain (highlights), plus an Offset wheel.","D":"Not actual control names."},"principle":"Lift = shadows, Gamma = midtones, Gain = highlights.","num":70},{"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"What does dragging the master ring (the slider under the wheel) for Gain to the right do?","options":["Increases saturation","Brightens the image, with the strongest effect on highlights","Adds blue to highlights","Crushes the blacks"],"correct":"B","explanations":{"A":"Saturation isn't controlled by the master rings.","B":"Correct: Gain master = brightness, with most effect at the top end (highlights).","C":"Colour bias = centre dot, not the master ring.","D":"Crushing blacks = pulling Lift down, not Gain up."},"principle":"Master ring = brightness; centre dot = colour bias.","num":71},{"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"What does the centre dot of a colour wheel control?","options":["Brightness of that tonal range","Colour cast (hue) applied to that tonal range","Contrast","Saturation"],"correct":"B","explanations":{"A":"Brightness = master ring beneath the wheel.","B":"Correct: the dot you drag inside the wheel tints that range toward a hue.","C":"Contrast is separate.","D":"Saturation has its own slider."},"principle":"Master ring = brightness; centre dot = colour.","num":72},{"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"What is a Qualifier used for on the Color page?","options":["Adding contrast","Selecting (isolating) a range of pixels by hue, saturation, and luminance","Increasing render quality","Picking a render preset"],"correct":"B","explanations":{"A":"Contrast is a different control.","B":"Correct: Qualifier picks pixels by HSL so you can grade only that range (e.g. only the sky, only the skin).","C":"Not a render feature.","D":"Not a render feature."},"principle":"Qualifier = HSL-based pixel selection for isolation.","num":73},{"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"What is a Power Window?","options":["A shape (circle, rectangle, polygon, etc.) drawn on the viewer that limits where a node's correction applies","A keyboard shortcut layout","A high-priority render queue","A scope view"],"correct":"A","explanations":{"A":"Correct: Power Windows are vector shapes you draw on the image; the node only affects what's inside (or outside) the shape.","B":"Not a keyboard concept.","C":"Not render-related.","D":"Not a scope."},"principle":"Power Window = geometric mask limiting a correction.","num":74},{"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"Where is the Gallery panel (for stills and references) located on the Color page?","options":["Top-left","Bottom-right","Top-right","Right sidebar"],"correct":"A","explanations":{"A":"Correct: the Gallery sits in the top-left area; drag stills here, or grab stills from your shots.","B":"Bottom-right holds scopes.","C":"Top-right holds the node graph.","D":"Right sidebar holds the Inspector / controls."},"principle":"Gallery = top-left of Color page.","num":75},{"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"How do you add a new serial (sequential) node to the node graph?","options":["Press Alt+S","Press Cmd/Ctrl+N","Right-click → Add Node → Serial","Press Alt+P"],"correct":"A","explanations":{"A":"Correct: Alt+S adds a serial node after the current one.","B":"Cmd/Ctrl+N creates a new project, not a node.","C":"Works (right-click → Add Node → Serial) but slower than Alt+S.","D":"Alt+P adds a Parallel mixer, not a serial node."},"principle":"Alt+S = add serial node; Alt+P = parallel; Alt+L = layer mixer.","num":76},{"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"What does the small number on a node (e.g. '1') do when clicked?","options":["Deletes the node","Toggles the node on/off so you can A/B its effect","Opens the node's properties","Adds a new node"],"correct":"B","explanations":{"A":"Delete is via right-click or backspace.","B":"Correct: clicking the small node number disables/enables that node — fast A/B comparison.","C":"Properties are in the Inspector / palettes below.","D":"Not how new nodes are added."},"principle":"Click the node number = toggle the node on/off.","num":77},{"section_label":"SECTION VI · MODULE 06","module_num":6,"module_title":"The Color Page — Basics","scenario":null,"stem":"What's the fastest way to copy a grade from one clip to another?","options":["Render and re-import","Mouse over the source clip thumbnail and middle-click","Drag the node graph onto the target","Right-click → Save → right-click target → Load"],"correct":"B","explanations":{"A":"Re-rendering is destructive and slow.","B":"Correct: middle-click the source clip's thumbnail strip with the target clip selected — instant grade transfer.","C":"Dragging the node graph isn't supported.","D":"Works (Save Grade → Apply Saved Grade) but takes more steps than middle-click."},"principle":"Middle-click the source thumbnail = instant grade copy.","num":78},{"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"Where is the Mixer panel located on the Fairlight page by default?","options":["Left side","Right side","Bottom","Top"],"correct":"B","explanations":{"A":"The left holds the Index / track list.","B":"Correct: the Mixer with channel strips sits on the right.","C":"The bottom is for the timeline.","D":"The top has the viewer and meters."},"principle":"Fairlight Mixer = right side; channel strips per track.","num":79},{"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"What does the cyan-coloured horizontal strip in the channel strip provide?","options":["Bus routing","Equalization (EQ)","Dynamics (compressor, gate, limiter)","Volume automation"],"correct":"B","explanations":{"A":"Bus routing has its own dropdowns.","B":"Correct: the cyan strip opens the EQ for that track.","C":"Dynamics is the green strip.","D":"Volume is the main fader at the bottom."},"principle":"Cyan = EQ; green = Dynamics.","num":80},{"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"What does the green-coloured strip in the channel strip open?","options":["EQ","Dynamics — Compressor, Gate, Expander, Limiter","Effects","Pan controls"],"correct":"B","explanations":{"A":"EQ is the cyan strip.","B":"Correct: the green strip opens the dynamics processors.","C":"Effects have their own slot below.","D":"Pan has its own dial above the fader."},"principle":"Green = Dynamics.","num":81},{"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"What is Bus 1 by default?","options":["The drum bus","The main mix output bus","An effects send","Unused"],"correct":"B","explanations":{"A":"No default drum bus exists.","B":"Correct: Bus 1 is the main stereo (or 5.1) mix output; tracks route here by default.","C":"Effects sends are separate.","D":"Bus 1 is in active use as the main mix."},"principle":"Bus 1 = main mix output.","num":82},{"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"Where are the Solo and Mute buttons on a Fairlight track?","options":["Inside the timeline clip","On the track header (the strip on the left of the timeline) and on the channel strip in the Mixer","Right-click → Solo/Mute","Only in the Inspector"],"correct":"B","explanations":{"A":"Clips don't hold track-level controls.","B":"Correct: Solo and Mute live on both the track header and the channel strip — pick whichever is more convenient.","C":"Right-click has other options.","D":"Inspector shows clip-level controls."},"principle":"Solo/Mute = track header AND channel strip.","num":83},{"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"The track header strip on the Fairlight timeline is located:","options":["To the right of the track","To the left of the track","Above the track","Inside each clip"],"correct":"B","explanations":{"A":"The right of the timeline holds the Mixer.","B":"Correct: every track has a header on its left edge with name, arm, solo/mute, format controls.","C":"The top of the timeline holds the timeline ruler.","D":"Clips are independent of track-level controls."},"principle":"Track header = left edge of each Fairlight track.","num":84},{"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"What does the volume fader (the long vertical slider on each channel strip) measure in?","options":["Percentage (0-100%)","Decibels (dB), centred around 0 dB","Watts","Frequencies"],"correct":"B","explanations":{"A":"Linear percentage isn't how pro audio is measured.","B":"Correct: faders use dB with 0 dB as unity gain (no change); positive values amplify, negative values attenuate.","C":"Watts measure power output, not mixer level.","D":"Frequencies belong to EQ, not the fader."},"principle":"Mixer fader = dB; 0 dB is unity gain.","num":85},{"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"What does the audio meter colour change to when a signal approaches clipping (0 dB)?","options":["Green throughout","Yellow then red as it nears 0 dB","Stays the same colour","Blue"],"correct":"B","explanations":{"A":"Green = safe level.","B":"Correct: green = safe, yellow = warning, red = approaching/at clipping. Aim for peaks in yellow, average in green.","C":"Colours absolutely change.","D":"Blue isn't a meter colour."},"principle":"Green → yellow → red as level rises toward 0 dB.","num":86},{"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"What does arming a track (the red record button on the track header) do?","options":["Enables recording for that track","Mutes other tracks","Creates a backup","Locks the track"],"correct":"A","explanations":{"A":"Correct: arming enables recording onto that track from your input.","B":"Solo does that, not arm.","C":"Not a backup function.","D":"Lock has its own icon."},"principle":"Arm = enable recording on that track.","num":87},{"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"What's a Bus in Fairlight?","options":["A grouping channel — multiple tracks can route to it for shared processing or mixing","A backup file","A type of clip","A timeline marker type"],"correct":"A","explanations":{"A":"Correct: a Bus collects multiple track signals for shared processing (e.g. all dialogue → Dialogue Bus → EQ → Main).","B":"Not a backup.","C":"Not a clip type.","D":"Not a marker."},"principle":"Bus = signal-collection channel for shared processing.","num":88},{"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"If you want to apply one EQ to a group of tracks (say, all dialogue), what's the cleanest approach?","options":["Apply the same EQ to each track individually","Route those tracks to a sub-bus and apply EQ on the sub-bus once","Render and re-import","Use a separate timeline"],"correct":"B","explanations":{"A":"Works but is brittle and hard to update.","B":"Correct: a sub-bus collects the tracks; EQ on the bus applies to all of them with one set of controls.","C":"Destructive and unnecessary.","D":"Doesn't solve the shared-processing problem."},"principle":"Sub-bus = shared processing for a group of tracks.","num":89},{"section_label":"SECTION VII · MODULE 07","module_num":7,"module_title":"The Fairlight Page","scenario":null,"stem":"What does the Effects rack on a channel strip let you do?","options":["Add chained plugins like Reverb, De-Esser, etc. to that track","Add transitions between clips","Add visual effects","Adjust track height"],"correct":"A","explanations":{"A":"Correct: the Effects rack hosts audio plugins (Reverb, De-Esser, Pitch, etc.) for that track.","B":"Transitions belong on the timeline (and aren't audio-specific).","C":"Visual effects belong to Fusion/Edit/Color, not Fairlight.","D":"Track height is a view option."},"principle":"Effects rack = audio plugin chain per channel.","num":90},{"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"Where is the Render Queue located on the Deliver page?","options":["Top-left","Top-right","Right side","Bottom"],"correct":"C","explanations":{"A":"Top-left holds the Render Settings panel.","B":"Top-right shows the source viewer.","C":"Correct: the Render Queue lives on the right side; jobs you add appear here in sequence.","D":"The bottom is the timeline."},"principle":"Render Queue = right side of the Deliver page.","num":91},{"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"Where is the Render Settings panel on the Deliver page?","options":["Top-left","Top-right","Right side","Center"],"correct":"A","explanations":{"A":"Correct: render settings (preset, format, codec, resolution) live on the top-left.","B":"Top-right is the viewer.","C":"Right side is the Render Queue.","D":"Center holds the viewer."},"principle":"Render Settings = top-left of the Deliver page.","num":92},{"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"What's the difference between 'Format' and 'Codec' in the Render Settings?","options":["They're the same thing","Format is the file extension (container); Codec is how the video data inside it is encoded","Format is for video, Codec is for audio","Format is resolution, Codec is bitrate"],"correct":"B","explanations":{"A":"They're related but distinct.","B":"Correct: Format = container (.mp4, .mov, .mxf); Codec = encoder (H.264, H.265, ProRes, DNxHR).","C":"Both apply to video.","D":"Resolution and bitrate are separate settings."},"principle":"Format = container; Codec = encoder. MP4 commonly carries H.264 or H.265.","num":93},{"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"Which codec is generally chosen for an archive master that you want to re-edit years later?","options":["H.264 — universal","ProRes 422 HQ or 4444 — high quality, easy to decode in any NLE","H.265 — smallest","MP3"],"correct":"B","explanations":{"A":"H.264 is heavily compressed; re-editing degrades quality each pass.","B":"Correct: ProRes is the industry standard for masters — pristine, decodes cleanly in any NLE, future-proof.","C":"H.265 is small but heavily compressed — bad for re-edit.","D":"MP3 is audio-only."},"principle":"Archive master = ProRes (or DNxHR). H.264/H.265 are delivery codecs, not archive.","num":94},{"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"What does the 'Render' range option 'In to Out' do?","options":["Renders only between the timeline's marked in and out points","Renders only the first to last clip","Renders only video, not audio","Renders a single still frame"],"correct":"A","explanations":{"A":"Correct: it renders only between the in/out points you've marked on the timeline (with I and O keys).","B":"That would just be 'Entire Timeline'.","C":"Render range isn't channel-specific.","D":"Stills have their own export option."},"principle":"In to Out renders only the marked range.","num":95},{"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"The 'Individual Clips' render option does what?","options":["Renders only the currently selected clip on the timeline","Renders each timeline clip as its own separate file (useful for batch transcoding or per-clip review)","Renders the timeline as multiple parallel video tracks in one file","Splits one clip into multiple resolution variants"],"correct":"B","explanations":{"A":"Selected clip rendering is a separate option.","B":"Correct: produces one file per clip on the timeline — used for batch transcoding camera media to ProRes, or for per-clip approval.","C":"Tracks aren't rendered as parallel streams.","D":"Not a multi-resolution feature."},"principle":"Individual Clips = one output file per timeline clip.","num":96},{"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"How do you queue a render job for later (instead of starting it immediately)?","options":["Click 'Add to Render Queue' — the job appears in the queue but doesn't start","Right-click the timeline → Queue Render","File → Schedule Render","There's no queue — every render starts immediately"],"correct":"A","explanations":{"A":"Correct: 'Add to Render Queue' stages a job. Use 'Render All' on the queue to process them sequentially (e.g. overnight).","B":"Not on the right-click menu.","C":"No scheduling menu.","D":"The queue is exactly how Resolve handles deferred renders."},"principle":"Add to Render Queue → Render All = batch rendering.","num":97},{"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"What's the 'Browse' button next to the file location field used for?","options":["Browse render presets","Choose where the rendered file will be saved on disk","Browse codecs","Browse the timeline"],"correct":"B","explanations":{"A":"Presets are a separate dropdown.","B":"Correct: Browse opens a file dialog so you can pick the output folder and filename.","C":"Codecs are in the format/codec dropdowns.","D":"Timeline navigation isn't tied to Browse."},"principle":"Browse = pick output destination on disk.","num":98},{"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"Common Resolve render presets include YouTube, Vimeo, ProRes Master, and:","options":["Custom (lets you configure everything manually)","Burnable DVD","Floppy Disk","Cassette Tape"],"correct":"A","explanations":{"A":"Correct: 'Custom' opens up all the granular settings; presets are starting points.","B":"Disc burning isn't built-in.","C":"Not a real preset.","D":"Not a real preset."},"principle":"Custom = total control; presets are quick starts.","num":99},{"section_label":"SECTION VIII · MODULE 08","module_num":8,"module_title":"The Deliver Page","scenario":null,"stem":"Where do you find audio export settings (codec, bit depth, channels) in the Render Settings panel?","options":["They share the Video tab","There's a dedicated Audio tab","Audio is always AAC stereo — no options","Only in Fairlight"],"correct":"B","explanations":{"A":"Audio has its own tab.","B":"Correct: the Audio tab in Render Settings lets you pick codec (PCM, AAC), bit depth, sample rate, output channels.","C":"Plenty of options exist.","D":"Deliver page has its own audio export controls."},"principle":"Audio tab in Render Settings = codec, bit depth, channels.","num":100}];
+const TOTAL_Q = 100;
+const PASS_MARK = 90;        // 90% of 100
+const MAX_ATTEMPTS = 3;
+const TIME_LIMIT_MS = 2 * 60 * 60 * 1000;
+
+const MODULE_TITLES = {
+  1:"Foundations & Philosophy", 2:"The Media Page", 3:"The Edit Page",
+  4:"The Cut Page", 5:"The Fusion Page", 6:"The Color Page — Basics",
+  7:"The Fairlight Page", 8:"The Deliver Page"
+};
+const STORAGE_KEY = "drm_basics_v1";
+
+// ════════════════════════════ STATE ════════════════════════════
+let state = { attempts: [], inProgress: null };
+let timerInterval = null;
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(parsed.attempts) state.attempts = parsed.attempts;
+      if(parsed.inProgress) state.inProgress = parsed.inProgress;
+    }
+  }catch(e){ console.warn("Could not load state:", e); }
+}
+function saveState(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch(e){ console.warn("Could not save state:", e); }
+}
+
+// ════════════════════════════ SCREEN ROUTING ════════════════════════════
+function showScreen(name){
+  document.body.setAttribute("data-active", name);
+  window.scrollTo(0, 0);
+}
+
+// ════════════════════════════ START SCREEN ════════════════════════════
+function renderStart(){
+  const passedAttempt = state.attempts.find(a => a.passed);
+  if(passedAttempt){
+    return renderPassedAlready(passedAttempt);
+  }
+  if(state.attempts.length >= MAX_ATTEMPTS){
+    return renderLocked();
+  }
+
+  const remaining = MAX_ATTEMPTS - state.attempts.length;
+  const attemptNum = state.attempts.length + 1;
+  document.getElementById("attempts-remaining").textContent =
+    `Attempt ${attemptNum} of ${MAX_ATTEMPTS}`;
+
+  // Show history if any
+  const log = document.getElementById("attempts-log");
+  const list = document.getElementById("attempts-list");
+  if(state.attempts.length > 0){
+    list.innerHTML = state.attempts.map((a, i) => {
+      const cls = a.passed ? "pass" : "fail";
+      const verdict = a.passed ? "PASS" : "FAIL";
+      const pct = ((a.score / TOTAL_Q) * 100).toFixed(1);
+      return `<div class="attempt-row">
+        <span class="a-num">Attempt ${i+1}</span>
+        <span class="a-score">${a.score}/${TOTAL_Q} (${pct}%)</span>
+        <span class="a-result ${cls}">${verdict}</span>
+      </div>`;
+    }).join("");
+    log.style.display = "block";
+  } else {
+    log.style.display = "none";
+  }
+
+  // Resume in-progress
+  const resumeBtn = document.getElementById("btn-resume");
+  if(state.inProgress){
+    resumeBtn.style.display = "block";
+    resumeBtn.textContent = `Resume in-progress attempt (${state.inProgress.name})`;
+  } else {
+    resumeBtn.style.display = "none";
+  }
+
+  showScreen("start");
+}
+
+function renderPassedAlready(attempt){
+  const idx = state.attempts.indexOf(attempt);
+  const pct = ((attempt.score / TOTAL_Q) * 100).toFixed(1);
+  const minutes = Math.floor(attempt.durationMs / 60000);
+  document.getElementById("passed-summary").innerHTML =
+    `<strong>${attempt.name}</strong> passed on <strong>attempt ${idx+1}</strong> of ${MAX_ATTEMPTS} with a score of <strong>${attempt.score}/${TOTAL_Q}</strong> (${pct}%) in ${formatDuration(attempt.durationMs)}.`;
+  document.getElementById("passed-attempts").innerHTML = renderAttemptList(state.attempts);
+  showScreen("passed");
+}
+
+function renderLocked(){
+  document.getElementById("locked-attempts").innerHTML = renderAttemptList(state.attempts);
+  showScreen("locked");
+}
+
+function renderAttemptList(attempts){
+  return attempts.map((a, i) => {
+    const cls = a.passed ? "pass" : "fail";
+    const verdict = a.passed ? "PASS" : "FAIL";
+    const pct = ((a.score / TOTAL_Q) * 100).toFixed(1);
+    return `<div class="attempt-row">
+      <span class="a-num">Attempt ${i+1}</span>
+      <span class="a-score">${a.score}/${TOTAL_Q} (${pct}%)</span>
+      <span class="a-result ${cls}">${verdict}</span>
+    </div>`;
+  }).join("");
+}
+
+// ════════════════════════════ EXAM ════════════════════════════
+function startNewAttempt(name){
+  state.inProgress = {
+    name: name.trim(),
+    started: Date.now(),
+    answers: {},   // qIdx (0-149) -> letter
+    flagged: [],   // qIdx
+    currentQ: 0,
+  };
+  saveState();
+  enterExam();
+}
+
+function resumeAttempt(){
+  if(!state.inProgress) return;
+  enterExam();
+}
+
+function enterExam(){
+  document.getElementById("bar-candidate").textContent = state.inProgress.name;
+  showScreen("exam");
+  renderQuestion();
+  startTimer();
+}
+
+function renderQuestion(){
+  const idx = state.inProgress.currentQ;
+  const q = QUESTIONS[idx];
+  const answered = state.inProgress.answers[idx];
+  const flagged = state.inProgress.flagged.includes(idx);
+
+  document.getElementById("bar-qcount").textContent = `${idx+1}/${TOTAL_Q}`;
+  document.getElementById("progress-fill").style.width =
+    `${((idx+1) / TOTAL_Q) * 100}%`;
+
+  const wrap = document.getElementById("q-wrap");
+  const letters = ["A","B","C","D"];
+  wrap.innerHTML = `
+    <div class="q-meta">${q.section_label}</div>
+    <div class="q-stem">${q.stem}</div>
+    ${q.scenario ? `<div class="q-scenario">${q.scenario}</div>` : ""}
+    <ul class="opts-list">
+      ${q.options.map((opt, i) => `
+        <li>
+          <button class="opt-btn ${answered === letters[i] ? "selected" : ""}" data-letter="${letters[i]}">
+            <span class="letter">${letters[i]}</span>
+            <span class="text">${opt}</span>
+          </button>
+        </li>
+      `).join("")}
+    </ul>
+  `;
+  wrap.querySelectorAll(".opt-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const letter = btn.dataset.letter;
+      state.inProgress.answers[idx] = letter;
+      saveState();
+      renderQuestion();
+    });
+  });
+
+  // Flag button state
+  document.getElementById("btn-flag").classList.toggle("active", flagged);
+  document.getElementById("flag-label").textContent = flagged ? "Flagged" : "Flag for review";
+
+  // Nav buttons
+  document.getElementById("btn-prev").disabled = idx === 0;
+  const nextBtn = document.getElementById("btn-next");
+  if(idx === TOTAL_Q - 1){
+    nextBtn.textContent = "Review →";
+  } else {
+    nextBtn.textContent = "Next →";
+  }
+}
+
+function goToQuestion(idx){
+  if(idx < 0 || idx >= TOTAL_Q) return;
+  state.inProgress.currentQ = idx;
+  saveState();
+  renderQuestion();
+  closeNavigator();
+}
+
+function nextQuestion(){
+  const idx = state.inProgress.currentQ;
+  if(idx === TOTAL_Q - 1){
+    enterReview();
+  } else {
+    goToQuestion(idx + 1);
+  }
+}
+
+function prevQuestion(){
+  goToQuestion(state.inProgress.currentQ - 1);
+}
+
+function toggleFlag(){
+  const idx = state.inProgress.currentQ;
+  const i = state.inProgress.flagged.indexOf(idx);
+  if(i >= 0) state.inProgress.flagged.splice(i, 1);
+  else state.inProgress.flagged.push(idx);
+  saveState();
+  renderQuestion();
+}
+
+// ════════════════════════════ TIMER ════════════════════════════
+function startTimer(){
+  if(timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(updateTimer, 1000);
+  updateTimer();
+}
+function stopTimer(){
+  if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+}
+function updateTimer(){
+  if(!state.inProgress) return;
+  const elapsed = Date.now() - state.inProgress.started;
+  const remaining = TIME_LIMIT_MS - elapsed;
+  const timerEl = document.getElementById("bar-timer");
+  if(remaining <= 0){
+    timerEl.textContent = "0:00:00";
+    timeUp();
+    return;
+  }
+  const hours = Math.floor(remaining / 3600000);
+  const mins = Math.floor((remaining % 3600000) / 60000);
+  const secs = Math.floor((remaining % 60000) / 1000);
+  timerEl.textContent = `${hours}:${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+  timerEl.classList.toggle("warning", remaining < 10 * 60 * 1000);  // last 10 minutes
+}
+function timeUp(){
+  stopTimer();
+  document.getElementById("time-up-modal").classList.add("open");
+}
+
+// ════════════════════════════ NAVIGATOR ════════════════════════════
+function openNavigator(){
+  const grid = document.getElementById("nav-grid");
+  grid.innerHTML = "";
+  const answers = state.inProgress.answers;
+  const flagged = state.inProgress.flagged;
+  const current = state.inProgress.currentQ;
+  for(let i = 0; i < TOTAL_Q; i++){
+    const cell = document.createElement("button");
+    cell.className = "nav-cell";
+    if(answers[i]) cell.classList.add("answered");
+    if(flagged.includes(i)) cell.classList.add("flagged");
+    if(i === current) cell.classList.add("current");
+    cell.textContent = String(i + 1);
+    cell.addEventListener("click", () => goToQuestion(i));
+    grid.appendChild(cell);
+  }
+  document.getElementById("navigator").classList.add("open");
+}
+function closeNavigator(){
+  document.getElementById("navigator").classList.remove("open");
+}
+
+// ════════════════════════════ REVIEW SCREEN ════════════════════════════
+function enterReview(){
+  const ip = state.inProgress;
+  const answered = Object.keys(ip.answers).length;
+  const unanswered = TOTAL_Q - answered;
+  const flagged = ip.flagged.length;
+
+  document.getElementById("review-summary").innerHTML = `
+    <div class="row"><span class="l">Answered</span><span class="v ${unanswered===0?"ok":""}">${answered} / ${TOTAL_Q}</span></div>
+    <div class="row"><span class="l">Unanswered</span><span class="v ${unanswered>0?"warn":""}">${unanswered}</span></div>
+    <div class="row"><span class="l">Flagged for review</span><span class="v">${flagged}</span></div>
+  `;
+
+  const unEl = document.getElementById("review-unanswered");
+  if(unanswered > 0){
+    const unanswered_q = [];
+    for(let i = 0; i < TOTAL_Q; i++) if(!ip.answers[i]) unanswered_q.push(i + 1);
+    unEl.innerHTML = `
+      <h3 style="color:var(--red)">Unanswered questions</h3>
+      <p style="color:var(--muted);font-size:.88rem;margin:.4rem 0 .6rem">These will be marked wrong if you submit now.</p>
+      <div class="q-list-pills">${unanswered_q.map(n =>
+        `<button class="q-pill" data-q="${n-1}">Q${String(n).padStart(3,"0")}</button>`
+      ).join("")}</div>`;
+    unEl.querySelectorAll(".q-pill").forEach(p =>
+      p.addEventListener("click", e => { goToQuestion(+e.target.dataset.q); showScreen("exam"); }));
+  } else { unEl.innerHTML = ""; }
+
+  const flEl = document.getElementById("review-flagged");
+  if(flagged > 0){
+    flEl.innerHTML = `
+      <h3>Flagged for review</h3>
+      <div class="q-list-pills">${ip.flagged.sort((a,b)=>a-b).map(i =>
+        `<button class="q-pill flagged" data-q="${i}">Q${String(i+1).padStart(3,"0")}</button>`
+      ).join("")}</div>`;
+    flEl.querySelectorAll(".q-pill").forEach(p =>
+      p.addEventListener("click", e => { goToQuestion(+e.target.dataset.q); showScreen("exam"); }));
+  } else { flEl.innerHTML = ""; }
+
+  showScreen("review");
+}
+
+// ════════════════════════════ SUBMIT & SCORE ════════════════════════════
+function submitExam(){
+  const ip = state.inProgress;
+  const finished = Date.now();
+  let correct = 0;
+  for(let i = 0; i < TOTAL_Q; i++){
+    if(ip.answers[i] === QUESTIONS[i].correct) correct++;
+  }
+  const attempt = {
+    name: ip.name,
+    started: ip.started,
+    finished,
+    score: correct,
+    passed: correct >= PASS_MARK,
+    durationMs: finished - ip.started,
+    answers: ip.answers,
+  };
+  state.attempts.push(attempt);
+  state.inProgress = null;
+  saveState();
+  stopTimer();
+  renderResults(attempt);
+}
+
+function renderResults(attempt){
+  const attemptIdx = state.attempts.indexOf(attempt);
+  document.getElementById("results-name").textContent = attempt.name;
+  const date = new Date(attempt.finished);
+  document.getElementById("results-date").textContent =
+    date.toLocaleDateString("en-ZA", {year:"numeric", month:"long", day:"numeric"}) +
+    " at " + date.toLocaleTimeString("en-ZA", {hour:"2-digit", minute:"2-digit"});
+
+  const hero = document.getElementById("result-hero");
+  hero.className = "result-hero " + (attempt.passed ? "pass" : "fail");
+  document.getElementById("result-verdict").textContent = attempt.passed ? "PASSED" : "FAILED";
+  document.getElementById("result-score").textContent = attempt.score;
+  const pct = ((attempt.score / TOTAL_Q) * 100).toFixed(1);
+  document.getElementById("result-pct").textContent = pct + "%";
+  document.getElementById("result-attempt").textContent =
+    `${attemptIdx + 1} of ${MAX_ATTEMPTS}`;
+  document.getElementById("result-duration").textContent = formatDuration(attempt.durationMs);
+  document.getElementById("result-correct").textContent = `${attempt.score} correct`;
+
+  // Module breakdown
+  const modScores = {};
+  for(let i = 0; i < TOTAL_Q; i++){
+    const m = QUESTIONS[i].module_num;
+    if(!modScores[m]) modScores[m] = { correct: 0, total: 0 };
+    modScores[m].total++;
+    if(attempt.answers[i] === QUESTIONS[i].correct) modScores[m].correct++;
+  }
+  const tbody = document.getElementById("mod-table-body");
+  tbody.innerHTML = "";
+  const weakMods = [];
+  Object.keys(modScores).sort((a,b) => +a - +b).forEach(m => {
+    const s = modScores[m];
+    const pctMod = (s.correct / s.total) * 100;
+    const modName = MODULE_TITLES[m] || `Module ${m}`;
+    const modLabel = m === "99" ? "Synthesis" : `M${String(m).padStart(2,"0")}`;
+    let cls = "";
+    if(pctMod >= 90) cls = "strong";
+    else if(pctMod < 60) { cls = "weak"; weakMods.push({ num: m, name: modName, score: s.correct, total: s.total }); }
+    tbody.innerHTML += `
+      <tr>
+        <td><strong style="color:var(--text)">${modLabel}</strong><br><span style="color:var(--muted);font-size:.78rem">${modName}</span></td>
+        <td class="score">${s.correct}/${s.total}</td>
+        <td class="bar"><div class="mod-bar-bg"><div class="mod-bar-fill ${cls}" style="width:${pctMod}%"></div></div></td>
+      </tr>`;
+  });
+
+  // Wrong question pills
+  const wrong = [];
+  for(let i = 0; i < TOTAL_Q; i++){
+    if(attempt.answers[i] !== QUESTIONS[i].correct) wrong.push(i + 1);
+  }
+  if(wrong.length === 0){
+    document.getElementById("wrong-list-section").innerHTML = `
+      <div class="heading" style="color:var(--green)">Every question answered correctly</div>`;
+  } else {
+    document.getElementById("wrong-pills").innerHTML =
+      wrong.map(n => `<span class="wrong-pill">Q${String(n).padStart(3,"0")}</span>`).join("");
+  }
+
+  // Weak topics callout
+  const wt = document.getElementById("weak-topics");
+  const wtList = document.getElementById("weak-topics-list");
+  if(weakMods.length > 0 && !attempt.passed){
+    wtList.innerHTML = weakMods.map(m =>
+      `<li><em>${m.name}</em> — ${m.score}/${m.total} correct. Re-read course module ${m.num === "99" ? "synthesis" : m.num} and the related memo entries.</li>`
+    ).join("");
+    wt.style.display = "block";
+  } else {
+    wt.style.display = "none";
+  }
+
+  // Detailed review (collapsed by default)
+  renderReviewDetails(attempt);
+
+  // Retake / next steps block
+  const retakeBlock = document.getElementById("retake-block");
+  const used = state.attempts.length;
+  const remaining = MAX_ATTEMPTS - used;
+  if(attempt.passed){
+    retakeBlock.innerHTML = `
+      <div class="lock-card" style="background:rgba(126,201,142,.06);border-color:rgba(126,201,142,.3)">
+        <p style="margin:0">You've passed on attempt ${attemptIdx+1} of ${MAX_ATTEMPTS}. Send the screenshot to your instructor.</p>
+      </div>`;
+  } else if(remaining > 0){
+    retakeBlock.innerHTML = `
+      <p style="text-align:center;color:var(--muted);margin:1.2rem 0 .6rem">You have <strong>${remaining}</strong> attempt${remaining===1?"":"s"} remaining.</p>
+      <button class="btn" id="btn-retake">Start retake</button>
+      <button class="btn secondary" id="btn-home">Back to home (later)</button>`;
+    document.getElementById("btn-retake").addEventListener("click", () => {
+      if(confirm("Start a new attempt? Your current results are saved and your instructor still needs the screenshot.")){
+        renderStart();
+      }
+    });
+    document.getElementById("btn-home").addEventListener("click", () => renderStart());
+  } else {
+    retakeBlock.innerHTML = `
+      <div class="lock-card" style="background:rgba(236,90,90,.06);border-color:rgba(236,90,90,.3)">
+        <div class="ico" style="font-size:2rem">🔒</div>
+        <p>All 3 attempts used. Contact your instructor to discuss next steps.</p>
+      </div>`;
+  }
+
+  showScreen("results");
+}
+
+function renderReviewDetails(attempt){
+  const wrongIdx = [];
+  for(let i = 0; i < TOTAL_Q; i++){
+    if(attempt.answers[i] !== QUESTIONS[i].correct) wrongIdx.push(i);
+  }
+  const details = document.getElementById("review-details");
+  if(wrongIdx.length === 0){
+    details.innerHTML = "<p>No wrong answers to review.</p>";
+    return;
+  }
+  details.innerHTML = wrongIdx.map(i => {
+    const q = QUESTIONS[i];
+    const userLetter = attempt.answers[i] || "—";
+    const userAnswer = userLetter === "—"
+      ? '<em>(left blank)</em>'
+      : q.options[["A","B","C","D"].indexOf(userLetter)];
+    const correctAnswer = q.options[["A","B","C","D"].indexOf(q.correct)];
+    const userExp = userLetter !== "—" ? (q.explanations[userLetter] || "") : "";
+    const correctExp = q.explanations[q.correct] || "";
+    const modLabel = q.module_num === 99 ? "Synthesis" : `M${String(q.module_num).padStart(2,"0")}`;
+    return `
+      <div class="review-card">
+        <div class="rc-head">
+          <span class="rc-num">Q${String(q.num).padStart(3,"0")}</span>
+          <span class="rc-mod">${modLabel} · ${q.module_title}</span>
+        </div>
+        ${q.scenario ? `<div class="rc-scenario">${q.scenario}</div>` : ""}
+        <div class="rc-stem">${q.stem}</div>
+        <div class="rc-choice user-wrong"><span class="l">YOU CHOSE ${userLetter}:</span>${userAnswer}</div>
+        <div class="rc-choice correct-was"><span class="l">CORRECT ${q.correct}:</span>${correctAnswer}</div>
+        ${userExp ? `<div class="rc-exp"><strong class="label">Why ${userLetter} is wrong</strong>${userExp}</div>` : ""}
+        <div class="rc-exp"><strong class="label">Why ${q.correct} is correct</strong>${correctExp}</div>
+        ${q.principle ? `<div class="rc-principle">Principle · ${q.principle}</div>` : ""}
+      </div>`;
+  }).join("");
+}
+
+function formatDuration(ms){
+  const totalMins = Math.floor(ms / 60000);
+  const h = Math.floor(totalMins / 60);
+  const m = totalMins % 60;
+  if(h > 0) return `${h}h ${m}m`;
+  return `${m}m`;
+}
+
+// ════════════════════════════ EVENT WIRING ════════════════════════════
+document.addEventListener("DOMContentLoaded", () => {
+  loadState();
+  renderStart();
+
+  // Start screen
+  const nameInput = document.getElementById("candidate-name");
+  const startBtn = document.getElementById("btn-start");
+  nameInput.addEventListener("input", () => {
+    startBtn.disabled = nameInput.value.trim().length < 2;
+  });
+  startBtn.addEventListener("click", () => {
+    const name = nameInput.value.trim();
+    if(name.length < 2) return;
+    if(confirm(`Start examination as "${name}"? The 5-hour timer begins now.`)){
+      startNewAttempt(name);
+    }
+  });
+  document.getElementById("btn-resume").addEventListener("click", () => resumeAttempt());
+
+  // Exam navigation
+  document.getElementById("btn-next").addEventListener("click", () => nextQuestion());
+  document.getElementById("btn-prev").addEventListener("click", () => prevQuestion());
+  document.getElementById("btn-submit-top").addEventListener("click", () => enterReview());
+  document.getElementById("btn-flag").addEventListener("click", () => toggleFlag());
+  document.getElementById("btn-navigator").addEventListener("click", () => openNavigator());
+  document.getElementById("nav-close").addEventListener("click", () => closeNavigator());
+
+  // Review screen
+  document.getElementById("btn-back-to-exam").addEventListener("click", () => showScreen("exam"));
+  document.getElementById("btn-confirm-submit").addEventListener("click", () => {
+    if(confirm("Submit your exam now? You can't change answers after submitting.")) submitExam();
+  });
+
+  // Results screen
+  document.getElementById("review-toggle").addEventListener("click", (e) => {
+    const tog = e.currentTarget;
+    const det = document.getElementById("review-details");
+    tog.classList.toggle("open");
+    det.classList.toggle("show");
+  });
+
+  // Time-up modal
+  document.getElementById("btn-time-up-ok").addEventListener("click", () => {
+    document.getElementById("time-up-modal").classList.remove("open");
+    submitExam();
+  });
+
+  // Warn before leaving in the middle of exam
+  window.addEventListener("beforeunload", (e) => {
+    if(state.inProgress && document.body.dataset.active === "exam"){
+      e.preventDefault();
+      e.returnValue = "";
+    }
+  });
+});
+</script>
+</body></html>
