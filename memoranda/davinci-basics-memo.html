@@ -1,0 +1,1756 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DaVinci Resolve — Mock Exam (Basics) — Memorandum (Instructor) — Shamase Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0f17;--surface:#161a24;--surface-2:#1c2130;--border:#252a36;--border-2:#343b4a;
+--text:#e8e6e0;--muted:#8b8e98;--dim:#5d626d;--gold:#d4a574;--gold-dim:#a07d52;--teal:#5dc8b7;--green:#7ec98e;--red:#ec5a5a;}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;line-height:1.5;font-size:15px}
+.wrap{max-width:860px;margin:0 auto;padding:2.4rem 1.4rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.22em;color:var(--red);margin-bottom:.8rem}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:2.2rem;margin:0 0 .3rem}
+.sub{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);margin:0 0 1.2rem}
+.banner{background:rgba(236,90,90,.1);border:1px solid var(--red);border-radius:8px;padding:.8rem 1.1rem;color:var(--red);font-size:.85rem;font-family:'JetBrains Mono',monospace;letter-spacing:.03em;margin:1rem 0 1.8rem}
+.modhead{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin:2rem 0 .4rem;border-top:1px solid var(--border-2);padding-top:1.2rem}
+.q{border:1px solid var(--border);border-radius:9px;background:var(--surface);padding:.9rem 1.1rem;margin:.7rem 0}
+.q .id{font-family:'JetBrains Mono',monospace;color:var(--gold-dim);font-size:.74rem;letter-spacing:.1em;margin-bottom:.35rem}
+.q .scenario{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);font-size:.92rem;margin:.2rem 0 .4rem;padding-left:.7rem;border-left:2px solid var(--border-2)}
+.q .stem{font-weight:500;margin:.2rem 0 .55rem}
+.opt{font-size:.9rem;padding:.28rem .5rem;border-radius:5px;margin:.18rem 0;color:var(--muted)}
+.opt .l{font-family:'JetBrains Mono',monospace;font-weight:700;margin-right:.45rem;color:var(--dim)}
+.opt.correct{background:rgba(126,201,142,.13);color:var(--text);border:1px solid rgba(126,201,142,.4)}
+.opt.correct .l{color:var(--green)}
+.opt.correct::after{content:" \2713 CORRECT";font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.12em;color:var(--green);font-weight:700}
+.key{margin-top:.55rem;padding-top:.5rem;border-top:1px dashed var(--border-2);font-size:.85rem}
+.key .ans{font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:700;font-size:.74rem;letter-spacing:.12em;margin-bottom:.25rem}
+.key .rat{color:var(--text);margin:.25rem 0;font-size:.9rem}
+.key .ex{color:var(--muted);margin:.35rem 0 .2rem;font-size:.87rem;padding:.45rem .6rem;background:rgba(126,201,142,.06);border-left:2px solid var(--green-dim,rgba(126,201,142,.4));border-radius:4px}
+.key .ex b{color:var(--green);font-weight:600}
+.key .wrong-head{font-family:'JetBrains Mono',monospace;color:var(--red);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin:.7rem 0 .3rem}
+.key .ww{color:var(--muted);font-size:.85rem;margin:.22rem 0;padding-left:1.6rem;position:relative;line-height:1.45}
+.key .ww .wl{position:absolute;left:0;top:0;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--red);font-size:.78rem}
+.key .prin{color:var(--gold);font-style:italic;font-size:.85rem;margin-top:.6rem;padding-top:.5rem;border-top:1px dashed var(--border-2)}
+footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--border);color:var(--dim);font-size:.7rem;font-family:'JetBrains Mono',monospace;text-align:center;letter-spacing:.08em}
+@media print{
+  body{background:#fff;color:#111}.q{break-inside:avoid;border-color:#ccc;background:#fafafa}
+  .banner{color:#b00;border-color:#b00}.opt.correct{background:#eaf6ec}
+  .key .prin{color:#9a6f30}.eyebrow{color:#b00}
+}
+</style></head><body><div class="wrap">
+
+<div class="eyebrow">Shamase Studios · Instructor Memorandum · Marking Key</div>
+<h1>DaVinci Resolve — Mock Exam (Basics)</h1>
+<p class="sub">Interface &amp; Software Fundamentals · 100 questions · pass mark 90%</p>
+<div class="banner">⚠ INSTRUCTOR USE · Marking key. Question order matches the live exam exactly.</div>
+<div class="modhead">Module 01 · Foundations &amp; Philosophy</div>
+<div class="q">
+<div class="id">Q001 · Module 01</div>
+<div class="stem">How many main pages does DaVinci Resolve have?</div>
+<div class="opt"><span class="l">A</span>5</div>
+<div class="opt"><span class="l">B</span>6</div>
+<div class="opt correct"><span class="l">C</span>7</div>
+<div class="opt"><span class="l">D</span>8</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Correct: Media, Cut, Edit, Fusion, Color, Fairlight, Deliver.</div>
+<div class="ex"><b>Example.</b> Open Resolve and look along the bottom bar — you'll count seven icons: Media, Cut, Edit, Fusion, Color, Fairlight, Deliver, each a full workspace.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Too few — Resolve has more than 5 dedicated workspaces.</div>
+<div class="ww"><span class="wl">B</span>Close but missing one — there are 7, not 6.</div>
+<div class="ww"><span class="wl">D</span>Too many — there are 7 main pages.</div>
+<div class="prin">Principle: The 7 pages: Media, Cut, Edit, Fusion, Color, Fairlight, Deliver.</div>
+</div></div>
+<div class="q">
+<div class="id">Q002 · Module 01</div>
+<div class="stem">Which of these is NOT one of Resolve's main pages?</div>
+<div class="opt"><span class="l">A</span>Cut</div>
+<div class="opt correct"><span class="l">B</span>Compose</div>
+<div class="opt"><span class="l">C</span>Fusion</div>
+<div class="opt"><span class="l">D</span>Fairlight</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: there is no 'Compose' page in Resolve.</div>
+<div class="ex"><b>Example.</b> If a tutorial says 'go to the Compose page,' it's wrong — that compositing work actually happens on the Fusion page.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Cut is a real page — used for fast editing with dual timelines.</div>
+<div class="ww"><span class="wl">C</span>Fusion is a real page — used for compositing and VFX.</div>
+<div class="ww"><span class="wl">D</span>Fairlight is a real page — used for audio mixing.</div>
+<div class="prin">Principle: The 7 pages don't include a Compose page — Fusion handles that work.</div>
+</div></div>
+<div class="q">
+<div class="id">Q003 · Module 01</div>
+<div class="stem">In the standard post-production workflow, which page comes last?</div>
+<div class="opt"><span class="l">A</span>Color</div>
+<div class="opt"><span class="l">B</span>Fairlight</div>
+<div class="opt correct"><span class="l">C</span>Deliver</div>
+<div class="opt"><span class="l">D</span>Edit</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Correct: Deliver is where you render the final file — the last step.</div>
+<div class="ex"><b>Example.</b> Finishing a wedding film: cut on Edit, grade on Color, mix on Fairlight, then switch to Deliver last to render the MP4 you hand the client.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Color comes before audio mixing in the standard workflow.</div>
+<div class="ww"><span class="wl">B</span>Fairlight (audio) comes before Deliver but isn't the last step.</div>
+<div class="ww"><span class="wl">D</span>Edit comes early — picture lock happens here before grading.</div>
+<div class="prin">Principle: Workflow order: Media → Cut/Edit → Fusion → Color → Fairlight → Deliver.</div>
+</div></div>
+<div class="q">
+<div class="id">Q004 · Module 01</div>
+<div class="stem">What's the main difference between Resolve Free and Resolve Studio?</div>
+<div class="opt"><span class="l">A</span>Studio is required for any commercial work</div>
+<div class="opt correct"><span class="l">B</span>Studio unlocks additional features like Resolve FX, AI tools, and HDR support</div>
+<div class="opt"><span class="l">C</span>Studio is faster at rendering</div>
+<div class="opt"><span class="l">D</span>Studio allows projects longer than 30 minutes</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Studio is sold for features, not for licensing.</div>
+<div class="ex"><b>Example.</b> A YouTuber can monetise videos cut entirely in the free version; you'd only buy Studio when you need Magic Mask, noise reduction or HDR.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>False — the free version has no commercial-use restriction.</div>
+<div class="ww"><span class="wl">C</span>Render speed is hardware-dependent, not version-dependent.</div>
+<div class="ww"><span class="wl">D</span>There's no project length limit in either version.</div>
+<div class="prin">Principle: Free is fully commercial-usable; Studio unlocks pro features.</div>
+</div></div>
+<div class="q">
+<div class="id">Q005 · Module 01</div>
+<div class="stem">What file extension does a Resolve project export use?</div>
+<div class="opt correct"><span class="l">A</span>.drp</div>
+<div class="opt"><span class="l">B</span>.drx</div>
+<div class="opt"><span class="l">C</span>.prproj</div>
+<div class="opt"><span class="l">D</span>.fcpxml</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: .drp = DaVinci Resolve Project export.</div>
+<div class="ex"><b>Example.</b> To send a project to a collaborator, right-click it in the Project Manager → Export Project → it saves a single .drp file you can email.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>.drx = DaVinci Resolve power grade (color preset).</div>
+<div class="ww"><span class="wl">C</span>.prproj is Premiere Pro's project format.</div>
+<div class="ww"><span class="wl">D</span>.fcpxml is Final Cut Pro's interchange format.</div>
+<div class="prin">Principle: .drp exports projects; .drx exports grades.</div>
+</div></div>
+<div class="q">
+<div class="id">Q006 · Module 01</div>
+<div class="stem">Where does Resolve open by default when launched?</div>
+<div class="opt"><span class="l">A</span>The Edit page</div>
+<div class="opt"><span class="l">B</span>The Media page</div>
+<div class="opt correct"><span class="l">C</span>The Project Manager</div>
+<div class="opt"><span class="l">D</span>The last project you used</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Correct: The Project Manager appears first, letting you choose or create a project.</div>
+<div class="ex"><b>Example.</b> Launch Resolve cold and you land in the Project Manager — a grid of project thumbnails — before any editing UI appears.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Edit page only appears once a project is open.</div>
+<div class="ww"><span class="wl">B</span>Media page only appears once a project is open.</div>
+<div class="ww"><span class="wl">D</span>Resolve doesn't auto-open the last project unless configured.</div>
+<div class="prin">Principle: Project Manager → choose project → page workspace.</div>
+</div></div>
+<div class="q">
+<div class="id">Q007 · Module 01</div>
+<div class="stem">Where do you find the page navigation bar in Resolve?</div>
+<div class="opt"><span class="l">A</span>Top of the screen</div>
+<div class="opt correct"><span class="l">B</span>Bottom of the screen</div>
+<div class="opt"><span class="l">C</span>Left sidebar</div>
+<div class="opt"><span class="l">D</span>Right sidebar</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: page icons sit along the bottom of the Resolve window.</div>
+<div class="ex"><b>Example.</b> Glance at the very bottom of the window: that row of seven page icons is how you move between workspaces.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>The top has the menu bar (File, Edit, Trim, etc.), not page navigation.</div>
+<div class="ww"><span class="wl">C</span>The left sidebar holds page-specific panels (e.g. Media Pool).</div>
+<div class="ww"><span class="wl">D</span>The right sidebar holds page-specific panels too (e.g. Inspector).</div>
+<div class="prin">Principle: Pages are switched via icons at the bottom of the Resolve window.</div>
+</div></div>
+<div class="q">
+<div class="id">Q008 · Module 01</div>
+<div class="stem">The bottom page bar shows the pages in which order?</div>
+<div class="opt"><span class="l">A</span>Alphabetical</div>
+<div class="opt correct"><span class="l">B</span>Workflow order (Media → Deliver)</div>
+<div class="opt"><span class="l">C</span>Random</div>
+<div class="opt"><span class="l">D</span>Most-recently-used first</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: left-to-right matches the typical workflow sequence.</div>
+<div class="ex"><b>Example.</b> The icons read left-to-right as Media → Cut → Edit → Fusion → Color → Fairlight → Deliver — the same order you actually work in.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>They're not in alphabetical order.</div>
+<div class="ww"><span class="wl">C</span>The order is deliberate, not random.</div>
+<div class="ww"><span class="wl">D</span>The bar position is fixed, not adaptive.</div>
+<div class="prin">Principle: Pages are ordered by workflow: Media → Cut → Edit → Fusion → Color → Fairlight → Deliver.</div>
+</div></div>
+<div class="q">
+<div class="id">Q009 · Module 01</div>
+<div class="stem">How do you return to the Project Manager once you have a project open?</div>
+<div class="opt"><span class="l">A</span>File → New Project</div>
+<div class="opt correct"><span class="l">B</span>Click the Project Manager icon (house) in the top-left</div>
+<div class="opt"><span class="l">C</span>Restart Resolve</div>
+<div class="opt"><span class="l">D</span>Press Escape</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the small home icon at the top-left returns to the Project Manager.</div>
+<div class="ex"><b>Example.</b> Mid-project you click the small house icon top-left to pop back to the Project Manager and open a different job.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>This creates a new project rather than returning to the manager.</div>
+<div class="ww"><span class="wl">C</span>Restarting works but is unnecessary.</div>
+<div class="ww"><span class="wl">D</span>Escape doesn't switch projects.</div>
+<div class="prin">Principle: The Project Manager icon (top-left) toggles between project and manager view.</div>
+</div></div>
+<div class="q">
+<div class="id">Q010 · Module 01</div>
+<div class="stem">What does the floating panel toggle (icon top-right of each page) do?</div>
+<div class="opt"><span class="l">A</span>Closes the current project</div>
+<div class="opt"><span class="l">B</span>Toggles fullscreen mode for the viewer</div>
+<div class="opt correct"><span class="l">C</span>Toggles visibility of the panels (Media Pool, Inspector, etc.) on that page</div>
+<div class="opt"><span class="l">D</span>Saves the project</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Correct: the panel toggles show/hide page-specific panels to expand the viewer area.</div>
+<div class="ex"><b>Example.</b> Editing on a laptop, you tap the panel toggle to hide the Media Pool and Inspector so the viewer fills the screen.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Closing the project is done via the home/Project Manager icon.</div>
+<div class="ww"><span class="wl">B</span>Fullscreen viewer is a different toggle (Cmd/Ctrl+F).</div>
+<div class="ww"><span class="wl">D</span>Resolve auto-saves; there's no manual save button at the top-right.</div>
+<div class="prin">Principle: Panel toggles maximize the viewer by hiding side panels.</div>
+</div></div>
+<div class="q">
+<div class="id">Q011 · Module 01</div>
+<div class="stem">By default, Resolve automatically saves your project:</div>
+<div class="opt"><span class="l">A</span>Never — you must save manually</div>
+<div class="opt correct"><span class="l">B</span>Continuously as you work — Live Save is on by default in current versions</div>
+<div class="opt"><span class="l">C</span>Only when you close the project</div>
+<div class="opt"><span class="l">D</span>Every 30 minutes</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Live Save and Project Backups are both enabled by default in Resolve 18+.</div>
+<div class="ex"><b>Example.</b> Force-quit Resolve after a crash and on relaunch your timeline is intact, because Live Save wrote every change as you worked.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>False — modern Resolve includes auto-save.</div>
+<div class="ww"><span class="wl">C</span>Closing without saving will still save changes due to Live Save.</div>
+<div class="ww"><span class="wl">D</span>Auto-save is continuous, not interval-based.</div>
+<div class="prin">Principle: Resolve auto-saves; backups can also be restored from Project Manager.</div>
+</div></div>
+<div class="q">
+<div class="id">Q012 · Module 01</div>
+<div class="stem">Which of these is the correct page sequence for a typical edit-and-grade workflow?</div>
+<div class="opt correct"><span class="l">A</span>Media → Edit → Color → Deliver</div>
+<div class="opt"><span class="l">B</span>Edit → Media → Color → Deliver</div>
+<div class="opt"><span class="l">C</span>Color → Edit → Media → Deliver</div>
+<div class="opt"><span class="l">D</span>Media → Color → Edit → Deliver</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: ingest media first, edit picture, then grade, then deliver.</div>
+<div class="ex"><b>Example.</b> A typical short: import clips (Media) → build the cut (Edit) → grade it (Color) → export (Deliver).</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Media comes before Edit — you need clips first.</div>
+<div class="ww"><span class="wl">C</span>You can't grade before editing.</div>
+<div class="ww"><span class="wl">D</span>You can't grade clips that aren't on a timeline yet.</div>
+<div class="prin">Principle: Always: ingest → edit → grade → deliver.</div>
+</div></div>
+<div class="modhead">Module 02 · The Media Page</div>
+<div class="q">
+<div class="id">Q013 · Module 02</div>
+<div class="stem">What is the Media Pool?</div>
+<div class="opt"><span class="l">A</span>Resolve's recycle bin for deleted clips</div>
+<div class="opt correct"><span class="l">B</span>The database of all clips Resolve has registered in your project</div>
+<div class="opt"><span class="l">C</span>The folder on disk where Resolve stores media</div>
+<div class="opt"><span class="l">D</span>A temporary cache of preview files</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the Media Pool tracks every clip Resolve knows about in this project.</div>
+<div class="ex"><b>Example.</b> Delete a clip from the Media Pool and the file still sits on your drive — the Pool only tracked a reference to it.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Deleted clips don't go to the Media Pool — they're removed.</div>
+<div class="ww"><span class="wl">C</span>That's where source media physically lives — different concept.</div>
+<div class="ww"><span class="wl">D</span>Preview cache is a different system.</div>
+<div class="prin">Principle: The Media Pool is the project's clip registry, not a disk folder.</div>
+</div></div>
+<div class="q">
+<div class="id">Q014 · Module 02</div>
+<div class="stem">What's the difference between Media Storage and the Media Pool?</div>
+<div class="opt"><span class="l">A</span>Media Storage holds video; Media Pool holds audio</div>
+<div class="opt correct"><span class="l">B</span>Media Storage is a file-system browser; Media Pool is the project's database of registered clips</div>
+<div class="opt"><span class="l">C</span>Media Storage is for local drives; Media Pool is for cloud media</div>
+<div class="opt"><span class="l">D</span>They're identical — just different views</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Storage lets you browse your drives; Pool tracks what you've imported into the project.</div>
+<div class="ex"><b>Example.</b> You browse an external SSD in Media Storage, then drag the folder you want into the Media Pool to actually register those clips in the project.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Both panels hold all media types.</div>
+<div class="ww"><span class="wl">C</span>Both can show local and network drives.</div>
+<div class="ww"><span class="wl">D</span>They're functionally different: Storage = browser, Pool = database.</div>
+<div class="prin">Principle: Storage is the file browser; Pool is the project's tracked clip list.</div>
+</div></div>
+<div class="q">
+<div class="id">Q015 · Module 02</div>
+<div class="stem">What's the most efficient way to import a folder of clips while preserving the folder structure as bins?</div>
+<div class="opt"><span class="l">A</span>Drag each clip in one at a time</div>
+<div class="opt correct"><span class="l">B</span>Drag the folders into the bin list on the left side of the Media Pool</div>
+<div class="opt"><span class="l">C</span>Use File → Import Media for each clip</div>
+<div class="opt"><span class="l">D</span>Copy the folders into Resolve's install directory</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: dragging folders into the bin list creates a matching bin hierarchy.</div>
+<div class="ex"><b>Example.</b> Drag your 'Day 1' and 'Day 2' camera folders onto the bin list and Resolve recreates that same bin structure automatically.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Per-clip dragging loses the folder structure.</div>
+<div class="ww"><span class="wl">C</span>Import Media imports clips but not folder structure.</div>
+<div class="ww"><span class="wl">D</span>Resolve doesn't read media from its install directory.</div>
+<div class="prin">Principle: Drag folders to the bin list; drag clips to the Pool body.</div>
+</div></div>
+<div class="q">
+<div class="id">Q016 · Module 02</div>
+<div class="stem">What is a Smart Bin?</div>
+<div class="opt"><span class="l">A</span>A bin that auto-deletes old clips</div>
+<div class="opt correct"><span class="l">B</span>A bin that updates dynamically based on filter criteria you set</div>
+<div class="opt"><span class="l">C</span>A bin that uses AI to categorize footage</div>
+<div class="opt"><span class="l">D</span>A bin that only stores audio clips</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: define filter criteria (e.g. keyword='interview'), the bin auto-populates.</div>
+<div class="ex"><b>Example.</b> Set a Smart Bin rule 'Keyword contains interview' and every interview clip — wherever it lives — shows up there automatically.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Smart Bins don't delete anything.</div>
+<div class="ww"><span class="wl">C</span>AI auto-binning is a separate feature (IntelliSearch in v21).</div>
+<div class="ww"><span class="wl">D</span>No audio-only restriction — Smart Bins filter any clip type.</div>
+<div class="prin">Principle: Smart Bins = dynamic filter results, not static folders.</div>
+</div></div>
+<div class="q">
+<div class="id">Q017 · Module 02</div>
+<div class="stem">Where do you find a clip's Clip Attributes panel (where you can change frame rate, audio channels, etc.)?</div>
+<div class="opt"><span class="l">A</span>Inspector panel on the Edit page</div>
+<div class="opt correct"><span class="l">B</span>Right-click the clip in the Media Pool → Clip Attributes</div>
+<div class="opt"><span class="l">C</span>Effects panel</div>
+<div class="opt"><span class="l">D</span>Color page node graph</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: right-click → Clip Attributes lets you reinterpret frame rate, audio channels, alpha, etc.</div>
+<div class="ex"><b>Example.</b> A clip imported as stereo but it's really a mono lav: right-click → Clip Attributes → Audio to set it to mono.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>The Edit page Inspector adjusts timeline parameters, not source attributes.</div>
+<div class="ww"><span class="wl">C</span>Effects don't expose source attributes.</div>
+<div class="ww"><span class="wl">D</span>The Color node graph is for grading.</div>
+<div class="prin">Principle: Right-click → Clip Attributes for source-level reinterpretation.</div>
+</div></div>
+<div class="q">
+<div class="id">Q018 · Module 02</div>
+<div class="stem">To sync separately-recorded audio (e.g. from a Zoom recorder) to video clips, the fastest method is:</div>
+<div class="opt"><span class="l">A</span>Drag the audio onto the video and manually align waveforms</div>
+<div class="opt correct"><span class="l">B</span>Select all clips and audio → right-click → Auto-Sync Audio → Synchronize using Waveform</div>
+<div class="opt"><span class="l">C</span>Render new clips with synced audio in a third-party app first</div>
+<div class="opt"><span class="l">D</span>Use the Fairlight page's timecode lock</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Resolve's Auto-Sync Audio matches waveforms across selected clips.</div>
+<div class="ex"><b>Example.</b> Boom on a Zoom, scratch audio on-camera: select both, right-click → Auto-Sync Audio → Synchronize using Waveform, and Resolve lines them up by the clap.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Manual alignment works but is slow for many clips.</div>
+<div class="ww"><span class="wl">C</span>Resolve syncs natively — no external app needed.</div>
+<div class="ww"><span class="wl">D</span>Timecode lock requires matching timecode, not just waveforms.</div>
+<div class="prin">Principle: Right-click selected clips → Auto-Sync Audio → Synchronize using Waveform.</div>
+</div></div>
+<div class="q">
+<div class="id">Q019 · Module 02</div>
+<div class="stem">What's a Power Bin in Resolve?</div>
+<div class="opt"><span class="l">A</span>A bin that holds files larger than 4K</div>
+<div class="opt correct"><span class="l">B</span>A special bin whose contents are shared across all projects in your library</div>
+<div class="opt"><span class="l">C</span>A bin that boosts render priority</div>
+<div class="opt"><span class="l">D</span>A bin with encrypted contents</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Power Bins are shared across projects — useful for stock footage, logos, sound effects.</div>
+<div class="ex"><b>Example.</b> Put your studio logo and sound-effects library in a Power Bin and they're available in every project you open — no re-import.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>No file-size requirement.</div>
+<div class="ww"><span class="wl">C</span>Render priority isn't a bin property.</div>
+<div class="ww"><span class="wl">D</span>Bins don't encrypt content.</div>
+<div class="prin">Principle: Power Bins share across projects; regular bins are project-scoped.</div>
+</div></div>
+<div class="q">
+<div class="id">Q020 · Module 02</div>
+<div class="stem">In the Media Page, where is the Source Viewer located?</div>
+<div class="opt"><span class="l">A</span>Top center</div>
+<div class="opt correct"><span class="l">B</span>Top right</div>
+<div class="opt"><span class="l">C</span>Bottom right</div>
+<div class="opt"><span class="l">D</span>Top left</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the Source Viewer is in the top-right area of the Media page.</div>
+<div class="ex"><b>Example.</b> On the Media page the clip you double-click previews in the top-right Source Viewer while the Pool sits in the centre.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>The center area is where the Media Pool sits.</div>
+<div class="ww"><span class="wl">C</span>The bottom typically shows the timeline (if present) or audio panel.</div>
+<div class="ww"><span class="wl">D</span>The top-left holds Media Storage.</div>
+<div class="prin">Principle: Media page layout: Storage (top-left), Source Viewer (top-right), Pool (center/bottom).</div>
+</div></div>
+<div class="q">
+<div class="id">Q021 · Module 02</div>
+<div class="stem">How do you switch between List view and Thumbnail view in the Media Pool?</div>
+<div class="opt"><span class="l">A</span>File → Preferences → View Mode</div>
+<div class="opt"><span class="l">B</span>Right-click the Media Pool → switch view</div>
+<div class="opt correct"><span class="l">C</span>Use the small view-toggle icons at the top of the Media Pool</div>
+<div class="opt"><span class="l">D</span>View modes can't be changed</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Correct: small icons at the top of the Media Pool toggle between Thumbnail, List, and Filmstrip views.</div>
+<div class="ex"><b>Example.</b> Click the little list/thumbnail icons at the top of the Media Pool to switch from big thumbnails to a sortable List view.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Preferences doesn't control Media Pool view.</div>
+<div class="ww"><span class="wl">B</span>View options aren't on the right-click menu.</div>
+<div class="ww"><span class="wl">D</span>Views are absolutely changeable.</div>
+<div class="prin">Principle: View-toggle icons sit at the top of the Media Pool panel.</div>
+</div></div>
+<div class="q">
+<div class="id">Q022 · Module 02</div>
+<div class="stem">The bin list (showing your project's folder hierarchy) is located:</div>
+<div class="opt"><span class="l">A</span>On the right side of the Media Pool</div>
+<div class="opt correct"><span class="l">B</span>On the left side of the Media Pool</div>
+<div class="opt"><span class="l">C</span>Above the Media Pool</div>
+<div class="opt"><span class="l">D</span>Below the Media Pool</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the bin list is on the left side of the Media Pool panel.</div>
+<div class="ex"><b>Example.</b> Your project's bin folders run down the left edge of the Media Pool.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>The right side typically shows the Source Viewer.</div>
+<div class="ww"><span class="wl">C</span>The top has view controls and column headers.</div>
+<div class="ww"><span class="wl">D</span>The bottom may show metadata.</div>
+<div class="prin">Principle: Bin list = left side of Media Pool.</div>
+</div></div>
+<div class="q">
+<div class="id">Q023 · Module 02</div>
+<div class="stem">A clip imports with the wrong frame rate (29.97 instead of 23.976) and plays back too fast in your 23.976 timeline. How do you fix it?</div>
+<div class="opt"><span class="l">A</span>Delete and re-import the clip</div>
+<div class="opt correct"><span class="l">B</span>Right-click the clip → Clip Attributes → Video → change frame rate to 23.976</div>
+<div class="opt"><span class="l">C</span>Change the timeline's frame rate to 29.97</div>
+<div class="opt"><span class="l">D</span>Use a speed effect to slow it down</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Clip Attributes reinterprets frame rate without rendering.</div>
+<div class="ex"><b>Example.</b> A 29.97 clip races in your 23.976 timeline — right-click → Clip Attributes → Video → set 23.976 and it plays correctly, no re-render.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Reimporting won't change the metadata Resolve uses.</div>
+<div class="ww"><span class="wl">C</span>Don't change the timeline rate to match one wrong clip — fix the clip.</div>
+<div class="ww"><span class="wl">D</span>Speed effects are destructive; reinterpretation is non-destructive.</div>
+<div class="prin">Principle: Use Clip Attributes to reinterpret frame rate non-destructively.</div>
+</div></div>
+<div class="q">
+<div class="id">Q024 · Module 02</div>
+<div class="stem">Which metadata column is most useful for narrative editors organizing scene takes?</div>
+<div class="opt"><span class="l">A</span>Capture Application</div>
+<div class="opt correct"><span class="l">B</span>Reel Number, Scene, Take</div>
+<div class="opt"><span class="l">C</span>File Size</div>
+<div class="opt"><span class="l">D</span>Color Space</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Reel/Scene/Take metadata aligns with traditional production logging.</div>
+<div class="ex"><b>Example.</b> Cutting a drama, you sort the Pool by Scene then Take to find 'Scene 4, Take 3 (circle take)' in seconds.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Capture Application identifies the recording software — rarely useful editorially.</div>
+<div class="ww"><span class="wl">C</span>File size is a technical detail, not editorial.</div>
+<div class="ww"><span class="wl">D</span>Color Space matters for grading, not narrative organization.</div>
+<div class="prin">Principle: Reel, Scene, and Take fields drive narrative organization.</div>
+</div></div>
+<div class="modhead">Module 03 · The Edit Page</div>
+<div class="q">
+<div class="id">Q025 · Module 03</div>
+<div class="stem">How many viewers does the Edit page have by default?</div>
+<div class="opt"><span class="l">A</span>1</div>
+<div class="opt correct"><span class="l">B</span>2</div>
+<div class="opt"><span class="l">C</span>3</div>
+<div class="opt"><span class="l">D</span>4</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Source Viewer (left) and Timeline Viewer (right) by default.</div>
+<div class="ex"><b>Example.</b> The Edit page shows the Source Viewer (left) for raw clips and the Timeline Viewer (right) for your cut, side by side.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>That's a one-viewer mode you can toggle to, but not the default.</div>
+<div class="ww"><span class="wl">C</span>There are two main viewers, not three.</div>
+<div class="ww"><span class="wl">D</span>Four-viewer layouts exist in multicam, not as default.</div>
+<div class="prin">Principle: Edit page = dual viewer layout (Source + Timeline).</div>
+</div></div>
+<div class="q">
+<div class="id">Q026 · Module 03</div>
+<div class="stem">Which viewer shows the clip you're previewing before adding to the timeline?</div>
+<div class="opt"><span class="l">A</span>Timeline Viewer</div>
+<div class="opt correct"><span class="l">B</span>Source Viewer</div>
+<div class="opt"><span class="l">C</span>Inspector preview</div>
+<div class="opt"><span class="l">D</span>Project Settings preview</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the Source Viewer (top-left) previews clips before editing.</div>
+<div class="ex"><b>Example.</b> You scrub a 10-minute interview in the Source Viewer, set in/out, then drop only that chunk into the timeline.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Timeline Viewer shows the current edit (timeline output).</div>
+<div class="ww"><span class="wl">C</span>The Inspector doesn't have a preview area.</div>
+<div class="ww"><span class="wl">D</span>Project Settings has no preview viewer.</div>
+<div class="prin">Principle: Source = clip preview; Timeline = edit output.</div>
+</div></div>
+<div class="q">
+<div class="id">Q027 · Module 03</div>
+<div class="stem">Where is the Inspector panel by default?</div>
+<div class="opt"><span class="l">A</span>Bottom of the screen</div>
+<div class="opt correct"><span class="l">B</span>Top right</div>
+<div class="opt"><span class="l">C</span>Left sidebar</div>
+<div class="opt"><span class="l">D</span>It's not visible until you select a clip</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the Inspector lives in the top-right area; toggle visibility with its button.</div>
+<div class="ex"><b>Example.</b> Select a title and the Inspector (top-right) fills with its font, size and position controls.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>The bottom holds the timeline.</div>
+<div class="ww"><span class="wl">C</span>The left sidebar holds the Media Pool by default.</div>
+<div class="ww"><span class="wl">D</span>It is visible by default once toggled on — selecting a clip just populates it.</div>
+<div class="prin">Principle: Inspector lives in the top-right; toggle to hide/show.</div>
+</div></div>
+<div class="q">
+<div class="id">Q028 · Module 03</div>
+<div class="stem">Where do you find the Effects Library (transitions, titles, generators, etc.)?</div>
+<div class="opt"><span class="l">A</span>Top of the timeline</div>
+<div class="opt correct"><span class="l">B</span>On the left, accessible via the 'Effects' button at the top-left</div>
+<div class="opt"><span class="l">C</span>Right-click on the timeline</div>
+<div class="opt"><span class="l">D</span>File → Effects</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: click 'Effects' at the top-left to open the Effects Library panel.</div>
+<div class="ex"><b>Example.</b> Need a cross-dissolve? Click Effects at the top-left, then drag the transition onto your cut.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>The top of the timeline holds the toolbar.</div>
+<div class="ww"><span class="wl">C</span>Right-click on a clip shows clip options, not the full library.</div>
+<div class="ww"><span class="wl">D</span>File menu doesn't list effects.</div>
+<div class="prin">Principle: Effects Library opens via the Effects button at the top-left of the Edit page.</div>
+</div></div>
+<div class="q">
+<div class="id">Q029 · Module 03</div>
+<div class="stem">What does the Edit Index show?</div>
+<div class="opt"><span class="l">A</span>A graphical thumbnail of every clip</div>
+<div class="opt correct"><span class="l">B</span>A spreadsheet-style list of every edit in the timeline (in/out, source, name)</div>
+<div class="opt"><span class="l">C</span>The history of every undo step</div>
+<div class="opt"><span class="l">D</span>A list of media changes since last save</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the Edit Index is a text-based row-per-edit list — useful for navigation, search, and EDLs.</div>
+<div class="ex"><b>Example.</b> Open the Edit Index to see a numbered, spreadsheet-style list of every cut — handy for jumping to edit #42 or exporting an EDL.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>That's the Filmstrip view in the Media Pool.</div>
+<div class="ww"><span class="wl">C</span>Undo history is separate.</div>
+<div class="ww"><span class="wl">D</span>No 'changes since last save' panel exists.</div>
+<div class="prin">Principle: Edit Index = spreadsheet of every cut in the timeline.</div>
+</div></div>
+<div class="q">
+<div class="id">Q030 · Module 03</div>
+<div class="stem">What's the default keyboard shortcut for the Selection (arrow) tool on the Edit page?</div>
+<div class="opt correct"><span class="l">A</span>A</div>
+<div class="opt"><span class="l">B</span>S</div>
+<div class="opt"><span class="l">C</span>V</div>
+<div class="opt"><span class="l">D</span>Spacebar</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: A = Selection tool (the standard arrow).</div>
+<div class="ex"><b>Example.</b> Press A to get the arrow back after using the blade, so you can grab and move clips again.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>S has no default tool binding (often customized for Split).</div>
+<div class="ww"><span class="wl">C</span>V is timeline track selection in some NLEs, not Resolve's Selection.</div>
+<div class="ww"><span class="wl">D</span>Spacebar plays/pauses, doesn't select a tool.</div>
+<div class="prin">Principle: A = Selection tool (the default cursor).</div>
+</div></div>
+<div class="q">
+<div class="id">Q031 · Module 03</div>
+<div class="stem">Which keyboard shortcut selects the Blade (razor) tool?</div>
+<div class="opt"><span class="l">A</span>A</div>
+<div class="opt correct"><span class="l">B</span>B</div>
+<div class="opt"><span class="l">C</span>T</div>
+<div class="opt"><span class="l">D</span>X</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: B = Blade tool.</div>
+<div class="ex"><b>Example.</b> Press B and click a clip to slice it exactly where you want to remove a cough.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>A is Selection.</div>
+<div class="ww"><span class="wl">C</span>T is Trim Edit Mode, not Blade.</div>
+<div class="ww"><span class="wl">D</span>X marks in/out around the current clip but isn't a tool.</div>
+<div class="prin">Principle: B = Blade tool; T = Trim Edit Mode.</div>
+</div></div>
+<div class="q">
+<div class="id">Q032 · Module 03</div>
+<div class="stem">Which shortcut activates the Trim Edit Mode?</div>
+<div class="opt"><span class="l">A</span>A</div>
+<div class="opt"><span class="l">B</span>B</div>
+<div class="opt correct"><span class="l">C</span>T</div>
+<div class="opt"><span class="l">D</span>R</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Correct: T = Trim Edit Mode (for slip, slide, roll, ripple operations).</div>
+<div class="ex"><b>Example.</b> Press T and drag the upper half of a clip to slip it — changing what's shown without moving its position.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>A is Selection.</div>
+<div class="ww"><span class="wl">B</span>B is Blade.</div>
+<div class="ww"><span class="wl">D</span>R is not the trim shortcut.</div>
+<div class="prin">Principle: T = Trim Edit Mode.</div>
+</div></div>
+<div class="q">
+<div class="id">Q033 · Module 03</div>
+<div class="stem">What's the default keyboard shortcut to split a clip at the playhead?</div>
+<div class="opt"><span class="l">A</span>S</div>
+<div class="opt"><span class="l">B</span>X</div>
+<div class="opt correct"><span class="l">C</span>Ctrl/Cmd + \</div>
+<div class="opt"><span class="l">D</span>Spacebar</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Correct: Ctrl/Cmd + \ splits at the playhead by default.</div>
+<div class="ex"><b>Example.</b> Park the playhead on a flub and press Cmd/Ctrl+\ to split the clip there so you can delete the bad part.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>S has no default split binding (many people customize S → split).</div>
+<div class="ww"><span class="wl">B</span>X marks in/out, doesn't split.</div>
+<div class="ww"><span class="wl">D</span>Spacebar is play/pause.</div>
+<div class="prin">Principle: Ctrl/Cmd + \ = split at playhead (default; many remap to S).</div>
+</div></div>
+<div class="q">
+<div class="id">Q034 · Module 03</div>
+<div class="stem">What does the Snapping toggle (magnet icon) do on the Edit page?</div>
+<div class="opt"><span class="l">A</span>Snaps clips to a grid</div>
+<div class="opt correct"><span class="l">B</span>Snaps clips to nearby edit points, markers, and the playhead while dragging</div>
+<div class="opt"><span class="l">C</span>Locks the viewer to a fixed aspect ratio</div>
+<div class="opt"><span class="l">D</span>Snaps audio to its nearest beat</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: dragged clips snap to edit points, markers, playhead position, and other clips.</div>
+<div class="ex"><b>Example.</b> With Snapping on, a dragged clip jumps to butt cleanly against the previous clip's end instead of leaving a one-frame gap.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Snapping isn't to a fixed grid.</div>
+<div class="ww"><span class="wl">C</span>Aspect ratio is separate (Output Blanking).</div>
+<div class="ww"><span class="wl">D</span>Audio doesn't snap to beats automatically.</div>
+<div class="prin">Principle: Snapping helps clips land on existing edit points and the playhead.</div>
+</div></div>
+<div class="q">
+<div class="id">Q035 · Module 03</div>
+<div class="stem">Which Edit page command pushes later clips down the timeline to make room for a new clip?</div>
+<div class="opt"><span class="l">A</span>Overwrite</div>
+<div class="opt correct"><span class="l">B</span>Insert</div>
+<div class="opt"><span class="l">C</span>Replace</div>
+<div class="opt"><span class="l">D</span>Place on Top</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Insert pushes later clips down to make space.</div>
+<div class="ex"><b>Example.</b> Drop a missing reaction shot mid-scene with Insert and everything after it slides right to make room.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Overwrite pastes over existing clips, preserving timeline length.</div>
+<div class="ww"><span class="wl">C</span>Replace swaps a clip in place with one of equal duration.</div>
+<div class="ww"><span class="wl">D</span>Place on Top adds the clip on a new track above.</div>
+<div class="prin">Principle: Insert = push later clips; Overwrite = paste over.</div>
+</div></div>
+<div class="q">
+<div class="id">Q036 · Module 03</div>
+<div class="stem">Which Edit page command pastes a clip over existing timeline material without changing timeline length?</div>
+<div class="opt"><span class="l">A</span>Insert</div>
+<div class="opt correct"><span class="l">B</span>Overwrite</div>
+<div class="opt"><span class="l">C</span>Place on Top</div>
+<div class="opt"><span class="l">D</span>Append</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Overwrite pastes over existing material, replacing the underlying clips at that position.</div>
+<div class="ex"><b>Example.</b> Paint three seconds of B-roll over a shot with Overwrite — it covers without changing the timeline's length.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Insert pushes later clips down.</div>
+<div class="ww"><span class="wl">C</span>Place on Top adds to a new track above.</div>
+<div class="ww"><span class="wl">D</span>Append adds to the end of the timeline.</div>
+<div class="prin">Principle: Overwrite replaces in place; timeline length unchanged.</div>
+</div></div>
+<div class="q">
+<div class="id">Q037 · Module 03</div>
+<div class="stem">What is the keyboard shortcut for marking an In point?</div>
+<div class="opt correct"><span class="l">A</span>I</div>
+<div class="opt"><span class="l">B</span>O</div>
+<div class="opt"><span class="l">C</span>M</div>
+<div class="opt"><span class="l">D</span>P</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: I = mark In point.</div>
+<div class="ex"><b>Example.</b> Scrub to where the good take begins and press I to set the In point.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>O marks the Out point.</div>
+<div class="ww"><span class="wl">C</span>M adds a marker at the playhead.</div>
+<div class="ww"><span class="wl">D</span>P has no default in/out function.</div>
+<div class="prin">Principle: I = In; O = Out; M = Marker.</div>
+</div></div>
+<div class="q">
+<div class="id">Q038 · Module 03</div>
+<div class="stem">What is the keyboard shortcut for marking an Out point?</div>
+<div class="opt"><span class="l">A</span>I</div>
+<div class="opt correct"><span class="l">B</span>O</div>
+<div class="opt"><span class="l">C</span>M</div>
+<div class="opt"><span class="l">D</span>P</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: O = mark Out point.</div>
+<div class="ex"><b>Example.</b> Scrub to the end of the line and press O to set the Out point before editing it in.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>I marks the In point.</div>
+<div class="ww"><span class="wl">C</span>M adds a marker.</div>
+<div class="ww"><span class="wl">D</span>P has no default in/out function.</div>
+<div class="prin">Principle: O = Out point.</div>
+</div></div>
+<div class="q">
+<div class="id">Q039 · Module 03</div>
+<div class="stem">JKL keyboard playback works like:</div>
+<div class="opt"><span class="l">A</span>J = slower, K = stop, L = faster</div>
+<div class="opt"><span class="l">B</span>J = back, K = playhead reset, L = forward</div>
+<div class="opt correct"><span class="l">C</span>J = backward play, K = pause, L = forward play (tapping multiple times increases speed)</div>
+<div class="opt"><span class="l">D</span>J/K/L are unused</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Correct: J = back, K = pause, L = forward; repeated taps speed up.</div>
+<div class="ex"><b>Example.</b> Hold L to play forward; tap it again and playback jumps to 2× for fast review — K stops, J runs it backward.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Closer but missing the multi-tap acceleration behaviour.</div>
+<div class="ww"><span class="wl">B</span>K doesn't reset; it pauses.</div>
+<div class="ww"><span class="wl">D</span>JKL are very much used — they're standard NLE playback keys.</div>
+<div class="prin">Principle: J/K/L = reverse / pause / forward. Tap multiple times to accelerate.</div>
+</div></div>
+<div class="q">
+<div class="id">Q040 · Module 03</div>
+<div class="stem">What does the Linked Selection toggle (chain-link icon) control?</div>
+<div class="opt"><span class="l">A</span>Whether clips on different tracks are selected together when linked</div>
+<div class="opt"><span class="l">B</span>Whether transitions automatically link to their adjacent clips</div>
+<div class="opt correct"><span class="l">C</span>Whether audio and video selections also include each other (and other linked relationships)</div>
+<div class="opt"><span class="l">D</span>Whether the timeline plays in linked mode with the source</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Correct: when Linked Selection is on, clicking a video clip also selects its linked audio (and any other linked items).</div>
+<div class="ex"><b>Example.</b> With Linked Selection on, clicking the video also grabs its attached audio, so they move together and stay in sync.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Track selection is separate.</div>
+<div class="ww"><span class="wl">B</span>Transitions always attach to their clips regardless of this toggle.</div>
+<div class="ww"><span class="wl">D</span>Source-timeline link is a different feature.</div>
+<div class="prin">Principle: Linked Selection = picking a clip also picks its linked audio/video partners.</div>
+</div></div>
+<div class="q">
+<div class="id">Q041 · Module 03</div>
+<div class="stem">If you want to keyframe an effect parameter (e.g. clip Position) in Edit, where do you find that control?</div>
+<div class="opt"><span class="l">A</span>The Effects Library</div>
+<div class="opt correct"><span class="l">B</span>The Inspector panel for the selected clip</div>
+<div class="opt"><span class="l">C</span>The Color page</div>
+<div class="opt"><span class="l">D</span>Right-click the clip → Animate</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: select the clip → Inspector shows Transform, Cropping, Composite, etc. with keyframe icons next to each parameter.</div>
+<div class="ex"><b>Example.</b> Select a clip, open Inspector → Transform, click the diamond next to Position to start a push-in animation.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Effects Library holds effects to add, not parameters of existing ones.</div>
+<div class="ww"><span class="wl">C</span>Color page is grading, not motion.</div>
+<div class="ww"><span class="wl">D</span>There's no 'Animate' option on the right-click menu.</div>
+<div class="prin">Principle: Inspector → parameter → click keyframe icon to animate.</div>
+</div></div>
+<div class="q">
+<div class="id">Q042 · Module 03</div>
+<div class="stem">What's the simplest way to fade in a clip on the Edit page?</div>
+<div class="opt"><span class="l">A</span>Apply a Cross Dissolve transition between two clips</div>
+<div class="opt correct"><span class="l">B</span>Drag the small white triangle handle at the top-left corner of the clip inward</div>
+<div class="opt"><span class="l">C</span>Keyframe the opacity from 0 to 100% manually</div>
+<div class="opt"><span class="l">D</span>Use Fusion to build a fade</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: every clip has fade handles at its top corners — drag inward for instant fade-in/out.</div>
+<div class="ex"><b>Example.</b> Hover the top-left corner of a clip, grab the white triangle and drag right for an instant one-second fade-in.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Cross Dissolve requires two clips; for a single fade-in the handle is fastest.</div>
+<div class="ww"><span class="wl">C</span>Works but is more steps than the fade handles.</div>
+<div class="ww"><span class="wl">D</span>Massive overkill for a fade.</div>
+<div class="prin">Principle: Top-corner triangles = built-in fade handles.</div>
+</div></div>
+<div class="modhead">Module 04 · The Cut Page</div>
+<div class="q">
+<div class="id">Q043 · Module 04</div>
+<div class="stem">What is the defining visual feature of the Cut page that the Edit page lacks?</div>
+<div class="opt"><span class="l">A</span>A built-in colour grading tool</div>
+<div class="opt correct"><span class="l">B</span>Two simultaneous timelines (full-project zoom-out + detail zoom-in) visible at the same time</div>
+<div class="opt"><span class="l">C</span>Voice-activated editing</div>
+<div class="opt"><span class="l">D</span>GPU-accelerated rendering</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the Cut page shows your whole project zoomed-out at the top and a detail view below — no constant zoom in/out.</div>
+<div class="ex"><b>Example.</b> On the Cut page the top strip shows your whole 20-minute project while the bottom shows the few seconds around the playhead — no zooming.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Both pages have access to the Color page for grading.</div>
+<div class="ww"><span class="wl">C</span>No voice-activated editing in Resolve.</div>
+<div class="ww"><span class="wl">D</span>Both pages use the same render engine.</div>
+<div class="prin">Principle: Cut = dual timeline (overview + detail).</div>
+</div></div>
+<div class="q">
+<div class="id">Q044 · Module 04</div>
+<div class="stem">What is Source Tape mode?</div>
+<div class="opt"><span class="l">A</span>A mode where Resolve only uses tape decks</div>
+<div class="opt correct"><span class="l">B</span>A mode that strings every clip in a bin end-to-end as one continuous source you can scrub through</div>
+<div class="opt"><span class="l">C</span>A backup mode for camera tapes</div>
+<div class="opt"><span class="l">D</span>An audio recording mode</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Source Tape concatenates all selected clips so you can scrub through them in one stream, marking in/out as you go.</div>
+<div class="ex"><b>Example.</b> Select a bin and hit Source Tape to scrub all 60 clips as one continuous reel, marking keepers as you go.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>No tape-deck restriction.</div>
+<div class="ww"><span class="wl">C</span>Not a backup feature.</div>
+<div class="ww"><span class="wl">D</span>Not an audio feature.</div>
+<div class="prin">Principle: Source Tape = scroll through every bin clip as if it were one long tape.</div>
+</div></div>
+<div class="q">
+<div class="id">Q045 · Module 04</div>
+<div class="stem">What does the Sync Bin do on the Cut page?</div>
+<div class="opt"><span class="l">A</span>Syncs your project to a cloud backup</div>
+<div class="opt correct"><span class="l">B</span>Auto-syncs multicam clips by audio and displays angles aligned to the playhead for live switching</div>
+<div class="opt"><span class="l">C</span>Synchronizes export settings across multiple deliverables</div>
+<div class="opt"><span class="l">D</span>Syncs the timeline frame rate to your camera</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Sync Bin auto-syncs cameras by audio; switching angles becomes drag-drop.</div>
+<div class="ex"><b>Example.</b> Three-camera interview: Sync Bin auto-aligns the cameras by audio, then you cut between angles just by clicking the one you want at the playhead.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Not a cloud-sync feature.</div>
+<div class="ww"><span class="wl">C</span>No export sync feature.</div>
+<div class="ww"><span class="wl">D</span>Frame rate is set in project settings.</div>
+<div class="prin">Principle: Sync Bin = live multicam angle switcher at the playhead.</div>
+</div></div>
+<div class="q">
+<div class="id">Q046 · Module 04</div>
+<div class="stem">On the Cut page, what does the Smart Insert button do by default?</div>
+<div class="opt"><span class="l">A</span>Pushes the inserted clip to the timeline's end</div>
+<div class="opt correct"><span class="l">B</span>Inserts at the nearest edit point — Resolve snaps the insertion to the closest clip boundary, not the exact playhead</div>
+<div class="opt"><span class="l">C</span>Inserts only video, not audio</div>
+<div class="opt"><span class="l">D</span>Inserts at the start of the timeline regardless of playhead</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Smart Insert snaps to the nearest edit point — saving you from micro-positioning the playhead.</div>
+<div class="ex"><b>Example.</b> On the Cut page Smart Insert drops your clip at the nearest cut, so you don't have to nudge the playhead onto the exact frame.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>That's Append, not Smart Insert.</div>
+<div class="ww"><span class="wl">C</span>Smart Insert respects link selection (both A and V by default).</div>
+<div class="ww"><span class="wl">D</span>It uses your playhead, just snaps to the nearest cut.</div>
+<div class="prin">Principle: Smart Insert = insert at nearest edit point (not exact playhead).</div>
+</div></div>
+<div class="q">
+<div class="id">Q047 · Module 04</div>
+<div class="stem">The Cut page is optimized for which kind of editing?</div>
+<div class="opt"><span class="l">A</span>Long-form narrative drama</div>
+<div class="opt correct"><span class="l">B</span>Quick-turn editing like vlogs, news, social cuts, multicam podcasts</div>
+<div class="opt"><span class="l">C</span>VFX-heavy compositing</div>
+<div class="opt"><span class="l">D</span>Color grading</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Cut is designed for speed — quick-turn delivery, multicam, vlog-style edits.</div>
+<div class="ex"><b>Example.</b> A daily vlog or news package gets cut on the Cut page, where speed beats frame-perfect precision.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Narrative drama generally uses the Edit page for precision.</div>
+<div class="ww"><span class="wl">C</span>VFX = Fusion page.</div>
+<div class="ww"><span class="wl">D</span>Grading = Color page.</div>
+<div class="prin">Principle: Cut = speed-oriented editing. Edit = precision-oriented editing.</div>
+</div></div>
+<div class="q">
+<div class="id">Q048 · Module 04</div>
+<div class="stem">What hardware control surface is the Cut page designed to work with?</div>
+<div class="opt correct"><span class="l">A</span>DaVinci Speed Editor</div>
+<div class="opt"><span class="l">B</span>DaVinci Advanced Panel</div>
+<div class="opt"><span class="l">C</span>DaVinci Micro Panel</div>
+<div class="opt"><span class="l">D</span>Wacom tablets only</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: the Speed Editor is the dedicated hardware companion for the Cut page workflow.</div>
+<div class="ex"><b>Example.</b> The DaVinci Speed Editor's jog wheel and source buttons are built around the Cut page for fast assembly.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Advanced Panel is for the Color page.</div>
+<div class="ww"><span class="wl">C</span>Micro Panel is also for the Color page.</div>
+<div class="ww"><span class="wl">D</span>Tablets are not Cut-specific.</div>
+<div class="prin">Principle: Cut page ↔ Speed Editor. Color page ↔ Micro/Mini/Advanced Panels.</div>
+</div></div>
+<div class="q">
+<div class="id">Q049 · Module 04</div>
+<div class="stem">Where is the Quick Export button on the Cut page?</div>
+<div class="opt"><span class="l">A</span>Bottom-left of the timeline</div>
+<div class="opt correct"><span class="l">B</span>Top-right of the page</div>
+<div class="opt"><span class="l">C</span>Inside the Inspector</div>
+<div class="opt"><span class="l">D</span>It doesn't exist on the Cut page</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Quick Export is a small icon in the top-right corner — one-click export to common presets without leaving Cut.</div>
+<div class="ex"><b>Example.</b> Finish a social clip on Cut, hit Quick Export top-right, pick YouTube, and it renders without opening Deliver.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>That area holds timeline controls.</div>
+<div class="ww"><span class="wl">C</span>Inspector doesn't host export controls.</div>
+<div class="ww"><span class="wl">D</span>It absolutely exists on Cut; that's the point of the speed-oriented design.</div>
+<div class="prin">Principle: Quick Export = top-right corner of the Cut page.</div>
+</div></div>
+<div class="q">
+<div class="id">Q050 · Module 04</div>
+<div class="stem">Cut and Edit both modify the same timeline. True or false?</div>
+<div class="opt correct"><span class="l">A</span>True — the underlying timeline is identical; only the workspace differs</div>
+<div class="opt"><span class="l">B</span>False — Cut and Edit use separate timelines</div>
+<div class="opt"><span class="l">C</span>True only for projects under 5 minutes</div>
+<div class="opt"><span class="l">D</span>False — they're entirely different timeline formats</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: the timeline is one — Cut and Edit just present different tools and views.</div>
+<div class="ex"><b>Example.</b> Cut a scene on the Cut page, switch to Edit, and it's the same timeline — your edits are right there, no import.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>There's only one timeline per sequence, accessible from either page.</div>
+<div class="ww"><span class="wl">C</span>No project-length condition exists.</div>
+<div class="ww"><span class="wl">D</span>Timelines are unified across pages.</div>
+<div class="prin">Principle: One timeline, multiple pages.</div>
+</div></div>
+<div class="q">
+<div class="id">Q051 · Module 04</div>
+<div class="stem">The two timelines on the Cut page show:</div>
+<div class="opt"><span class="l">A</span>A and B rolls separately</div>
+<div class="opt correct"><span class="l">B</span>The same timeline at two different zoom levels: full-project overview (top) + detailed view (bottom)</div>
+<div class="opt"><span class="l">C</span>The original and a backup</div>
+<div class="opt"><span class="l">D</span>Camera 1 and Camera 2 angles</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: top = whole project zoomed out; bottom = current section in detail. Same timeline, two zooms.</div>
+<div class="ex"><b>Example.</b> The Cut's upper timeline is the whole project zoomed out; the lower one is the detail — same edit, two zoom levels.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Resolve doesn't separate A/B rolls visually.</div>
+<div class="ww"><span class="wl">C</span>Not a backup view.</div>
+<div class="ww"><span class="wl">D</span>Camera angles appear in the Sync Bin, not the dual-timeline view.</div>
+<div class="prin">Principle: Dual timeline = overview zoom + detail zoom on the same edit.</div>
+</div></div>
+<div class="q">
+<div class="id">Q052 · Module 04</div>
+<div class="stem">Where do you switch between Cut and Edit pages?</div>
+<div class="opt"><span class="l">A</span>File → Switch Page</div>
+<div class="opt correct"><span class="l">B</span>Click the appropriate page icon in the bottom page navigation bar</div>
+<div class="opt"><span class="l">C</span>Cmd/Ctrl + Tab</div>
+<div class="opt"><span class="l">D</span>Right-click the timeline → switch view</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: page icons at the bottom of Resolve let you switch between Cut, Edit, and all other pages.</div>
+<div class="ex"><b>Example.</b> Click the Edit icon in the bottom bar to leave Cut and keep working on the identical timeline.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>File menu doesn't list page switching.</div>
+<div class="ww"><span class="wl">C</span>Cmd/Ctrl+Tab switches between system apps, not Resolve pages.</div>
+<div class="ww"><span class="wl">D</span>Right-click on the timeline shows clip options.</div>
+<div class="prin">Principle: Bottom bar = page switching, for all 7 pages.</div>
+</div></div>
+<div class="modhead">Module 05 · The Fusion Page</div>
+<div class="q">
+<div class="id">Q053 · Module 05</div>
+<div class="stem">What is the main interface element on the Fusion page that's different from every other page?</div>
+<div class="opt"><span class="l">A</span>A timeline</div>
+<div class="opt correct"><span class="l">B</span>A node graph (a flowchart of operations)</div>
+<div class="opt"><span class="l">C</span>A spreadsheet</div>
+<div class="opt"><span class="l">D</span>A 3D viewport</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Fusion uses a node-based compositing graph — each node is an operation, connections show data flow.</div>
+<div class="ex"><b>Example.</b> Fusion swaps the timeline for a node graph — boxes wired together, each doing one job, like a flowchart.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>All pages have timeline access, but it's not the defining feature here.</div>
+<div class="ww"><span class="wl">C</span>No spreadsheet view.</div>
+<div class="ww"><span class="wl">D</span>Fusion can do 3D, but the defining element is the node graph.</div>
+<div class="prin">Principle: Fusion = node-based compositing.</div>
+</div></div>
+<div class="q">
+<div class="id">Q054 · Module 05</div>
+<div class="stem">When you enter Fusion on a clip, what two nodes appear by default?</div>
+<div class="opt"><span class="l">A</span>Camera and Renderer</div>
+<div class="opt correct"><span class="l">B</span>MediaIn and MediaOut</div>
+<div class="opt"><span class="l">C</span>Input and Output</div>
+<div class="opt"><span class="l">D</span>Source and Sink</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: MediaIn imports the timeline clip into Fusion; MediaOut returns the composite to the timeline.</div>
+<div class="ex"><b>Example.</b> Enter Fusion and you see MediaIn (your clip arriving) wired to MediaOut (the result going back to the timeline).</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Not real Fusion node names.</div>
+<div class="ww"><span class="wl">C</span>Not the actual node names in Resolve.</div>
+<div class="ww"><span class="wl">D</span>Not real Fusion node names.</div>
+<div class="prin">Principle: MediaIn → composition → MediaOut.</div>
+</div></div>
+<div class="q">
+<div class="id">Q055 · Module 05</div>
+<div class="stem">What is the Merge node used for?</div>
+<div class="opt"><span class="l">A</span>Merging two timelines together</div>
+<div class="opt correct"><span class="l">B</span>Combining a foreground element over a background, with optional masking</div>
+<div class="opt"><span class="l">C</span>Joining audio tracks</div>
+<div class="opt"><span class="l">D</span>Combining two grades</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Merge combines a foreground (green input) over a background (yellow), with optional effect mask (blue).</div>
+<div class="ex"><b>Example.</b> To put a logo over footage you add a Merge: background plate in yellow, logo in green, and it composites them.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Timelines don't merge in Fusion.</div>
+<div class="ww"><span class="wl">C</span>Audio isn't handled in Fusion.</div>
+<div class="ww"><span class="wl">D</span>Grades belong to the Color page.</div>
+<div class="prin">Principle: Merge = composite foreground over background.</div>
+</div></div>
+<div class="q">
+<div class="id">Q056 · Module 05</div>
+<div class="stem">The Merge node has three inputs colored yellow, green, and blue. What do they represent?</div>
+<div class="opt"><span class="l">A</span>Yellow = audio, green = video, blue = effects</div>
+<div class="opt correct"><span class="l">B</span>Yellow = background, green = foreground, blue = effect mask</div>
+<div class="opt"><span class="l">C</span>Yellow = red channel, green = green channel, blue = blue channel</div>
+<div class="opt"><span class="l">D</span>Yellow = R, green = G, blue = B alpha</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: yellow = background, green = foreground, blue = optional effect mask. This convention is used across many Fusion nodes.</div>
+<div class="ex"><b>Example.</b> On a Merge, the sky plate goes in the yellow (background) input and the bird element in green (foreground); blue takes a mask if needed.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Audio isn't routed in Fusion.</div>
+<div class="ww"><span class="wl">C</span>That's RGB channel separation, not Merge inputs.</div>
+<div class="ww"><span class="wl">D</span>Inputs aren't channel-based.</div>
+<div class="prin">Principle: Yellow/green/blue = background/foreground/mask, universally in Fusion.</div>
+</div></div>
+<div class="q">
+<div class="id">Q057 · Module 05</div>
+<div class="stem">Where is the Inspector panel located on the Fusion page?</div>
+<div class="opt"><span class="l">A</span>Bottom-left</div>
+<div class="opt"><span class="l">B</span>Top-left</div>
+<div class="opt correct"><span class="l">C</span>Right side</div>
+<div class="opt"><span class="l">D</span>It's hidden by default</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Correct: the Inspector sits on the right; it shows the parameters of whatever node you select.</div>
+<div class="ex"><b>Example.</b> Click a Blur node and its strength slider appears in the Inspector on the right.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Bottom-left holds the toolbar / spline editor area.</div>
+<div class="ww"><span class="wl">B</span>Top-left has the Effects Library.</div>
+<div class="ww"><span class="wl">D</span>It's visible by default.</div>
+<div class="prin">Principle: Fusion Inspector = right side, parameters of selected node.</div>
+</div></div>
+<div class="q">
+<div class="id">Q058 · Module 05</div>
+<div class="stem">How many viewers does the Fusion page have?</div>
+<div class="opt"><span class="l">A</span>1</div>
+<div class="opt correct"><span class="l">B</span>2</div>
+<div class="opt"><span class="l">C</span>3</div>
+<div class="opt"><span class="l">D</span>4</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: two viewers — useful for comparing one node's output to another while working.</div>
+<div class="ex"><b>Example.</b> Load your final MediaOut in the right viewer and the node you're tweaking in the left, to compare as you work.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>There are two for split-view inspection.</div>
+<div class="ww"><span class="wl">C</span>Two by default.</div>
+<div class="ww"><span class="wl">D</span>Two by default.</div>
+<div class="prin">Principle: Fusion has dual viewers for compare-while-working.</div>
+</div></div>
+<div class="q">
+<div class="id">Q059 · Module 05</div>
+<div class="stem">How do you load a selected node into the left viewer?</div>
+<div class="opt"><span class="l">A</span>Drag the node onto the viewer</div>
+<div class="opt"><span class="l">B</span>Right-click → View</div>
+<div class="opt correct"><span class="l">C</span>Press 1 on the keyboard with the node selected</div>
+<div class="opt"><span class="l">D</span>Press V</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Correct: 1 loads to left viewer, 2 loads to right viewer.</div>
+<div class="ex"><b>Example.</b> Select a node and press 1 to throw it into the left viewer for inspection.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Drag-onto-viewer doesn't activate the view.</div>
+<div class="ww"><span class="wl">B</span>Right-click has view options but the keyboard shortcut is faster.</div>
+<div class="ww"><span class="wl">D</span>V has no view binding.</div>
+<div class="prin">Principle: Press 1 for left viewer, 2 for right viewer.</div>
+</div></div>
+<div class="q">
+<div class="id">Q060 · Module 05</div>
+<div class="stem">How do you add a new tool/node to the Fusion graph?</div>
+<div class="opt correct"><span class="l">A</span>Drag from the Effects Library, or use Shift+Spacebar to open a search dialog</div>
+<div class="opt"><span class="l">B</span>Right-click → New Node</div>
+<div class="opt"><span class="l">C</span>File → New Tool</div>
+<div class="opt"><span class="l">D</span>Click the canvas → it auto-adds</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: drag from the Effects Library (top-left) or press Shift+Spacebar for a searchable picker.</div>
+<div class="ex"><b>Example.</b> Press Shift+Spacebar, type 'blur', hit enter — the Blur node drops straight into your graph.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Right-click has 'Add Tool' but it's slower than Shift+Spacebar.</div>
+<div class="ww"><span class="wl">C</span>File menu doesn't host tool insertion.</div>
+<div class="ww"><span class="wl">D</span>Clicking the canvas doesn't auto-add anything.</div>
+<div class="prin">Principle: Shift+Spacebar = fastest way to add a Fusion tool.</div>
+</div></div>
+<div class="q">
+<div class="id">Q061 · Module 05</div>
+<div class="stem">What is the Spline editor used for in Fusion?</div>
+<div class="opt"><span class="l">A</span>Drawing vector shapes</div>
+<div class="opt correct"><span class="l">B</span>Editing the interpolation curve of animated parameters (keyframe easing)</div>
+<div class="opt"><span class="l">C</span>Adjusting the color of a clip</div>
+<div class="opt"><span class="l">D</span>Creating Bezier masks</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Spline lets you reshape how parameters animate between keyframes — for smooth easing, etc.</div>
+<div class="ex"><b>Example.</b> Your text snaps to a halt; open the Spline editor and ease the keyframe so it glides to a stop instead.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Vector drawing is a different tool.</div>
+<div class="ww"><span class="wl">C</span>Color belongs to the Color page.</div>
+<div class="ww"><span class="wl">D</span>Bezier masks use Polygon tools, not the Spline editor.</div>
+<div class="prin">Principle: Spline editor = keyframe interpolation curves.</div>
+</div></div>
+<div class="q">
+<div class="id">Q062 · Module 05</div>
+<div class="stem">Where is the Effects Library / tool browser on the Fusion page?</div>
+<div class="opt correct"><span class="l">A</span>Top-left, by default</div>
+<div class="opt"><span class="l">B</span>Top-right</div>
+<div class="opt"><span class="l">C</span>Bottom</div>
+<div class="opt"><span class="l">D</span>Hidden — accessed only via right-click</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: the Effects Library opens from the top-left of the Fusion page.</div>
+<div class="ex"><b>Example.</b> Drag a FastNoise generator from the top-left Effects Library into the node graph.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Top-right has the Inspector.</div>
+<div class="ww"><span class="wl">C</span>Bottom area holds the node graph.</div>
+<div class="ww"><span class="wl">D</span>It's a visible panel, not just a right-click menu.</div>
+<div class="prin">Principle: Effects Library = top-left of Fusion.</div>
+</div></div>
+<div class="q">
+<div class="id">Q063 · Module 05</div>
+<div class="stem">Where does the Fusion node graph appear?</div>
+<div class="opt"><span class="l">A</span>Top of the page</div>
+<div class="opt correct"><span class="l">B</span>Bottom half of the page</div>
+<div class="opt"><span class="l">C</span>Right sidebar</div>
+<div class="opt"><span class="l">D</span>Inside the Inspector</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the node graph occupies the bottom half of the Fusion page; viewers sit above it.</div>
+<div class="ex"><b>Example.</b> The Fusion node graph fills the bottom half of the page; the viewers sit above it.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>The top holds viewers.</div>
+<div class="ww"><span class="wl">C</span>The right side holds the Inspector.</div>
+<div class="ww"><span class="wl">D</span>The Inspector shows parameters, not the graph.</div>
+<div class="prin">Principle: Fusion node graph = bottom half of page.</div>
+</div></div>
+<div class="q">
+<div class="id">Q064 · Module 05</div>
+<div class="stem">What does a Tracker node typically do in Fusion?</div>
+<div class="opt"><span class="l">A</span>Tracks render times</div>
+<div class="opt correct"><span class="l">B</span>Tracks a feature in the image across frames so you can stick elements to it</div>
+<div class="opt"><span class="l">C</span>Tracks your edit history</div>
+<div class="opt"><span class="l">D</span>Tracks file paths</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Tracker follows a feature (e.g. an eye, a sign, a moving prop) so you can attach text or graphics to it via Match Move.</div>
+<div class="ex"><b>Example.</b> Track the moving car's number plate, then attach a blur to the tracker so it follows and hides the plate.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Render tracking isn't a node function.</div>
+<div class="ww"><span class="wl">C</span>Edit history is a separate concept.</div>
+<div class="ww"><span class="wl">D</span>File paths aren't tracked nodally.</div>
+<div class="prin">Principle: Tracker node = follow a feature, drive a graphic with it.</div>
+</div></div>
+<div class="modhead">Module 06 · The Color Page — Basics</div>
+<div class="q">
+<div class="id">Q065 · Module 06</div>
+<div class="stem">What's the unique thing about how the Color page selects which clip to grade?</div>
+<div class="opt"><span class="l">A</span>You drag the clip onto a colour effect to grade it</div>
+<div class="opt correct"><span class="l">B</span>Whichever clip the playhead is over is automatically the active clip being graded</div>
+<div class="opt"><span class="l">C</span>You must double-click a clip to grade it</div>
+<div class="opt"><span class="l">D</span>You select the clip from a dropdown</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: position the playhead over a clip; that clip is what your grade applies to.</div>
+<div class="ex"><b>Example.</b> Move the playhead onto shot 12 and the wheels now grade shot 12 — no selecting required.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>No effect-drag concept on the Color page.</div>
+<div class="ww"><span class="wl">C</span>No double-click needed.</div>
+<div class="ww"><span class="wl">D</span>No dropdown selector.</div>
+<div class="prin">Principle: Color page: playhead = active clip.</div>
+</div></div>
+<div class="q">
+<div class="id">Q066 · Module 06</div>
+<div class="stem">Where does the Node Graph live on the Color page?</div>
+<div class="opt"><span class="l">A</span>Bottom-left</div>
+<div class="opt correct"><span class="l">B</span>Top-right</div>
+<div class="opt"><span class="l">C</span>Center bottom</div>
+<div class="opt"><span class="l">D</span>Right sidebar</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the node graph sits in the top-right by default.</div>
+<div class="ex"><b>Example.</b> Your clip's nodes sit in the top-right; pressing Alt+S there adds another correction in series.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Bottom-left often holds the Gallery or thumbnails.</div>
+<div class="ww"><span class="wl">C</span>Center bottom holds the timeline strip.</div>
+<div class="ww"><span class="wl">D</span>Right sidebar holds the Inspector / controls.</div>
+<div class="prin">Principle: Color node graph = top-right.</div>
+</div></div>
+<div class="q">
+<div class="id">Q067 · Module 06</div>
+<div class="stem">Where do the video scopes (Parade, Waveform, Vectorscope) live on the Color page?</div>
+<div class="opt correct"><span class="l">A</span>Bottom-right area</div>
+<div class="opt"><span class="l">B</span>Top-left</div>
+<div class="opt"><span class="l">C</span>Inside the viewer</div>
+<div class="opt"><span class="l">D</span>On the Edit page only</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: scopes occupy the bottom-right panel; you can switch between Parade, Waveform, Vectorscope, Histogram from there.</div>
+<div class="ex"><b>Example.</b> Open the bottom-right scopes panel and switch to Parade to check your whites are neutral.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Top-left holds the Gallery.</div>
+<div class="ww"><span class="wl">C</span>The viewer shows the image, not the scopes.</div>
+<div class="ww"><span class="wl">D</span>Scopes are a Color-page feature primarily.</div>
+<div class="prin">Principle: Scopes panel = bottom-right of the Color page.</div>
+</div></div>
+<div class="q">
+<div class="id">Q068 · Module 06</div>
+<div class="stem">Which video scope shows the three RGB channels side-by-side as separate waveforms?</div>
+<div class="opt"><span class="l">A</span>Histogram</div>
+<div class="opt"><span class="l">B</span>Vectorscope</div>
+<div class="opt correct"><span class="l">C</span>Parade</div>
+<div class="opt"><span class="l">D</span>Curves</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Correct: Parade scope shows R, G, B as three side-by-side waveforms — used for spotting colour casts.</div>
+<div class="ex"><b>Example.</b> Point the Parade at a grey wall — if the red channel sits higher than green and blue, the shot is too warm.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Histogram shows brightness distribution.</div>
+<div class="ww"><span class="wl">B</span>Vectorscope shows hue and saturation on a circular grid.</div>
+<div class="ww"><span class="wl">D</span>Curves is a control, not a scope.</div>
+<div class="prin">Principle: Parade = R, G, B channels side by side.</div>
+</div></div>
+<div class="q">
+<div class="id">Q069 · Module 06</div>
+<div class="stem">Which scope is best for evaluating skin tones and saturation?</div>
+<div class="opt"><span class="l">A</span>Histogram</div>
+<div class="opt correct"><span class="l">B</span>Vectorscope</div>
+<div class="opt"><span class="l">C</span>Parade</div>
+<div class="opt"><span class="l">D</span>Waveform</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Vectorscope plots hue and saturation; the skin-tone line runs roughly from centre to 11 o'clock.</div>
+<div class="ex"><b>Example.</b> Turn on the skin-tone line on the Vectorscope and nudge the grade until the face cluster sits along that 11 o'clock line.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Histogram is for luminance distribution.</div>
+<div class="ww"><span class="wl">C</span>Parade is for channel balance.</div>
+<div class="ww"><span class="wl">D</span>Waveform shows brightness over time.</div>
+<div class="prin">Principle: Vectorscope = hue/saturation; skin tones live on the 11 o'clock line.</div>
+</div></div>
+<div class="q">
+<div class="id">Q070 · Module 06</div>
+<div class="stem">In the Primaries Wheels palette, what are the three default colour wheels named?</div>
+<div class="opt"><span class="l">A</span>Red / Green / Blue</div>
+<div class="opt"><span class="l">B</span>Shadows / Midtones / Highlights</div>
+<div class="opt correct"><span class="l">C</span>Lift / Gamma / Gain</div>
+<div class="opt"><span class="l">D</span>Black / Grey / White</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Correct: Lift (shadows), Gamma (midtones), Gain (highlights), plus an Offset wheel.</div>
+<div class="ex"><b>Example.</b> Pull Lift down to deepen the blacks, push Gamma up to brighten faces, ride Gain to set the highlights.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>R/G/B are channel labels, not wheel names.</div>
+<div class="ww"><span class="wl">B</span>Conceptually correct, but the labelled controls are Lift/Gamma/Gain.</div>
+<div class="ww"><span class="wl">D</span>Not actual control names.</div>
+<div class="prin">Principle: Lift = shadows, Gamma = midtones, Gain = highlights.</div>
+</div></div>
+<div class="q">
+<div class="id">Q071 · Module 06</div>
+<div class="stem">What does dragging the master ring (the slider under the wheel) for Gain to the right do?</div>
+<div class="opt"><span class="l">A</span>Increases saturation</div>
+<div class="opt correct"><span class="l">B</span>Brightens the image, with the strongest effect on highlights</div>
+<div class="opt"><span class="l">C</span>Adds blue to highlights</div>
+<div class="opt"><span class="l">D</span>Crushes the blacks</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Gain master = brightness, with most effect at the top end (highlights).</div>
+<div class="ex"><b>Example.</b> Drag the Gain ring right and the bright sky lifts while the shadows barely move.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Saturation isn't controlled by the master rings.</div>
+<div class="ww"><span class="wl">C</span>Colour bias = centre dot, not the master ring.</div>
+<div class="ww"><span class="wl">D</span>Crushing blacks = pulling Lift down, not Gain up.</div>
+<div class="prin">Principle: Master ring = brightness; centre dot = colour bias.</div>
+</div></div>
+<div class="q">
+<div class="id">Q072 · Module 06</div>
+<div class="stem">What does the centre dot of a colour wheel control?</div>
+<div class="opt"><span class="l">A</span>Brightness of that tonal range</div>
+<div class="opt correct"><span class="l">B</span>Colour cast (hue) applied to that tonal range</div>
+<div class="opt"><span class="l">C</span>Contrast</div>
+<div class="opt"><span class="l">D</span>Saturation</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the dot you drag inside the wheel tints that range toward a hue.</div>
+<div class="ex"><b>Example.</b> Drag the Lift centre dot toward teal to push a cool tint into the shadows.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Brightness = master ring beneath the wheel.</div>
+<div class="ww"><span class="wl">C</span>Contrast is separate.</div>
+<div class="ww"><span class="wl">D</span>Saturation has its own slider.</div>
+<div class="prin">Principle: Master ring = brightness; centre dot = colour.</div>
+</div></div>
+<div class="q">
+<div class="id">Q073 · Module 06</div>
+<div class="stem">What is a Qualifier used for on the Color page?</div>
+<div class="opt"><span class="l">A</span>Adding contrast</div>
+<div class="opt correct"><span class="l">B</span>Selecting (isolating) a range of pixels by hue, saturation, and luminance</div>
+<div class="opt"><span class="l">C</span>Increasing render quality</div>
+<div class="opt"><span class="l">D</span>Picking a render preset</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Qualifier picks pixels by HSL so you can grade only that range (e.g. only the sky, only the skin).</div>
+<div class="ex"><b>Example.</b> Qualify the sky's blue with the Qualifier picker, then desaturate only the sky without touching the rest of the frame.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Contrast is a different control.</div>
+<div class="ww"><span class="wl">C</span>Not a render feature.</div>
+<div class="ww"><span class="wl">D</span>Not a render feature.</div>
+<div class="prin">Principle: Qualifier = HSL-based pixel selection for isolation.</div>
+</div></div>
+<div class="q">
+<div class="id">Q074 · Module 06</div>
+<div class="stem">What is a Power Window?</div>
+<div class="opt correct"><span class="l">A</span>A shape (circle, rectangle, polygon, etc.) drawn on the viewer that limits where a node's correction applies</div>
+<div class="opt"><span class="l">B</span>A keyboard shortcut layout</div>
+<div class="opt"><span class="l">C</span>A high-priority render queue</div>
+<div class="opt"><span class="l">D</span>A scope view</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: Power Windows are vector shapes you draw on the image; the node only affects what's inside (or outside) the shape.</div>
+<div class="ex"><b>Example.</b> Draw a circular Power Window over the face and brighten only inside it to draw the eye.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Not a keyboard concept.</div>
+<div class="ww"><span class="wl">C</span>Not render-related.</div>
+<div class="ww"><span class="wl">D</span>Not a scope.</div>
+<div class="prin">Principle: Power Window = geometric mask limiting a correction.</div>
+</div></div>
+<div class="q">
+<div class="id">Q075 · Module 06</div>
+<div class="stem">Where is the Gallery panel (for stills and references) located on the Color page?</div>
+<div class="opt correct"><span class="l">A</span>Top-left</div>
+<div class="opt"><span class="l">B</span>Bottom-right</div>
+<div class="opt"><span class="l">C</span>Top-right</div>
+<div class="opt"><span class="l">D</span>Right sidebar</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: the Gallery sits in the top-left area; drag stills here, or grab stills from your shots.</div>
+<div class="ex"><b>Example.</b> Grab a still of your hero shot into the top-left Gallery, then wipe it against other shots to match them.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Bottom-right holds scopes.</div>
+<div class="ww"><span class="wl">C</span>Top-right holds the node graph.</div>
+<div class="ww"><span class="wl">D</span>Right sidebar holds the Inspector / controls.</div>
+<div class="prin">Principle: Gallery = top-left of Color page.</div>
+</div></div>
+<div class="q">
+<div class="id">Q076 · Module 06</div>
+<div class="stem">How do you add a new serial (sequential) node to the node graph?</div>
+<div class="opt correct"><span class="l">A</span>Press Alt+S</div>
+<div class="opt"><span class="l">B</span>Press Cmd/Ctrl+N</div>
+<div class="opt"><span class="l">C</span>Right-click → Add Node → Serial</div>
+<div class="opt"><span class="l">D</span>Press Alt+P</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: Alt+S adds a serial node after the current one.</div>
+<div class="ex"><b>Example.</b> Press Alt+S to add a fresh serial node so your vignette sits after your colour balance.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Cmd/Ctrl+N creates a new project, not a node.</div>
+<div class="ww"><span class="wl">C</span>Works (right-click → Add Node → Serial) but slower than Alt+S.</div>
+<div class="ww"><span class="wl">D</span>Alt+P adds a Parallel mixer, not a serial node.</div>
+<div class="prin">Principle: Alt+S = add serial node; Alt+P = parallel; Alt+L = layer mixer.</div>
+</div></div>
+<div class="q">
+<div class="id">Q077 · Module 06</div>
+<div class="stem">What does the small number on a node (e.g. '1') do when clicked?</div>
+<div class="opt"><span class="l">A</span>Deletes the node</div>
+<div class="opt correct"><span class="l">B</span>Toggles the node on/off so you can A/B its effect</div>
+<div class="opt"><span class="l">C</span>Opens the node's properties</div>
+<div class="opt"><span class="l">D</span>Adds a new node</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: clicking the small node number disables/enables that node — fast A/B comparison.</div>
+<div class="ex"><b>Example.</b> Click the '1' on a node to switch your grade off and on and confirm it's actually improving the shot.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Delete is via right-click or backspace.</div>
+<div class="ww"><span class="wl">C</span>Properties are in the Inspector / palettes below.</div>
+<div class="ww"><span class="wl">D</span>Not how new nodes are added.</div>
+<div class="prin">Principle: Click the node number = toggle the node on/off.</div>
+</div></div>
+<div class="q">
+<div class="id">Q078 · Module 06</div>
+<div class="stem">What's the fastest way to copy a grade from one clip to another?</div>
+<div class="opt"><span class="l">A</span>Render and re-import</div>
+<div class="opt correct"><span class="l">B</span>Mouse over the source clip thumbnail and middle-click</div>
+<div class="opt"><span class="l">C</span>Drag the node graph onto the target</div>
+<div class="opt"><span class="l">D</span>Right-click → Save → right-click target → Load</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: middle-click the source clip's thumbnail strip with the target clip selected — instant grade transfer.</div>
+<div class="ex"><b>Example.</b> Select the ungraded shot, hover the graded shot's thumbnail and middle-click — the whole grade copies across instantly.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Re-rendering is destructive and slow.</div>
+<div class="ww"><span class="wl">C</span>Dragging the node graph isn't supported.</div>
+<div class="ww"><span class="wl">D</span>Works (Save Grade → Apply Saved Grade) but takes more steps than middle-click.</div>
+<div class="prin">Principle: Middle-click the source thumbnail = instant grade copy.</div>
+</div></div>
+<div class="modhead">Module 07 · The Fairlight Page</div>
+<div class="q">
+<div class="id">Q079 · Module 07</div>
+<div class="stem">Where is the Mixer panel located on the Fairlight page by default?</div>
+<div class="opt"><span class="l">A</span>Left side</div>
+<div class="opt correct"><span class="l">B</span>Right side</div>
+<div class="opt"><span class="l">C</span>Bottom</div>
+<div class="opt"><span class="l">D</span>Top</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the Mixer with channel strips sits on the right.</div>
+<div class="ex"><b>Example.</b> On Fairlight the channel strips with faders run down the right in the Mixer.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>The left holds the Index / track list.</div>
+<div class="ww"><span class="wl">C</span>The bottom is for the timeline.</div>
+<div class="ww"><span class="wl">D</span>The top has the viewer and meters.</div>
+<div class="prin">Principle: Fairlight Mixer = right side; channel strips per track.</div>
+</div></div>
+<div class="q">
+<div class="id">Q080 · Module 07</div>
+<div class="stem">What does the cyan-coloured horizontal strip in the channel strip provide?</div>
+<div class="opt"><span class="l">A</span>Bus routing</div>
+<div class="opt correct"><span class="l">B</span>Equalization (EQ)</div>
+<div class="opt"><span class="l">C</span>Dynamics (compressor, gate, limiter)</div>
+<div class="opt"><span class="l">D</span>Volume automation</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the cyan strip opens the EQ for that track.</div>
+<div class="ex"><b>Example.</b> Double-click the cyan strip on the dialogue channel to high-pass out the low rumble.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Bus routing has its own dropdowns.</div>
+<div class="ww"><span class="wl">C</span>Dynamics is the green strip.</div>
+<div class="ww"><span class="wl">D</span>Volume is the main fader at the bottom.</div>
+<div class="prin">Principle: Cyan = EQ; green = Dynamics.</div>
+</div></div>
+<div class="q">
+<div class="id">Q081 · Module 07</div>
+<div class="stem">What does the green-coloured strip in the channel strip open?</div>
+<div class="opt"><span class="l">A</span>EQ</div>
+<div class="opt correct"><span class="l">B</span>Dynamics — Compressor, Gate, Expander, Limiter</div>
+<div class="opt"><span class="l">C</span>Effects</div>
+<div class="opt"><span class="l">D</span>Pan controls</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the green strip opens the dynamics processors.</div>
+<div class="ex"><b>Example.</b> Click the green strip to drop a compressor on the voice and even out the loud and soft words.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>EQ is the cyan strip.</div>
+<div class="ww"><span class="wl">C</span>Effects have their own slot below.</div>
+<div class="ww"><span class="wl">D</span>Pan has its own dial above the fader.</div>
+<div class="prin">Principle: Green = Dynamics.</div>
+</div></div>
+<div class="q">
+<div class="id">Q082 · Module 07</div>
+<div class="stem">What is Bus 1 by default?</div>
+<div class="opt"><span class="l">A</span>The drum bus</div>
+<div class="opt correct"><span class="l">B</span>The main mix output bus</div>
+<div class="opt"><span class="l">C</span>An effects send</div>
+<div class="opt"><span class="l">D</span>Unused</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Bus 1 is the main stereo (or 5.1) mix output; tracks route here by default.</div>
+<div class="ex"><b>Example.</b> Every track feeds Bus 1 by default — that's the stereo mix that actually reaches your speakers and the export.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>No default drum bus exists.</div>
+<div class="ww"><span class="wl">C</span>Effects sends are separate.</div>
+<div class="ww"><span class="wl">D</span>Bus 1 is in active use as the main mix.</div>
+<div class="prin">Principle: Bus 1 = main mix output.</div>
+</div></div>
+<div class="q">
+<div class="id">Q083 · Module 07</div>
+<div class="stem">Where are the Solo and Mute buttons on a Fairlight track?</div>
+<div class="opt"><span class="l">A</span>Inside the timeline clip</div>
+<div class="opt correct"><span class="l">B</span>On the track header (the strip on the left of the timeline) and on the channel strip in the Mixer</div>
+<div class="opt"><span class="l">C</span>Right-click → Solo/Mute</div>
+<div class="opt"><span class="l">D</span>Only in the Inspector</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Solo and Mute live on both the track header and the channel strip — pick whichever is more convenient.</div>
+<div class="ex"><b>Example.</b> Hit M on the music track header to mute it, or use the same button on its channel strip in the Mixer.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Clips don't hold track-level controls.</div>
+<div class="ww"><span class="wl">C</span>Right-click has other options.</div>
+<div class="ww"><span class="wl">D</span>Inspector shows clip-level controls.</div>
+<div class="prin">Principle: Solo/Mute = track header AND channel strip.</div>
+</div></div>
+<div class="q">
+<div class="id">Q084 · Module 07</div>
+<div class="stem">The track header strip on the Fairlight timeline is located:</div>
+<div class="opt"><span class="l">A</span>To the right of the track</div>
+<div class="opt correct"><span class="l">B</span>To the left of the track</div>
+<div class="opt"><span class="l">C</span>Above the track</div>
+<div class="opt"><span class="l">D</span>Inside each clip</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: every track has a header on its left edge with name, arm, solo/mute, format controls.</div>
+<div class="ex"><b>Example.</b> The track's name, arm and mute buttons sit on the header at the left edge of each Fairlight track.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>The right of the timeline holds the Mixer.</div>
+<div class="ww"><span class="wl">C</span>The top of the timeline holds the timeline ruler.</div>
+<div class="ww"><span class="wl">D</span>Clips are independent of track-level controls.</div>
+<div class="prin">Principle: Track header = left edge of each Fairlight track.</div>
+</div></div>
+<div class="q">
+<div class="id">Q085 · Module 07</div>
+<div class="stem">What does the volume fader (the long vertical slider on each channel strip) measure in?</div>
+<div class="opt"><span class="l">A</span>Percentage (0-100%)</div>
+<div class="opt correct"><span class="l">B</span>Decibels (dB), centred around 0 dB</div>
+<div class="opt"><span class="l">C</span>Watts</div>
+<div class="opt"><span class="l">D</span>Frequencies</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: faders use dB with 0 dB as unity gain (no change); positive values amplify, negative values attenuate.</div>
+<div class="ex"><b>Example.</b> Set the fader to 0 dB for unity (no change), or pull it to -6 dB to bring the music down under the voice.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Linear percentage isn't how pro audio is measured.</div>
+<div class="ww"><span class="wl">C</span>Watts measure power output, not mixer level.</div>
+<div class="ww"><span class="wl">D</span>Frequencies belong to EQ, not the fader.</div>
+<div class="prin">Principle: Mixer fader = dB; 0 dB is unity gain.</div>
+</div></div>
+<div class="q">
+<div class="id">Q086 · Module 07</div>
+<div class="stem">What does the audio meter colour change to when a signal approaches clipping (0 dB)?</div>
+<div class="opt"><span class="l">A</span>Green throughout</div>
+<div class="opt correct"><span class="l">B</span>Yellow then red as it nears 0 dB</div>
+<div class="opt"><span class="l">C</span>Stays the same colour</div>
+<div class="opt"><span class="l">D</span>Blue</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: green = safe, yellow = warning, red = approaching/at clipping. Aim for peaks in yellow, average in green.</div>
+<div class="ex"><b>Example.</b> Aim dialogue peaks into the yellow; if the meter flashes red you're clipping and must pull the level down.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Green = safe level.</div>
+<div class="ww"><span class="wl">C</span>Colours absolutely change.</div>
+<div class="ww"><span class="wl">D</span>Blue isn't a meter colour.</div>
+<div class="prin">Principle: Green → yellow → red as level rises toward 0 dB.</div>
+</div></div>
+<div class="q">
+<div class="id">Q087 · Module 07</div>
+<div class="stem">What does arming a track (the red record button on the track header) do?</div>
+<div class="opt correct"><span class="l">A</span>Enables recording for that track</div>
+<div class="opt"><span class="l">B</span>Mutes other tracks</div>
+<div class="opt"><span class="l">C</span>Creates a backup</div>
+<div class="opt"><span class="l">D</span>Locks the track</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: arming enables recording onto that track from your input.</div>
+<div class="ex"><b>Example.</b> Click the red arm button on a track, then record your voiceover straight onto it.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Solo does that, not arm.</div>
+<div class="ww"><span class="wl">C</span>Not a backup function.</div>
+<div class="ww"><span class="wl">D</span>Lock has its own icon.</div>
+<div class="prin">Principle: Arm = enable recording on that track.</div>
+</div></div>
+<div class="q">
+<div class="id">Q088 · Module 07</div>
+<div class="stem">What's a Bus in Fairlight?</div>
+<div class="opt correct"><span class="l">A</span>A grouping channel — multiple tracks can route to it for shared processing or mixing</div>
+<div class="opt"><span class="l">B</span>A backup file</div>
+<div class="opt"><span class="l">C</span>A type of clip</div>
+<div class="opt"><span class="l">D</span>A timeline marker type</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: a Bus collects multiple track signals for shared processing (e.g. all dialogue → Dialogue Bus → EQ → Main).</div>
+<div class="ex"><b>Example.</b> Route all five dialogue tracks to a Dialogue Bus so one fader and one EQ control the whole voice mix.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Not a backup.</div>
+<div class="ww"><span class="wl">C</span>Not a clip type.</div>
+<div class="ww"><span class="wl">D</span>Not a marker.</div>
+<div class="prin">Principle: Bus = signal-collection channel for shared processing.</div>
+</div></div>
+<div class="q">
+<div class="id">Q089 · Module 07</div>
+<div class="stem">If you want to apply one EQ to a group of tracks (say, all dialogue), what's the cleanest approach?</div>
+<div class="opt"><span class="l">A</span>Apply the same EQ to each track individually</div>
+<div class="opt correct"><span class="l">B</span>Route those tracks to a sub-bus and apply EQ on the sub-bus once</div>
+<div class="opt"><span class="l">C</span>Render and re-import</div>
+<div class="opt"><span class="l">D</span>Use a separate timeline</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: a sub-bus collects the tracks; EQ on the bus applies to all of them with one set of controls.</div>
+<div class="ex"><b>Example.</b> Instead of EQ-ing six dialogue tracks one by one, send them to a sub-bus and EQ it once.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Works but is brittle and hard to update.</div>
+<div class="ww"><span class="wl">C</span>Destructive and unnecessary.</div>
+<div class="ww"><span class="wl">D</span>Doesn't solve the shared-processing problem.</div>
+<div class="prin">Principle: Sub-bus = shared processing for a group of tracks.</div>
+</div></div>
+<div class="q">
+<div class="id">Q090 · Module 07</div>
+<div class="stem">What does the Effects rack on a channel strip let you do?</div>
+<div class="opt correct"><span class="l">A</span>Add chained plugins like Reverb, De-Esser, etc. to that track</div>
+<div class="opt"><span class="l">B</span>Add transitions between clips</div>
+<div class="opt"><span class="l">C</span>Add visual effects</div>
+<div class="opt"><span class="l">D</span>Adjust track height</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: the Effects rack hosts audio plugins (Reverb, De-Esser, Pitch, etc.) for that track.</div>
+<div class="ex"><b>Example.</b> Drop a De-Esser then a Reverb into the channel's Effects rack to chain them on that voice.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Transitions belong on the timeline (and aren't audio-specific).</div>
+<div class="ww"><span class="wl">C</span>Visual effects belong to Fusion/Edit/Color, not Fairlight.</div>
+<div class="ww"><span class="wl">D</span>Track height is a view option.</div>
+<div class="prin">Principle: Effects rack = audio plugin chain per channel.</div>
+</div></div>
+<div class="modhead">Module 08 · The Deliver Page</div>
+<div class="q">
+<div class="id">Q091 · Module 08</div>
+<div class="stem">Where is the Render Queue located on the Deliver page?</div>
+<div class="opt"><span class="l">A</span>Top-left</div>
+<div class="opt"><span class="l">B</span>Top-right</div>
+<div class="opt correct"><span class="l">C</span>Right side</div>
+<div class="opt"><span class="l">D</span>Bottom</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Correct: the Render Queue lives on the right side; jobs you add appear here in sequence.</div>
+<div class="ex"><b>Example.</b> Each job you add stacks up in the Render Queue on the right, ready for Render All.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Top-left holds the Render Settings panel.</div>
+<div class="ww"><span class="wl">B</span>Top-right shows the source viewer.</div>
+<div class="ww"><span class="wl">D</span>The bottom is the timeline.</div>
+<div class="prin">Principle: Render Queue = right side of the Deliver page.</div>
+</div></div>
+<div class="q">
+<div class="id">Q092 · Module 08</div>
+<div class="stem">Where is the Render Settings panel on the Deliver page?</div>
+<div class="opt correct"><span class="l">A</span>Top-left</div>
+<div class="opt"><span class="l">B</span>Top-right</div>
+<div class="opt"><span class="l">C</span>Right side</div>
+<div class="opt"><span class="l">D</span>Center</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: render settings (preset, format, codec, resolution) live on the top-left.</div>
+<div class="ex"><b>Example.</b> Pick your codec and resolution in the Render Settings panel at the top-left before adding the job.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Top-right is the viewer.</div>
+<div class="ww"><span class="wl">C</span>Right side is the Render Queue.</div>
+<div class="ww"><span class="wl">D</span>Center holds the viewer.</div>
+<div class="prin">Principle: Render Settings = top-left of the Deliver page.</div>
+</div></div>
+<div class="q">
+<div class="id">Q093 · Module 08</div>
+<div class="stem">What's the difference between 'Format' and 'Codec' in the Render Settings?</div>
+<div class="opt"><span class="l">A</span>They're the same thing</div>
+<div class="opt correct"><span class="l">B</span>Format is the file extension (container); Codec is how the video data inside it is encoded</div>
+<div class="opt"><span class="l">C</span>Format is for video, Codec is for audio</div>
+<div class="opt"><span class="l">D</span>Format is resolution, Codec is bitrate</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Format = container (.mp4, .mov, .mxf); Codec = encoder (H.264, H.265, ProRes, DNxHR).</div>
+<div class="ex"><b>Example.</b> Choose .mov as the Format (container) and ProRes as the Codec (encoder) — an MP4 would usually carry H.264 instead.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>They're related but distinct.</div>
+<div class="ww"><span class="wl">C</span>Both apply to video.</div>
+<div class="ww"><span class="wl">D</span>Resolution and bitrate are separate settings.</div>
+<div class="prin">Principle: Format = container; Codec = encoder. MP4 commonly carries H.264 or H.265.</div>
+</div></div>
+<div class="q">
+<div class="id">Q094 · Module 08</div>
+<div class="stem">Which codec is generally chosen for an archive master that you want to re-edit years later?</div>
+<div class="opt"><span class="l">A</span>H.264 — universal</div>
+<div class="opt correct"><span class="l">B</span>ProRes 422 HQ or 4444 — high quality, easy to decode in any NLE</div>
+<div class="opt"><span class="l">C</span>H.265 — smallest</div>
+<div class="opt"><span class="l">D</span>MP3</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: ProRes is the industry standard for masters — pristine, decodes cleanly in any NLE, future-proof.</div>
+<div class="ex"><b>Example.</b> Master to ProRes 4444 so that when the client wants a re-edit in three years it opens pristine in any NLE.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>H.264 is heavily compressed; re-editing degrades quality each pass.</div>
+<div class="ww"><span class="wl">C</span>H.265 is small but heavily compressed — bad for re-edit.</div>
+<div class="ww"><span class="wl">D</span>MP3 is audio-only.</div>
+<div class="prin">Principle: Archive master = ProRes (or DNxHR). H.264/H.265 are delivery codecs, not archive.</div>
+</div></div>
+<div class="q">
+<div class="id">Q095 · Module 08</div>
+<div class="stem">What does the 'Render' range option 'In to Out' do?</div>
+<div class="opt correct"><span class="l">A</span>Renders only between the timeline's marked in and out points</div>
+<div class="opt"><span class="l">B</span>Renders only the first to last clip</div>
+<div class="opt"><span class="l">C</span>Renders only video, not audio</div>
+<div class="opt"><span class="l">D</span>Renders a single still frame</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: it renders only between the in/out points you've marked on the timeline (with I and O keys).</div>
+<div class="ex"><b>Example.</b> Mark I and O around a 30-second teaser and choose 'In to Out' to render just that section.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>That would just be 'Entire Timeline'.</div>
+<div class="ww"><span class="wl">C</span>Render range isn't channel-specific.</div>
+<div class="ww"><span class="wl">D</span>Stills have their own export option.</div>
+<div class="prin">Principle: In to Out renders only the marked range.</div>
+</div></div>
+<div class="q">
+<div class="id">Q096 · Module 08</div>
+<div class="stem">The 'Individual Clips' render option does what?</div>
+<div class="opt"><span class="l">A</span>Renders only the currently selected clip on the timeline</div>
+<div class="opt correct"><span class="l">B</span>Renders each timeline clip as its own separate file (useful for batch transcoding or per-clip review)</div>
+<div class="opt"><span class="l">C</span>Renders the timeline as multiple parallel video tracks in one file</div>
+<div class="opt"><span class="l">D</span>Splits one clip into multiple resolution variants</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: produces one file per clip on the timeline — used for batch transcoding camera media to ProRes, or for per-clip approval.</div>
+<div class="ex"><b>Example.</b> Batch-transcode a card of camera files to ProRes by ticking Individual Clips — one output file per clip.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Selected clip rendering is a separate option.</div>
+<div class="ww"><span class="wl">C</span>Tracks aren't rendered as parallel streams.</div>
+<div class="ww"><span class="wl">D</span>Not a multi-resolution feature.</div>
+<div class="prin">Principle: Individual Clips = one output file per timeline clip.</div>
+</div></div>
+<div class="q">
+<div class="id">Q097 · Module 08</div>
+<div class="stem">How do you queue a render job for later (instead of starting it immediately)?</div>
+<div class="opt correct"><span class="l">A</span>Click 'Add to Render Queue' — the job appears in the queue but doesn't start</div>
+<div class="opt"><span class="l">B</span>Right-click the timeline → Queue Render</div>
+<div class="opt"><span class="l">C</span>File → Schedule Render</div>
+<div class="opt"><span class="l">D</span>There's no queue — every render starts immediately</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: 'Add to Render Queue' stages a job. Use 'Render All' on the queue to process them sequentially (e.g. overnight).</div>
+<div class="ex"><b>Example.</b> Set up three deliverables, Add each to the Render Queue, then Render All overnight.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Not on the right-click menu.</div>
+<div class="ww"><span class="wl">C</span>No scheduling menu.</div>
+<div class="ww"><span class="wl">D</span>The queue is exactly how Resolve handles deferred renders.</div>
+<div class="prin">Principle: Add to Render Queue → Render All = batch rendering.</div>
+</div></div>
+<div class="q">
+<div class="id">Q098 · Module 08</div>
+<div class="stem">What's the 'Browse' button next to the file location field used for?</div>
+<div class="opt"><span class="l">A</span>Browse render presets</div>
+<div class="opt correct"><span class="l">B</span>Choose where the rendered file will be saved on disk</div>
+<div class="opt"><span class="l">C</span>Browse codecs</div>
+<div class="opt"><span class="l">D</span>Browse the timeline</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: Browse opens a file dialog so you can pick the output folder and filename.</div>
+<div class="ex"><b>Example.</b> Click Browse to point the render at your 'Exports' folder and name the file.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Presets are a separate dropdown.</div>
+<div class="ww"><span class="wl">C</span>Codecs are in the format/codec dropdowns.</div>
+<div class="ww"><span class="wl">D</span>Timeline navigation isn't tied to Browse.</div>
+<div class="prin">Principle: Browse = pick output destination on disk.</div>
+</div></div>
+<div class="q">
+<div class="id">Q099 · Module 08</div>
+<div class="stem">Common Resolve render presets include YouTube, Vimeo, ProRes Master, and:</div>
+<div class="opt correct"><span class="l">A</span>Custom (lets you configure everything manually)</div>
+<div class="opt"><span class="l">B</span>Burnable DVD</div>
+<div class="opt"><span class="l">C</span>Floppy Disk</div>
+<div class="opt"><span class="l">D</span>Cassette Tape</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Correct: 'Custom' opens up all the granular settings; presets are starting points.</div>
+<div class="ex"><b>Example.</b> Start from the YouTube preset, then switch to Custom to bump the bitrate higher.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Disc burning isn't built-in.</div>
+<div class="ww"><span class="wl">C</span>Not a real preset.</div>
+<div class="ww"><span class="wl">D</span>Not a real preset.</div>
+<div class="prin">Principle: Custom = total control; presets are quick starts.</div>
+</div></div>
+<div class="q">
+<div class="id">Q100 · Module 08</div>
+<div class="stem">Where do you find audio export settings (codec, bit depth, channels) in the Render Settings panel?</div>
+<div class="opt"><span class="l">A</span>They share the Video tab</div>
+<div class="opt correct"><span class="l">B</span>There's a dedicated Audio tab</div>
+<div class="opt"><span class="l">C</span>Audio is always AAC stereo — no options</div>
+<div class="opt"><span class="l">D</span>Only in Fairlight</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Correct: the Audio tab in Render Settings lets you pick codec (PCM, AAC), bit depth, sample rate, output channels.</div>
+<div class="ex"><b>Example.</b> Open the Audio tab in Render Settings to export Linear PCM 24-bit instead of the default AAC.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Audio has its own tab.</div>
+<div class="ww"><span class="wl">C</span>Plenty of options exist.</div>
+<div class="ww"><span class="wl">D</span>Deliver page has its own audio export controls.</div>
+<div class="prin">Principle: Audio tab in Render Settings = codec, bit depth, channels.</div>
+</div></div>
+<footer>DaVinci Resolve — Mock Exam (Basics) · Instructor Memorandum · Shamase Studios 2026</footer>
+</div></body></html>

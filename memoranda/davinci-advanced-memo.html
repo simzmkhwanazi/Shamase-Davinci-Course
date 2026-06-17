@@ -1,0 +1,1781 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DaVinci Resolve — Mock Exam (Advanced / Mastery) — Memorandum (Instructor) — Shamase Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0f17;--surface:#161a24;--surface-2:#1c2130;--border:#252a36;--border-2:#343b4a;
+--text:#e8e6e0;--muted:#8b8e98;--dim:#5d626d;--gold:#d4a574;--gold-dim:#a07d52;--teal:#5dc8b7;--green:#7ec98e;--red:#ec5a5a;}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;line-height:1.5;font-size:15px}
+.wrap{max-width:860px;margin:0 auto;padding:2.4rem 1.4rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.22em;color:var(--red);margin-bottom:.8rem}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:2.2rem;margin:0 0 .3rem}
+.sub{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);margin:0 0 1.2rem}
+.banner{background:rgba(236,90,90,.1);border:1px solid var(--red);border-radius:8px;padding:.8rem 1.1rem;color:var(--red);font-size:.85rem;font-family:'JetBrains Mono',monospace;letter-spacing:.03em;margin:1rem 0 1.8rem}
+.modhead{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin:2rem 0 .4rem;border-top:1px solid var(--border-2);padding-top:1.2rem}
+.q{border:1px solid var(--border);border-radius:9px;background:var(--surface);padding:.9rem 1.1rem;margin:.7rem 0}
+.q .id{font-family:'JetBrains Mono',monospace;color:var(--gold-dim);font-size:.74rem;letter-spacing:.1em;margin-bottom:.35rem}
+.q .scenario{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);font-size:.92rem;margin:.2rem 0 .4rem;padding-left:.7rem;border-left:2px solid var(--border-2)}
+.q .stem{font-weight:500;margin:.2rem 0 .55rem}
+.opt{font-size:.9rem;padding:.28rem .5rem;border-radius:5px;margin:.18rem 0;color:var(--muted)}
+.opt .l{font-family:'JetBrains Mono',monospace;font-weight:700;margin-right:.45rem;color:var(--dim)}
+.opt.correct{background:rgba(126,201,142,.13);color:var(--text);border:1px solid rgba(126,201,142,.4)}
+.opt.correct .l{color:var(--green)}
+.opt.correct::after{content:" \2713 CORRECT";font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.12em;color:var(--green);font-weight:700}
+.key{margin-top:.55rem;padding-top:.5rem;border-top:1px dashed var(--border-2);font-size:.85rem}
+.key .ans{font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:700;font-size:.74rem;letter-spacing:.12em;margin-bottom:.25rem}
+.key .rat{color:var(--text);margin:.25rem 0;font-size:.9rem}
+.key .ex{color:var(--muted);margin:.35rem 0 .2rem;font-size:.87rem;padding:.45rem .6rem;background:rgba(126,201,142,.06);border-left:2px solid var(--green-dim,rgba(126,201,142,.4));border-radius:4px}
+.key .ex b{color:var(--green);font-weight:600}
+.key .wrong-head{font-family:'JetBrains Mono',monospace;color:var(--red);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin:.7rem 0 .3rem}
+.key .ww{color:var(--muted);font-size:.85rem;margin:.22rem 0;padding-left:1.6rem;position:relative;line-height:1.45}
+.key .ww .wl{position:absolute;left:0;top:0;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--red);font-size:.78rem}
+.key .prin{color:var(--gold);font-style:italic;font-size:.85rem;margin-top:.6rem;padding-top:.5rem;border-top:1px dashed var(--border-2)}
+footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--border);color:var(--dim);font-size:.7rem;font-family:'JetBrains Mono',monospace;text-align:center;letter-spacing:.08em}
+@media print{
+  body{background:#fff;color:#111}.q{break-inside:avoid;border-color:#ccc;background:#fafafa}
+  .banner{color:#b00;border-color:#b00}.opt.correct{background:#eaf6ec}
+  .key .prin{color:#9a6f30}.eyebrow{color:#b00}
+}
+</style></head><body><div class="wrap">
+
+<div class="eyebrow">Shamase Studios · Instructor Memorandum · Marking Key</div>
+<h1>DaVinci Resolve — Mock Exam (Advanced / Mastery)</h1>
+<p class="sub">Workflow &amp; Decision Making · 100 questions · pass mark 90%</p>
+<div class="banner">⚠ INSTRUCTOR USE · Marking key. Question order matches the live exam exactly.</div>
+<div class="modhead">Module 01 · Foundations &amp; Philosophy</div>
+<div class="q">
+<div class="id">Q001 · Module 01</div>
+<div class="scenario">A client commissions a 12-minute corporate documentary, deliverable in 10 days. You are fluent in Premiere Pro but have never used Resolve. The client requires only an H.264 4K master and an Instagram-ready vertical cut.</div>
+<div class="stem">What is the most professionally responsible decision?</div>
+<div class="opt"><span class="l">A</span>Switch to Resolve to learn it on a real project — the free version handles everything required.</div>
+<div class="opt correct"><span class="l">B</span>Deliver the project in Premiere Pro and begin learning Resolve on a lower-stakes future project.</div>
+<div class="opt"><span class="l">C</span>Use Resolve for the edit and Premiere for the colour grade to play to each app's strengths.</div>
+<div class="opt"><span class="l">D</span>Subcontract the entire job to a Resolve specialist while you observe.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">The professional argument is risk management. A 10-day deadline on a deliverable that doesn't <em>need</em> Resolve isn't the right time to learn a new tool. Use the skills you have; learn the new tool on a lower-stakes project.</div>
+<div class="ex"><b>Example.</b> It's like being a fluent Premiere editor handed a tight deadline — you deliver in the tool you already know and learn Resolve on next month's lower-stakes personal short.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Resolve is technically capable, but learning curve + deadline = unnecessary risk on a paid job.</div>
+<div class="ww"><span class="wl">C</span>Mixing tools mid-project compounds risk: round-tripping problems, two software workflows, two debugging surfaces.</div>
+<div class="ww"><span class="wl">D</span>Subcontracting is overkill for a 12-minute corporate piece; it shifts the work but adds coordination overhead.</div>
+<div class="prin">Principle: Match the tool to the project, not the project to the tool you want to learn.</div>
+</div></div>
+<div class="q">
+<div class="id">Q002 · Module 01</div>
+<div class="scenario">You're spec'ing a workstation that will primarily handle 4K H.265 multicam interviews, light colour, no Fusion, and Fairlight mixes up to 24 tracks.</div>
+<div class="stem">Which hardware spec is the weakest link to address first?</div>
+<div class="opt"><span class="l">A</span>CPU clock speed — H.265 decode is single-thread limited.</div>
+<div class="opt"><span class="l">B</span>GPU VRAM — Resolve needs at least 12 GB for 4K colour work.</div>
+<div class="opt"><span class="l">C</span>RAM — multitrack Fairlight projects load all audio into memory.</div>
+<div class="opt correct"><span class="l">D</span>Storage I/O — H.265 multicam needs fast random reads to scrub smoothly.</div>
+<div class="key">
+<div class="ans">✓ WHY D IS CORRECT</div>
+<div class="rat">H.265 is a heavily compressed codec; multicam scrubbing demands many simultaneous random reads. Slow storage I/O is the most likely bottleneck for this exact workflow — slower than any GPU or CPU you'd realistically buy.</div>
+<div class="ex"><b>Example.</b> Drop that H.265 multicam onto a slow spinning drive and scrubbing stutters; move the same files to an NVMe SSD and they scrub instantly — the GPU never changed.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>CPU clock helps, but modern CPUs decode H.265 with hardware acceleration; this isn't the bottleneck.</div>
+<div class="ww"><span class="wl">B</span>12 GB VRAM is enough for light grading; this isn't a Fusion or heavy-noise-reduction workload.</div>
+<div class="ww"><span class="wl">C</span>Fairlight doesn't load all audio into memory; it streams from disk. 16 GB system RAM suffices.</div>
+<div class="prin">Principle: Diagnose the bottleneck by workload, not by component prestige.</div>
+</div></div>
+<div class="q">
+<div class="id">Q003 · Module 01</div>
+<div class="stem">A colleague claims Resolve's free version cannot be used for commercial work because of licensing restrictions. How do you respond?</div>
+<div class="opt"><span class="l">A</span>They are correct — the free version is for personal projects only.</div>
+<div class="opt correct"><span class="l">B</span>They are incorrect — the free version has no commercial-use restriction; Studio is bought for features, not licensing.</div>
+<div class="opt"><span class="l">C</span>They are partially correct — commercial use is permitted up to a revenue cap, beyond which Studio is required.</div>
+<div class="opt"><span class="l">D</span>They are partially correct — commercial use is permitted, but client redelivery requires Studio.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">The free version has no commercial-use restriction whatsoever. Studio is sold for features (Resolve FX, AI tools, HDR, etc.), not for licensing.</div>
+<div class="ex"><b>Example.</b> An agency can bill a client for a national ad cut entirely in free Resolve — no watermark, no licence fee, fully legal.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>All variants of a common myth. There is no revenue cap, no client-redelivery restriction, no licensing wall on commercial use.</div>
+<div class="ww"><span class="wl">C</span>All variants of a common myth. There is no revenue cap, no client-redelivery restriction, no licensing wall on commercial use.</div>
+<div class="ww"><span class="wl">D</span>All variants of a common myth. There is no revenue cap, no client-redelivery restriction, no licensing wall on commercial use.</div>
+<div class="prin">Principle: Verify software licensing claims against the vendor's documentation, not hearsay.</div>
+</div></div>
+<div class="q">
+<div class="id">Q004 · Module 01</div>
+<div class="stem">A client sends you a <code>.drp</code> file and asks you to "open the project." Double-clicking launches Resolve but the project does not open. What is happening?</div>
+<div class="opt"><span class="l">A</span>The <code>.drp</code> is corrupted; ask the client to re-export.</div>
+<div class="opt correct"><span class="l">B</span>A <code>.drp</code> is a project export, not a project file — you must import it into a library via the Project Manager.</div>
+<div class="opt"><span class="l">C</span>The free version cannot open <code>.drp</code> files from Studio.</div>
+<div class="opt"><span class="l">D</span>The <code>.drp</code> requires a matching <code>.drx</code> to open.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">A <code>.drp</code> is an exported project file, not a live project. Resolve manages projects through its library database; to use the <code>.drp</code>, import it via the Project Manager (right-click → Import Project).</div>
+<div class="ex"><b>Example.</b> The client's .drp sits on your desktop doing nothing until you open Project Manager → right-click → Import Project — then it appears in your library and opens.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Corruption is rare; the symptom described matches the import-required behaviour.</div>
+<div class="ww"><span class="wl">C</span>The free version opens Studio-exported projects fine — only Studio-specific features lock.</div>
+<div class="ww"><span class="wl">D</span>A <code>.drx</code> is a stored grade (power grade), unrelated to opening a project.</div>
+<div class="prin">Principle: Resolve's project library is the source of truth; <code>.drp</code> is a moving van, not an apartment.</div>
+</div></div>
+<div class="q">
+<div class="id">Q005 · Module 01</div>
+<div class="scenario">You must move a 90-minute project from your Mac to a colleague's PC running Resolve free for a single grading session.</div>
+<div class="stem">The cleanest export strategy is:</div>
+<div class="opt"><span class="l">A</span>Copy your entire Resolve library folder and tell them to point Resolve at it.</div>
+<div class="opt correct"><span class="l">B</span>Right-click the project → Export Project → send the <code>.drp</code> plus a hard drive with the linked media.</div>
+<div class="opt"><span class="l">C</span>Render a high-quality H.265 file and have them reimport it.</div>
+<div class="opt"><span class="l">D</span>Save to a cloud library so the colleague accesses it directly.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Export Project produces a <code>.drp</code> the colleague can import. They also need the linked media — copy that on a hard drive. If file paths break on their end, Resolve's Relink feature handles it.</div>
+<div class="ex"><b>Example.</b> You hand the colourist a drive with the .drp plus the footage folder; they import the project and, if paths differ, Relink finds the media in one pass.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Copying the library folder is fragile — paths differ between machines and Resolve's library structure isn't designed for that.</div>
+<div class="ww"><span class="wl">C</span>A rendered file can't be re-graded; the colleague is doing a grading session, so they need the project.</div>
+<div class="ww"><span class="wl">D</span>Cloud libraries work, but require both ends to have the same cloud setup and Studio access for some features. Overkill for one session.</div>
+<div class="prin">Principle: <code>.drp</code> + linked media is the universal transport.</div>
+</div></div>
+<div class="modhead">Module 02 · The Media Page</div>
+<div class="q">
+<div class="id">Q006 · Module 02</div>
+<div class="scenario">You receive 6 hours of footage on a client drive, already organised into folders by camera and shoot day.</div>
+<div class="stem">The fastest way to bring this in while preserving the folder hierarchy:</div>
+<div class="opt"><span class="l">A</span>Drag each folder one at a time into the Media Pool — Resolve creates bins automatically.</div>
+<div class="opt correct"><span class="l">B</span>Drag all folders together into the Media Pool's <em>bin list</em> on the left — Resolve creates a matching bin hierarchy.</div>
+<div class="opt"><span class="l">C</span>Use File → Import Media for each clip individually.</div>
+<div class="opt"><span class="l">D</span>Drag all folders into Media Storage, then rebuild the bins manually.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Dragging multiple folders to the <em>bin list</em> (left side of Media Pool) recreates the folder hierarchy as a bin structure. Dragging into the Pool itself flattens everything into one bin.</div>
+<div class="ex"><b>Example.</b> Drop the client's 'Cam A / Cam B / Audio' folders onto the bin list and those three bins appear instantly, each holding its clips.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Works but is slower and risks losing the hierarchy.</div>
+<div class="ww"><span class="wl">C</span>One-at-a-time import is the slowest possible method.</div>
+<div class="ww"><span class="wl">D</span>Media Storage is just a browser; rebuilding bins manually is wasted work.</div>
+<div class="prin">Principle: Bin list = hierarchy preserved; Pool itself = flat.</div>
+</div></div>
+<div class="q">
+<div class="id">Q007 · Module 02</div>
+<div class="stem">The practical distinction between Media Storage and the Media Pool is:</div>
+<div class="opt"><span class="l">A</span>Media Storage holds camera files; Media Pool holds transcoded copies.</div>
+<div class="opt correct"><span class="l">B</span>Media Storage is the file system browser; Media Pool is the project's database of clips Resolve tracks.</div>
+<div class="opt"><span class="l">C</span>Media Storage is for video; Media Pool is for audio.</div>
+<div class="opt"><span class="l">D</span>Media Storage shows local drives; Media Pool shows network drives.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Media Storage is a view of your file system — Resolve can see it. The Media Pool is the project's <em>database</em> of clips Resolve <em>knows about</em> (and tracks metadata for).</div>
+<div class="ex"><b>Example.</b> You can see a 2 TB archive drive in Media Storage, but until you drag clips into the Pool the project knows nothing about them.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>None of these distinctions are correct; they confuse codec, file type, or location with the conceptual database/browser split.</div>
+<div class="ww"><span class="wl">C</span>None of these distinctions are correct; they confuse codec, file type, or location with the conceptual database/browser split.</div>
+<div class="ww"><span class="wl">D</span>None of these distinctions are correct; they confuse codec, file type, or location with the conceptual database/browser split.</div>
+<div class="prin">Principle: Browser vs database — two tiers, two purposes.</div>
+</div></div>
+<div class="q">
+<div class="id">Q008 · Module 02</div>
+<div class="scenario">You shot a wedding with a Zoom recorder capturing ceremony audio while two A7S III cameras recorded scratch audio. You want to replace camera audio with the Zoom track across all 18 ceremony clips.</div>
+<div class="stem">Most efficient workflow:</div>
+<div class="opt"><span class="l">A</span>On the Edit page, drag the Zoom audio onto a new track and manually align each clip's waveform.</div>
+<div class="opt correct"><span class="l">B</span>On the Media page, select all camera clips plus the Zoom recording, right-click → Auto-Sync Audio → Synchronize using Waveform.</div>
+<div class="opt"><span class="l">C</span>On Fairlight, drag the Zoom and use dynamic timecode lock.</div>
+<div class="opt"><span class="l">D</span>On the Cut page, set both cameras to the Sync Bin and let Resolve auto-pick the best audio.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Media-page Auto-Sync Audio with Synchronize using Waveform is built for exactly this — Resolve matches waveforms across selected clips in a single operation.</div>
+<div class="ex"><b>Example.</b> Select all 18 ceremony angles plus the Zoom file, right-click → Auto-Sync Audio, and Resolve swaps the tinny camera sound for the clean recorder track across all of them at once.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Manual alignment is the brute-force option; far slower than auto-sync.</div>
+<div class="ww"><span class="wl">C</span>Fairlight doesn't have a magical "dynamic timecode lock" feature; this option is fabricated.</div>
+<div class="ww"><span class="wl">D</span>Cut's Sync Bin is for multicam picture switching, not replacing camera audio with a separate boom recording.</div>
+<div class="prin">Principle: Waveform sync at the Media stage is the most batch-efficient.</div>
+</div></div>
+<div class="q">
+<div class="id">Q009 · Module 02</div>
+<div class="stem">After Auto-Sync Audio across 30 clips, five report "not synced." Most likely cause and next step:</div>
+<div class="opt"><span class="l">A</span>Those clips are corrupted — re-ingest from the source.</div>
+<div class="opt correct"><span class="l">B</span>Those clips lack a matching audio signature in the reference — sync manually or check if they belong to a different take.</div>
+<div class="opt"><span class="l">C</span>Sample rate mismatch — convert before syncing.</div>
+<div class="opt"><span class="l">D</span>Resolve's sync only works on the first 25 clips; restart on the remaining five.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Auto-sync requires the audio in both clips to contain matching features. Failures usually mean: that clip lacks a matching transient (silent, or recorded from a different take or location). Investigate and sync manually if it's a real match.</div>
+<div class="ex"><b>Example.</b> The five that failed were recorded after you'd stopped the Zoom — there's no matching waveform to lock onto, so you sync those by hand on a transient.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Sync failure is not the same as file corruption.</div>
+<div class="ww"><span class="wl">C</span>Sample rate differences can cause drift but rarely a hard sync failure.</div>
+<div class="ww"><span class="wl">D</span>There is no 25-clip limit.</div>
+<div class="prin">Principle: Sync failures usually mean the audio doesn't match, not that Resolve is broken.</div>
+</div></div>
+<div class="q">
+<div class="id">Q010 · Module 02</div>
+<div class="scenario">A documentary has 400 clips across 12 shoot days. You need to find every clip tagged "over the shoulder" so an editor can work on conversational scenes.</div>
+<div class="stem">Best Resolve feature:</div>
+<div class="opt correct"><span class="l">A</span>Smart Bin with a keyword filter — updates live as you tag more clips.</div>
+<div class="opt"><span class="l">B</span>Bin colour coding — colour every OTS clip the same and visually scan.</div>
+<div class="opt"><span class="l">C</span>Rename every OTS clip with "OTS_" prefix and sort alphabetically.</div>
+<div class="opt"><span class="l">D</span>Resolve's IntelliSearch v21 — search OTS by AI vision analysis.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">A Smart Bin with a keyword filter is the right tool — it updates automatically as you tag more clips, surfaces all OTS clips regardless of their bin location, and is built for this exact use case.</div>
+<div class="ex"><b>Example.</b> Tag OTS clips as you log and the 'OTS' Smart Bin fills itself — by the end of day 12 every over-the-shoulder shot is one click away, wherever it lives.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Bin colour coding is visual and doesn't scale; you can't filter or sort efficiently on colour alone.</div>
+<div class="ww"><span class="wl">C</span>Renaming with prefixes is destructive and slow.</div>
+<div class="ww"><span class="wl">D</span>IntelliSearch (v21) is powerful but currently identifies content from analysis — for an existing "OTS" tag, the keyword smart bin is more direct.</div>
+<div class="prin">Principle: Smart bins = live filters; tag once, query forever.</div>
+</div></div>
+<div class="modhead">Module 03 · The Edit Page</div>
+<div class="q">
+<div class="id">Q011 · Module 03</div>
+<div class="scenario">You're assembling a scene from 30 takes across 4 angles. The director joins you in 90 minutes to review.</div>
+<div class="stem">Highest-leverage thing to complete first:</div>
+<div class="opt"><span class="l">A</span>Carefully grade the wide master so the director sees the final look.</div>
+<div class="opt correct"><span class="l">B</span>Lay down a rough cut from master takes only — a watchable beginning-to-end version.</div>
+<div class="opt"><span class="l">C</span>Sync all audio and run the full project through noise reduction.</div>
+<div class="opt"><span class="l">D</span>Build complex transitions between every cut to demonstrate creative options.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">A rough cut from master takes only gives the director a watchable beginning-to-end version — the basis for creative feedback. Director reviews are about the cut's <em>shape</em>, not its polish.</div>
+<div class="ex"><b>Example.</b> You hand the director a watchable start-to-finish assembly from the master takes; they react to the story's shape, not to unfinished colour or transitions.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Grading before the cut is wasted work — the cut may change.</div>
+<div class="ww"><span class="wl">C</span>Audio sync and noise reduction matter, but not before there's anything to listen to.</div>
+<div class="ww"><span class="wl">D</span>Transitions on every cut suggest amateurism; directors want the structure, not the decoration.</div>
+<div class="prin">Principle: Show shape first; polish later.</div>
+</div></div>
+<div class="q">
+<div class="id">Q012 · Module 03</div>
+<div class="stem">Which edit button pushes later clips down the timeline to make space for the inserted clip?</div>
+<div class="opt"><span class="l">A</span>Overwrite</div>
+<div class="opt correct"><span class="l">B</span>Insert</div>
+<div class="opt"><span class="l">C</span>Replace</div>
+<div class="opt"><span class="l">D</span>Place on Top</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Insert pushes later clips down the timeline. Overwrite pastes over. Replace swaps in place. Place on Top adds to a new track without affecting existing clips.</div>
+<div class="ex"><b>Example.</b> Insert a missing pickup line mid-scene and every later clip slides right to make room — nothing gets painted over.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="prin">Principle: Insert = push later clips. Overwrite = preserve length.</div>
+</div></div>
+<div class="q">
+<div class="id">Q013 · Module 03</div>
+<div class="scenario">A 4-minute interview clip has a 12-second dead pause in the middle ruining pacing.</div>
+<div class="stem">Fastest method to remove those 12 seconds while keeping the rest intact:</div>
+<div class="opt"><span class="l">A</span>Trim from the left edge of the second half, then drag everything right back into place.</div>
+<div class="opt correct"><span class="l">B</span>Position playhead at the pause start, split (<kbd>S</kbd>). Move to pause end, split. Delete the middle.</div>
+<div class="opt"><span class="l">C</span>Use the Cut page's smart trim function to auto-detect silences.</div>
+<div class="opt"><span class="l">D</span>Lasso the pause region with the Blade tool and use a gap-removal command.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Split-Delete-Ripple is the cleanest approach. With a custom <kbd>S</kbd> shortcut for split, two presses delineate the pause; deleting the middle segment ripples earlier content right automatically (or use selection + delete with snapping).</div>
+<div class="ex"><b>Example.</b> Press S at the start of the dead pause, S at the end, select the middle and delete — the 12 seconds vanish and the two halves ripple together.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Trimming and dragging is multi-step and error-prone.</div>
+<div class="ww"><span class="wl">C</span>Cut page silence detection exists but is not the fastest for a single 12-second region you can see.</div>
+<div class="ww"><span class="wl">D</span>Blade lasso isn't a Resolve feature; Blade is one-click splitting.</div>
+<div class="prin">Principle: Split + delete = the cleanest dialogue cut.</div>
+</div></div>
+<div class="q">
+<div class="id">Q014 · Module 03</div>
+<div class="stem">In Trim Tool (<kbd>T</kbd>), click-dragging the <em>lower</em> portion of a clip in its middle does what?</div>
+<div class="opt"><span class="l">A</span>Slips the clip — same in/out, different portion of source.</div>
+<div class="opt correct"><span class="l">B</span>Slides the clip — moves in time, trimming neighbours.</div>
+<div class="opt"><span class="l">C</span>Rolls the clip — moves its boundary with the next clip.</div>
+<div class="opt"><span class="l">D</span>Rate-stretches the clip.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Lower half + drag = slide. The clip moves in time, trimming its neighbours. Upper half + drag = slip (same in/out, different portion of source).</div>
+<div class="ex"><b>Example.</b> Grab the lower half of a B-roll clip in the Trim tool and drag — it moves later in time while trimming the clips on either side to fit.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="prin">Principle: Upper = slip (content shift); lower = slide (time shift).</div>
+</div></div>
+<div class="q">
+<div class="id">Q015 · Module 03</div>
+<div class="stem">A wide shot ends with the actor turning right; a close-up take also begins with them turning right. Cutting at the motion feels natural because:</div>
+<div class="opt correct"><span class="l">A</span>The viewer's eye is occupied by motion, masking the discontinuity between angles.</div>
+<div class="opt"><span class="l">B</span>Resolve's interpolation smooths the gap automatically.</div>
+<div class="opt"><span class="l">C</span>Matching motion vectors trigger a temporal coherence effect.</div>
+<div class="opt"><span class="l">D</span>Wide and close-up share the same colour space.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">The viewer's eye is occupied by motion, masking the cut between angles. This is a foundational editing principle — "cutting on action."</div>
+<div class="ex"><b>Example.</b> The wide ends as she stands; the close-up starts mid-stand — cut on that rising motion and the eye never notices the change of angle.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Resolve doesn't have temporal interpolation between cuts, and colour space isn't what makes cuts seamless. These are fabricated technical explanations for a perceptual phenomenon.</div>
+<div class="ww"><span class="wl">C</span>Resolve doesn't have temporal interpolation between cuts, and colour space isn't what makes cuts seamless. These are fabricated technical explanations for a perceptual phenomenon.</div>
+<div class="ww"><span class="wl">D</span>Resolve doesn't have temporal interpolation between cuts, and colour space isn't what makes cuts seamless. These are fabricated technical explanations for a perceptual phenomenon.</div>
+<div class="prin">Principle: Eye follows motion; cuts hide in motion.</div>
+</div></div>
+<div class="q">
+<div class="id">Q016 · Module 03</div>
+<div class="stem">Which keyboard setup most accelerates dialogue and podcast editing once learned?</div>
+<div class="opt"><span class="l">A</span>Defaults: <kbd>Ctrl</kbd>+<kbd>\</kbd> split, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>[</kbd>/<kbd>]</kbd> for trim.</div>
+<div class="opt correct"><span class="l">B</span>Custom: <kbd>Q</kbd> = trim start, <kbd>W</kbd> = trim end, <kbd>S</kbd> = split. Three fingers, one hand.</div>
+<div class="opt"><span class="l">C</span>The Premiere preset for muscle-memory transfer.</div>
+<div class="opt"><span class="l">D</span>The Final Cut Pro preset.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Custom <kbd>Q</kbd>/<kbd>W</kbd>/<kbd>S</kbd> = three fingers on one hand. The default shortcuts require two hands and break flow.</div>
+<div class="ex"><b>Example.</b> With Q, W and S under your left hand you top-and-tail a podcast clip in two keystrokes, never reaching for the mouse.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Two-hand defaults are slower than three-finger custom shortcuts.</div>
+<div class="ww"><span class="wl">C</span>Premiere or FCP presets transfer muscle memory but aren't optimised for Resolve workflows.</div>
+<div class="ww"><span class="wl">D</span>Premiere or FCP presets transfer muscle memory but aren't optimised for Resolve workflows.</div>
+<div class="prin">Principle: Speed comes from one-handed keyboard work.</div>
+</div></div>
+<div class="q">
+<div class="id">Q017 · Module 03</div>
+<div class="scenario">You keyframe a title sliding in from offscreen-right to centre. The animation works but jerks to a stop.</div>
+<div class="stem">Cause:</div>
+<div class="opt correct"><span class="l">A</span>Keyframes are linear by default — ease the outgoing keyframe by flattening its tangent in the Keyframes panel.</div>
+<div class="opt"><span class="l">B</span>The title is too short — animations under 24 frames always jerk.</div>
+<div class="opt"><span class="l">C</span>Resolve doesn't support keyframed titles on the Edit page — use Fusion.</div>
+<div class="opt"><span class="l">D</span>The Inspector transform applies only once at clip start.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Default keyframes are linear; the end keyframe needs to be eased (flatten its tangent in the Keyframes panel curve view) to decelerate naturally.</div>
+<div class="ex"><b>Example.</b> Your lower-third slides in then slams to a halt — flatten the end keyframe's tangent in the curve view and it glides smoothly to rest.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Animation duration doesn't determine "jerk" — interpolation does.</div>
+<div class="ww"><span class="wl">C</span>Edit-page keyframed titles work fine.</div>
+<div class="ww"><span class="wl">D</span>Inspector transforms support keyframes throughout the clip.</div>
+<div class="prin">Principle: Linear keyframes jerk; ease them for natural deceleration.</div>
+</div></div>
+<div class="q">
+<div class="id">Q018 · Module 03</div>
+<div class="stem">You keyframed a clip's position to move across screen. You duplicate the clip. The duplicate must animate identically. Most reliable approach:</div>
+<div class="opt correct"><span class="l">A</span>The duplicate inherits the animation — just duplicate normally.</div>
+<div class="opt"><span class="l">B</span>Use Edit → Copy → Paste Attributes onto the duplicate.</div>
+<div class="opt"><span class="l">C</span>Recreate keyframes manually on the duplicate.</div>
+<div class="opt"><span class="l">D</span>Create a Compound Clip from the original first — duplicating compounds preserves animation.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Yes — duplicating in Resolve preserves keyframes on the duplicate.</div>
+<div class="ex"><b>Example.</b> Alt-drag your animated logo to copy it and the copy already pushes in identically — no re-keyframing needed.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Paste Attributes works but is unnecessary; the duplicate already has the animation.</div>
+<div class="ww"><span class="wl">C</span>Re-creating is wasted effort.</div>
+<div class="ww"><span class="wl">D</span>Compound clips aren't needed — keyframes persist on duplicates.</div>
+<div class="prin">Principle: Duplicating preserves everything, including keyframes.</div>
+</div></div>
+<div class="q">
+<div class="id">Q019 · Module 03</div>
+<div class="stem">Enabling Snapping (the magnet icon) in the Edit page affects what?</div>
+<div class="opt correct"><span class="l">A</span>Clips snap to nearby edit points, markers, and the playhead while dragging.</div>
+<div class="opt"><span class="l">B</span>The viewer snaps to common aspect ratios.</div>
+<div class="opt"><span class="l">C</span>Audio waveforms snap to even peaks for sync.</div>
+<div class="opt"><span class="l">D</span>Clips snap to frame boundaries to prevent sub-frame edits.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Snapping snaps clips during drag to nearby edit points, markers, and the playhead.</div>
+<div class="ex"><b>Example.</b> With the magnet on, the clip you drag clicks neatly onto the previous clip's tail and the playhead, never leaving a stray frame.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>All fabricated. The viewer doesn't snap to aspect ratios; audio doesn't snap to peaks; sub-frame snapping isn't what the magnet does.</div>
+<div class="ww"><span class="wl">C</span>All fabricated. The viewer doesn't snap to aspect ratios; audio doesn't snap to peaks; sub-frame snapping isn't what the magnet does.</div>
+<div class="ww"><span class="wl">D</span>All fabricated. The viewer doesn't snap to aspect ratios; audio doesn't snap to peaks; sub-frame snapping isn't what the magnet does.</div>
+<div class="prin">Principle: Snapping = clip-position assist during drag.</div>
+</div></div>
+<div class="modhead">Module 04 · The Cut Page</div>
+<div class="q">
+<div class="id">Q020 · Module 04</div>
+<div class="stem">The defining structural feature of the Cut page that Edit lacks:</div>
+<div class="opt correct"><span class="l">A</span>Two separate timelines — full-project zoom-out plus detail zoom-in — simultaneously visible.</div>
+<div class="opt"><span class="l">B</span>A built-in colour grading tool unavailable in Edit.</div>
+<div class="opt"><span class="l">C</span>Faster rendering through GPU acceleration.</div>
+<div class="opt"><span class="l">D</span>Native vertical aspect-ratio support.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Two simultaneous timelines (zoomed-out + zoomed-in) — Cut's signature feature. Eliminates the constant zoom in/out that consumes Edit-page time.</div>
+<div class="ex"><b>Example.</b> On Cut you click the top overview to jump to minute 14 of a 20-minute talk while the lower timeline shows the exact frames there — no zooming.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Cut and Edit share grading, rendering, and aspect-ratio support — none of these are unique to Cut.</div>
+<div class="ww"><span class="wl">C</span>Cut and Edit share grading, rendering, and aspect-ratio support — none of these are unique to Cut.</div>
+<div class="ww"><span class="wl">D</span>Cut and Edit share grading, rendering, and aspect-ratio support — none of these are unique to Cut.</div>
+<div class="prin">Principle: Two timelines = the Cut page's design DNA.</div>
+</div></div>
+<div class="q">
+<div class="id">Q021 · Module 04</div>
+<div class="scenario">A 4-camera podcast records 90 minutes; cut delivery is due tomorrow.</div>
+<div class="stem">Strongest reason to pick Cut over Edit:</div>
+<div class="opt correct"><span class="l">A</span>Sync Bin — auto-sync cameras and switch between angles live at the playhead.</div>
+<div class="opt"><span class="l">B</span>Source Tape — scrub all clips end-to-end as one source.</div>
+<div class="opt"><span class="l">C</span>The Smart Insert button.</div>
+<div class="opt"><span class="l">D</span>Built-in autocut from voice-activity detection.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">The Sync Bin is the genuine multicam killer feature. Drop a spine, then switch angles live at the playhead by drag-dropping. Fastest multicam workflow in any NLE.</div>
+<div class="ex"><b>Example.</b> Spine the wide of your 4-camera podcast, then click the close-up in the Sync Bin whenever someone speaks and that angle drops straight in.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Source Tape is useful but not multicam-specific.</div>
+<div class="ww"><span class="wl">C</span>Smart Insert is a small productivity gain, not multicam-specific.</div>
+<div class="ww"><span class="wl">D</span>Autocut from VAD isn't a Resolve native feature.</div>
+<div class="prin">Principle: Multicam interview = Sync Bin = Cut page.</div>
+</div></div>
+<div class="q">
+<div class="id">Q022 · Module 04</div>
+<div class="stem">On the Cut page, clicking Insert with the playhead roughly between two clips does:</div>
+<div class="opt"><span class="l">A</span>Splits the nearer clip at the playhead and inserts there.</div>
+<div class="opt correct"><span class="l">B</span>Snaps to the nearest edit point (the boundary) and inserts there.</div>
+<div class="opt"><span class="l">C</span>Inserts at the start of the timeline regardless.</div>
+<div class="opt"><span class="l">D</span>Inserts on a new track above.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Cut page smart-inserts at the nearest edit point. This is a design choice to optimise for speed — micro-positioning the playhead isn't required.</div>
+<div class="ex"><b>Example.</b> On Cut you don't fuss over the exact frame — Insert lands the clip at the nearest cut and you keep moving at speed.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Splitting at the playhead is Edit-page behaviour.</div>
+<div class="ww"><span class="wl">C</span>Fabricated behaviours.</div>
+<div class="ww"><span class="wl">D</span>Fabricated behaviours.</div>
+<div class="prin">Principle: Cut prioritises speed via smart snapping to edit points.</div>
+</div></div>
+<div class="q">
+<div class="id">Q023 · Module 04</div>
+<div class="scenario">After Sync by Audio on a 4-camera shoot, one camera is offset by 2 seconds in the result.</div>
+<div class="stem">Cause and remedy:</div>
+<div class="opt correct"><span class="l">A</span>That camera's audio was too low to match — sync that camera manually using a sharp transient.</div>
+<div class="opt"><span class="l">B</span>Save Sync corrupts the project — restart Resolve.</div>
+<div class="opt"><span class="l">C</span>Resolve cannot sync 4 cameras simultaneously — sync in pairs.</div>
+<div class="opt"><span class="l">D</span>Cut's sync is approximate by design; a 2-second drift is normal.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Audio matching needs sufficient signal strength and matching features. If one camera's audio is too low or too noisy, the auto-sync may pick a wrong match. Manually sync that camera using a sharp transient (clap, door slam).</div>
+<div class="ex"><b>Example.</b> Camera C's on-board mic was almost silent, so auto-sync misplaced it by two seconds — you line it up by hand on the clap.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Fabricated causes. Resolve handles multi-camera sync without 2-camera limits; the offset isn't "normal" or expected.</div>
+<div class="ww"><span class="wl">C</span>Fabricated causes. Resolve handles multi-camera sync without 2-camera limits; the offset isn't "normal" or expected.</div>
+<div class="ww"><span class="wl">D</span>Fabricated causes. Resolve handles multi-camera sync without 2-camera limits; the offset isn't "normal" or expected.</div>
+<div class="prin">Principle: Auto-sync needs distinctive audio; failure means audio is too weak or different.</div>
+</div></div>
+<div class="modhead">Module 05 · The Fusion Page</div>
+<div class="q">
+<div class="id">Q024 · Module 05</div>
+<div class="stem">A clip opens in Fusion. The two default nodes present are:</div>
+<div class="opt"><span class="l">A</span>Camera and Renderer — reads the source and outputs to the timeline.</div>
+<div class="opt correct"><span class="l">B</span>MediaIn and MediaOut — imports the clip and returns the result to the timeline.</div>
+<div class="opt"><span class="l">C</span>Source and Sink — loads and writes to disk.</div>
+<div class="opt"><span class="l">D</span>Import and Export — reads and renders.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">MediaIn imports the timeline clip into Fusion; MediaOut returns the composite to the timeline. These two bracket every Fusion graph.</div>
+<div class="ex"><b>Example.</b> Open a shot in Fusion and you're handed MediaIn (the clip) wired to MediaOut (back to the timeline); you build the composite between them.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Fabricated node names.</div>
+<div class="ww"><span class="wl">C</span>Fabricated node names.</div>
+<div class="ww"><span class="wl">D</span>Fabricated node names.</div>
+<div class="prin">Principle: MediaIn → composition → MediaOut.</div>
+</div></div>
+<div class="q">
+<div class="id">Q025 · Module 05</div>
+<div class="stem">A Merge node has three inputs (yellow, green, blue). Each accepts:</div>
+<div class="opt correct"><span class="l">A</span>Yellow = background, green = foreground, blue = effect mask.</div>
+<div class="opt"><span class="l">B</span>Yellow = source A, green = source B, blue = source C — combined equally.</div>
+<div class="opt"><span class="l">C</span>Yellow = colour, green = alpha, blue = depth.</div>
+<div class="opt"><span class="l">D</span>Yellow = video, green = audio, blue = metadata.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Yellow = background, green = foreground, blue = effect mask. Universal convention across Fusion.</div>
+<div class="ex"><b>Example.</b> Sky plate into the Merge's yellow input, the comped bird into green — the bird now sits over the sky.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Fabricated schemes; the colours are consistent throughout.</div>
+<div class="ww"><span class="wl">C</span>Fabricated schemes; the colours are consistent throughout.</div>
+<div class="ww"><span class="wl">D</span>Fabricated schemes; the colours are consistent throughout.</div>
+<div class="prin">Principle: Yellow/green/blue = bg/fg/mask, everywhere.</div>
+</div></div>
+<div class="q">
+<div class="id">Q026 · Module 05</div>
+<div class="stem">A polygon mask drawn at frame 1 was adjusted at frame 30. On playback it morphs between the two shapes unintentionally. Cause:</div>
+<div class="opt"><span class="l">A</span>Bezier handles are unstable — reset them.</div>
+<div class="opt correct"><span class="l">B</span>Polygons automatically keyframe shape changes — right-click in Inspector → Remove Polygon1 → Polyline.</div>
+<div class="opt"><span class="l">C</span>The MediaIn is keyframed — disable its keyframes.</div>
+<div class="opt"><span class="l">D</span>The Merge node is rendering inconsistently.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Polygon masks auto-keyframe shape changes. Remove via right-click → Remove Polygon1 → Polyline in the Inspector.</div>
+<div class="ex"><b>Example.</b> Your roto mask wobbles between frame 1 and frame 30 — right-click in the Inspector → Remove Polyline and the shape freezes.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Not handles, MediaIn, or Merge — the polyline itself carries the keyframes.</div>
+<div class="ww"><span class="wl">C</span>Not handles, MediaIn, or Merge — the polyline itself carries the keyframes.</div>
+<div class="ww"><span class="wl">D</span>Not handles, MediaIn, or Merge — the polyline itself carries the keyframes.</div>
+<div class="prin">Principle: Polygons keyframe automatically; remove the polyline to lock.</div>
+</div></div>
+<div class="q">
+<div class="id">Q027 · Module 05</div>
+<div class="scenario">You want atmospheric smoke drifting only along a diagonal upper-frame streak.</div>
+<div class="stem">Cleanest node graph:</div>
+<div class="opt"><span class="l">A</span>MediaIn → ColorCorrector (dark cloud colour) → MediaOut.</div>
+<div class="opt correct"><span class="l">B</span>FastNoise (dark clouds) → masked by a Polygon (streak) → Merged over MediaIn → MediaOut.</div>
+<div class="opt"><span class="l">C</span>MediaIn → heavy Blur → MediaOut, then desaturate.</div>
+<div class="opt"><span class="l">D</span>Background generator (grey) → Merge over MediaIn with composite Multiply.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Generate dark clouds (FastNoise), restrict via Polygon mask, merge over the source.</div>
+<div class="ex"><b>Example.</b> FastNoise makes the clouds, a Polygon limits them to a diagonal streak, and a Merge lays them over the sky — localised smoke, nothing global.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>ColorCorrector tints the whole image, not localised smoke.</div>
+<div class="ww"><span class="wl">C</span>Blur diffuses existing pixels, doesn't add cloud content.</div>
+<div class="ww"><span class="wl">D</span>Multiply darkens globally, not a localised streak.</div>
+<div class="prin">Principle: Generate → mask → merge: the universal additive flow.</div>
+</div></div>
+<div class="q">
+<div class="id">Q028 · Module 05</div>
+<div class="stem">You want to view one node in the left viewer while the final composite stays in the right viewer. Fastest method:</div>
+<div class="opt"><span class="l">A</span>Connect two MediaOut nodes — one to each viewer.</div>
+<div class="opt correct"><span class="l">B</span>Select the node you want and press <kbd>1</kbd> (left viewer) or <kbd>2</kbd> (right viewer).</div>
+<div class="opt"><span class="l">C</span>Right-click each viewer and choose "follow node."</div>
+<div class="opt"><span class="l">D</span>Drag the node onto the viewer header.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat"><kbd>1</kbd> loads the selected node into the left viewer; <kbd>2</kbd> into the right. Keyboard-driven.</div>
+<div class="ex"><b>Example.</b> Select the Blur node and press 1 to inspect it in the left viewer while your finished MediaOut stays in viewer 2.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Fabricated. Fusion viewers are independent and node-assigned.</div>
+<div class="ww"><span class="wl">C</span>Fabricated. Fusion viewers are independent and node-assigned.</div>
+<div class="ww"><span class="wl">D</span>Fabricated. Fusion viewers are independent and node-assigned.</div>
+<div class="prin">Principle: 1 and 2 = viewer assignment.</div>
+</div></div>
+<div class="q">
+<div class="id">Q029 · Module 05</div>
+<div class="scenario">You're compositing an alien into a cockpit shot. The cockpit foreground plate and alien background plate are different resolutions.</div>
+<div class="stem">The cleanest way to scale the alien to fit the cockpit window:</div>
+<div class="opt correct"><span class="l">A</span>Run the alien MediaIn through a Transform node and use its size/position controls.</div>
+<div class="opt"><span class="l">B</span>Open the source clip in Edit and pre-scale before sending to Fusion.</div>
+<div class="opt"><span class="l">C</span>Use the Merge node's "size" parameter on the green input.</div>
+<div class="opt"><span class="l">D</span>Convert both plates to the same resolution via the Project Settings.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Transform node = Fusion's standard tool for scaling elements within a composite.</div>
+<div class="ex"><b>Example.</b> The alien plate is 4K and the cockpit 1080 — a Transform node shrinks just the alien to fit the cockpit window.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Pre-scaling in Edit is destructive.</div>
+<div class="ww"><span class="wl">C</span>Merge has size, but it's for fine offset, not principal scaling.</div>
+<div class="ww"><span class="wl">D</span>Project Settings affect the whole timeline.</div>
+<div class="prin">Principle: Transform scales individual elements non-destructively.</div>
+</div></div>
+<div class="q">
+<div class="id">Q030 · Module 05</div>
+<div class="scenario">A FastNoise node generates clouds you want to use as smoke. You want the clouds to drift gently across the frame over time.</div>
+<div class="stem">The right control:</div>
+<div class="opt correct"><span class="l">A</span>Keyframe the FastNoise <em>Center</em> control to translate horizontally over the clip's duration.</div>
+<div class="opt"><span class="l">B</span>Animate the FastNoise <em>Seethe</em> rate from 0 to 1.</div>
+<div class="opt"><span class="l">C</span>Wrap FastNoise in a Transform node and keyframe the Transform's position.</div>
+<div class="opt"><span class="l">D</span>Apply a Glow node to the FastNoise output.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Center keyframed = directional drift of the noise pattern.</div>
+<div class="ex"><b>Example.</b> Keyframe the noise's Center from left to right and the smoke drifts across the frame; animating Seethe instead would only make it boil in place.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Seethe animates the noise's internal evolution (wiggle), not direction.</div>
+<div class="ww"><span class="wl">C</span>Transform wrapper works but is unnecessary.</div>
+<div class="ww"><span class="wl">D</span>Glow doesn't move things.</div>
+<div class="prin">Principle: Center = position; Seethe = internal change.</div>
+</div></div>
+<div class="q">
+<div class="id">Q031 · Module 05</div>
+<div class="stem">You want to track a moving person's eye and stick a graphic to it. The cleanest Fusion approach:</div>
+<div class="opt correct"><span class="l">A</span>Tracker node with target on the eye, set Operation to Match Move, feed the graphic into the green input.</div>
+<div class="opt"><span class="l">B</span>Use a Polygon mask drawn on the eye and keyframed.</div>
+<div class="opt"><span class="l">C</span>Apply Resolve's Color-page Tracker to the timeline clip.</div>
+<div class="opt"><span class="l">D</span>Use Magic Mask on the eye.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Tracker node + target on eye + Operation = Match Move + graphic into green input. Tracker drives the graphic.</div>
+<div class="ex"><b>Example.</b> Track the actor's eye, set the Merge to Match Move, and the floating UI graphic rides along with every glance.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Keyframed polygon = manual; Tracker automates.</div>
+<div class="ww"><span class="wl">C</span>Color page tracker handles windows, not Fusion composites.</div>
+<div class="ww"><span class="wl">D</span>Magic Mask creates moving masks, not tracked attachment points.</div>
+<div class="prin">Principle: Tracker + Match Move = stick a graphic to motion.</div>
+</div></div>
+<div class="modhead">Module 06 · The Color Page — Basics</div>
+<div class="q">
+<div class="id">Q032 · Module 06</div>
+<div class="stem">The Color page operates on the principle that:</div>
+<div class="opt"><span class="l">A</span>You select an effect from a panel and drag it onto a clip.</div>
+<div class="opt correct"><span class="l">B</span>Whichever clip the playhead is over is automatically the clip being graded.</div>
+<div class="opt"><span class="l">C</span>Each timeline must be re-imported into a separate grading project.</div>
+<div class="opt"><span class="l">D</span>Grades are applied to tracks, not clips.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">The clip under the playhead is automatically the clip being graded — no effect drag, no clip-select toggle.</div>
+<div class="ex"><b>Example.</b> Park the playhead on shot 7 and the wheels grade shot 7; slide to shot 8 and you're now grading that — no selecting.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Effect-drag (Premiere-style), per-timeline import, and track-grading aren't Resolve's model.</div>
+<div class="ww"><span class="wl">C</span>Effect-drag (Premiere-style), per-timeline import, and track-grading aren't Resolve's model.</div>
+<div class="ww"><span class="wl">D</span>Effect-drag (Premiere-style), per-timeline import, and track-grading aren't Resolve's model.</div>
+<div class="prin">Principle: Playhead position = active clip.</div>
+</div></div>
+<div class="q">
+<div class="id">Q033 · Module 06</div>
+<div class="stem">In the Primaries palette, dragging the master wheel under the <em>Gain</em> wheel to the right does:</div>
+<div class="opt"><span class="l">A</span>Increases saturation across the image.</div>
+<div class="opt correct"><span class="l">B</span>Brightens the entire image, with the strongest effect on highlights.</div>
+<div class="opt"><span class="l">C</span>Adds blue to the highlights.</div>
+<div class="opt"><span class="l">D</span>Increases contrast.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Gain master wheel right = brightens whole image, strongest in highlights.</div>
+<div class="ex"><b>Example.</b> Drag the Gain ring right and the bright sky lifts toward white while the shadows barely move; pull it left to recover a blown window.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Saturation isn't controlled by the master wheel.</div>
+<div class="ww"><span class="wl">C</span>Blue requires moving the centre dot, not the slider.</div>
+<div class="ww"><span class="wl">D</span>Contrast = combining lift + gain opposites.</div>
+<div class="prin">Principle: Master wheel = brightness; centre dot = colour.</div>
+</div></div>
+<div class="q">
+<div class="id">Q034 · Module 06</div>
+<div class="stem">An S-curve in the Custom Curves panel (lift the upper midtones, depress the lower midtones) produces:</div>
+<div class="opt correct"><span class="l">A</span>Increased contrast in a filmic way — deeper blacks and brighter highlights.</div>
+<div class="opt"><span class="l">B</span>Reduced contrast across the whole tonal range.</div>
+<div class="opt"><span class="l">C</span>A blue colour cast across the image.</div>
+<div class="opt"><span class="l">D</span>Inversion of the image's brightness.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">S-curve = filmic contrast. Upper midtones up, lower midtones down.</div>
+<div class="ex"><b>Example.</b> Lift the top of the curve and dip the bottom — blacks deepen, highlights pop, and the flat log shot suddenly has filmic snap.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>S-curve increases contrast, not reduces.</div>
+<div class="ww"><span class="wl">C</span>Hue isn't affected by a luminance curve.</div>
+<div class="ww"><span class="wl">D</span>Inversion requires flipping the whole curve.</div>
+<div class="prin">Principle: S-curve = universal contrast move.</div>
+</div></div>
+<div class="q">
+<div class="id">Q035 · Module 06</div>
+<div class="stem">Looking at the Parade scope on a shot where the wall should be neutral grey: the red channel is noticeably higher than green and blue at the wall's horizontal position. The image is:</div>
+<div class="opt correct"><span class="l">A</span>Tinted red — correct by pulling the Offset wheel toward cyan until R, G, B align.</div>
+<div class="opt"><span class="l">B</span>Underexposed — lift the gamma.</div>
+<div class="opt"><span class="l">C</span>Saturated correctly — leave alone.</div>
+<div class="opt"><span class="l">D</span>Showing chromatic aberration — apply a lens correction.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">R > G,B at a neutral wall = red tint. Pull Offset toward cyan until aligned.</div>
+<div class="ex"><b>Example.</b> On the grey wall the red trace towers over green and blue — pull Offset toward cyan until the three level out and the warm cast is gone.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Different diagnoses; the parade clearly shows colour cast.</div>
+<div class="ww"><span class="wl">C</span>Different diagnoses; the parade clearly shows colour cast.</div>
+<div class="ww"><span class="wl">D</span>Different diagnoses; the parade clearly shows colour cast.</div>
+<div class="prin">Principle: Channel imbalance at neutral = white balance.</div>
+</div></div>
+<div class="q">
+<div class="id">Q036 · Module 06</div>
+<div class="stem">The Vectorscope shows your skin tones cluster far from the diagonal "skin line." Which is the strongest action?</div>
+<div class="opt"><span class="l">A</span>Stylistic skin off the skin line is always wrong — pull skin onto the line immediately.</div>
+<div class="opt correct"><span class="l">B</span>Use the Main Object isolation node and shift skin toward the line, unless a stylistic choice intentionally deviates.</div>
+<div class="opt"><span class="l">C</span>Apply Face Refinement at full strength.</div>
+<div class="opt"><span class="l">D</span>Lower global saturation until skin is grey.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">The skin line is a target, not a law. Adjust via Main Object isolation; stylistic deviation is valid.</div>
+<div class="ex"><b>Example.</b> Skin sits low at 8 o'clock — nudge it back up the 11 o'clock line via the Main Object node, unless you're deliberately going stylised.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Too dogmatic.</div>
+<div class="ww"><span class="wl">C</span>Face Refinement handles surface detail, not hue placement.</div>
+<div class="ww"><span class="wl">D</span>Desaturating is a different problem.</div>
+<div class="prin">Principle: Skin line = aim point, deliberate deviation is fine.</div>
+</div></div>
+<div class="q">
+<div class="id">Q037 · Module 06</div>
+<div class="stem">Fastest way to copy a grade from one timeline clip to another:</div>
+<div class="opt"><span class="l">A</span>Right-click source → Save Grade → right-click target → Apply Saved Grade.</div>
+<div class="opt correct"><span class="l">B</span>Select target, mouse over source's thumbnail, middle-click.</div>
+<div class="opt"><span class="l">C</span>Edit → Copy → switch to target → Paste Attributes.</div>
+<div class="opt"><span class="l">D</span>Drag the source clip's node graph onto the target's clip thumbnail.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Middle-click the source thumbnail = instant grade copy.</div>
+<div class="ex"><b>Example.</b> Grade shot 1, select shot 2, hover shot 1's thumbnail and middle-click — shot 2 inherits the whole grade instantly.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Save Grade is for permanent presets, not quick copies.</div>
+<div class="ww"><span class="wl">C</span>Paste Attributes works but slower in Color.</div>
+<div class="ww"><span class="wl">D</span>Node-graph drag isn't a Resolve action.</div>
+<div class="prin">Principle: Middle-click = instant copy.</div>
+</div></div>
+<div class="q">
+<div class="id">Q038 · Module 06</div>
+<div class="stem">You want a creative look that affects every clip in the timeline simultaneously. The right scope for that grade is:</div>
+<div class="opt"><span class="l">A</span>Each clip individually with copy-paste.</div>
+<div class="opt correct"><span class="l">B</span>A timeline-level node — switch to the timeline node graph using the small dots above the node graph.</div>
+<div class="opt"><span class="l">C</span>A pre-clip group grade.</div>
+<div class="opt"><span class="l">D</span>A post-clip group grade.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Timeline-level nodes apply to every clip. Switch via the dots above the node graph.</div>
+<div class="ex"><b>Example.</b> Add the teal-orange look on a timeline node and all 80 clips get it at once, while each clip's own nodes still balance underneath.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Per-clip copy is brittle.</div>
+<div class="ww"><span class="wl">C</span>Group grades affect group members only.</div>
+<div class="ww"><span class="wl">D</span>Group grades affect group members only.</div>
+<div class="prin">Principle: Timeline node = once, everywhere.</div>
+</div></div>
+<div class="modhead">Module 07 · The Fairlight Page</div>
+<div class="q">
+<div class="id">Q039 · Module 07</div>
+<div class="stem">You can hear your music tracks but the dialogue is barely audible. You add a Compressor to the dialogue. Threshold is set to -10 dB, ratio 4:1, makeup gain 0 dB. Why is the dialogue still quiet?</div>
+<div class="opt correct"><span class="l">A</span>Makeup gain must be positive to compensate for the compression — try +6 dB.</div>
+<div class="opt"><span class="l">B</span>The Compressor only affects audio above -10 dB; if dialogue averages below that, no compression and no makeup happens.</div>
+<div class="opt"><span class="l">C</span>The dialogue track is muted — check the mute button.</div>
+<div class="opt"><span class="l">D</span>The Compressor cannot work on dialogue tracks; use Limiter instead.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Compression reduces level above threshold; makeup gain compensates. Without makeup, the track is quieter overall.</div>
+<div class="ex"><b>Example.</b> The compressor pulls the loud words down but the track now sits lower overall — push makeup gain to +6 dB and the dialogue jumps forward.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Partly true — but the fix is still makeup gain.</div>
+<div class="ww"><span class="wl">C</span>Mute is possible but unlikely given the scenario.</div>
+<div class="ww"><span class="wl">D</span>Compressor works fine on dialogue.</div>
+<div class="prin">Principle: Compressor reduces; makeup restores.</div>
+</div></div>
+<div class="q">
+<div class="id">Q040 · Module 07</div>
+<div class="scenario">A character's voice is heard from another room through a closed door.</div>
+<div class="stem">The audio treatment that best sells the "in another room" feel:</div>
+<div class="opt"><span class="l">A</span>Increase volume on that track.</div>
+<div class="opt correct"><span class="l">B</span>Roll off high frequencies with an EQ (high-cut), and reduce overall track volume slightly.</div>
+<div class="opt"><span class="l">C</span>Add chorus and reverb generously.</div>
+<div class="opt"><span class="l">D</span>Apply a flanger effect.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">High-cut EQ + volume reduction = muffled "through-the-wall" feel.</div>
+<div class="ex"><b>Example.</b> Roll the highs off the off-screen voice and drop it a few dB and it instantly sounds like it's coming through the closed door.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Volume alone doesn't muffle.</div>
+<div class="ww"><span class="wl">C</span>Chorus/heavy reverb = stylised, not realistic isolation.</div>
+<div class="ww"><span class="wl">D</span>Flanger is metallic, not muffling.</div>
+<div class="prin">Principle: Muffled = high-cut EQ.</div>
+</div></div>
+<div class="q">
+<div class="id">Q041 · Module 07</div>
+<div class="stem">An audio recording imports as a stereo clip but contains the voice only on the left channel. The right approach:</div>
+<div class="opt"><span class="l">A</span>Pan the stereo track left to centre the voice — leave it stereo.</div>
+<div class="opt correct"><span class="l">B</span>Right-click in Media Pool → Clip Attributes → Audio → set format to mono / both channels. Then on the timeline track header, right-click → Change Track Type → Mono.</div>
+<div class="opt"><span class="l">C</span>Duplicate the clip and stack copies to fake mono.</div>
+<div class="opt"><span class="l">D</span>Use Fairlight's "channel rebalance" plugin.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Clip Attributes restructures channel mapping; track type ensures mono playback through both speakers.</div>
+<div class="ex"><b>Example.</b> The lav landed on the left channel only — Clip Attributes → mono, then Change Track Type → Mono, and it plays evenly in both ears.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Panning doesn't fix mono content stuck on one channel.</div>
+<div class="ww"><span class="wl">C</span>Duplication doesn't fix channel mapping.</div>
+<div class="ww"><span class="wl">D</span>No "rebalance" plugin — structural fix needed.</div>
+<div class="prin">Principle: Mono-on-one-channel = Clip Attributes + track type.</div>
+</div></div>
+<div class="q">
+<div class="id">Q042 · Module 07</div>
+<div class="stem">A scene has 5 body-drop sound effects on 5 separate tracks. You want to apply consistent compression and reverb across all 5 with one set of controls. The right structure:</div>
+<div class="opt"><span class="l">A</span>Apply compression and reverb individually to each track — Fairlight is per-track.</div>
+<div class="opt"><span class="l">B</span>Group the 5 tracks (<kbd>Ctrl</kbd>+<kbd>G</kbd>) and apply effects to the group.</div>
+<div class="opt correct"><span class="l">C</span>Route all 5 tracks to a single Bus, apply compression and reverb on the Bus.</div>
+<div class="opt"><span class="l">D</span>Render all 5 to a single audio file and apply effects to that.</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">Route all 5 tracks to one Bus; apply effects on the Bus once.</div>
+<div class="ex"><b>Example.</b> Send all five body-drop effects to one Bus and a single compressor plus reverb on that Bus glues them together with one set of controls.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Per-track is what we're avoiding.</div>
+<div class="ww"><span class="wl">B</span>Track group links faders, not shared processing.</div>
+<div class="ww"><span class="wl">D</span>Rendering loses flexibility.</div>
+<div class="prin">Principle: Shared processing → Bus.</div>
+</div></div>
+<div class="q">
+<div class="id">Q043 · Module 07</div>
+<div class="stem">In the channel strip, the green strip near the top opens what?</div>
+<div class="opt"><span class="l">A</span>Equalizer.</div>
+<div class="opt correct"><span class="l">B</span>Dynamics — Compressor, Gate, Expander, Limiter.</div>
+<div class="opt"><span class="l">C</span>Bus routing.</div>
+<div class="opt"><span class="l">D</span>Effects rack.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Green strip = Dynamics.</div>
+<div class="ex"><b>Example.</b> Click the green strip on the voice channel and the Dynamics panel opens, ready to even out the performance.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>EQ is cyan.</div>
+<div class="ww"><span class="wl">C</span>Bus routing and effects rack have their own controls.</div>
+<div class="ww"><span class="wl">D</span>Bus routing and effects rack have their own controls.</div>
+<div class="prin">Principle: Cyan = EQ; green = Dynamics.</div>
+</div></div>
+<div class="q">
+<div class="id">Q044 · Module 07</div>
+<div class="stem">A 30-second music clip needs to fit a 20-second sequence on beat. The non-AI approach to shorten it:</div>
+<div class="opt"><span class="l">A</span>Decrease the timeline frame rate.</div>
+<div class="opt correct"><span class="l">B</span>Find similar waveform peaks at the start and end of a section you want to keep, blade at those points, splice, add a short crossfade at the splice.</div>
+<div class="opt"><span class="l">C</span>Apply a time-stretch effect with 67% rate.</div>
+<div class="opt"><span class="l">D</span>Render and re-import at a faster speed.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Splice on similar waveform peaks = on-beat splice; short crossfade hides the seam.</div>
+<div class="ex"><b>Example.</b> Find a matching beat at 0:08 and 0:18, blade both points, butt them together with a short crossfade — the 30-second track is now a seamless 20.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Frame rate affects video, not audio timing.</div>
+<div class="ww"><span class="wl">C</span>Time-stretch creates pitch artefacts.</div>
+<div class="ww"><span class="wl">D</span>Faster speed = higher pitch.</div>
+<div class="prin">Principle: Waveform-matched splice = invisible cut.</div>
+</div></div>
+<div class="q">
+<div class="id">Q045 · Module 07</div>
+<div class="stem">In Range mode on the Fairlight timeline, dragging across part of an audio clip does what?</div>
+<div class="opt correct"><span class="l">A</span>Selects only that range — backspace deletes it; you can apply effects or pull volume keyframes inside it without splitting the clip.</div>
+<div class="opt"><span class="l">B</span>Splits the clip at both ends of the drag.</div>
+<div class="opt"><span class="l">C</span>Creates a new audio track for that range.</div>
+<div class="opt"><span class="l">D</span>Moves the audio waveform vertically.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Range mode selects without splitting; backspace deletes; volume keyframes can be pulled within it.</div>
+<div class="ex"><b>Example.</b> Drag across the noisy gap in a clip with Range mode and pull its volume to nothing — no splitting, no extra clips left behind.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Range doesn't auto-split.</div>
+<div class="ww"><span class="wl">C</span>Fabricated.</div>
+<div class="ww"><span class="wl">D</span>Fabricated.</div>
+<div class="prin">Principle: Range = surgical regions, no destructive splits.</div>
+</div></div>
+<div class="modhead">Module 08 · The Deliver Page</div>
+<div class="q">
+<div class="id">Q046 · Module 08</div>
+<div class="stem">A client wants a master file to archive that they can re-edit in five years if needed. The right codec choice is:</div>
+<div class="opt"><span class="l">A</span>H.264 — universally compatible.</div>
+<div class="opt"><span class="l">B</span>H.265 — smallest file size.</div>
+<div class="opt correct"><span class="l">C</span>ProRes 422 HQ or 4444 — large but visually pristine and easy to decode in any future NLE.</div>
+<div class="opt"><span class="l">D</span>QuickTime Animation — lossless.</div>
+<div class="key">
+<div class="ans">✓ WHY C IS CORRECT</div>
+<div class="rat">ProRes 422 HQ or 4444 — pristine, easily decoded in any future NLE, stays gradeable.</div>
+<div class="ex"><b>Example.</b> You master the documentary to ProRes 4444; three years later the client reopens it for a recut and it's still pristine and fully gradeable.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>H.264 loses quality each re-edit pass.</div>
+<div class="ww"><span class="wl">B</span>H.265 same problem; smaller but heavily compressed.</div>
+<div class="ww"><span class="wl">D</span>QuickTime Animation is for transparency-preserving graphics.</div>
+<div class="prin">Principle: Archive = ProRes / DNxHR.</div>
+</div></div>
+<div class="q">
+<div class="id">Q047 · Module 08</div>
+<div class="stem">A 1080p edit will be uploaded to YouTube. The "trick" to make it look noticeably cleaner after YouTube's re-encoding:</div>
+<div class="opt"><span class="l">A</span>Render in H.265 instead of H.264.</div>
+<div class="opt correct"><span class="l">B</span>Upscale the deliver resolution to Ultra HD (3840×2160) — YouTube applies a different encoder to 4K uploads, improving final quality.</div>
+<div class="opt"><span class="l">C</span>Render at 10-bit colour depth.</div>
+<div class="opt"><span class="l">D</span>Increase the bitrate to 50 Mbps.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">YouTube applies a better encoder to 4K uploads. Upload 1080p content at UHD to access that pipeline.</div>
+<div class="ex"><b>Example.</b> Set the 1080p timeline to render at UHD and after YouTube re-encodes it the upload looks visibly crisper than a native 1080 export would.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>H.265 alone doesn't trigger the better encoder; resolution does.</div>
+<div class="ww"><span class="wl">C</span>Bit depth and bitrate matter, but the resolution trick is the documented YouTube quality improvement.</div>
+<div class="ww"><span class="wl">D</span>Bit depth and bitrate matter, but the resolution trick is the documented YouTube quality improvement.</div>
+<div class="prin">Principle: Upload 1080p as UHD for YouTube's better encoder.</div>
+</div></div>
+<div class="q">
+<div class="id">Q048 · Module 08</div>
+<div class="stem">A client asks for an MP4 video file. The container is MP4. What codec is conventionally used inside it?</div>
+<div class="opt"><span class="l">A</span>ProRes.</div>
+<div class="opt correct"><span class="l">B</span>H.264 (sometimes H.265) — these are the typical codecs paired with MP4.</div>
+<div class="opt"><span class="l">C</span>DNxHR.</div>
+<div class="opt"><span class="l">D</span>QuickTime Animation.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">MP4 containers conventionally hold H.264 or H.265.</div>
+<div class="ex"><b>Example.</b> The client asks for 'an MP4' — you give them an H.264-in-MP4 file that plays on any phone, laptop or website.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>ProRes lives in QuickTime; DNxHR in MOV/MXF; Animation in MOV.</div>
+<div class="ww"><span class="wl">C</span>ProRes lives in QuickTime; DNxHR in MOV/MXF; Animation in MOV.</div>
+<div class="ww"><span class="wl">D</span>ProRes lives in QuickTime; DNxHR in MOV/MXF; Animation in MOV.</div>
+<div class="prin">Principle: MP4 = H.264/H.265.</div>
+</div></div>
+<div class="q">
+<div class="id">Q049 · Module 08</div>
+<div class="stem">After hitting Render, the rendered file plays back with white blocks appearing randomly across the image. Most likely cause:</div>
+<div class="opt"><span class="l">A</span>The codec is corrupted.</div>
+<div class="opt correct"><span class="l">B</span>The Mac is overheating during render and skipping frames — render in a cooler environment with better airflow.</div>
+<div class="opt"><span class="l">C</span>The deliver resolution is too high for the source.</div>
+<div class="opt"><span class="l">D</span>Resolve free is rate-limited at low frame rates.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Thermal throttling causes the GPU/CPU to skip frames; white blocks are the classic symptom. Improve cooling.</div>
+<div class="ex"><b>Example.</b> The laptop hit 98°C mid-render and scattered white blocks through the file — render again on a cooling stand and it comes out clean.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Codec corruption is rare.</div>
+<div class="ww"><span class="wl">C</span>Resolution mismatch doesn't produce white blocks.</div>
+<div class="ww"><span class="wl">D</span>No free-version rate limit exists.</div>
+<div class="prin">Principle: Render artefacts often = thermal throttling.</div>
+</div></div>
+<div class="q">
+<div class="id">Q050 · Module 08</div>
+<div class="stem">You add a subtitle track in the Edit page using the Subtitle generator. After delivery the subtitles do not appear in the output file. Most likely cause:</div>
+<div class="opt correct"><span class="l">A</span>The subtitle format wasn't set to "Burn into video" in the Deliver page subtitle settings.</div>
+<div class="opt"><span class="l">B</span>The subtitle clip is on a separate timeline.</div>
+<div class="opt"><span class="l">C</span>Subtitles only render in H.265.</div>
+<div class="opt"><span class="l">D</span>The subtitle track was muted.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Subtitles need Format → Burn into video on the Deliver page.</div>
+<div class="ex"><b>Example.</b> Your captions vanished from the export until you set Subtitle → Burn into video on the Deliver page.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Location, codec, mute aren't the issue — the format toggle is.</div>
+<div class="ww"><span class="wl">C</span>Location, codec, mute aren't the issue — the format toggle is.</div>
+<div class="ww"><span class="wl">D</span>Location, codec, mute aren't the issue — the format toggle is.</div>
+<div class="prin">Principle: Subtitled exports require "Burn into video."</div>
+</div></div>
+<div class="q">
+<div class="id">Q051 · Module 08</div>
+<div class="scenario">You need to render the same timeline as three deliverables: a YouTube version, a client preview, and a ProRes archive. You want them all to render unattended overnight.</div>
+<div class="stem">The right approach:</div>
+<div class="opt"><span class="l">A</span>Open three Resolves and start each render in parallel.</div>
+<div class="opt correct"><span class="l">B</span>Configure each as a separate render job, Add to Render Queue, then Render All — they process sequentially.</div>
+<div class="opt"><span class="l">C</span>Render manually one at a time during the day.</div>
+<div class="opt"><span class="l">D</span>Use the Cut page's batch export.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Render Queue handles multiple jobs sequentially overnight.</div>
+<div class="ex"><b>Example.</b> Add the YouTube, client-preview and ProRes jobs to the Render Queue, hit Render All before bed, and wake to three finished files.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Parallel Resolve instances compete for GPU.</div>
+<div class="ww"><span class="wl">C</span>Manual sequential = slow.</div>
+<div class="ww"><span class="wl">D</span>Cut's batch export uses the same Render Queue.</div>
+<div class="prin">Principle: Render Queue = unattended batch.</div>
+</div></div>
+<div class="q">
+<div class="id">Q052 · Module 08</div>
+<div class="stem">For an archive master, the audio settings should be:</div>
+<div class="opt"><span class="l">A</span>AAC, stereo, 16-bit — universally compatible.</div>
+<div class="opt correct"><span class="l">B</span>Linear PCM (WAV-style), 32-bit float if available, with "All Timeline Tracks" rather than a stereo mixdown.</div>
+<div class="opt"><span class="l">C</span>MP3 320 kbps.</div>
+<div class="opt"><span class="l">D</span>Whatever the input audio was, unchanged.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Linear PCM, high bit depth, all timeline tracks separately. Preserves every audio decision for re-edits.</div>
+<div class="ex"><b>Example.</b> You export the master as Linear PCM 24-bit with all timeline tracks, so a future editor can re-balance dialogue and music separately.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>AAC stereo loses individual tracks.</div>
+<div class="ww"><span class="wl">C</span>MP3 is lossy.</div>
+<div class="ww"><span class="wl">D</span>"Unchanged" doesn't apply after Fairlight mixing.</div>
+<div class="prin">Principle: Archive audio = PCM, high bit, all tracks.</div>
+</div></div>
+<div class="modhead">Module 09 · Color Management Setup</div>
+<div class="q">
+<div class="id">Q053 · Module 09</div>
+<div class="stem">Why do professional cameras record in log instead of standard Rec.709?</div>
+<div class="opt"><span class="l">A</span>Log files are smaller than Rec.709.</div>
+<div class="opt correct"><span class="l">B</span>Log packs maximum dynamic range and colour information into the file at the cost of an unattractive flat appearance — to be corrected in post.</div>
+<div class="opt"><span class="l">C</span>Log is required for HDR delivery.</div>
+<div class="opt"><span class="l">D</span>Log is faster to record.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Log packs maximum dynamic range and colour into the file via a flat curve. The flat look is corrected in post via colour management.</div>
+<div class="ex"><b>Example.</b> Your FX6 log clip looks washed-out grey straight off the card — that flatness is holding the full dynamic range for you to grade back in.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Log files are usually larger, not smaller.</div>
+<div class="ww"><span class="wl">C</span>HDR delivery is a separate concept; log is for capture latitude.</div>
+<div class="ww"><span class="wl">D</span>Log doesn't change recording speed.</div>
+<div class="prin">Principle: Log = maximum data; flat by design.</div>
+</div></div>
+<div class="q">
+<div class="id">Q054 · Module 09</div>
+<div class="stem">In Project Settings, the recommended "future-proof" Color Processing Mode for modern grading is:</div>
+<div class="opt"><span class="l">A</span>Rec.709 / Rec.709 — match input to output.</div>
+<div class="opt correct"><span class="l">B</span>HDR DaVinci Wide Gamut Intermediate — wide enough for any camera, log-shaped for accurate maths.</div>
+<div class="opt"><span class="l">C</span>SDR Rec.2020.</div>
+<div class="opt"><span class="l">D</span>The camera's native log space.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">HDR DaVinci Wide Gamut Intermediate = the modern future-proof working space.</div>
+<div class="ex"><b>Example.</b> Set the working space to DaVinci Wide Gamut Intermediate and your Sony, Canon and iPhone clips all grade in one consistent, future-proof space.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Rec.709 → Rec.709 collapses the workflow's latitude.</div>
+<div class="ww"><span class="wl">C</span>SDR Rec.2020 isn't the standard intermediate.</div>
+<div class="ww"><span class="wl">D</span>The camera's log isn't designed as a working space.</div>
+<div class="prin">Principle: DaVinci Wide Gamut Intermediate = working space.</div>
+</div></div>
+<div class="q">
+<div class="id">Q055 · Module 09</div>
+<div class="scenario">Mac users grading a feature for theatrical and streaming delivery.</div>
+<div class="stem">Which Output Color Space best matches what the user will see on consumer playback (QuickTime, Safari)?</div>
+<div class="opt"><span class="l">A</span>Rec.709 Gamma 2.4.</div>
+<div class="opt correct"><span class="l">B</span>Rec.709-A — Apple's slight gamma compensation matches Mac playback.</div>
+<div class="opt"><span class="l">C</span>DCI-P3.</div>
+<div class="opt"><span class="l">D</span>Rec.2020.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Rec.709-A is Apple's slight gamma compensation. Mac playback in QuickTime/Safari matches the viewer.</div>
+<div class="ex"><b>Example.</b> Grade on a Mac with Output set to Rec.709-A and the result in QuickTime and Safari matches exactly what you saw in the viewer.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>2.4 is darker than Mac's default playback gamma; image will appear different.</div>
+<div class="ww"><span class="wl">C</span>DCI-P3 and Rec.2020 are for theatrical and HDR, not standard Mac playback.</div>
+<div class="ww"><span class="wl">D</span>DCI-P3 and Rec.2020 are for theatrical and HDR, not standard Mac playback.</div>
+<div class="prin">Principle: Mac output = Rec.709-A.</div>
+</div></div>
+<div class="q">
+<div class="id">Q056 · Module 09</div>
+<div class="stem">A clip was shot on a Sony A7S III in S-Log3. What Input Color Space tag should it receive in the Media Pool?</div>
+<div class="opt"><span class="l">A</span>Sony S-Log3.</div>
+<div class="opt correct"><span class="l">B</span>S-Gamut3.Cine / S-Log3.</div>
+<div class="opt"><span class="l">C</span>Sony Rec.709.</div>
+<div class="opt"><span class="l">D</span>DaVinci Wide Gamut.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Sony's S-Log3 colour science: S-Gamut3.Cine / S-Log3 is the correct Input Color Space tag.</div>
+<div class="ex"><b>Example.</b> Tag the A7S III clips as S-Gamut3.Cine / S-Log3 and the grey log instantly springs to a natural, balanced starting image.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>"Sony S-Log3" alone isn't the proper compound tag.</div>
+<div class="ww"><span class="wl">C</span>Rec.709 is the wrong space — would invert the log curve incorrectly.</div>
+<div class="ww"><span class="wl">D</span>DaVinci Wide Gamut is the working space, not the source.</div>
+<div class="prin">Principle: Tag with the camera's exact gamut + gamma.</div>
+</div></div>
+<div class="q">
+<div class="id">Q057 · Module 09</div>
+<div class="stem">An iPhone shot in its default video mode (not Pro / not Apple Log) should be tagged as:</div>
+<div class="opt"><span class="l">A</span>Apple Log.</div>
+<div class="opt correct"><span class="l">B</span>Rec.709 Gamma 2.4 — the iPhone's default output is Rec.709.</div>
+<div class="opt"><span class="l">C</span>iPhone Log.</div>
+<div class="opt"><span class="l">D</span>DaVinci Wide Gamut.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Default iPhone mode (non-Pro/non-Apple-Log) outputs Rec.709 Gamma 2.4.</div>
+<div class="ex"><b>Example.</b> The client's standard iPhone clips already look punchy — tag them Rec.709 Gamma 2.4 (effectively a bypass) and grade lightly.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Apple Log only applies if explicitly enabled (iPhone 15 Pro / 16 Pro Pro modes).</div>
+<div class="ww"><span class="wl">C</span>"iPhone Log" isn't a real input space.</div>
+<div class="ww"><span class="wl">D</span>DaVinci Wide Gamut is the working space.</div>
+<div class="prin">Principle: Default iPhone = Rec.709.</div>
+</div></div>
+<div class="modhead">Module 10 · The Node Tree Architecture</div>
+<div class="q">
+<div class="id">Q058 · Module 10</div>
+<div class="stem">The three conceptual columns of the Notary Structure, in order:</div>
+<div class="opt"><span class="l">A</span>Look — Balance — Isolate.</div>
+<div class="opt correct"><span class="l">B</span>Balance — Isolate — Global Look.</div>
+<div class="opt"><span class="l">C</span>Isolate — Balance — Sharpen.</div>
+<div class="opt"><span class="l">D</span>Curves — Wheels — Effects.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Balance → Isolate → Look. Technical foundation before creative work.</div>
+<div class="ex"><b>Example.</b> You neutralise exposure (Balance), separate skin from background (Isolate), then add the mood (Look) — technical groundwork before any art.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Other orderings reverse cause and effect.</div>
+<div class="ww"><span class="wl">C</span>Other orderings reverse cause and effect.</div>
+<div class="ww"><span class="wl">D</span>Other orderings reverse cause and effect.</div>
+<div class="prin">Principle: Technical foundation, then creative.</div>
+</div></div>
+<div class="q">
+<div class="id">Q059 · Module 10</div>
+<div class="stem">A Serial node connection means:</div>
+<div class="opt"><span class="l">A</span>Multiple corrections operate on the same source image simultaneously.</div>
+<div class="opt correct"><span class="l">B</span>Each node operates on the previous node's output — order matters.</div>
+<div class="opt"><span class="l">C</span>Connections render in the background.</div>
+<div class="opt"><span class="l">D</span>The two nodes share a single set of controls.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Serial = sequential; each node operates on the previous output. Order matters.</div>
+<div class="ex"><b>Example.</b> Your contrast node feeds the vignette node feeds the grain node — each builds on the last, so changing the order changes the result.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>That's parallel mixer behaviour.</div>
+<div class="ww"><span class="wl">C</span>Fabricated.</div>
+<div class="ww"><span class="wl">D</span>Fabricated.</div>
+<div class="prin">Principle: Serial = sequential; order matters.</div>
+</div></div>
+<div class="q">
+<div class="id">Q060 · Module 10</div>
+<div class="stem">A Parallel Mixer node combines its inputs how?</div>
+<div class="opt"><span class="l">A</span>Bottom branches override top branches (priority order).</div>
+<div class="opt correct"><span class="l">B</span>All branches start from the same source and sum equally — no precision compounding loss.</div>
+<div class="opt"><span class="l">C</span>Branches multiply together.</div>
+<div class="opt"><span class="l">D</span>The mixer picks the most-saturated branch at each pixel.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Parallel = all branches start from source, sum equally. No compounding precision loss.</div>
+<div class="ex"><b>Example.</b> Three Global tweaks each start from the same balanced image and sum together, so none of them degrades the others' precision.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>That's layer mixer behaviour.</div>
+<div class="ww"><span class="wl">C</span>Fabricated.</div>
+<div class="ww"><span class="wl">D</span>Fabricated.</div>
+<div class="prin">Principle: Parallel = equal sums from source.</div>
+</div></div>
+<div class="q">
+<div class="id">Q061 · Module 10</div>
+<div class="stem">A Layer Mixer node combines its branches how?</div>
+<div class="opt"><span class="l">A</span>Equally summed.</div>
+<div class="opt correct"><span class="l">B</span>Bottom branches take priority — they sit on top, like Photoshop layers.</div>
+<div class="opt"><span class="l">C</span>Branches are blended by image hue.</div>
+<div class="opt"><span class="l">D</span>The brightest branch wins per pixel.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Layer Mixer = bottom branches override top, like Photoshop layers.</div>
+<div class="ex"><b>Example.</b> Stack Background, then Second Object, then Main Object at the bottom — skin overrides everything above it, like the top layer in Photoshop.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Equal summing = parallel.</div>
+<div class="ww"><span class="wl">C</span>Fabricated.</div>
+<div class="ww"><span class="wl">D</span>Fabricated.</div>
+<div class="prin">Principle: Layer mixer = bottom takes priority.</div>
+</div></div>
+<div class="q">
+<div class="id">Q062 · Module 10</div>
+<div class="stem">In the Notary Structure, the Main Object node is wired as the <em>bottom</em> branch of the Layer Mixer because:</div>
+<div class="opt"><span class="l">A</span>Layer mixers process bottom-first.</div>
+<div class="opt correct"><span class="l">B</span>The Main Object should take priority — corrections applied to the background must not affect it. Bottom branches override top branches in a Layer Mixer.</div>
+<div class="opt"><span class="l">C</span>It connects naturally to the CST out.</div>
+<div class="opt"><span class="l">D</span>Convention only — order doesn't actually matter.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">The Main Object should override background corrections. Bottom-branch priority in a Layer Mixer ensures this.</div>
+<div class="ex"><b>Example.</b> Because skin sits on the bottom branch, pushing the background blue leaves the face completely untouched.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Layer Mixers process all branches, not bottom-first as an order operation.</div>
+<div class="ww"><span class="wl">C</span>CST out connection is unrelated.</div>
+<div class="ww"><span class="wl">D</span>Order absolutely matters in a Layer Mixer.</div>
+<div class="prin">Principle: Bottom = priority in Layer Mixer.</div>
+</div></div>
+<div class="modhead">Module 11 · Balancing Nodes</div>
+<div class="q">
+<div class="id">Q063 · Module 11</div>
+<div class="stem">The Parade scope shows the waveform of your image bunched in the lower third (everything dark) with no signal reaching the top. The right initial move:</div>
+<div class="opt correct"><span class="l">A</span>Push gain up to extend highlights toward 1023, then refine gamma to lift midtones.</div>
+<div class="opt"><span class="l">B</span>Increase saturation.</div>
+<div class="opt"><span class="l">C</span>Apply a sharpening filter.</div>
+<div class="opt"><span class="l">D</span>Change the Output Color Space.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Stretch the waveform. Push gain to extend highlights; refine gamma for midtones.</div>
+<div class="ex"><b>Example.</b> The Parade bunches in the bottom third — push Gain to lift the brights toward 1023, then open the midtones with Gamma.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Saturation doesn't fix exposure.</div>
+<div class="ww"><span class="wl">C</span>Sharpening doesn't change tonal distribution.</div>
+<div class="ww"><span class="wl">D</span>Output Color Space affects display, not source exposure.</div>
+<div class="prin">Principle: Stretch the waveform first.</div>
+</div></div>
+<div class="q">
+<div class="id">Q064 · Module 11</div>
+<div class="stem">The top of the waveform shows a flat horizontal line at 1023. This indicates:</div>
+<div class="opt"><span class="l">A</span>Perfect exposure.</div>
+<div class="opt correct"><span class="l">B</span>Highlights are clipped — pixel values exceeding 1023 are all recorded as 1023, and the original detail is lost.</div>
+<div class="opt"><span class="l">C</span>The image is over-saturated.</div>
+<div class="opt"><span class="l">D</span>The codec is failing.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Flat line at 1023 = clipped highlights. Data is lost.</div>
+<div class="ex"><b>Example.</b> A flat ceiling at 1023 means the sky's detail is already gone — pulling Gain down won't recover it; you'd have had to expose lower on set.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Flat at 1023 is the opposite of perfect — it means information's gone.</div>
+<div class="ww"><span class="wl">C</span>Saturation isn't measured on the waveform's brightness axis.</div>
+<div class="ww"><span class="wl">D</span>Codec failure isn't the diagnostic.</div>
+<div class="prin">Principle: Flat at 1023 = clipped, data gone.</div>
+</div></div>
+<div class="q">
+<div class="id">Q065 · Module 11</div>
+<div class="stem">A "muddy" image — skin tones feel dark and blotchy. The cleanest fix in the Contrast node:</div>
+<div class="opt"><span class="l">A</span>Apply heavy global contrast.</div>
+<div class="opt correct"><span class="l">B</span>Apply moderate contrast with the pivot pulled left, so blacks deepen without crushing midtones.</div>
+<div class="opt"><span class="l">C</span>Apply a Glow effect.</div>
+<div class="opt"><span class="l">D</span>Push saturation up.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Moderate contrast with pivot pulled left — deepens blacks without crushing midtones.</div>
+<div class="ex"><b>Example.</b> The skin looks blotchy and dark — add gentle contrast with the pivot pulled left and the blacks firm up without crushing the face.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Heavy global contrast crushes midtones.</div>
+<div class="ww"><span class="wl">C</span>Glow softens, doesn't fix muddiness.</div>
+<div class="ww"><span class="wl">D</span>Saturation doesn't address tonal muddiness.</div>
+<div class="prin">Principle: Pivot left = blacks deepen without midtone loss.</div>
+</div></div>
+<div class="q">
+<div class="id">Q066 · Module 11</div>
+<div class="stem">At the balancing stage, the right amount of saturation to add is:</div>
+<div class="opt"><span class="l">A</span>Maximum — push to full so the grade has plenty to work with.</div>
+<div class="opt correct"><span class="l">B</span>Modest — just enough that the qualifier can distinguish regions (e.g. skin from sky).</div>
+<div class="opt"><span class="l">C</span>Zero — desaturate completely until the global look.</div>
+<div class="opt"><span class="l">D</span>None of the above — saturation isn't part of balancing.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Modest — enough for qualifiers to distinguish regions; creative saturation comes in the Global Look.</div>
+<div class="ex"><b>Example.</b> You add just enough saturation that the qualifier can tell skin from the green wall behind it — the bold colour comes later in the Look.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Maxing now means undoing later.</div>
+<div class="ww"><span class="wl">C</span>Zero defeats isolation.</div>
+<div class="ww"><span class="wl">D</span>Saturation is part of balancing — modestly.</div>
+<div class="prin">Principle: Just enough saturation to enable isolation.</div>
+</div></div>
+<div class="q">
+<div class="id">Q067 · Module 11</div>
+<div class="scenario">A scene was shot in a candle-lit room and reads as warm orange throughout.</div>
+<div class="stem">Should you white-balance it to neutral?</div>
+<div class="opt"><span class="l">A</span>Yes — every scene must be neutralised first.</div>
+<div class="opt correct"><span class="l">B</span>No — balancing fixes <em>errors</em>, not character. Candle light is warm by nature; leave the warmth as the scene's identity.</div>
+<div class="opt"><span class="l">C</span>Only if delivering for broadcast.</div>
+<div class="opt"><span class="l">D</span>Only if there's skin in the frame.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Balancing fixes errors, not character. Candle light is warm by design — leave it.</div>
+<div class="ex"><b>Example.</b> The candle-lit scene is meant to glow amber — you leave the warmth alone because it's the scene's identity, not a white-balance error.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Dogmatic neutralising kills scene character.</div>
+<div class="ww"><span class="wl">C</span>Skin presence and broadcast aren't the deciding factor — scene intent is.</div>
+<div class="ww"><span class="wl">D</span>Skin presence and broadcast aren't the deciding factor — scene intent is.</div>
+<div class="prin">Principle: Balance errors; preserve character.</div>
+</div></div>
+<div class="modhead">Module 12 · Color Isolation &amp; the Layer Mixer</div>
+<div class="q">
+<div class="id">Q068 · Module 12</div>
+<div class="stem">A Qualifier picks pixels by:</div>
+<div class="opt correct"><span class="l">A</span>Hue, Saturation, and Luminance.</div>
+<div class="opt"><span class="l">B</span>Position in the frame.</div>
+<div class="opt"><span class="l">C</span>Time on the timeline.</div>
+<div class="opt"><span class="l">D</span>Codec encoding values.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Qualifier picks by HSL — Hue, Saturation, Luminance.</div>
+<div class="ex"><b>Example.</b> You pick the blue sky by hue, tighten the saturation and luminance ranges, and now you can darken only the sky.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Position is what Power Windows control.</div>
+<div class="ww"><span class="wl">C</span>Fabricated.</div>
+<div class="ww"><span class="wl">D</span>Fabricated.</div>
+<div class="prin">Principle: Qualifier = HSL picker.</div>
+</div></div>
+<div class="q">
+<div class="id">Q069 · Module 12</div>
+<div class="stem">A skin qualifier selection looks broken and blocky on 8-bit phone footage. The most effective remedies:</div>
+<div class="opt"><span class="l">A</span>Use a Square mask.</div>
+<div class="opt correct"><span class="l">B</span>Increase Denoise and Blur Radius in Matte Finesse; consider Pre-filter; add a Power Window around the face to limit spurious picks.</div>
+<div class="opt"><span class="l">C</span>Convert the footage to 16-bit.</div>
+<div class="opt"><span class="l">D</span>Apply Sharpen first.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Denoise, Blur Radius, Pre-filter, and a face Power Window in combination = the standard remedy for limited-bit qualifier mattes.</div>
+<div class="ex"><b>Example.</b> The 8-bit phone skin matte breaks up — crank Denoise and Blur Radius and box it in with a face window, and it cleans right up.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Square mask doesn't fix qualifier quality.</div>
+<div class="ww"><span class="wl">C</span>8-bit can't be promoted to 16-bit usefully.</div>
+<div class="ww"><span class="wl">D</span>Sharpening worsens qualifier matters.</div>
+<div class="prin">Principle: Soften and window the matte on weak footage.</div>
+</div></div>
+<div class="q">
+<div class="id">Q070 · Module 12</div>
+<div class="stem">A Power Window is best used:</div>
+<div class="opt"><span class="l">A</span>Instead of a Qualifier.</div>
+<div class="opt correct"><span class="l">B</span>With a Qualifier — the qualifier picks pixels by colour; the window adds a geometric constraint so the correction applies only inside the window AND inside the qualifier selection.</div>
+<div class="opt"><span class="l">C</span>For light leak effects.</div>
+<div class="opt"><span class="l">D</span>For audio mixing.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Qualifier + Window = colour-based pick AND geometric constraint, together.</div>
+<div class="ex"><b>Example.</b> Qualify all skin tones, then drop a circle around the face so background skin-coloured props don't get caught in the selection.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>They complement, don't replace.</div>
+<div class="ww"><span class="wl">C</span>Power Windows aren't for light leaks or audio.</div>
+<div class="ww"><span class="wl">D</span>Power Windows aren't for light leaks or audio.</div>
+<div class="prin">Principle: Combine qualifier + window for clean selections.</div>
+</div></div>
+<div class="q">
+<div class="id">Q071 · Module 12</div>
+<div class="stem">A Power Window is drawn around a subject's face. The subject walks across the frame. Without intervention, the window stays fixed and the face leaves it. The fix:</div>
+<div class="opt"><span class="l">A</span>Make the window much larger to cover the path.</div>
+<div class="opt correct"><span class="l">B</span>On the window's Tracker tab, click "Track Forward and Reverse" — Resolve auto-tracks the window to follow the face.</div>
+<div class="opt"><span class="l">C</span>Keyframe the window position by hand on every frame.</div>
+<div class="opt"><span class="l">D</span>Apply Magic Mask instead.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Tracker tab → Track Forward and Reverse = auto-keyframed window following.</div>
+<div class="ex"><b>Example.</b> The face walks across frame — hit Track Forward and Reverse on the window's Tracker tab and the correction follows automatically.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Oversized window means the correction bleeds outside the face.</div>
+<div class="ww"><span class="wl">C</span>Manual keyframing every frame is the slow path.</div>
+<div class="ww"><span class="wl">D</span>Magic Mask is an alternative but not the named tool here.</div>
+<div class="prin">Principle: Power Window tracker = auto-follow.</div>
+</div></div>
+<div class="q">
+<div class="id">Q072 · Module 12</div>
+<div class="stem">Magic Mask is most useful when:</div>
+<div class="opt correct"><span class="l">A</span>You need a moving mask that follows a subject (a person, a face, an object) across a shot, and you have Studio.</div>
+<div class="opt"><span class="l">B</span>You need to apply a global colour cast.</div>
+<div class="opt"><span class="l">C</span>You're working in the free version.</div>
+<div class="opt"><span class="l">D</span>You need to denoise audio.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Moving subject mask via AI = Magic Mask's whole purpose.</div>
+<div class="ex"><b>Example.</b> In Studio you stroke the walking subject once and Magic Mask rotos them across the whole shot — no polygon drawn by hand.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Global colour casts are a different tool.</div>
+<div class="ww"><span class="wl">C</span>Free version doesn't include Magic Mask.</div>
+<div class="ww"><span class="wl">D</span>Audio denoising is a different toolkit.</div>
+<div class="prin">Principle: Magic Mask = AI moving roto.</div>
+</div></div>
+<div class="q">
+<div class="id">Q073 · Module 12</div>
+<div class="stem">In the Layer Mixer pattern of the Notary Structure, when you push blue into the Background node, the skin (isolated in the Main Object node) stays unchanged. Why?</div>
+<div class="opt"><span class="l">A</span>The Background's qualifier is set to skin colour.</div>
+<div class="opt correct"><span class="l">B</span>The Main Object is on the bottom branch of the Layer Mixer, which takes priority over higher branches.</div>
+<div class="opt"><span class="l">C</span>The skin is automatically protected by Resolve's AI.</div>
+<div class="opt"><span class="l">D</span>Background corrections never apply to skin areas.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Bottom branch of a Layer Mixer takes priority — skin stays protected from background corrections.</div>
+<div class="ex"><b>Example.</b> Push the background cool and the isolated skin on the bottom branch stays exactly as you graded it.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Background's qualifier targets non-skin, not skin.</div>
+<div class="ww"><span class="wl">C</span>No automatic protection; the architecture provides it.</div>
+<div class="ww"><span class="wl">D</span>Background corrections do apply — but the Layer Mixer overrides them where Main Object is selected.</div>
+<div class="prin">Principle: Bottom branch = protected region.</div>
+</div></div>
+<div class="q">
+<div class="id">Q074 · Module 12</div>
+<div class="stem">The Vectorscope's "skin tone indicator" line runs diagonally from centre toward approximately:</div>
+<div class="opt"><span class="l">A</span>3 o'clock.</div>
+<div class="opt correct"><span class="l">B</span>11 o'clock — the typical position of healthy human skin tones regardless of ethnicity.</div>
+<div class="opt"><span class="l">C</span>9 o'clock.</div>
+<div class="opt"><span class="l">D</span>5 o'clock.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">The skin tone line runs diagonally from centre toward roughly 11 o'clock on the vectorscope.</div>
+<div class="ex"><b>Example.</b> Switch on the skin indicator and steer the face cluster onto that 11 o'clock line for natural-looking skin.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Fabricated positions.</div>
+<div class="ww"><span class="wl">C</span>Fabricated positions.</div>
+<div class="ww"><span class="wl">D</span>Fabricated positions.</div>
+<div class="prin">Principle: 11 o'clock = skin line.</div>
+</div></div>
+<div class="modhead">Module 13 · The Global Look</div>
+<div class="q">
+<div class="id">Q075 · Module 13</div>
+<div class="stem">Before pushing a single slider in the Global Look, you should:</div>
+<div class="opt"><span class="l">A</span>Apply a stylistic LUT for inspiration.</div>
+<div class="opt correct"><span class="l">B</span>Choose a hero frame — one frame that represents the look you're aiming for, well-lit, with the main subject — and grade against that frame first.</div>
+<div class="opt"><span class="l">C</span>Increase saturation globally.</div>
+<div class="opt"><span class="l">D</span>Grade the first frame of the timeline.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Pick a hero frame first — design the look against the strongest reference frame, then carry it across the timeline.</div>
+<div class="ex"><b>Example.</b> You park on the best-lit wide of the protagonist and build the whole look there, then carry it across every other shot.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>A LUT short-circuits the look-design process.</div>
+<div class="ww"><span class="wl">C</span>Saturation isn't a starting point.</div>
+<div class="ww"><span class="wl">D</span>Frame 1 might be a bad reference (cut-in, slate, dark, atypical).</div>
+<div class="prin">Principle: Choose your hero frame deliberately.</div>
+</div></div>
+<div class="q">
+<div class="id">Q076 · Module 13</div>
+<div class="stem">An "S-curve" in Custom Curves typically means:</div>
+<div class="opt correct"><span class="l">A</span>A curve that resembles the letter S — upper midtones lifted, lower midtones depressed — adding film-like contrast.</div>
+<div class="opt"><span class="l">B</span>A curve set to "Spline" interpolation.</div>
+<div class="opt"><span class="l">C</span>A saturation curve.</div>
+<div class="opt"><span class="l">D</span>A curve mirrored on the Y axis.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">S-curve = letter S shape — film-print-like contrast.</div>
+<div class="ex"><b>Example.</b> An S in the curve — top up, bottom down — gives the digital footage that film-print contrast in a single move.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Spline interpolation, saturation, mirroring — none of these define an S-curve.</div>
+<div class="ww"><span class="wl">C</span>Spline interpolation, saturation, mirroring — none of these define an S-curve.</div>
+<div class="ww"><span class="wl">D</span>Spline interpolation, saturation, mirroring — none of these define an S-curve.</div>
+<div class="prin">Principle: S-curve = filmic contrast shape.</div>
+</div></div>
+<div class="q">
+<div class="id">Q077 · Module 13</div>
+<div class="stem">A reference still imported into the Gallery is most useful for:</div>
+<div class="opt"><span class="l">A</span>Copying its grade onto your shot.</div>
+<div class="opt correct"><span class="l">B</span>Visual comparison against your shot via split-screen — guiding your eye toward similar tonal distribution without literally copying.</div>
+<div class="opt"><span class="l">C</span>Permanently locking the look.</div>
+<div class="opt"><span class="l">D</span>Replacing your shot.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Visual comparison — give your eye a target. Not literal copying.</div>
+<div class="ex"><b>Example.</b> You wipe a still from a film you admire against your shot to give your eye a target — not to copy it pixel-for-pixel.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Reference grades are inspirational, not destination.</div>
+<div class="ww"><span class="wl">C</span>Stills don't lock looks.</div>
+<div class="ww"><span class="wl">D</span>Stills don't replace your shot.</div>
+<div class="prin">Principle: Reference = visual target, not destination.</div>
+</div></div>
+<div class="q">
+<div class="id">Q078 · Module 13</div>
+<div class="stem">The "teal-orange" look means:</div>
+<div class="opt correct"><span class="l">A</span>Teal in the shadows, orange in the highlights — the modern blockbuster look. Restraint is essential.</div>
+<div class="opt"><span class="l">B</span>Orange in the shadows, teal in the highlights.</div>
+<div class="opt"><span class="l">C</span>The whole image tinted teal.</div>
+<div class="opt"><span class="l">D</span>Skin in teal, sky in orange.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Teal shadows, orange highlights — the modern blockbuster look. Restraint essential.</div>
+<div class="ex"><b>Example.</b> A touch of teal in the shadows and warmth in the highlights gives the blockbuster feel; pushed hard it just screams 'filter.'</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Reversed; uncommon and unflattering.</div>
+<div class="ww"><span class="wl">C</span>Other distributions but not "teal-orange."</div>
+<div class="ww"><span class="wl">D</span>Other distributions but not "teal-orange."</div>
+<div class="prin">Principle: Teal in shadows, orange in highlights.</div>
+</div></div>
+<div class="q">
+<div class="id">Q079 · Module 13</div>
+<div class="stem">After applying the Global Look, the skin tone looks wrong. The correct fix in the Notary Structure:</div>
+<div class="opt"><span class="l">A</span>Re-do the Global Look from scratch.</div>
+<div class="opt correct"><span class="l">B</span>Adjust the Main Object node — because skin is isolated there, you can shift skin back toward the skin line independently of the global tint.</div>
+<div class="opt"><span class="l">C</span>Disable the Global Look entirely.</div>
+<div class="opt"><span class="l">D</span>Reduce overall saturation.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Main Object isolation — adjust skin independently after the Global Look.</div>
+<div class="ex"><b>Example.</b> The look tinted the face green — you nudge skin back on the Main Object node without disturbing the rest of the grade.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Re-doing the look is unnecessary.</div>
+<div class="ww"><span class="wl">C</span>Disabling the look loses the creative direction.</div>
+<div class="ww"><span class="wl">D</span>Lowering saturation affects the whole image.</div>
+<div class="prin">Principle: Isolation lets you fix skin without redoing the look.</div>
+</div></div>
+<div class="q">
+<div class="id">Q080 · Module 13</div>
+<div class="stem">The Color Slicer's "HSV saturation" differs from the standard saturation slider by:</div>
+<div class="opt"><span class="l">A</span>Affecting only red and orange channels.</div>
+<div class="opt correct"><span class="l">B</span>Boosting saturation without changing the image's brightness or contrast.</div>
+<div class="opt"><span class="l">C</span>Being available only in the free version.</div>
+<div class="opt"><span class="l">D</span>Working only in HDR projects.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">HSV saturation boosts colour without changing brightness or contrast — cleaner than the standard saturation slider.</div>
+<div class="ex"><b>Example.</b> The Color Slicer's HSV saturation richens colour without lifting brightness, so the grade gets punchier without going milky.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Affects all channels.</div>
+<div class="ww"><span class="wl">C</span>Available in Studio only, but not exclusive to HDR projects.</div>
+<div class="ww"><span class="wl">D</span>Available in Studio only, but not exclusive to HDR projects.</div>
+<div class="prin">Principle: HSV saturation = pure colour, no luminance side-effects.</div>
+</div></div>
+<div class="q">
+<div class="id">Q081 · Module 13</div>
+<div class="stem">Why does the Notary Structure use a Parallel Mixer (not Serial) around the Global Look adjustments?</div>
+<div class="opt"><span class="l">A</span>Parallel renders faster.</div>
+<div class="opt correct"><span class="l">B</span>All Global adjustments start from the same source and sum equally — preventing precision compounding loss across multiple operations.</div>
+<div class="opt"><span class="l">C</span>Parallel allows non-sequential keyframes.</div>
+<div class="opt"><span class="l">D</span>It looks cleaner in the node graph.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Parallel mixer prevents precision compounding loss across multiple operations.</div>
+<div class="ex"><b>Example.</b> All your Global moves draw from the same source and sum, so eight adjustments don't stack up precision errors.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Render speed isn't the design reason.</div>
+<div class="ww"><span class="wl">C</span>Keyframes work in both.</div>
+<div class="ww"><span class="wl">D</span>Aesthetic isn't the point.</div>
+<div class="prin">Principle: Parallel = no precision compounding.</div>
+</div></div>
+<div class="modhead">Module 14 · Power Windows &amp; Adjustments</div>
+<div class="q">
+<div class="id">Q082 · Module 14</div>
+<div class="stem">A vignette is typically built as:</div>
+<div class="opt correct"><span class="l">A</span>A circle Power Window with the Key Output set to Invert, then offset pulled down to darken the inverted (outer) area.</div>
+<div class="opt"><span class="l">B</span>A polygon mask around the corners.</div>
+<div class="opt"><span class="l">C</span>A Glow effect with negative gain.</div>
+<div class="opt"><span class="l">D</span>A LUT named "Vignette."</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Circle Window + Key Output: Invert + offset down = standard vignette.</div>
+<div class="ex"><b>Example.</b> Draw a soft circle, invert the key, pull the offset down — the edges darken and the eye falls on the centre of frame.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Polygon corners is much more work.</div>
+<div class="ww"><span class="wl">C</span>Glow does the opposite of vignette.</div>
+<div class="ww"><span class="wl">D</span>Named LUTs are presets, not the canonical tool.</div>
+<div class="prin">Principle: Vignette = inverted soft circle + offset down.</div>
+</div></div>
+<div class="q">
+<div class="id">Q083 · Module 14</div>
+<div class="stem">The "subject brightening" Power Window technique works because:</div>
+<div class="opt correct"><span class="l">A</span>The eye is drawn to lit areas — gently lifting the subject's face draws attention there. Cinematographers have used this principle for a century.</div>
+<div class="opt"><span class="l">B</span>Brighter areas render faster.</div>
+<div class="opt"><span class="l">C</span>Subject brightening fixes underexposure.</div>
+<div class="opt"><span class="l">D</span>It removes shadows from the background.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Eye follows light — universal cinematic principle, used for a century.</div>
+<div class="ex"><b>Example.</b> Lift the subject's face a touch with a window and the viewer's eye goes straight to them — the oldest trick in cinematography.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Render speed is unrelated.</div>
+<div class="ww"><span class="wl">C</span>Subject brightening doesn't fix underexposure of the whole shot.</div>
+<div class="ww"><span class="wl">D</span>Background shadows aren't removed.</div>
+<div class="prin">Principle: Light leads the eye.</div>
+</div></div>
+<div class="q">
+<div class="id">Q084 · Module 14</div>
+<div class="stem">Face Refinement's "skin smoothing" is most natural-looking when:</div>
+<div class="opt"><span class="l">A</span>Set to maximum strength.</div>
+<div class="opt correct"><span class="l">B</span>Set subtly — around 0.3–0.5 — with the Scaling control pulled down so skin texture isn't completely wiped.</div>
+<div class="opt"><span class="l">C</span>Combined with full sharpening.</div>
+<div class="opt"><span class="l">D</span>Applied to every clip uniformly.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Subtle (0.3–0.5) + Scaling down preserves natural texture.</div>
+<div class="ex"><b>Example.</b> Smoothing at 0.4 with Scaling low softens blemishes but keeps the pores, so the actor looks rested rather than plastic.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Maximum = plastic look.</div>
+<div class="ww"><span class="wl">C</span>Sharpening + smoothing fight each other.</div>
+<div class="ww"><span class="wl">D</span>Uniform application ignores per-shot needs.</div>
+<div class="prin">Principle: Face Refinement: light touch + low Scaling.</div>
+</div></div>
+<div class="q">
+<div class="id">Q085 · Module 14</div>
+<div class="stem">The Color Warper differs from Hue vs Hue curves in that it:</div>
+<div class="opt"><span class="l">A</span>Affects luminance instead of hue.</div>
+<div class="opt correct"><span class="l">B</span>Lets you click a colour on the viewer to add a hexagonal-grid control point, then drag the point to shift that hue, with selective falloff controlled by a radius — surgical changes other tools can't match.</div>
+<div class="opt"><span class="l">C</span>Is faster to render.</div>
+<div class="opt"><span class="l">D</span>Works only in 8-sided mode.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Click-drag a hue on the hexagonal grid with selective radius falloff — surgical hue shifts other tools can't match.</div>
+<div class="ex"><b>Example.</b> You click the one off-colour jacket on the Warper's grid and drag its hue without disturbing the skin tone right next to it.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Hue is what Warper controls.</div>
+<div class="ww"><span class="wl">C</span>Render speed and mode are incidental.</div>
+<div class="ww"><span class="wl">D</span>Render speed and mode are incidental.</div>
+<div class="prin">Principle: Warper = surgical hue/sat dragging.</div>
+</div></div>
+<div class="q">
+<div class="id">Q086 · Module 14</div>
+<div class="stem">A Power Window is built around a face. The subject's head turns slightly. The grade now "drifts" off the face. The most reliable solution:</div>
+<div class="opt"><span class="l">A</span>Disable the Power Window.</div>
+<div class="opt correct"><span class="l">B</span>Track the window via its Tracker tab — Resolve auto-keyframes the window to follow the face.</div>
+<div class="opt"><span class="l">C</span>Make the window much larger.</div>
+<div class="opt"><span class="l">D</span>Use Magic Mask instead.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Auto-track via Tracker tab. Resolve keyframes the window to follow.</div>
+<div class="ex"><b>Example.</b> The head turns and the window drifts off the face — auto-track it and the grade stays locked on.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Disabling kills the correction.</div>
+<div class="ww"><span class="wl">C</span>Oversized = bleed.</div>
+<div class="ww"><span class="wl">D</span>Magic Mask is alternative; Tracker is the named tool.</div>
+<div class="prin">Principle: Track the window to follow the subject.</div>
+</div></div>
+<div class="modhead">Module 15 · Final Look &amp; Refinement</div>
+<div class="q">
+<div class="id">Q087 · Module 15</div>
+<div class="stem">A Final Look node sits in serial after the Global Look node. Its purpose:</div>
+<div class="opt"><span class="l">A</span>To redo the Global Look.</div>
+<div class="opt correct"><span class="l">B</span>To push the image one more step further on top of the parallel-mixer's output — final darkening, casts, or curve adjustments.</div>
+<div class="opt"><span class="l">C</span>To apply a LUT.</div>
+<div class="opt"><span class="l">D</span>To render the file.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Push the image one more step further on top of the parallel-mixer output — final darkening, casts, curve refinement.</div>
+<div class="ex"><b>Example.</b> After the Global Look you add a serial Final Look node and pull the whole frame a touch darker and cooler for the night feel.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Don't redo the Global Look.</div>
+<div class="ww"><span class="wl">C</span>LUTs are different beasts.</div>
+<div class="ww"><span class="wl">D</span>Rendering is the Deliver page.</div>
+<div class="prin">Principle: Final Look = serial push on top of Global.</div>
+</div></div>
+<div class="q">
+<div class="id">Q088 · Module 15</div>
+<div class="stem">In Studio's native Film Grain effect, "Advanced Controls" allow you to:</div>
+<div class="opt correct"><span class="l">A</span>Add grain only at specific tonal ranges (e.g., reduce grain in shadows to keep black areas clean).</div>
+<div class="opt"><span class="l">B</span>Animate grain size over time.</div>
+<div class="opt"><span class="l">C</span>Sync grain to audio peaks.</div>
+<div class="opt"><span class="l">D</span>Replace grain with a LUT.</div>
+<div class="key">
+<div class="ans">✓ WHY A IS CORRECT</div>
+<div class="rat">Apply grain selectively to shadows, midtones, or highlights — keep blacks clean by lowering shadow grain.</div>
+<div class="ex"><b>Example.</b> You dial grain down in the shadows so the blacks stay clean while the midtones keep their film texture.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">B</span>Grain size animation isn't an Advanced Control.</div>
+<div class="ww"><span class="wl">C</span>No audio sync.</div>
+<div class="ww"><span class="wl">D</span>Grain isn't replaced by a LUT.</div>
+<div class="prin">Principle: Advanced Controls = tonal-region grain weighting.</div>
+</div></div>
+<div class="q">
+<div class="id">Q089 · Module 15</div>
+<div class="stem">In the free version, film grain is typically added by:</div>
+<div class="opt"><span class="l">A</span>The native Film Grain effect.</div>
+<div class="opt correct"><span class="l">B</span>An overlay video file placed on a track above the edit, with composite mode set to Overlay.</div>
+<div class="opt"><span class="l">C</span>A LUT.</div>
+<div class="opt"><span class="l">D</span>An audio plugin.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Overlay video file + composite mode Overlay = free version grain workflow.</div>
+<div class="ex"><b>Example.</b> No Studio? Drop a grain video on the track above the edit and set its composite mode to Overlay — instant texture, for free.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Native Film Grain is Studio-only.</div>
+<div class="ww"><span class="wl">C</span>LUTs don't add grain.</div>
+<div class="ww"><span class="wl">D</span>Audio plugins are unrelated.</div>
+<div class="prin">Principle: Free version grain = overlay file.</div>
+</div></div>
+<div class="q">
+<div class="id">Q090 · Module 15</div>
+<div class="stem">In the Blur palette (Color page), the Radius slider behavior is:</div>
+<div class="opt"><span class="l">A</span>Always blurs — higher values blur more.</div>
+<div class="opt correct"><span class="l">B</span>Below 0.5 = sharpen, above 0.5 = blur. Default 0.5 is no effect.</div>
+<div class="opt"><span class="l">C</span>Always sharpens — higher values sharpen more.</div>
+<div class="opt"><span class="l">D</span>Radius affects only luminance, not chroma.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Below 0.5 sharpens, above 0.5 blurs. Default 0.5 = no effect.</div>
+<div class="ex"><b>Example.</b> Nudge the Blur radius to 0.46 to sharpen the eyes; push it past 0.5 and it would soften the image instead.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>The Radius behaviour is bidirectional, hinged on 0.5.</div>
+<div class="ww"><span class="wl">C</span>The Radius behaviour is bidirectional, hinged on 0.5.</div>
+<div class="ww"><span class="wl">D</span>The Radius behaviour is bidirectional, hinged on 0.5.</div>
+<div class="prin">Principle: Radius 0.5 is neutral; below = sharpen.</div>
+</div></div>
+<div class="q">
+<div class="id">Q091 · Module 15</div>
+<div class="stem">The under-discussed Sharpening control "Scaling" determines:</div>
+<div class="opt"><span class="l">A</span>The output resolution of the sharpen.</div>
+<div class="opt correct"><span class="l">B</span>Which pixel-size features get sharpened — higher scaling targets larger features (eyes, lips); lower scaling targets fine texture. Pushing scaling toward 1.0 produces strikingly detailed images for social media.</div>
+<div class="opt"><span class="l">C</span>The Resolve render priority.</div>
+<div class="opt"><span class="l">D</span>The colour space of the sharpen filter.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Scaling determines which pixel-size features the sharpen targets. Toward 1.0 produces strikingly detailed images for social compression.</div>
+<div class="ex"><b>Example.</b> Push Sharpen's Scaling toward 1.0 and the eyes and lips snap into detail that survives Instagram's compression.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Resolution, render priority, colour space — none are the function.</div>
+<div class="ww"><span class="wl">C</span>Resolution, render priority, colour space — none are the function.</div>
+<div class="ww"><span class="wl">D</span>Resolution, render priority, colour space — none are the function.</div>
+<div class="prin">Principle: Scaling = target pixel size of sharpen.</div>
+</div></div>
+<div class="modhead">Module 16 · Grading Different Footage Types</div>
+<div class="q">
+<div class="id">Q092 · Module 16</div>
+<div class="stem">An iPhone shot in default (Rec.709) mode imports into the Notary Structure. The CST in node should be configured as:</div>
+<div class="opt"><span class="l">A</span>Apple Log input.</div>
+<div class="opt correct"><span class="l">B</span>Input Rec.709 → Output Rec.709 (effectively a bypass — the footage is already in display space).</div>
+<div class="opt"><span class="l">C</span>S-Log3 input.</div>
+<div class="opt"><span class="l">D</span>Wide Gamut Intermediate input.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Input Rec.709 → Output Rec.709 effectively bypasses the CST. The footage is already display-ready.</div>
+<div class="ex"><b>Example.</b> The default-iPhone clip is already display-ready, so the CST is Rec.709 in / Rec.709 out — effectively a bypass.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Wrong colour spaces produce inverted curves.</div>
+<div class="ww"><span class="wl">C</span>Wrong colour spaces produce inverted curves.</div>
+<div class="ww"><span class="wl">D</span>Wrong colour spaces produce inverted curves.</div>
+<div class="prin">Principle: Default iPhone = Rec.709 in, Rec.709 out.</div>
+</div></div>
+<div class="q">
+<div class="id">Q093 · Module 16</div>
+<div class="stem">A heavy creative push on 8-bit phone footage typically reveals:</div>
+<div class="opt"><span class="l">A</span>Higher dynamic range than expected.</div>
+<div class="opt correct"><span class="l">B</span>Banding in skies, blocky qualifier mattes, and broken-up isolations — the bit depth limits the latitude.</div>
+<div class="opt"><span class="l">C</span>Improved sharpness.</div>
+<div class="opt"><span class="l">D</span>Cleaner skin tones than log footage.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">8-bit limits everything — banding, blocky mattes, broken isolations on hard pushes.</div>
+<div class="ex"><b>Example.</b> Push the phone sky hard and it bands into visible steps — the 8-bit file simply has no more data to give.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Phone footage has less dynamic range, not more.</div>
+<div class="ww"><span class="wl">C</span>Sharpness doesn't increase from heavy grades.</div>
+<div class="ww"><span class="wl">D</span>Phone skin doesn't beat log skin.</div>
+<div class="prin">Principle: 8-bit = limited latitude.</div>
+</div></div>
+<div class="q">
+<div class="id">Q094 · Module 16</div>
+<div class="stem">A common high-leverage move on phone footage is:</div>
+<div class="opt"><span class="l">A</span>Maximum saturation push.</div>
+<div class="opt correct"><span class="l">B</span>White-balance correction — phones often produce cool indoor footage that warms naturally with one Offset shift.</div>
+<div class="opt"><span class="l">C</span>Extreme colour isolation.</div>
+<div class="opt"><span class="l">D</span>Skipping the balancing column.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Phone white-balance correction yields disproportionate quality gain — one Offset shift fixes the most common phone problem.</div>
+<div class="ex"><b>Example.</b> One Offset nudge warms the cold office iPhone footage and it instantly looks ten times better — the highest-value phone fix.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Maximum saturation breaks the footage.</div>
+<div class="ww"><span class="wl">C</span>Extreme isolation breaks on 8-bit.</div>
+<div class="ww"><span class="wl">D</span>Skipping balancing = compounding problems downstream.</div>
+<div class="prin">Principle: WB correction is the phone's highest-leverage fix.</div>
+</div></div>
+<div class="q">
+<div class="id">Q095 · Module 16</div>
+<div class="stem">An iPhone 15 Pro shooting in Apple Log should be treated as:</div>
+<div class="opt"><span class="l">A</span>Phone footage — limited latitude.</div>
+<div class="opt correct"><span class="l">B</span>A proper log camera — 10-bit Apple Log grades comparably to mid-tier mirrorless. CST in: Input Apple Log.</div>
+<div class="opt"><span class="l">C</span>Inferior to S-Log3.</div>
+<div class="opt"><span class="l">D</span>Rec.709 with a hidden curve.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Apple Log is a proper log space — 10-bit, with grading latitude comparable to mid-tier mirrorless. CST in: Apple Log.</div>
+<div class="ex"><b>Example.</b> The iPhone 15 Pro's Apple Log grades like a proper mirrorless camera — tag it Apple Log and use the full node tree.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Apple Log isn't "phone footage" in the limited-latitude sense.</div>
+<div class="ww"><span class="wl">C</span>Comparable to S-Log3, not categorically inferior.</div>
+<div class="ww"><span class="wl">D</span>It's actual log, not hidden curve.</div>
+<div class="prin">Principle: Apple Log = real log; treat accordingly.</div>
+</div></div>
+<div class="q">
+<div class="id">Q096 · Module 16</div>
+<div class="stem">Stock footage downloaded from a library is typically in Rec.709 and arrives "over-graded." The right preparation before adding your own grade:</div>
+<div class="opt"><span class="l">A</span>Apply your grade on top — the original grade adds character.</div>
+<div class="opt correct"><span class="l">B</span>Use the balancing column to neutralise — pull saturation down to a working level, fix exposure if needed — then grade. Otherwise you're stacking grade on grade.</div>
+<div class="opt"><span class="l">C</span>Re-export the footage at 16-bit first.</div>
+<div class="opt"><span class="l">D</span>Apply a "Reset to Camera" LUT.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Use the balancing column to neutralise — saturation down, exposure check — before adding your own grade. Otherwise you stack grade on grade.</div>
+<div class="ex"><b>Example.</b> The over-cooked stock clip gets its saturation pulled back toward neutral before you add your look, or you'd be grading on top of someone else's grade.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Stacking grades produces compounded over-saturation.</div>
+<div class="ww"><span class="wl">C</span>Bit-depth re-export gains nothing if data is already lost.</div>
+<div class="ww"><span class="wl">D</span>No "Reset to Camera" LUT exists.</div>
+<div class="prin">Principle: Stock footage: neutralise before re-grading.</div>
+</div></div>
+<div class="modhead">Module 99 · Decisions Under Pressure</div>
+<div class="q">
+<div class="id">Q097 · Module 99</div>
+<div class="scenario">A client delivers 2 hours of S-Log3 footage from a Sony FX6, shot mostly handheld. They need: (a) a 90-second hero edit for Instagram (vertical), (b) a 3-minute web cut (16:9), (c) a ProRes master archive. Deadline is 5 days. You work alone.</div>
+<div class="stem">The most efficient sequencing of the work:</div>
+<div class="opt"><span class="l">A</span>Build all three timelines first, then grade each separately, then mix audio, then deliver in batch.</div>
+<div class="opt correct"><span class="l">B</span>Cut the 3-minute master in 16:9; lock picture; grade once on this timeline with the Notary Structure; duplicate the timeline to create the Instagram vertical cut and re-frame in Sizing → Input; mix audio on the master; render all three (web H.265, Instagram H.265 vertical, ProRes archive) via the Render Queue.</div>
+<div class="opt"><span class="l">C</span>Grade every clip separately; then assemble three timelines from graded clips.</div>
+<div class="opt"><span class="l">D</span>Render the master first in H.264 then re-edit from that for the other deliverables.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Cut once, lock picture, grade once, duplicate-and-reframe for vertical, mix once, render all variants in the Render Queue. Each step's work compounds; you avoid grading three times.</div>
+<div class="ex"><b>Example.</b> You cut the 16:9 master, grade it once, duplicate-and-reframe for the vertical, mix once, then queue all three renders — no work repeated.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Three separate workflows = three times the effort.</div>
+<div class="ww"><span class="wl">C</span>Per-clip grading before assembly is the slow path.</div>
+<div class="ww"><span class="wl">D</span>Re-editing from compressed renders loses quality and time.</div>
+<div class="prin">Principle: Cut → grade → mix → render-many. Do work once.</div>
+</div></div>
+<div class="q">
+<div class="id">Q098 · Module 99</div>
+<div class="scenario">A long-take interview was shot in 4K H.265 on a 25 fps timeline. Playback stutters in the Edit page. You have 4 hours until the client review.</div>
+<div class="stem">The fastest fix that doesn't compromise final quality:</div>
+<div class="opt"><span class="l">A</span>Buy a new GPU before the meeting.</div>
+<div class="opt correct"><span class="l">B</span>Generate optimised media or proxies (Playback menu → Render Cache / Optimised Media); the edit experience becomes smooth, final output remains from the original files.</div>
+<div class="opt"><span class="l">C</span>Re-export the source to H.264 and re-import.</div>
+<div class="opt"><span class="l">D</span>Drop the timeline to 1080p resolution.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Optimised media / proxies = smooth playback without changing final output quality. The non-destructive fix.</div>
+<div class="ex"><b>Example.</b> The 4K H.265 stutters, so you generate optimised media — playback turns silky and the final render still pulls from the original files.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Buying hardware before a meeting is impractical.</div>
+<div class="ww"><span class="wl">C</span>Re-export to H.264 is destructive.</div>
+<div class="ww"><span class="wl">D</span>Dropping timeline resolution affects every step downstream.</div>
+<div class="prin">Principle: Proxies are the right tool for playback issues.</div>
+</div></div>
+<div class="q">
+<div class="id">Q099 · Module 99</div>
+<div class="scenario">A documentary protagonist filmed his own interviews on his iPhone over a year. His skin tone is consistently warmer than your studio-shot footage. The director wants every shot to feel like one consistent world.</div>
+<div class="stem">The principled approach:</div>
+<div class="opt"><span class="l">A</span>Pull the warm shots back to neutral so all skin matches.</div>
+<div class="opt correct"><span class="l">B</span>Decide whether warmth is character (e.g. lived-in, intimate) or error. If character, embrace it across both — push your studio shots warmer to match. If error, neutralise the phone footage's warmth with a per-clip white-balance correction in the balancing column.</div>
+<div class="opt"><span class="l">C</span>Use Magic Mask on every face.</div>
+<div class="opt"><span class="l">D</span>Apply face refinement to all faces equally.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Decide if warmth is character or error. If character, embrace it on the studio shots too. If error, neutralise. The question isn't "match," it's "what does the film want to feel like?"</div>
+<div class="ex"><b>Example.</b> You ask whether the protagonist's warm iPhone look is 'him' or a mistake; deciding it's character, you warm your studio shots to match rather than cooling his.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>Cold neutrality may erase the protagonist's identity.</div>
+<div class="ww"><span class="wl">C</span>Magic Mask is a hammer when nuance is needed.</div>
+<div class="ww"><span class="wl">D</span>Uniform face refinement doesn't address warmth.</div>
+<div class="prin">Principle: Decide intent first, then technique.</div>
+</div></div>
+<div class="q">
+<div class="id">Q100 · Module 99</div>
+<div class="scenario">You complete a grade on a hero shot using a strong stylised look. When you copy the grade (middle-click) to a second shot, the second shot looks unbalanced — the look "fits" the hero but reveals problems on the new shot.</div>
+<div class="stem">The correct response:</div>
+<div class="opt"><span class="l">A</span>The look is wrong — start over.</div>
+<div class="opt correct"><span class="l">B</span>The look amplifies underlying differences between shots. Adjust the second shot's Clip-level Balancing nodes (exposure, contrast, white balance) until it matches the hero's starting point — then the same look will sit better.</div>
+<div class="opt"><span class="l">C</span>Use a different look on the second shot.</div>
+<div class="opt"><span class="l">D</span>Disable timeline-level grades.</div>
+<div class="key">
+<div class="ans">✓ WHY B IS CORRECT</div>
+<div class="rat">Strong looks amplify shot-to-shot differences. Fix the second shot's balance to match the hero's starting point before judging the look.</div>
+<div class="ex"><b>Example.</b> The bold look exposes the second shot's flatter exposure — fix its balance to match the hero's starting point and the same look suddenly fits.</div>
+<div class="wrong-head">Why the other options are incorrect</div>
+<div class="ww"><span class="wl">A</span>The look isn't wrong if it works on the hero.</div>
+<div class="ww"><span class="wl">C</span>Per-shot looks defeat consistency.</div>
+<div class="ww"><span class="wl">D</span>Timeline grades affect the test fairly.</div>
+<div class="prin">Principle: Balance the shot to the hero; the look will fit.</div>
+</div></div>
+<footer>DaVinci Resolve — Mock Exam (Advanced / Mastery) · Instructor Memorandum · Shamase Studios 2026</footer>
+</div></body></html>

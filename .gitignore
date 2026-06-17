@@ -1,2 +1,4 @@
 .DS_Store
 files.zip
+fairlight/_memoranda/
+fairlight/_build/_*.json
